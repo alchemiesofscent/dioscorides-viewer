@@ -49,8 +49,10 @@ The normalized TEI should match the Berendes conventions where applicable:
 Sprengel has been imported as a first-pass diplomatic edition in
 `editions/sprengel1829/`. Its TEI is not yet normalized into Berendes-style
 chunks, but it is registered in the viewer with a generated manifest so its text
-can be inspected alongside Berendes while the full normalization and image/IIIF
-alignment are planned.
+can be inspected alongside Berendes while the full normalization is planned.
+Images are mapped to Internet Archive item `b23982500_0001`; TEI
+`page_images/page-0006.png` corresponds to Archive page `n5` and IIIF image
+`b23982500_0001_0006.jp2`.
 
 ## hOCR And Word Alignment
 

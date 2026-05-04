@@ -18,10 +18,12 @@ Sprengel source facsimile:
 
 - Pedanius Dioscorides; Curtius Sprengel, ed., *Pedanii Dioscoridis Anazarbei De
   materia medica libri quinque* (Lipsiae: Cnobloch, 1829/1830).
-- Wellcome Collection record:
-  https://wellcomecollection.org/works/ncazpf6u
+- Internet Archive digitization:
+  https://archive.org/details/b23982500_0001/page/n5/mode/2up
+- IIIF manifest:
+  https://iiif.archive.org/iiif/b23982500_0001/manifest.json
 
 The static viewer loads page images from Heidelberg facsimile URLs recorded in
-the Berendes TEI and manifest. Sprengel image paths are prepared for later
-Wellcome image/IIIF alignment, but page images are not bundled. This project
-does not claim ownership of, bundle, or relicense external image files.
+the Berendes TEI and manifest, and from Internet Archive IIIF image URLs
+recorded in the Sprengel manifest. This project does not claim ownership of,
+bundle, or relicense external image files.

@@ -22,12 +22,13 @@
       "label": "Sprengel 1829/1830",
       "tei": "editions/sprengel1829/sprengel_diplomatic.xml",
       "manifest": "editions/sprengel1829/manifest.json",
-      "imageMode": "local",
+      "imageMode": "remote",
       "localImageRoot": "editions/sprengel1829/page_images/",
       "imageLabelRoot": "page_images/",
-      "sourceLabel": "Wellcome facsimile",
-      "sourceUrl": "https://wellcomecollection.org/works/ncazpf6u",
-      "licenseNote": "Imported diplomatic TEI generated from Wellcome source images. Page images are not bundled."
+      "sourceLabel": "Internet Archive facsimile",
+      "sourceUrl": "https://archive.org/details/b23982500_0001/page/n5/mode/2up",
+      "iiifManifest3": "https://iiif.archive.org/iiif/b23982500_0001/manifest.json",
+      "licenseNote": "Imported diplomatic TEI generated from Wellcome source images and wired to Internet Archive facsimile images. Page images are external and not bundled."
     }
   ]
 }

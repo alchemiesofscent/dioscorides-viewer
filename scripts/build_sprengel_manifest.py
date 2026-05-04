@@ -6,11 +6,13 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
+import re
 import xml.etree.ElementTree as ET
 
 
 TEI_NS = {"tei": "http://www.tei-c.org/ns/1.0"}
 XML_ID = "{http://www.w3.org/XML/1998/namespace}id"
+ARCHIVE_ID = "b23982500_0001"
 
 
 def local_name(tag: str) -> str:
@@ -38,7 +40,24 @@ def image_name(facs: str, fallback_index: int) -> str:
     return f"page-{fallback_index:04d}.png"
 
 
-def build_manifest(tei_path: Path) -> dict:
+def archive_scan_number(facs: str, fallback_index: int) -> int:
+    match = re.search(r"page-(\d{4})\.(?:png|jpe?g|jp2)$", facs)
+    return int(match.group(1)) if match else fallback_index
+
+
+def archive_page_url(archive_id: str, scan_number: int) -> str:
+    return f"https://archive.org/details/{archive_id}/page/n{max(0, scan_number - 1)}/mode/1up"
+
+
+def archive_iiif_image_url(archive_id: str, scan_number: int) -> str:
+    path = (
+        f"{archive_id}%2F{archive_id}_jp2.zip%2F"
+        f"{archive_id}_jp2%2F{archive_id}_{scan_number:04d}.jp2"
+    )
+    return f"https://iiif.archive.org/image/iiif/3/{path}/full/max/0/default.jpg"
+
+
+def build_manifest(tei_path: Path, archive_id: str) -> dict:
     pages = []
     seen_facs = set()
     stack: list[ET.Element] = []
@@ -55,14 +74,17 @@ def build_manifest(tei_path: Path) -> dict:
                 if facs:
                     seen_facs.add(facs)
                 leaf = len(pages) + 1
+                scan_number = archive_scan_number(facs, leaf)
                 page_n = element.get("n") or ""
                 pages.append(
                     {
-                        "pdf_page": leaf,
+                        "pdf_page": scan_number,
+                        "archive_page_n": max(0, scan_number - 1),
                         "book_page": "" if page_n == "None" else page_n,
                         "section": section_label(stack),
                         "tei_facs": facs,
-                        "facs": f"editions/sprengel1829/{facs}" if facs else "",
+                        "facs": archive_page_url(archive_id, scan_number),
+                        "remoteImage": archive_iiif_image_url(archive_id, scan_number),
                         "image": image_name(facs, leaf),
                         "xml_id": element.get(XML_ID) or "",
                     }
@@ -77,8 +99,9 @@ def build_manifest(tei_path: Path) -> dict:
     return {
         "total_pages": len(pages),
         "source": "Sprengel 1829/1830 diplomatic TEI import",
-        "source_url": "https://wellcomecollection.org/works/ncazpf6u",
-        "image_root": "editions/sprengel1829/page_images/",
+        "source_url": f"https://archive.org/details/{archive_id}/page/n5/mode/2up",
+        "iiif_manifest": f"https://iiif.archive.org/iiif/{archive_id}/manifest.json",
+        "image_root": f"https://iiif.archive.org/image/iiif/3/{archive_id}/",
         "pages": pages,
     }
 
@@ -87,9 +110,10 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--tei", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
+    parser.add_argument("--archive-id", default=ARCHIVE_ID)
     args = parser.parse_args()
 
-    manifest = build_manifest(args.tei)
+    manifest = build_manifest(args.tei, args.archive_id)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(
         json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",

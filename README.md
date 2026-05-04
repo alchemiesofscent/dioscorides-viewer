@@ -8,8 +8,8 @@ Sprengel's 1829/1830 Greek/Latin edition.
 The repository is designed to run on GitHub Pages. The text, page map, and
 viewer assets are committed; bulky facsimile images are not. The viewer loads
 Berendes page images directly from Heidelberg University Library facsimile URLs
-recorded in the TEI and `manifest.json`. Sprengel page-image slots are wired for
-later Wellcome image/IIIF alignment, but the images are not bundled.
+recorded in the TEI and `manifest.json`, and Sprengel images from the Internet
+Archive IIIF service.
 
 ## Open The Viewer
 
@@ -81,9 +81,12 @@ Berendes page images are served from Heidelberg University Library:
 
 https://digi.ub.uni-heidelberg.de/diglit/berendes1902
 
-Sprengel source images come from the Wellcome Collection record:
+Sprengel source images are wired to the Internet Archive item:
 
-https://wellcomecollection.org/works/ncazpf6u
+https://archive.org/details/b23982500_0001/page/n5/mode/2up
+
+The TEI was generated from page image labels beginning at `page-0006.png`; this
+maps to Archive page `n5` and IIIF image `b23982500_0001_0006.jp2`.
 
 This repository does not bundle or relicense external facsimile images; see
 `NOTICE.md`.
