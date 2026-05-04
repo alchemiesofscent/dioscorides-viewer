@@ -44,6 +44,14 @@ The normalized TEI should match the Berendes conventions where applicable:
 6. Add the edition to `editions.json`.
 7. Spot-check in the viewer against page images.
 
+## Current Sprengel State
+
+Sprengel has been imported as a first-pass diplomatic edition in
+`editions/sprengel1829/`. Its TEI is not yet normalized into Berendes-style
+chunks, but it is registered in the viewer with a generated manifest so its text
+can be inspected alongside Berendes while the full normalization and image/IIIF
+alignment are planned.
+
 ## hOCR And Word Alignment
 
 hOCR is a derived layer, not a blocker for first ingest. When added, keep it

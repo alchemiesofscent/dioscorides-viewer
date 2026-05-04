@@ -210,6 +210,7 @@
     const pages = Array.isArray(manifest.pages) ? manifest.pages : [];
     for (const page of pages) {
       if (page.facs) byFacs.set(page.facs, page);
+      if (page.tei_facs) byFacs.set(page.tei_facs, page);
       if (page.book_page) byBookPage.set(String(page.book_page), page);
     }
     return { byFacs, byBookPage };
@@ -487,6 +488,17 @@
   }
 
   function switchPage(pb, context, lookups) {
+    const facs = pb.getAttribute("facs") || "";
+    const n = pb.getAttribute("n") || "";
+    if (context.currentPage && facs && facs === context.currentPage.facs) {
+      if (context.chapter) registerChapterOnPage(context.chapter, context.currentPage, true);
+      else if (context.book) registerBookOnPage(context.book, context.currentPage);
+      else if (context.frontSection) registerFrontOnPage(context.frontSection, context.currentPage);
+      context.currentPage.section = context.chapter || context.book || context.frontSection || context.currentPage.section;
+      if (n && !context.currentPage.n) context.currentPage.n = n;
+      context.topFurnitureRow = null;
+      return;
+    }
     context.currentPage = createPage(pb, context, lookups);
     context.topFurnitureRow = null;
     restoreRenderedFrames(context);
@@ -848,7 +860,8 @@
     const labelRoot = state.edition.imageLabelRoot || localRoot;
     const localHref = image && localRoot ? resolveRepoPath(`${localRoot.replace(/\/?$/, "/")}${image}`) : "";
     const labelHref = image && labelRoot ? `${labelRoot.replace(/\/?$/, "/")}${image}` : "";
-    const remoteHref = manifest.remoteImage || page.facs || manifest.facs || "";
+    const sourceFacs = manifest.facs || page.facs || "";
+    const remoteHref = manifest.remoteImage || (/^https?:/i.test(sourceFacs) ? sourceFacs : "");
     const imageHref = state.edition.imageMode === "local" ? localHref || remoteHref : remoteHref || localHref;
     const sourceLabel = state.edition.sourceLabel || "facsimile";
 
@@ -860,8 +873,8 @@
 
     els.openImage.href = imageHref || "#";
     els.openImage.setAttribute("aria-disabled", imageHref ? "false" : "true");
-    els.openFacs.href = page.facs || manifest.facs || "#";
-    els.openFacs.setAttribute("aria-disabled", page.facs || manifest.facs ? "false" : "true");
+    els.openFacs.href = sourceFacs ? resolveRepoPath(sourceFacs) : "#";
+    els.openFacs.setAttribute("aria-disabled", sourceFacs ? "false" : "true");
     els.pageImage.hidden = true;
     els.imageFallback.hidden = true;
     els.pageImage.removeAttribute("src");
@@ -887,12 +900,12 @@
         ? `Local image missing or unavailable: ${labelHref}`
         : `${sourceLabel} image unavailable.`;
       els.imageFallback.appendChild(message);
-      if (page.facs || manifest.facs) {
+      if (sourceFacs) {
         const link = document.createElement("a");
-        link.href = page.facs || manifest.facs;
+        link.href = resolveRepoPath(sourceFacs);
         link.target = "_blank";
         link.rel = "noopener";
-        link.textContent = "Open Heidelberg facsimile";
+        link.textContent = `Open ${sourceLabel}`;
         els.imageFallback.appendChild(link);
       }
     };
@@ -1083,6 +1096,7 @@
     const nearestChapter = chapterById(context.divId) || page.activeChapter || page.chapters[page.chapters.length - 1] || null;
     const image = manifest.image || "";
     const imageLabelRoot = state.edition.imageLabelRoot || state.edition.localImageRoot || "";
+    const facs = manifest.facs || page.facs || "";
     return {
       teiFile: state.edition.tei || "",
       editionId: state.edition.id || "",
@@ -1090,7 +1104,7 @@
       pdfPage: manifest.pdf_page || null,
       bookPage: manifest.book_page || page.n || "",
       localImagePath: image && imageLabelRoot ? `${imageLabelRoot.replace(/\/?$/, "/")}${image}` : "",
-      facsUrl: page.facs || manifest.facs || "",
+      facsUrl: facs ? resolveRepoPath(facs) : "",
       nearestDivId: context.divId || nearestSectionId(page),
       nearestBookId: page.book ? page.book.id : "",
       nearestBook: page.book ? sectionLabel(page.book) : "",

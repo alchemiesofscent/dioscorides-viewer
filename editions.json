@@ -16,6 +16,18 @@
       "iiifManifest2": "https://digi.ub.uni-heidelberg.de/diglit/iiif/berendes1902/manifest",
       "iiifManifest3": "https://digi.ub.uni-heidelberg.de/diglit/iiif3/berendes1902/manifest",
       "licenseNote": "TEI/data/docs: CC BY-NC 4.0. Viewer/scripts: MIT. Heidelberg facsimile images are external source material marked Public Domain Mark by Heidelberg."
+    },
+    {
+      "id": "sprengel1829",
+      "label": "Sprengel 1829/1830",
+      "tei": "editions/sprengel1829/sprengel_diplomatic.xml",
+      "manifest": "editions/sprengel1829/manifest.json",
+      "imageMode": "local",
+      "localImageRoot": "editions/sprengel1829/page_images/",
+      "imageLabelRoot": "page_images/",
+      "sourceLabel": "Wellcome facsimile",
+      "sourceUrl": "https://wellcomecollection.org/works/ncazpf6u",
+      "licenseNote": "Imported diplomatic TEI generated from Wellcome source images. Page images are not bundled."
     }
   ]
 }

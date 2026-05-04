@@ -2,12 +2,14 @@
 
 Static TEI/EpiDoc viewer for Dioscorides editions, beginning with Julius
 Berendes' 1902 German translation, *Des Pedanios Dioskurides aus Anazarbos
-Arzneimittellehre in fünf Büchern*.
+Arzneimittellehre in fünf Büchern*, and an initial diplomatic import of
+Sprengel's 1829/1830 Greek/Latin edition.
 
 The repository is designed to run on GitHub Pages. The text, page map, and
 viewer assets are committed; bulky facsimile images are not. The viewer loads
 Berendes page images directly from Heidelberg University Library facsimile URLs
-recorded in the TEI and `manifest.json`.
+recorded in the TEI and `manifest.json`. Sprengel page-image slots are wired for
+later Wellcome image/IIIF alignment, but the images are not bundled.
 
 ## Open The Viewer
 
@@ -33,6 +35,7 @@ http://localhost:8000/viewer/
 
 - `viewer/` - static browser viewer.
 - `editions.json` - edition registry consumed by the viewer.
+- `editions/sprengel1829/` - imported Sprengel TEI and generated page manifest.
 - `chunks/` - normalized TEI chunk source for Berendes.
 - `output/berendes1902_epidoc.xml` - merged TEI/EpiDoc output.
 - `manifest.json` - Berendes page/image/chunk manifest.
@@ -72,15 +75,18 @@ Check the viewer JavaScript:
 node --check viewer/app.js
 ```
 
-## Source Facsimile
+## Source Facsimiles
 
 Berendes page images are served from Heidelberg University Library:
 
 https://digi.ub.uni-heidelberg.de/diglit/berendes1902
 
-The Heidelberg record exposes METS and IIIF manifests and marks image reuse with
-a Public Domain Mark. This repository does not bundle or relicense Heidelberg
-facsimile images; see `NOTICE.md`.
+Sprengel source images come from the Wellcome Collection record:
+
+https://wellcomecollection.org/works/ncazpf6u
+
+This repository does not bundle or relicense external facsimile images; see
+`NOTICE.md`.
 
 ## Licenses
 
