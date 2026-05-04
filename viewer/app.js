@@ -920,6 +920,7 @@
     if (!state.pages.length) return;
     const nextIndex = Math.max(0, Math.min(state.pages.length - 1, index));
     const page = state.pages[nextIndex];
+    const imageLabelRoot = state.edition.imageLabelRoot || state.edition.localImageRoot || "";
     state.currentIndex = nextIndex;
     state.selectedContext = null;
     els.copyCorrection.disabled = true;
@@ -934,7 +935,7 @@
       chapters.length ? `chapters ${chapters.join(", ")}` : "",
       chapterStarts.length ? `starts ${chapterStarts.join(", ")}` : "",
       page.manifest && page.manifest.pdf_page ? `PDF page ${page.manifest.pdf_page}` : "",
-      page.manifest && page.manifest.image ? `${IMAGE_LABEL_ROOT}${page.manifest.image}` : "",
+      page.manifest && page.manifest.image && imageLabelRoot ? `${imageLabelRoot.replace(/\/?$/, "/")}${page.manifest.image}` : "",
     ].filter(Boolean).join(" · ");
 
     els.teiText.replaceChildren(page.fragment.cloneNode(true));
