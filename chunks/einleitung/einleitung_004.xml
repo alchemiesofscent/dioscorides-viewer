@@ -1,0 +1,84 @@
+<pb n="16" facs="https://digi.ub.uni-heidelberg.de/diglitData/image/berendes1902/3/0_016.jpg"/>
+<fw type="pageNum" place="top-outer">16</fw>
+<fw type="header" place="top">Einleitung.</fw>
+<div type="textpart" subtype="section" n="einleitung" xml:id="front_einleitung_id-004">
+<ab>
+<lb n="1"/>Die Tafel der Gewichte bei Dioskurides würde sein:
+<lb n="2"/><foreign xml:lang="grc">κεράτιον</foreign> (Keration), röm. <foreign xml:lang="la">Siliqua</foreign> (nach Hultsch) . . = 0,189 g
+<lb n="3"/><foreign xml:lang="grc">θέρμος</foreign> (Thermos), Same von <foreign xml:lang="la">Lupinus</foreign> = 2 Keratia . . = 0,378 „
+<lb n="4"/><foreign xml:lang="grc">ὄβολος</foreign> (Obolos), röm. <foreign xml:lang="la">Obolus</foreign> . . . . . . . . = 0,568 „
+<lb n="5"/><foreign xml:lang="grc">κύαμος αἰγύπτιος</foreign> (ägyptische Bohne) = 1<hi rend="sup">1</hi>/<hi rend="sub">2</hi> Oboloi . . = 0,852 „
+<lb n="6"/><foreign xml:lang="grc">γράμμα</foreign> (Gramma), röm. <foreign xml:lang="la">Scripulum</foreign>, <foreign xml:lang="la">Scriptulum</foreign>, <foreign xml:lang="la">Scrupulum</foreign> = 1,137 „
+<lb n="7"/><foreign xml:lang="grc">τριώβολον</foreign> (Triobolon, 3 Oboloi) . . . . . . . = 1,794 „
+<lb n="8"/><foreign xml:lang="grc">δραχμή, ὁλκή</foreign> (Drachme, Holke), röm. <foreign xml:lang="la">Drachma</foreign> . . . = 3,411 „
+<lb n="9"/><foreign xml:lang="grc">κάρυον πόντικον</foreign> (Haselnuss) . . . . . . . . = 3,40 „
+<lb n="10"/><foreign xml:lang="grc">κάρυον βασιλικόν</foreign> (Wallnuss) . . . . . . . . = 13,644 „
+<lb n="11"/><foreign xml:lang="grc">οὐγγία</foreign> (Unchia), röm. <foreign xml:lang="la">Uncia</foreign> . . . . . . . = 27,288 „
+<lb n="12"/><foreign xml:lang="grc">ξέστης</foreign> (Xestes), <hi rend="sup">1</hi>/<hi rend="sub">6</hi> Pfund, röm. <foreign xml:lang="la">Sextans</foreign> . . . = 54,58 „
+<lb n="13"/><foreign xml:lang="grc">τέταρτον</foreign> (Tetarton), <hi rend="sup">1</hi>/<hi rend="sub">4</hi> Pfund, röm. <foreign xml:lang="la">Quadrans</foreign> . . = 81,86 „
+<lb n="14"/><foreign xml:lang="grc">λίτρα</foreign> (Litra), 1 Pfund, röm. <foreign xml:lang="la">Libra</foreign> . . . . . = 327,45 „
+<lb n="15"/><foreign xml:lang="grc">μνᾶ</foreign> (Mna), röm. <foreign xml:lang="la">Mina</foreign> . . . . . . . . = 436,6 „
+<lb n="16"/>Das am meisten vorkommende, für die Dosirung der Arzneien vor-
+<lb n="17"/>zugsweise benutzte Gewicht war die Drachme.
+<lb n="18"/>Die Tafel der Maasse:
+<lb n="19"/><foreign xml:lang="grc">χήμη</foreign> (Cheme) . . . . . . . . . . . . = 0,0114 l
+<lb n="20"/><foreign xml:lang="grc">κύαθος</foreign> (Kyathos, Becher), röm. <foreign xml:lang="la">Cyathus</foreign> . . . . . = 0,0456 „
+<lb n="21"/><foreign xml:lang="grc">ὀξύβαφον</foreign> (Oxybaphon, Essignäpfchen), röm. <foreign xml:lang="la">Acetabulum</foreign> . = 0,0684 „
+<lb n="22"/><foreign xml:lang="grc">τέταρτον</foreign> (Tetarton), röm. <foreign xml:lang="la">Quartarius</foreign> . . . . . . = 0,137 „
+<lb n="23"/><foreign xml:lang="grc">κοτύλη</foreign> (Kotyle), <foreign xml:lang="grc">τρυβλίον</foreign> (Tryblion)<ref target="#fn-einleitung-004-s001-n01" type="footnote-ref" xml:id="ref-fn-einleitung-004-s001-n01">1)</ref>, röm. <foreign xml:lang="la">Hemina</foreign> . . = 0,274 „
+<lb n="24"/><foreign xml:lang="grc">ξέστης</foreign> (Xestes), röm. <foreign xml:lang="la">Sextarius</foreign> . . . . . . . = 0,547 „
+<lb n="25"/><foreign xml:lang="grc">χοῖνιξ</foreign> (Choinix) (attisch) . . . . . . . . = 1,094 „
+<lb n="26"/><foreign xml:lang="grc">χοῦς</foreign> (Chus), röm. <foreign xml:lang="la">Congius</foreign> . . . . . . . = 3,282 „
+<lb n="27"/><foreign xml:lang="grc">οὖρνα</foreign> (Urna), röm. <foreign xml:lang="la">Urna</foreign> . . . . . . . = 13,130 „
+<lb n="28"/><foreign xml:lang="grc">ἀμφορεύς</foreign> (Amphoreus, Krug), <foreign xml:lang="grc">κεράμιον</foreign>, röm. <foreign xml:lang="la">Amphora</foreign> . = 26,260 „
+<lb n="29"/><foreign xml:lang="grc">μετρητής</foreign> (Metretes), röm. <foreign xml:lang="la">Metreta</foreign> . . . . . = 39,360 „
+<lb n="30"/>Weitere kleinere Maasse, deren Grösse sehr schwankt, sind das
+<lb n="31"/><foreign xml:lang="grc">μύστρον</foreign> (Mystron), und zwar das grosse Mystron, etwa = 0,068 l., das
+<lb n="32"/>kleine etwas mehr als die Hälfte davon. In einer Tabelle bei Hultsch
+<lb n="33"/>(<foreign xml:lang="la">Metrol. Scriptor. Analecta</foreign> p. 249, Nr. 74) wird das Mystron = 3 Exagia
+<lb n="34"/>(1 Exagion = 18 Keratia) = 4<hi rend="sup">1</hi>/<hi rend="sub">2</hi> Drachmen angegeben. Diese Tabelle
+<lb n="35"/>stützt sich, wie Hultsch (l. c. p. 183) bemerkt, zum grössten Theil auf
+<lb n="36"/>die Gewichtstafel des Dioskurides. Damit stimmt auch das <foreign xml:lang="grc">μνῆστρον</foreign>
+</ab>
+<note type="footnote" n="1" xml:id="fn-einleitung-004-s001-n01" corresp="#ref-fn-einleitung-004-s001-n01" place="bottom">
+<lb n="37"/>Nach attischem Maass und Gewicht; im Kleopatra-Fragment (Hultsch,
+<lb n="38"/><foreign xml:lang="la">Metrol. Script. Relig.</foreign> I p. 236) ist das Tryblion = Oxybaphon, im Eusebius-Fragment
+<lb n="39"/>(Hultsch, l. c. p. 277) = 4 Unzen. Das Tryblion kommt bei D. (Dioskurides) nur
+<lb n="40"/>zweimal vor (IV 69 u. 136).
+</note>
+<pb n="17" facs="https://digi.ub.uni-heidelberg.de/diglitData/image/berendes1902/3/0_017.jpg"/>
+<fw type="header" place="top">Einleitung.</fw>
+<fw type="pageNum" place="top-outer">17</fw>
+<ab>
+<lb n="1"/>(Mnestron) der Tafel des Oribasios, welcher gleichzeitig das Mnestron
+<lb n="2"/>= 3 Exagien oder Stagien, deren 6 auf eine Unze gehen, angibt.
+<lb n="3"/>Da Dioskurides nur Mystron schlechthin kennt, so dürfte diese Ge-
+<lb n="4"/>wichtsannahme den Vorzug verdienen. Nach dem Galen’schen Frag-
+<lb n="5"/>ment ist das grosse Mystron = 3, das kleine = 1<hi rend="sup">1</hi>/<hi rend="sub">2</hi> Oxybapha. Es
+<lb n="6"/>ist eigentlich ein Flüssigkeitsmaass, Dioskurides gebraucht es auch für
+<lb n="7"/>trockene Dinge, z. B. I 132. Das <foreign xml:lang="grc">κοχλιάριον</foreign> (Kochliarion), Coclear oder
+<lb n="8"/>Cochlear der Römer, Löffel, ist in der Tafel der Kleopatra = 1 Drachme,
+<lb n="9"/>bei Columella (<foreign xml:lang="la">De re r.</foreign> XII 21) = <hi rend="sup">1</hi>/<hi rend="sub">4</hi> Cyathus = 0,012 l, nach Galen
+<lb n="10"/>so viel als die Kotyle = 0,274 l, bei Oribasios = 7 Drachmen.
+<lb n="11"/>Neben diesen bestimmten Maassen kommen häufig auch solche vor,
+<lb n="12"/>die auf einem Vergleich mit menschlichen oder thierischen Gliedmaassen
+<lb n="13"/>beruhen, so <foreign xml:lang="grc">περὶ δάκτυλον τὸ πάχος</foreign>, fingerdick, <foreign xml:lang="grc">περὶ μικρὸν δάκτυλον τὸ</foreign>
+<lb n="14"/><foreign xml:lang="grc">πάχος</foreign>, von der Dicke des kleinen Fingers, <foreign xml:lang="grc">σπιθαμιαῖος, δισπιθαμιαῖος</foreign>, eine,
+<lb n="15"/>zwei Spannen lang, <foreign xml:lang="grc">πηχυαῖος</foreign>, eine Elle lang (von der Handwurzel bis
+<lb n="16"/>zum Armgelenk), <foreign xml:lang="grc">ὕψος ποδός</foreign>, von der Höhe eines Fusses (III 126) u. ä.
+<lb n="17"/>Ferner <foreign xml:lang="grc">ἀστράγαλος ὑός</foreign>, von der Grösse des Sprungbeines des Schweins.
+<lb n="18"/>Um sehr wenig auszudrücken, heisst es <foreign xml:lang="grc">χόνδρος</foreign>, ein Körnchen, ein
+<lb n="19"/>Stückchen.
+<lb n="20"/>Zum Abmessen bediente man sich des <hi rend="spaced">Pfundhorns</hi>, <foreign xml:lang="grc">κέρας λιτραῖον</foreign>;
+<lb n="21"/>es war ein aus Horn gefertigtes, durchsichtiges Gefäss, an dessen Aussen-
+<lb n="22"/>seite Kreise eingeritzt waren, welche die (metrischen) Unzen bezeichneten.
+<lb n="23"/>Galen (XIII p. 894) sagt, er habe durch eigene Bestimmung gefunden,
+<lb n="24"/>dass 12 solcher metrischen Unzen = 10 Gewichtsunzen seien. Dieses
+<lb n="25"/>Pfundhorn heisst auch <hi rend="spaced">Oelpfund</hi>; es ist aber nicht nach dem Gewicht
+<lb n="26"/>von Oel berechnet, da es kein römisches Hohlmaass gibt, dessen Oel-
+<lb n="27"/>gewicht 10 Unzen beträgt, auch in allen sonstigen Fällen das Wasser
+<lb n="28"/>als Norm genommen wird. Es passen 10 Unzen nach dem Wasser-
+<lb n="29"/>gewicht auf die Hemine, deren Zwölffaches der Congius ist, welcher
+<lb n="30"/>10 Pfund oder 120 Unzen wiegt (vgl. Hultsch, Metrol. S. 93).
+</ab>
+</div>

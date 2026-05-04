@@ -1,0 +1,21 @@
+# Local source facsimiles and large generated assets
+berendes1902__z3.pdf
+images/raw/
+images/enhanced/
+ocr/
+chunks_pilot_gate/
+chunks/run_log.json
+chunks/**/*_prompt.txt
+*_prompt.txt
+
+# Python/runtime caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+
+# Local logs and scratch output
+*.log
+*.tmp
+.DS_Store
+.codex/

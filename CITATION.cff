@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+title: Dioscorides Viewer
+message: "If you use this TEI edition or viewer, please cite the repository and the Heidelberg source facsimile."
+type: software
+authors:
+  - family-names: Coughlin
+    given-names: Sean
+repository-code: "https://github.com/alchemiesofscent/dioscorides-viewer"
+license: MIT
+date-released: 2026-05-04
+references:
+  - type: book
+    title: "Des Pedanios Dioskurides aus Anazarbos Arzneimittellehre in fünf Büchern"
+    authors:
+      - family-names: Berendes
+        given-names: Julius
+    year: 1902
+    publisher: "Verlag von Ferdinand Enke"
+    doi: "10.11588/diglit.69903"

@@ -1,0 +1,21 @@
+{
+  "defaultEdition": "berendes1902",
+  "editions": [
+    {
+      "id": "berendes1902",
+      "label": "Berendes 1902",
+      "tei": "output/berendes1902_epidoc.xml",
+      "manifest": "manifest.json",
+      "imageMode": "remote",
+      "localImageRoot": "images/raw/",
+      "imageLabelRoot": "images/raw/",
+      "sourceLabel": "Heidelberg facsimile",
+      "sourceUrl": "https://digi.ub.uni-heidelberg.de/diglit/berendes1902",
+      "doi": "https://doi.org/10.11588/diglit.69903",
+      "urn": "urn:nbn:de:bsz:16-diglit-699033",
+      "iiifManifest2": "https://digi.ub.uni-heidelberg.de/diglit/iiif/berendes1902/manifest",
+      "iiifManifest3": "https://digi.ub.uni-heidelberg.de/diglit/iiif3/berendes1902/manifest",
+      "licenseNote": "TEI/data/docs: CC BY-NC 4.0. Viewer/scripts: MIT. Heidelberg facsimile images are external source material marked Public Domain Mark by Heidelberg."
+    }
+  ]
+}

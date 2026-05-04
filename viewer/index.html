@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dioscorides Viewer</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="title-group">
+        <h1>Dioscorides Viewer</h1>
+        <div id="loadStatus" class="status" role="status">Loading TEI and page map...</div>
+      </div>
+      <div class="toolbar" aria-label="Edition and page navigation">
+        <label class="field edition-field">
+          <span>Edition</span>
+          <select id="editionSelect" disabled></select>
+        </label>
+        <button id="prevPage" type="button" title="Previous page" aria-label="Previous page">‹</button>
+        <label class="field">
+          <span>Page</span>
+          <select id="pageSelect" disabled></select>
+        </label>
+        <button id="nextPage" type="button" title="Next page" aria-label="Next page">›</button>
+      </div>
+      <div class="toolbar searchbar" role="search">
+        <label class="field search-field">
+          <span>Search</span>
+          <input id="searchInput" type="search" placeholder="Find text" autocomplete="off" disabled>
+        </label>
+        <button id="prevResult" type="button" title="Previous result" aria-label="Previous result">↑</button>
+        <button id="nextResult" type="button" title="Next result" aria-label="Next result">↓</button>
+        <span id="searchCount" class="muted">0/0</span>
+      </div>
+    </header>
+
+    <main class="layout">
+      <aside class="sidebar" aria-label="Sections">
+        <div class="sidebar-head">
+          <h2>Contents</h2>
+        </div>
+        <nav id="sectionList" class="section-list"></nav>
+      </aside>
+
+      <section class="text-pane" aria-label="TEI text">
+        <div class="pane-head">
+          <div>
+            <h2 id="pageTitle">Page</h2>
+            <div id="pageMeta" class="muted"></div>
+          </div>
+          <button id="copyCorrection" type="button" disabled>Copy correction note</button>
+        </div>
+        <article id="teiText" class="tei-text" tabindex="0"></article>
+      </section>
+
+      <section class="image-pane" aria-label="Scanned page image">
+        <div class="pane-head">
+          <div>
+            <h2>Page Image</h2>
+            <div id="imageMeta" class="muted"></div>
+          </div>
+          <div class="toolbar" aria-label="Image controls">
+            <button id="zoomOut" type="button" title="Zoom out" aria-label="Zoom out">−</button>
+            <button id="zoomReset" type="button" title="Reset zoom" aria-label="Reset zoom">100%</button>
+            <button id="zoomIn" type="button" title="Zoom in" aria-label="Zoom in">+</button>
+            <button id="fitWidth" type="button" title="Fit width" aria-label="Fit width">Fit</button>
+            <a id="openImage" class="button-link" target="_blank" rel="noopener">Image</a>
+            <a id="openFacs" class="button-link" target="_blank" rel="noopener">Heidelberg</a>
+          </div>
+        </div>
+        <div id="imageStage" class="image-stage">
+          <img id="pageImage" alt="">
+          <div id="imageFallback" class="image-fallback" hidden></div>
+        </div>
+      </section>
+    </main>
+
+    <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+    <script src="./app.js"></script>
+  </body>
+</html>
