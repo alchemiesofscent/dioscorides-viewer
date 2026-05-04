@@ -41,6 +41,7 @@
     fitWidth: document.getElementById("fitWidth"),
     openImage: document.getElementById("openImage"),
     openFacs: document.getElementById("openFacs"),
+    textViewToggle: document.getElementById("textViewToggle"),
     toast: document.getElementById("toast"),
   };
 
@@ -60,6 +61,9 @@
     xmlIdPages: new Map(),
     editions: [],
     edition: FALLBACK_EDITION,
+    textViewMode: "diplomatic",
+    generatedSectionIds: new WeakMap(),
+    generatedSectionIdCounts: new Map(),
   };
 
   function resolveRepoPath(path) {
@@ -232,6 +236,22 @@
     return directHead ? normalizeText(directHead.textContent || "") : "";
   }
 
+  function cleanBracketedTitle(text) {
+    const bracketed = text.match(/\[([^\]]+)/);
+    if (bracketed) {
+      return bracketed[1]
+        .replace(/\[\d+\]?$/, "")
+        .replace(/\s+/g, " ")
+        .replace(/[.。]+$/, "")
+        .trim();
+    }
+    return text
+      .replace(/^Κεφ\.\s*\S+\.?\s*/i, "")
+      .replace(/\s+/g, " ")
+      .replace(/[.。]+$/, "")
+      .trim();
+  }
+
   function extractNavTitle(div, title) {
     const directHead = directSectionHead(div);
     if (directHead) {
@@ -240,6 +260,7 @@
       });
       if (hi) return normalizeText(hi.textContent || "").replace(/[.。]+$/, "");
     }
+    if (/^Κεφ\./.test(title)) return cleanBracketedTitle(title);
     return title
       .replace(/^Cap\.\s*[-\d.()]+\.?\s*/i, "")
       .replace(/Περὶ[^.]*\./g, "")
@@ -248,18 +269,37 @@
       .trim();
   }
 
+  function generatedSectionId(div, kind, n, type, subtype, book) {
+    const sourceId = getXmlId(div);
+    if (sourceId) return sourceId;
+    if (state.generatedSectionIds.has(div)) return state.generatedSectionIds.get(div);
+    const bookPart = book && book.n ? `book-${classToken(book.n)}` : "";
+    const base = [state.edition.id, kind, bookPart, subtype || type || "section", n || ""]
+      .map(classToken)
+      .filter(Boolean)
+      .join("-");
+    const key = base || `${state.edition.id || "edition"}-${kind}-section`;
+    const count = (state.generatedSectionIdCounts.get(key) || 0) + 1;
+    state.generatedSectionIdCounts.set(key, count);
+    const id = count === 1 ? key : `${key}-${count}`;
+    state.generatedSectionIds.set(div, id);
+    return id;
+  }
+
   function buildSection(div, parent, kind, book) {
     const title = extractTitle(div);
     const n = div.getAttribute("n") || "";
+    const type = div.getAttribute("type") || "";
+    const subtype = div.getAttribute("subtype") || "";
     if (kind === "front" && n) {
       const existing = state.frontSections.find((section) => section.n === n);
       if (existing) return existing;
     }
     const section = {
-      id: getXmlId(div),
+      id: generatedSectionId(div, kind, n, type, subtype, book),
       n,
-      type: div.getAttribute("type") || "",
-      subtype: div.getAttribute("subtype") || "",
+      type,
+      subtype,
       title,
       navTitle: extractNavTitle(div, title),
       kind,
@@ -356,6 +396,50 @@
     return id ? state.chapters.find((chapter) => chapter.id === id) || null : null;
   }
 
+  function chapterByBookAndN(book, n) {
+    if (!book || !n) return null;
+    return state.chapters.find((chapter) => chapter.book === book && chapter.n === n) || null;
+  }
+
+  function combinedChapterTitle(primary, paired) {
+    return [primary, paired].filter(Boolean).join(" / ");
+  }
+
+  function registerChapterMilestone(milestone, context) {
+    const page = context.currentPage;
+    if (!page || !context.book) return;
+    const n = milestone.getAttribute("n") || "";
+    const label = milestone.getAttribute("label") || "";
+    const pairedLabel = milestone.getAttribute("pairedLabel") || "";
+    const title = combinedChapterTitle(label, pairedLabel) || milestone.getAttribute("sourceLabel") || n;
+    let chapter = chapterByBookAndN(context.book, n);
+    if (!chapter) {
+      chapter = {
+        id: getXmlId(milestone) || generatedSectionId(milestone, "chapter", n, "textpart", "chapter", context.book),
+        n,
+        type: "textpart",
+        subtype: "chapter",
+        title,
+        navTitle: title,
+        kind: "chapter",
+        parent: context.book,
+        book: context.book,
+        chapters: [],
+        currentChapter: null,
+        firstPageIndex: null,
+      };
+      state.chapters.push(chapter);
+      context.book.chapters.push(chapter);
+    } else if (title && (!chapter.navTitle || chapter.navTitle === chapter.n)) {
+      chapter.title = title;
+      chapter.navTitle = title;
+    }
+    context.chapter = chapter;
+    context.book.currentChapter = chapter;
+    registerChapterOnPage(chapter, page, true);
+    page.section = chapter;
+  }
+
   function decorateContext(element, page, context) {
     element.dataset.pageIndex = String(page.index);
     const section = context.chapter || context.book || context.frontSection || null;
@@ -401,12 +485,13 @@
     const isBlock = isBlockElement(source);
     const element = document.createElement(isBlock ? (name === "head" ? "h3" : "div") : name === "ref" ? "a" : "span");
     const type = source.getAttribute("type") || "";
+    const labeledNote = name === "note" && ["apparatus", "footnote"].includes(type);
     element.className = `${isBlock ? "tei-block " : ""}tei-${name}`;
     const typeToken = classToken(type);
     if (typeToken) element.classList.add(`tei-${typeToken}`);
     const placeToken = classToken(source.getAttribute("place") || "");
     if (placeToken) element.classList.add(`tei-place-${placeToken}`);
-    if (name === "note" && type === "footnote") element.classList.add("tei-footnote");
+    if (labeledNote) element.classList.add("tei-footnote");
     decorateContext(element, page, context);
     const sourceId = getXmlId(source);
     if (sourceId) {
@@ -414,9 +499,10 @@
       state.xmlIdPages.set(sourceId, page.index);
     }
 
-    if (name === "foreign") {
-      const lang = source.getAttributeNS(XML_NS, "lang") || source.getAttribute("xml:lang") || source.getAttribute("lang") || "";
-      if (lang) element.setAttribute("lang", lang);
+    const lang = source.getAttributeNS(XML_NS, "lang") || source.getAttribute("xml:lang") || source.getAttribute("lang") || "";
+    if (lang) {
+      element.setAttribute("lang", lang);
+      if (type === "pageZone") element.dataset.zoneLabel = lang === "grc" ? "Greek" : lang === "la" ? "Latin" : lang;
     }
 
     if (name === "hi") {
@@ -427,12 +513,12 @@
     }
 
     if (name === "ref") element.setAttribute("href", source.getAttribute("target") || "#");
-    if (name === "note" && type === "footnote") {
+    if (labeledNote) {
       const label = source.getAttribute("n") || "";
       if (label) {
         const labelElement = document.createElement("span");
         labelElement.className = "footnote-label";
-        labelElement.textContent = label;
+        labelElement.textContent = `${label} `;
         element.appendChild(labelElement);
       }
       const correspPages = Array.from(new Set((source.getAttribute("corresp") || "")
@@ -608,6 +694,10 @@
       context.pendingLineElement = null;
       return context;
     }
+    if (name === "milestone" && (node.getAttribute("unit") || "") === "chapter") {
+      registerChapterMilestone(node, context);
+      return context;
+    }
     if (isTopFurniture(node)) {
       appendTopFurniture(node, context, lookups);
       return context;
@@ -713,6 +803,8 @@
     state.searchResults = [];
     state.activeResult = -1;
     state.currentIndex = 0;
+    state.generatedSectionIds = new WeakMap();
+    state.generatedSectionIdCounts = new Map();
     els.copyCorrection.disabled = true;
     els.searchInput.disabled = true;
     els.searchCount.textContent = "0/0";
@@ -958,11 +1050,28 @@
     ].filter(Boolean).join(" · ");
 
     els.teiText.replaceChildren(page.fragment.cloneNode(true));
+    updateTextViewMode(page);
     els.teiText.scrollTop = 0;
     renderImage(page);
     updateActiveSection(page);
     updateSearchMarkers();
     if (!options.skipHash) updateHash(page);
+  }
+
+  function pageHasParallelZones(page) {
+    if (!page) return false;
+    return Boolean(page.fragment.querySelector('.tei-pagezone[lang="grc"]')) && Boolean(page.fragment.querySelector('.tei-pagezone[lang="la"]'));
+  }
+
+  function updateTextViewMode(page) {
+    const canParallel = pageHasParallelZones(page);
+    els.textViewToggle.hidden = !canParallel;
+    els.textViewToggle.disabled = !canParallel;
+    if (!canParallel) state.textViewMode = "diplomatic";
+    const parallel = canParallel && state.textViewMode === "parallel";
+    els.teiText.classList.toggle("tei-parallel", parallel);
+    els.textViewToggle.textContent = parallel ? "Diplomatic" : "Parallel";
+    els.textViewToggle.setAttribute("aria-pressed", parallel ? "true" : "false");
   }
 
   function allTextNodes(root) {
@@ -1167,6 +1276,10 @@
       else moveSearch(1);
     });
     els.copyCorrection.addEventListener("click", copyCorrectionNote);
+    els.textViewToggle.addEventListener("click", () => {
+      state.textViewMode = state.textViewMode === "parallel" ? "diplomatic" : "parallel";
+      showPage(state.currentIndex, { skipHash: true });
+    });
     els.teiText.addEventListener("click", (event) => {
       const block = event.target.closest(".tei-block");
       if (block && els.teiText.contains(block)) selectContext(contextFromElement(block), block);

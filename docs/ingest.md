@@ -54,6 +54,14 @@ Images are mapped to Internet Archive item `b23982500_0001`; TEI
 `page_images/page-0006.png` corresponds to Archive page `n5` and IIIF image
 `b23982500_0001_0006.jp2`.
 
+The current Sprengel generator applies deterministic normalization for the
+known first-pass import artifacts: apparatus markers are emitted as
+`type="footnote-ref"` / `type="footnote"` pairs, malformed Greek headings that
+absorbed a note marker are repaired without leaving paragraph-leading `.]`, and
+Greek `seg type="synonyma"` blocks preserve their printed order before the
+lemma. This is still a page-first diplomatic normalization, not a full
+Berendes-style OCR/chunk rebuild.
+
 ## hOCR And Word Alignment
 
 hOCR is a derived layer, not a blocker for first ingest. When added, keep it

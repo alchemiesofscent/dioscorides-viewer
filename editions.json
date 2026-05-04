@@ -20,7 +20,7 @@
     {
       "id": "sprengel1829",
       "label": "Sprengel 1829/1830",
-      "tei": "editions/sprengel1829/sprengel_diplomatic.xml",
+      "tei": "output/sprengel1829_epidoc.xml",
       "manifest": "editions/sprengel1829/manifest.json",
       "imageMode": "remote",
       "localImageRoot": "editions/sprengel1829/page_images/",

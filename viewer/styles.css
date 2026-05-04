@@ -314,6 +314,47 @@ select {
   margin: 12px 0 16px;
 }
 
+.tei-pagezone {
+  border: 1px solid var(--line);
+  background: #fffefb;
+  margin: 0 0 18px;
+  padding: 14px 16px;
+}
+
+.tei-pagezone::before {
+  content: attr(data-zone-label);
+  color: var(--muted);
+  display: block;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 11px;
+  line-height: 1;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.tei-place-top {
+  border-bottom: 3px solid #91b9b4;
+}
+
+.tei-place-bottom {
+  border-top: 3px solid #b7a36a;
+}
+
+.tei-parallel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 16px;
+  align-content: start;
+}
+
+.tei-parallel .tei-page-boundary {
+  grid-column: 1 / -1;
+}
+
+.tei-parallel .tei-pagezone {
+  min-width: 0;
+}
+
 .tei-fw {
   color: var(--muted);
   font-size: 14px;
@@ -422,6 +463,14 @@ select {
   min-width: 1.8em;
 }
 
+.tei-footnote-ref {
+  font-size: 0.72em;
+  line-height: 0;
+  padding: 0 0.05em;
+  text-decoration: none;
+  vertical-align: super;
+}
+
 .tei-cross-page-footnote {
   border-left-color: #9b6b45;
 }
@@ -524,6 +573,10 @@ select {
     height: auto;
     min-height: calc(100vh - 73px);
     grid-template-columns: 1fr;
+  }
+
+  .tei-parallel {
+    display: block;
   }
 
   .sidebar {
