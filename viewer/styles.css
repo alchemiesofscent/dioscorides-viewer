@@ -388,6 +388,34 @@ select {
   color: #39495f;
 }
 
+.tei-abbreviation-columns {
+  display: grid;
+  gap: 2px 0;
+  margin: 0;
+}
+
+.tei-abbreviation-columns .tei-item {
+  align-items: baseline;
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) minmax(0, 1fr);
+  column-gap: 24px;
+  margin: 0;
+}
+
+.tei-abbreviation-columns .tei-line {
+  min-width: 34px;
+}
+
+.tei-abbreviation-columns .line-number {
+  min-width: 26px;
+  padding-right: 8px;
+}
+
+.tei-abbr-left,
+.tei-abbr-right {
+  min-width: 0;
+}
+
 .footnote-label {
   display: inline-block;
   font-weight: 700;

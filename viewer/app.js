@@ -114,6 +114,12 @@
     for (const furniture of clone.querySelectorAll(".tei-fw")) {
       furniture.appendChild(document.createTextNode(" "));
     }
+    for (const leftColumn of clone.querySelectorAll(".tei-abbr-left")) {
+      leftColumn.appendChild(document.createTextNode(" "));
+    }
+    for (const abbreviationRow of clone.querySelectorAll(".tei-abbreviation-columns .tei-item")) {
+      abbreviationRow.appendChild(document.createTextNode(" "));
+    }
     return clone;
   }
 

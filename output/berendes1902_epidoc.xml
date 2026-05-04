@@ -1054,36 +1054,38 @@
 <lb n="1"/>Abkürzungen der wichtigsten Autorennamen.
 </head>
 <ab>
-<lb n="2"/>Ach. = Acharius. Hook. = Hooker.
-<lb n="3"/>Ait. = Aiton. Jacq. = Jacquin.
-<lb n="4"/>All. = Allioni. Kit. = Kitaibel.
-<lb n="5"/>Amor. = Amoreux. Kregl. = Kreglinger.
-<lb n="6"/>Bertol. = Bertoloni. Labill. = Labillardière.
-<lb n="7"/>Bibr. = Bibron. Lam. = Lamarck.
-<lb n="8"/>Biv. = Bivona-Bernardi. Lath. = Latham.
-<lb n="9"/>Blum. = Blumenbach. Latr. = Latreille.
-<lb n="10"/>Bonap. = Bonaparte. Laur. = Laurenti.
-<lb n="11"/>Briss. = Brisson. Licht. = Lichtenstein.
-<lb n="12"/>Cl. = Claus. Lour. = Loureiro.
-<lb n="13"/>Crntz. = Crantz. Matth. = Matthioli.
-<lb n="14"/>Curt. = Curtis. Merr. = Merrem.
-<lb n="15"/>Cuv. = Cuvier. Mill. = Miller.
-<lb n="16"/>C. V. = Cuvier et Valenciennes. Pall. = Pallas.
-<lb n="17"/>D. C. = De Candolle. Pers. = Persoon.
-<lb n="18"/>Desf. = Desfontaines. Poir. = Poiret.
-<lb n="19"/>Desv. = Desvaux. R. Br. = Robert Brown.
-<lb n="20"/>Dum. = Duméril. Rchb. = Reichenbach, L.
-<lb n="21"/>Ehrbg. = Ehrenberg. Retz. = Retzius.
-<lb n="22"/>Fabr. = Fabricius, Joh. Chr. Rösel = Rösel von Rosenhof.
-<lb n="23"/>Fisch. = Fischer. Sch. = Schäffer.
-<lb n="24"/>Flem. = Fleming. Schreb. = Schreber.
-<lb n="25"/>Forsk. = Forskal. Scop. = Scopoli.
-<lb n="26"/>Gärtn. = Gärtner. Sibth. = Sibthorp.
-<lb n="27"/>Gaud. = Gaudin. Sm. = Smith.
-<lb n="28"/>Geoffr. = Geoffroy St. Hilaire. Spr. = Sprengel.
-<lb n="29"/>Haesk. = Haeskel. Sw. = Swartz.
-<lb n="30"/>Hauskn. = Hausknecht. Vaill. = Vaillant.
-<lb n="31"/>Hoffm. = Hoffmann. Vill. = Villars.
+<list type="abbreviation-columns">
+<item><lb n="2"/><seg type="abbr-left">Ach. = Acharius.</seg><seg type="abbr-right">Hook. = Hooker.</seg></item>
+<item><lb n="3"/><seg type="abbr-left">Ait. = Aiton.</seg><seg type="abbr-right">Jacq. = Jacquin.</seg></item>
+<item><lb n="4"/><seg type="abbr-left">All. = Allioni.</seg><seg type="abbr-right">Kit. = Kitaibel.</seg></item>
+<item><lb n="5"/><seg type="abbr-left">Amor. = Amoreux.</seg><seg type="abbr-right">Kregl. = Kreglinger.</seg></item>
+<item><lb n="6"/><seg type="abbr-left">Bertol. = Bertoloni.</seg><seg type="abbr-right">Labill. = Labillardière.</seg></item>
+<item><lb n="7"/><seg type="abbr-left">Bibr. = Bibron.</seg><seg type="abbr-right">Lam. = Lamarck.</seg></item>
+<item><lb n="8"/><seg type="abbr-left">Biv. = Bivona-Bernardi.</seg><seg type="abbr-right">Lath. = Latham.</seg></item>
+<item><lb n="9"/><seg type="abbr-left">Blum. = Blumenbach.</seg><seg type="abbr-right">Latr. = Latreille.</seg></item>
+<item><lb n="10"/><seg type="abbr-left">Bonap. = Bonaparte.</seg><seg type="abbr-right">Laur. = Laurenti.</seg></item>
+<item><lb n="11"/><seg type="abbr-left">Briss. = Brisson.</seg><seg type="abbr-right">Licht. = Lichtenstein.</seg></item>
+<item><lb n="12"/><seg type="abbr-left">Cl. = Claus.</seg><seg type="abbr-right">Lour. = Loureiro.</seg></item>
+<item><lb n="13"/><seg type="abbr-left">Crntz. = Crantz.</seg><seg type="abbr-right">Matth. = Matthioli.</seg></item>
+<item><lb n="14"/><seg type="abbr-left">Curt. = Curtis.</seg><seg type="abbr-right">Merr. = Merrem.</seg></item>
+<item><lb n="15"/><seg type="abbr-left">Cuv. = Cuvier.</seg><seg type="abbr-right">Mill. = Miller.</seg></item>
+<item><lb n="16"/><seg type="abbr-left">C. V. = Cuvier et Valenciennes.</seg><seg type="abbr-right">Pall. = Pallas.</seg></item>
+<item><lb n="17"/><seg type="abbr-left">D. C. = De Candolle.</seg><seg type="abbr-right">Pers. = Persoon.</seg></item>
+<item><lb n="18"/><seg type="abbr-left">Desf. = Desfontaines.</seg><seg type="abbr-right">Poir. = Poiret.</seg></item>
+<item><lb n="19"/><seg type="abbr-left">Desv. = Desvaux.</seg><seg type="abbr-right">R. Br. = Robert Brown.</seg></item>
+<item><lb n="20"/><seg type="abbr-left">Dum. = Duméril.</seg><seg type="abbr-right">Rchb. = Reichenbach, L.</seg></item>
+<item><lb n="21"/><seg type="abbr-left">Ehrbg. = Ehrenberg.</seg><seg type="abbr-right">Retz. = Retzius.</seg></item>
+<item><lb n="22"/><seg type="abbr-left">Fabr. = Fabricius, Joh. Chr.</seg><seg type="abbr-right">Rösel = Rösel von Rosenhof.</seg></item>
+<item><lb n="23"/><seg type="abbr-left">Fisch. = Fischer.</seg><seg type="abbr-right">Sch. = Schäffer.</seg></item>
+<item><lb n="24"/><seg type="abbr-left">Flem. = Fleming.</seg><seg type="abbr-right">Schreb. = Schreber.</seg></item>
+<item><lb n="25"/><seg type="abbr-left">Forsk. = Forskal.</seg><seg type="abbr-right">Scop. = Scopoli.</seg></item>
+<item><lb n="26"/><seg type="abbr-left">Gärtn. = Gärtner.</seg><seg type="abbr-right">Sibth. = Sibthorp.</seg></item>
+<item><lb n="27"/><seg type="abbr-left">Gaud. = Gaudin.</seg><seg type="abbr-right">Sm. = Smith.</seg></item>
+<item><lb n="28"/><seg type="abbr-left">Geoffr. = Geoffroy St. Hilaire.</seg><seg type="abbr-right">Spr. = Sprengel.</seg></item>
+<item><lb n="29"/><seg type="abbr-left">Haesk. = Haeskel.</seg><seg type="abbr-right">Sw. = Swartz.</seg></item>
+<item><lb n="30"/><seg type="abbr-left">Hauskn. = Hausknecht.</seg><seg type="abbr-right">Vaill. = Vaillant.</seg></item>
+<item><lb n="31"/><seg type="abbr-left">Hoffm. = Hoffmann.</seg><seg type="abbr-right">Vill. = Villars.</seg></item>
+</list>
 </ab>
 </div>
 <div type="textpart" subtype="preface" n="vorrede" xml:id="front_vorrede_start_id-001">
