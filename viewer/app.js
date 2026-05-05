@@ -92,12 +92,19 @@
 
   function sectionLabel(section) {
     if (!section) return "Unsectioned";
-    if (section.kind === "book") return `Book ${section.n || section.id || "?"}`;
+    if (section.kind === "book") return section.navTitle || section.title || `Book ${section.n || section.id || "?"}`;
     return section.navTitle || section.title || section.n || section.id || section.subtype || section.type || "Section";
+  }
+
+  function compactSectionLabel(section) {
+    if (!section) return "";
+    if (section.kind === "book") return `Book ${section.n || "?"}`;
+    return sectionLabel(section);
   }
 
   function chapterLabel(chapter) {
     if (!chapter) return "";
+    if (chapter.subtype === "proem") return chapter.navTitle || chapter.title || chapter.n || "Proem";
     return [chapter.n, chapter.navTitle || chapter.title].filter(Boolean).join(" ");
   }
 
@@ -689,7 +696,28 @@
     return isInlineContentNode(previous) && isInlineContentNode(next);
   }
 
+  function isInCommentaryZone(container) {
+    return container instanceof Element && Boolean(container.closest(".tei-place-commentary"));
+  }
+
+  function appendCommentaryText(container, page, text) {
+    const lines = text
+      .replace(/\r\n?/g, "\n")
+      .split("\n")
+      .map((line) => line.replace(/[ \t]+/g, " ").trim())
+      .filter(Boolean);
+    for (const line of lines) {
+      if (container.childNodes.length) container.appendChild(document.createElement("br"));
+      container.appendChild(document.createTextNode(line));
+      page.plainText += ` ${normalizeText(line)}`;
+    }
+  }
+
   function appendText(container, page, text, preserveWhitespace = false) {
+    if (isInCommentaryZone(container) && /\r|\n/.test(text)) {
+      appendCommentaryText(container, page, text);
+      return;
+    }
     const trimmed = text.replace(/[ \t\r\n]+/g, " ");
     if (trimmed.trim()) {
       container.appendChild(document.createTextNode(trimmed));
@@ -722,7 +750,10 @@
     const lang = source.getAttributeNS(XML_NS, "lang") || source.getAttribute("xml:lang") || source.getAttribute("lang") || "";
     if (lang) {
       element.setAttribute("lang", lang);
-      if (type === "pageZone") element.dataset.zoneLabel = lang === "grc" ? "Greek" : lang === "la" ? "Latin" : lang;
+      if (type === "pageZone") {
+        const place = source.getAttribute("place") || "";
+        element.dataset.zoneLabel = place === "commentary" ? "Commentary" : lang === "grc" ? "Greek" : lang === "la" ? "Latin" : lang;
+      }
     }
 
     if (name === "hi") {
@@ -758,6 +789,16 @@
 
   function isBlockElement(element) {
     return ["ab", "p", "head", "note", "fw", "lg", "list", "item", "quote"].includes(localName(element));
+  }
+
+  function isRenderableHead(element, context) {
+    if (localName(element) !== "head") return true;
+    const parent = element.parentElement;
+    if (!parent) return true;
+    const parentName = localName(parent);
+    if (parentName === "ab") return true;
+    if (parentName === "div" && parent.getAttribute("subtype") === "diplomatic-page") return true;
+    return context.frames.some((frame) => frame.source === parent);
   }
 
   function appendLineBreak(context) {
@@ -813,7 +854,12 @@
   function startsWithPageBreak(div) {
     for (const child of div.childNodes) {
       if (child.nodeType === Node.TEXT_NODE && !(child.nodeValue || "").trim()) continue;
-      return child.nodeType === Node.ELEMENT_NODE && localName(child) === "pb";
+      if (child.nodeType !== Node.ELEMENT_NODE) return false;
+      const name = localName(child);
+      if (name === "head") continue;
+      if (name === "pb") return true;
+      if (name === "div") return startsWithPageBreak(child);
+      return false;
     }
     return false;
   }
@@ -823,6 +869,11 @@
     const subtype = div.getAttribute("subtype") || "";
     const startsNewPage = startsWithPageBreak(div);
     const next = { ...context };
+    if (startsNewPage) {
+      next.currentPage = null;
+      next.container = null;
+      next.topFurnitureRow = null;
+    }
     if (subtype === "diplomatic-page" || (type === "edition" && subtype === "diplomatic")) {
       return next;
     }
@@ -832,7 +883,7 @@
       next.chapter = null;
       next.frontSection = null;
       if (next.currentPage && !startsNewPage) registerBookOnPage(book, next.currentPage);
-    } else if (subtype === "chapter") {
+    } else if (subtype === "chapter" || subtype === "proem") {
       const chapter = buildSection(div, context.book, "chapter", context.book);
       next.chapter = chapter;
       if (context.book) context.book.currentChapter = chapter;
@@ -924,6 +975,9 @@
     }
     if (isTopFurniture(node)) {
       appendTopFurniture(node, context, lookups);
+      return context;
+    }
+    if (name === "head" && !isRenderableHead(node, context)) {
       return context;
     }
     context.topFurnitureRow = null;
@@ -1085,6 +1139,7 @@
     button.innerHTML = `<span class="label"></span><span class="meta"></span>`;
     button.querySelector(".label").textContent = label || sectionLabel(section);
     button.querySelector(".meta").textContent = meta || "";
+    button.title = [sectionLabel(section), meta].filter(Boolean).join(" · ");
     button.addEventListener("click", () => showPage(section.firstPageIndex));
     return button;
   }
@@ -1127,7 +1182,7 @@
 
       const summary = document.createElement("summary");
       summary.className = "book-summary";
-      const bookButton = makeSectionButton(book, "book-button", sectionLabel(book), `${book.chapters.length} chapters`);
+      const bookButton = makeSectionButton(book, "book-button", compactSectionLabel(book), `${book.chapters.length} chapters`);
       bookButton.addEventListener("click", (event) => {
         event.preventDefault();
         event.stopPropagation();
@@ -1286,12 +1341,17 @@
     const chapterStarts = pageChapterStartLabels(page);
     const chapters = pageChapterLabels(page);
     const frontLabels = frontSectionLabels(page.frontSection);
-    els.pageMeta.textContent = [
-      page.book ? sectionLabel(page.book) : frontLabels.join(" · "),
+    const pageMetaParts = [
+      page.book ? compactSectionLabel(page.book) : frontLabels.join(" · "),
       chapters.length ? `chapters ${chapters.join(", ")}` : "",
       chapterStarts.length ? `starts ${chapterStarts.join(", ")}` : "",
       page.manifest && page.manifest.pdf_page ? `PDF page ${page.manifest.pdf_page}` : "",
       page.manifest && page.manifest.image && imageLabelRoot ? `${imageLabelRoot.replace(/\/?$/, "/")}${page.manifest.image}` : "",
+    ].filter(Boolean);
+    els.pageMeta.textContent = pageMetaParts.join(" · ");
+    els.pageMeta.title = [
+      page.book ? sectionLabel(page.book) : frontLabels.join(" · "),
+      ...pageMetaParts.slice(1),
     ].filter(Boolean).join(" · ");
 
     els.teiText.replaceChildren(page.fragment.cloneNode(true));

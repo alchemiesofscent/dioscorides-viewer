@@ -10,6 +10,7 @@ from collections import defaultdict
 from dataclasses import dataclass, field
 from pathlib import Path
 import re
+from typing import Callable
 import xml.etree.ElementTree as ET
 
 
@@ -29,7 +30,61 @@ FRONT_LABELS = {
     "dedication": "Dedication",
     "preface": "Praefatio ad Dioscoridem",
     "errata": "Errata",
-    "sigla": "Codices et Editiones",
+}
+BOOK_1_GREEK_TITLE = "ΠΕΔΑΝΙΟΥ ΔΙΟΣΚΟΡΙΔΟΥ ΑΝΑΖΑΡΒΕΩΣ ΠΕΡΙ ΥΛΗΣ ΙΑΤΡΙΚΗΣ ΒΙΒΛΙΟΝ Α."
+BOOK_1_LATIN_TITLE = "PEDANII DIOSCORIDIS ANAZARBEI DE MATERIA MEDICA LIBER I. PRAEFATIO."
+BOOK_1_PROEM_TITLE = "ΠΡΟΟΙΜΙΟΝ."
+FRONT_MIDPAGE_HEAD_SPLITS = {
+    ("IX", "III. De aetate Dioscoridis."): (8, set()),
+    ("X", "IV. De vitae genere."): (16, set()),
+    ("XI", "V. De secta, cui nomen dederit."): (15, set()),
+    ("XII", "VI. De dictionis genere."): (28, {26, 27}),
+    ("XVI", "C. De synonymis plantarum barbaris."): (8, {7}),
+    ("XVII", "VIII. De codicibus manuscriptis."): (19, set()),
+    ("XX", "IX. De editionibus."): (13, set()),
+    ("XXI", "X. De aliis adminiculis."): (23, set()),
+    ("XXV", "XI. De hujus editionis ratione."): (15, set()),
+}
+FRONT_INLINE_SUBHEADS = {
+    "C. De synonymis plantarum barbaris.",
+}
+LINE_TEXT_REPLACEMENTS = {
+    "spr-lb-fm-0018-13": "chigenes ",
+    "spr-lb-fm-0019-06": "solita: e. g. ἰδρωτοποιΐα, ἐμφαρυγξάμενος, τὸ ἅλας loco",
+    "spr-lb-fm-0019-28": "His accedit, (lib. II. c. 63.) ἔξαγίου ponderis ve-",
+    "spr-lb-fm-0020-01": "Nec dictiones φασκίωσον (lib. II. c. 67.), σφέκλη,",
+    "spr-lb-fm-0020-02": "loco τρυγός (lib. II. c. 137.) qua Alexander Trallianus",
+    "spr-lb-fm-0020-03": "primus utitur (lib. II. p. 630.), νηστικός loco νῆστις,",
+    "spr-lb-fm-0020-04": "flexiones σεσέλιδος loco σεσέλεως, πτέρεως loco",
+    "spr-lb-fm-0020-05": "πτέριδος, nisi ex aetate proficisci possunt, qua lingua graeca",
+    "spr-lb-fm-0020-06": "jam βαρβαροφωνεῖν coeperat.",
+    "spr-lb-fm-0020-18": "rum. Etenim de eo testatur Galenus, πλῆθος ὀνομάτων",
+    "spr-lb-fm-0020-19": "ἐφ' ἑκάστῃ βοτάνῃ μάτην προστιθέντα, fabulas de trans-",
+    "spr-lb-fm-0020-25": "nunquam eadem recepit ",
+    "spr-lb-fm-0020-26": "quandoque repetunt; neque adjunctae sunt nostris sy-",
+    "spr-lb-fm-0021-04": "μακοποιὸν ἔθνος appellaverat ",
+    "spr-lb-fm-0031-08": "ceptus editionibus, p. 131. 183. 172. κελύφῳ et κελύφοις",
+    "spr-lb-fm-0031-09": "scripsi, ubi κελύφει et κελύφεσι ponendum est. P. 192.",
+    "spr-lb-fm-0031-10": "Βουπρήστου scripsi, quemadmodum omnes editiones,",
+    "spr-lb-fm-0031-11": "loco Βουπρήστεως.",
+    "spr-lb-fm-0031-13": "p. 11. lin. 7. ὄξει loco ὄξῳ,",
+    "spr-lb-fm-0031-20": "et plerisque locis Ἀφροί falso scripsi, cum ex Aldina",
+    "spr-lb-fm-0031-22": "rexi. P. 10. 12. 20. γλῶτταν legendum: p. 120. 203.",
+    "spr-lb-fm-0031-23": "204. 205. 110. λίπος: p. 137. ὀμφακῖτις: p. 243. κε-",
+    "spr-lb-fm-0031-24": "ραῗτις: p. 283. μυῗτις: p. 327. νυκτερῖτις, ἀερῖτις, αἰγῖτις,",
+    "spr-lb-fm-0031-25": "πελαγῖτις: p. 344. δακτυλῖτις: p. 129. Ἄγνος: p. 153.",
+    "spr-lb-fm-0031-26": "ἰχώρ: p. 296. τοίχων: p. 321. Ἰβηρίς.",
+}
+ELEMENT_TEXT_REPLACEMENTS = {
+    "spr-app-fm-0020-32": "Comm. de bibl. Vindob. lib. 2. p. 593.",
+    "spr-app-fm-0020-35": (
+        "De prophetis Aegyptiorum cf. Clem. Alex. strom. 1. p. 305.\n"
+        "Porphyr. de abstinent. p. 321. Aristid. orat. vol. 3. p. 553."
+    ),
+}
+TARGET_TAIL_REPLACEMENTS = {
+    "#spr-app-fm-0018-28": {"; dein et κάκτος et στρύχνον μανικὸν ἢ δορύκνιον,": "; dein et κάκτος et στρύχνον μανικὸν ὅ δορύκνιον,"},
+    "#spr-app-fm-0020-34": {"Aetius": "Aëtius"},
 }
 
 GREEK_HEAD_RE = re.compile(r"Κεφ\.\s*([^.\[]+)\.?\s*\[([^\]]+)")
@@ -61,7 +116,7 @@ class Page:
     front_subsection_title: str = ""
     book: str = ""
     zones: dict[str, list[ET.Element | ChapterMarker]] = field(
-        default_factory=lambda: {"grc": [], "la": [], "front": []}
+        default_factory=lambda: {"grc": [], "la": [], "commentary": [], "front": []}
     )
     chapter_starts: dict[str, list[str]] = field(default_factory=lambda: {"grc": [], "la": []})
 
@@ -90,6 +145,37 @@ def attr(element: ET.Element, name: str) -> str:
 
 def text_content(element: ET.Element) -> str:
     return " ".join("".join(element.itertext()).split())
+
+
+def lb_number(element: ET.Element) -> int | None:
+    value = attr(element, "n")
+    if not value or not value.isdigit():
+        return None
+    return int(value)
+
+
+def paragraph_line_range(
+    paragraph: ET.Element,
+    include_line: Callable[[int | None], bool],
+) -> ET.Element | None:
+    clone = copy.copy(paragraph)
+    clone.text = paragraph.text if include_line(None) else None
+    clone.tail = paragraph.tail
+    for child in list(clone):
+        clone.remove(child)
+
+    current_line: int | None = None
+    kept = bool(clone.text and clone.text.strip())
+    for child in list(paragraph):
+        if local_name(child.tag) == "lb":
+            current_line = lb_number(child)
+        if include_line(current_line):
+            clone.append(copy.deepcopy(child))
+            kept = True
+
+    if not kept:
+        return None
+    return clone
 
 
 def normalize_chapter_label_text(text: str, lang: str) -> str:
@@ -179,6 +265,31 @@ def copy_without_page_breaks(element: ET.Element) -> ET.Element | None:
             if local_name(child.tag) == "pb":
                 parent.remove(child)
     return clone
+
+
+def apply_text_replacements(element: ET.Element) -> None:
+    element_replacement = ELEMENT_TEXT_REPLACEMENTS.get(attr(element, "xml:id"))
+    if element_replacement is not None:
+        element.text = element_replacement
+        for child in list(element):
+            element.remove(child)
+
+    for child in element.iter():
+        if child is not element:
+            child_replacement = ELEMENT_TEXT_REPLACEMENTS.get(attr(child, "xml:id"))
+            if child_replacement is not None:
+                child.text = child_replacement
+                for grandchild in list(child):
+                    child.remove(grandchild)
+            tail_replacements = TARGET_TAIL_REPLACEMENTS.get(attr(child, "target"))
+            if child.tail and tail_replacements:
+                for old, new in tail_replacements.items():
+                    child.tail = child.tail.replace(old, new)
+        if local_name(child.tag) != "lb":
+            continue
+        replacement = LINE_TEXT_REPLACEMENTS.get(attr(child, "xml:id"))
+        if replacement is not None:
+            child.tail = replacement + ("\n" if (child.tail or "").endswith("\n") else "")
 
 
 def append_to_last_text(element: ET.Element, text: str) -> None:
@@ -289,6 +400,7 @@ def paragraph_with_inline_head(
     paragraph: ET.Element,
     head: ET.Element,
     strip_leading_head_close: bool = False,
+    line_break_after_head: bool = False,
 ) -> tuple[ET.Element, bool]:
     clone = copy.deepcopy(paragraph)
     stripped = remove_leading_head_close(clone) if strip_leading_head_close else False
@@ -298,14 +410,26 @@ def paragraph_with_inline_head(
         if local_name(child.tag) == "lb":
             existing_tail = child.tail or ""
             child.tail = ""
-            title.tail = " " + existing_tail.lstrip()
-            clone.insert(index + 1, title)
+            if line_break_after_head:
+                clone.insert(index + 1, title)
+                continuation_lb = ET.Element(f"{NS}lb")
+                continuation_lb.tail = existing_tail.lstrip()
+                clone.insert(index + 2, continuation_lb)
+            else:
+                title.tail = " " + existing_tail.lstrip()
+                clone.insert(index + 1, title)
             return clone, stripped
 
     existing_text = clone.text or ""
     clone.text = ""
-    title.tail = " " + existing_text.lstrip()
-    clone.insert(0, title)
+    if line_break_after_head:
+        clone.insert(0, title)
+        continuation_lb = ET.Element(f"{NS}lb")
+        continuation_lb.tail = existing_text.lstrip()
+        clone.insert(1, continuation_lb)
+    else:
+        title.tail = " " + existing_text.lstrip()
+        clone.insert(0, title)
     return clone, stripped
 
 
@@ -322,6 +446,7 @@ class SprengelBuilder:
         self.ref_id_counts: defaultdict[str, int] = defaultdict(int)
         self.ref_ids_by_target: defaultdict[str, list[str]] = defaultdict(list)
         self.front_unpaged: defaultdict[str, list[ET.Element]] = defaultdict(list)
+        self.book_opening_commentary: list[ET.Element] = []
         self.source_ids = {
             element.get(XML_ID)
             for element in self.root.iter()
@@ -441,6 +566,31 @@ class SprengelBuilder:
         ref.tail = ".]"
         return clone, True
 
+    def should_break_after_inline_head(self, lang: str, book: str, chapter: str) -> bool:
+        return lang == "grc" and book == "1" and chapter == "65"
+
+    def front_midpage_split(
+        self,
+        page: Page | None,
+        head: ET.Element,
+        paragraph: ET.Element | None,
+    ) -> tuple[ET.Element | None, ET.Element | None] | None:
+        if page is None or paragraph is None or local_name(paragraph.tag) != "p":
+            return None
+        rule = FRONT_MIDPAGE_HEAD_SPLITS.get((page.n, text_content(head)))
+        if rule is None:
+            return None
+        split_start, skip_lines = rule
+        prelude = paragraph_line_range(
+            paragraph,
+            lambda line: line is not None and line < split_start and line not in skip_lines,
+        )
+        remainder = paragraph_line_range(
+            paragraph,
+            lambda line: line is not None and line >= split_start and line not in skip_lines,
+        )
+        return prelude, remainder
+
     def collect_front(self) -> None:
         front = self.root.find(f".//{NS}front")
         if front is None:
@@ -449,13 +599,21 @@ class SprengelBuilder:
         for child in list(front):
             name = local_name(child.tag)
             section = "title_page" if name == "titlePage" else attr(child, "type") or name
+            if section == "sigla":
+                for node in list(child):
+                    if local_name(node.tag) != "pb":
+                        self.book_opening_commentary.extend(self.output_items(node))
+                continue
             direct_head = child.find(f"{NS}head")
             section_title = FRONT_LABELS.get(section) or (text_content(direct_head) if direct_head is not None else "") or section
             current_subsection = ""
             current_subsection_title = ""
             current_page: Page | None = None
             saw_page = False
-            for node in list(child):
+            children = list(child)
+            index = 0
+            while index < len(children):
+                node = children[index]
                 node_name = local_name(node.tag)
                 if node_name == "pb":
                     current_page = self.page_for_pb(node)
@@ -464,8 +622,31 @@ class SprengelBuilder:
                     current_page.front_subsection = current_subsection
                     current_page.front_subsection_title = current_subsection_title
                     saw_page = True
+                    index += 1
                     continue
                 if node_name == "head" and saw_page:
+                    next_node = children[index + 1] if index + 1 < len(children) else None
+                    split = self.front_midpage_split(current_page, node, next_node)
+                    if split is not None:
+                        prelude, remainder = split
+                        if current_page is not None and prelude is not None:
+                            current_page.zones["front"].extend(self.output_items(prelude))
+                        split_title = text_content(node)
+                        if split_title not in FRONT_INLINE_SUBHEADS:
+                            current_subsection_title = split_title
+                            current_subsection = front_subsection_key(
+                                section,
+                                current_subsection_title,
+                                subsection_counts,
+                            )
+                        if current_page is not None:
+                            current_page.front_subsection = current_subsection
+                            current_page.front_subsection_title = current_subsection_title
+                            current_page.zones["front"].extend(self.output_items(node))
+                            if remainder is not None:
+                                current_page.zones["front"].extend(self.output_items(remainder))
+                        index += 2
+                        continue
                     current_subsection_title = text_content(node)
                     current_subsection = front_subsection_key(section, current_subsection_title, subsection_counts)
                     if current_page is not None:
@@ -474,8 +655,10 @@ class SprengelBuilder:
                 if current_page is None:
                     if node_name != "head":
                         self.front_unpaged[section].extend(self.output_items(node))
+                    index += 1
                     continue
                 current_page.zones["front"].extend(self.output_items(node))
+                index += 1
 
     def collect_body_language(self, language_div: ET.Element, lang: str) -> None:
         state = {
@@ -555,6 +738,11 @@ class SprengelBuilder:
                                         paragraph_source,
                                         pending_head,
                                         strip_leading_head_close=bool(state["consume_leading_head_close"]),
+                                        line_break_after_head=self.should_break_after_inline_head(
+                                            lang,
+                                            str(state["book"]),
+                                            str(state["chapter"]),
+                                        ),
                                     )
                                     state["pending_inline_head"] = None
                                     if stripped:
@@ -587,6 +775,11 @@ class SprengelBuilder:
                                     child,
                                     state["pending_inline_head"],
                                     strip_leading_head_close=bool(state["consume_leading_head_close"]),
+                                    line_break_after_head=self.should_break_after_inline_head(
+                                        lang,
+                                        str(state["book"]),
+                                        str(state["chapter"]),
+                                    ),
                                 )
                                 state["pending_inline_head"] = None
                                 if stripped:
@@ -700,6 +893,7 @@ class SprengelBuilder:
         clone = copy_without_page_breaks(element)
         if clone is None:
             return []
+        apply_text_replacements(clone)
         if local_name(clone.tag) == "note" and attr(clone, "type") == "apparatus":
             notes = self.split_apparatus_note(clone)
             output = []
@@ -730,6 +924,22 @@ class SprengelBuilder:
             elif div_type == "translation" and lang == "la":
                 self.collect_body_language(div, "la")
         self.resolve_missing_apparatus_targets()
+        self.attach_book_opening_commentary()
+
+    def attach_book_opening_commentary(self) -> None:
+        if not self.book_opening_commentary:
+            return
+        first_book_page = next(
+            (
+                self.pages[facs]
+                for facs in self.page_order
+                if self.pages[facs].book == "1" and self.pages[facs].n == "1"
+            ),
+            None,
+        )
+        if first_book_page is None:
+            return
+        first_book_page.zones["commentary"].extend(copy.deepcopy(self.book_opening_commentary))
 
     def resolve_missing_apparatus_targets(self) -> None:
         known_ids = set(self.source_ids)
@@ -830,6 +1040,28 @@ class SprengelBuilder:
             else:
                 parent.append(item)
 
+    def append_body_page(self, parent: ET.Element, page: Page) -> None:
+        page_div = ET.SubElement(parent, f"{NS}div", {"type": "page", "subtype": "diplomatic-page", "n": page.n})
+        page_div.set("facs", page.facs)
+        page_div.set(XML_ID, f"spr-page-{page.index:04d}")
+        pb = ET.SubElement(page_div, f"{NS}pb")
+        if page.n:
+            pb.set("n", page.n)
+        pb.set("facs", page.facs)
+        pb.set(XML_ID, page.xml_id)
+        for lang, place in (("grc", "top"), ("commentary", "commentary"), ("la", "bottom")):
+            if not page.zones[lang]:
+                continue
+            zone = ET.SubElement(page_div, f"{NS}ab", {"type": "pageZone", "place": place})
+            zone.set(XML_LANG, "la" if lang == "commentary" else lang)
+            if page.book == "1" and page.n == "1" and lang == "grc":
+                ET.SubElement(zone, f"{NS}head").text = BOOK_1_GREEK_TITLE
+                ET.SubElement(zone, f"{NS}head").text = BOOK_1_PROEM_TITLE
+            elif page.book == "1" and page.n == "1" and lang == "la":
+                ET.SubElement(zone, f"{NS}head").text = BOOK_1_LATIN_TITLE
+            self.renumber_zone_lines(page.zones[lang])
+            self.append_zone_items(zone, page.zones[lang])
+
     def renumber_zone_lines(self, items: list[ET.Element | ChapterMarker]) -> None:
         line_number = 1
 
@@ -906,23 +1138,21 @@ class SprengelBuilder:
             if not book_pages:
                 continue
             book_div = ET.SubElement(edition, f"{NS}div", {"type": "textpart", "subtype": "book", "n": book})
-            ET.SubElement(book_div, f"{NS}head").text = f"Book {book}"
+            ET.SubElement(book_div, f"{NS}head").text = (
+                f"{BOOK_1_GREEK_TITLE} {BOOK_1_LATIN_TITLE}" if book == "1" else f"Book {book}"
+            )
             for page in book_pages:
-                page_div = ET.SubElement(book_div, f"{NS}div", {"type": "page", "subtype": "diplomatic-page", "n": page.n})
-                page_div.set("facs", page.facs)
-                page_div.set(XML_ID, f"spr-page-{page.index:04d}")
-                pb = ET.SubElement(page_div, f"{NS}pb")
-                if page.n:
-                    pb.set("n", page.n)
-                pb.set("facs", page.facs)
-                pb.set(XML_ID, page.xml_id)
-                for lang, place in (("grc", "top"), ("la", "bottom")):
-                    if not page.zones[lang]:
-                        continue
-                    zone = ET.SubElement(page_div, f"{NS}ab", {"type": "pageZone", "place": place})
-                    zone.set(XML_LANG, lang)
-                    self.renumber_zone_lines(page.zones[lang])
-                    self.append_zone_items(zone, page.zones[lang])
+                if book == "1" and page.n == "1":
+                    proem_div = ET.SubElement(
+                        book_div,
+                        f"{NS}div",
+                        {"type": "textpart", "subtype": "proem", "n": "prooimion"},
+                    )
+                    proem_div.set(XML_ID, "spr-book-1-prooimion")
+                    ET.SubElement(proem_div, f"{NS}head").text = BOOK_1_PROEM_TITLE
+                    self.append_body_page(proem_div, page)
+                else:
+                    self.append_body_page(book_div, page)
 
         ET.indent(tei, space="  ")
         return ET.ElementTree(tei)

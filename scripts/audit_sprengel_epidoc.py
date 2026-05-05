@@ -15,6 +15,9 @@ import xml.etree.ElementTree as ET
 TEI = "http://www.tei-c.org/ns/1.0"
 XML = "http://www.w3.org/XML/1998/namespace"
 XML_ID = f"{{{XML}}}id"
+BOOK_1_GREEK_TITLE = "ΠΕΔΑΝΙΟΥ ΔΙΟΣΚΟΡΙΔΟΥ ΑΝΑΖΑΡΒΕΩΣ ΠΕΡΙ ΥΛΗΣ ΙΑΤΡΙΚΗΣ ΒΙΒΛΙΟΝ Α."
+BOOK_1_LATIN_TITLE = "PEDANII DIOSCORIDIS ANAZARBEI DE MATERIA MEDICA LIBER I. PRAEFATIO."
+BOOK_1_PROEM_TITLE = "ΠΡΟΟΙΜΙΟΝ."
 
 
 def local_name(tag: str) -> str:
@@ -44,6 +47,71 @@ def nearest_non_page_div(element: ET.Element, parents: dict[ET.Element, ET.Eleme
     return None
 
 
+def page_by_facs(root: ET.Element, facs: str) -> ET.Element | None:
+    return next(
+        (
+            element
+            for element in root.iter()
+            if local_name(element.tag) == "div"
+            and attr(element, "subtype") == "diplomatic-page"
+            and attr(element, "facs") == facs
+        ),
+        None,
+    )
+
+
+def check_text_order(issues: list[str], text: str, label: str, needles: tuple[str, ...]) -> None:
+    positions = []
+    for needle in needles:
+        position = text.find(needle)
+        if position == -1:
+            issues.append(f"{label}_TEXT_MISSING: {needle}")
+            return
+        positions.append(position)
+    if positions != sorted(positions):
+        issues.append(f"{label}_TEXT_ORDER")
+
+
+def check_chapter_title_line_break(
+    issues: list[str],
+    parents: dict[ET.Element, ET.Element],
+    page: ET.Element | None,
+    title: str,
+    continuation: str,
+    label: str,
+) -> None:
+    if page is None:
+        issues.append(f"{label}_PAGE_MISSING")
+        return
+    title_seg = next(
+        (
+            element
+            for element in page.iter()
+            if local_name(element.tag) == "seg"
+            and attr(element, "type") == "chapterTitle"
+            and text_content(element) == title
+        ),
+        None,
+    )
+    if title_seg is None:
+        issues.append(f"{label}_TITLE_MISSING")
+        return
+    if title_seg.tail and title_seg.tail.strip():
+        issues.append(f"{label}_TITLE_HAS_INLINE_TAIL")
+    parent = parents.get(title_seg)
+    siblings = list(parent) if parent is not None else []
+    try:
+        index = siblings.index(title_seg)
+    except ValueError:
+        issues.append(f"{label}_TITLE_PARENT_MISSING")
+        return
+    next_sibling = siblings[index + 1] if index + 1 < len(siblings) else None
+    if next_sibling is None or local_name(next_sibling.tag) != "lb":
+        issues.append(f"{label}_CONTINUATION_LB_MISSING")
+    elif continuation not in (next_sibling.tail or ""):
+        issues.append(f"{label}_CONTINUATION_TEXT_MISSING")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("xml")
@@ -71,11 +139,12 @@ def main() -> int:
             "spr-front-dedication",
             "spr-front-preface",
             "spr-front-errata",
-            "spr-front-sigla",
         }
         missing_front_ids = sorted(expected_front_ids - front_ids)
         if missing_front_ids:
             issues.append(f"FRONT_TOP_SECTION_MISSING: {missing_front_ids}")
+        if "spr-front-sigla" in front_ids:
+            issues.append("FRONT_SIGLA_SHOULD_NOT_BE_NAV_SECTION")
         preface = next(
             (
                 element
@@ -111,7 +180,6 @@ def main() -> int:
                 "V. De secta, cui nomen dederit.",
                 "VI. De dictionis genere.",
                 "VII. De genuinorum a spuriis libris distinctione.",
-                "C. De synonymis plantarum barbaris.",
                 "VIII. De codicibus manuscriptis.",
                 "IX. De editionibus.",
                 "X. De aliis adminiculis.",
@@ -120,6 +188,8 @@ def main() -> int:
             missing_titles = sorted(expected_titles - subsection_titles)
             if missing_titles:
                 issues.append(f"FRONT_PREFACE_SUBSECTION_MISSING: {missing_titles}")
+            if "C. De synonymis plantarum barbaris." in subsection_titles:
+                issues.append("FRONT_PREFACE_SUBSECTION_C_SHOULD_BE_INLINE")
         page_xvii = next(
             (
                 element
@@ -141,6 +211,243 @@ def main() -> int:
                 )
             if "principis, qui, dum Xerxem comitaretur" not in text_content(page_xvii):
                 issues.append("FRONT_PAGE_XVII_TEXT_MISSING")
+            page_xvii_text = text_content(page_xvii)
+            if "φαρ- μακοποιὸν ἔθνος" not in page_xvii_text:
+                issues.append("FRONT_PAGE_XVII_AESCHYLUS_READING_MISSING")
+            if "φαρ- μακοποιῶν ἔθνος" in page_xvii_text:
+                issues.append("FRONT_PAGE_XVII_AESCHYLUS_BAD_READING")
+
+        page_0010 = page_by_facs(root, "page_images/page-0010.png")
+        if page_0010 is None:
+            issues.append("FRONT_BLANK_PAGE_0010_MISSING")
+        elif text_content(page_0010):
+            issues.append("FRONT_BLANK_PAGE_0010_HAS_TEXT")
+
+        page_0011 = page_by_facs(root, "page_images/page-0011.png")
+        if page_0011 is None:
+            issues.append("FRONT_PAGE_0011_MISSING")
+        else:
+            page_0011_text = text_content(page_0011)
+            if attr(page_0011, "n") != "VII":
+                issues.append("FRONT_PAGE_0011_BAD_N")
+            if "I. De nomine auctoris." not in page_0011_text:
+                issues.append("FRONT_PAGE_0011_SUBSECTION_TITLE_MISSING")
+            if "Praefatio ad Dioscoridem" in page_0011_text:
+                issues.append("FRONT_PAGE_0011_HAS_ABSTRACT_PREFACE_TITLE")
+
+        page_0018 = page_by_facs(root, "page_images/page-0018.png")
+        if page_0018 is None:
+            issues.append("FRONT_PAGE_0018_MISSING")
+        else:
+            page_0018_text = text_content(page_0018)
+            if "στρύχνον μανικὸν ὅ δορύκνιον" not in page_0018_text:
+                issues.append("FRONT_PAGE_0018_DORYKNION_READING_MISSING")
+            if "στρύχνον μανικὸν ἢ δορύκνιον" in page_0018_text:
+                issues.append("FRONT_PAGE_0018_DORYKNION_BAD_READING")
+
+        page_0019 = page_by_facs(root, "page_images/page-0019.png")
+        if page_0019 is None:
+            issues.append("FRONT_PAGE_0019_MISSING")
+        else:
+            page_0019_text = text_content(page_0019)
+            if "ἐμφαρυγξάμενος" not in page_0019_text:
+                issues.append("FRONT_PAGE_0019_EMPHARYNXAMENOS_READING_MISSING")
+            if "ἐμφαρυγγιζόμενος" in page_0019_text:
+                issues.append("FRONT_PAGE_0019_EMPHARYNGIZOMENOS_BAD_READING")
+            if "ἔξαγίου ponderis" not in page_0019_text:
+                issues.append("FRONT_PAGE_0019_EXAGIO_READING_MISSING")
+            if "ξαγίον ponderis" in page_0019_text:
+                issues.append("FRONT_PAGE_0019_EXAGIO_BAD_READING")
+
+        page_0020 = page_by_facs(root, "page_images/page-0020.png")
+        if page_0020 is None:
+            issues.append("FRONT_PAGE_0020_MISSING")
+        else:
+            page_0020_text = text_content(page_0020)
+            for expected in (
+                "φασκίωσον",
+                "loco τρυγός",
+                "νηστικός loco νῆστις",
+                "σεσέλιδος loco σεσέλεως",
+                "πτέρεως loco πτέριδος",
+                "βαρβαροφωνεῖν",
+                "πλῆθος ὀνομάτων",
+                "ἐφ' ἑκάστῃ βοτάνῃ μάτην προστιθέντα",
+                "Oribasius etiam et Aëtius",
+                "Comm. de bibl. Vindob. lib. 2. p. 593.",
+                "Aristid. orat. vol. 3. p. 553.",
+            ):
+                if expected not in page_0020_text:
+                    issues.append(f"FRONT_PAGE_0020_CORRECTION_MISSING: {expected}")
+            for rejected in (
+                "φασκώλιον",
+                "loco τεῦτλον",
+                "ψωρικός loco ψώρας",
+                "ὀσφέλος loco ὀσφέλεος",
+                "πιπέρεως loco πιπέριος",
+                "βαρβαρόφωνον",
+                "πάσης ὀνομασίαν",
+                "εἰς ἑκάστην βοτάνην μάτην προστεθέντα",
+                "Oribasius etiam et Aetius",
+                "Comm. de bibl. Vindob. lib. 2. p. 598.",
+                "Aristid. orat. vol. 3. p. 558.",
+            ):
+                if rejected in page_0020_text:
+                    issues.append(f"FRONT_PAGE_0020_REJECTED_READING_PRESENT: {rejected}")
+
+        page_0031 = page_by_facs(root, "page_images/page-0031.png")
+        if page_0031 is None:
+            issues.append("FRONT_PAGE_0031_MISSING")
+        else:
+            page_0031_text = text_content(page_0031)
+            for expected in (
+                "κελύφῳ et κελύφοις",
+                "κελύφει et κελύφεσι",
+                "Βουπρήστου",
+                "Βουπρήστεως",
+                "ὄξει loco ὄξῳ",
+                "Ἀφροί falso",
+                "P. 10. 12. 20. γλῶτταν",
+                "ραῗτις: p. 283. μυῗτις",
+                "νυκτερῖτις, ἀερῖτις, αἰγῖτις",
+                "πελαγῖτις",
+                "ἰχώρ",
+                "Ἰβηρίς",
+            ):
+                if expected not in page_0031_text:
+                    issues.append(f"FRONT_PAGE_0031_CORRECTION_MISSING: {expected}")
+            for rejected in (
+                "κέλυφη et κελύφας",
+                "κελύφη et κελύφεσι",
+                "Βουπρήστιον",
+                "Βουπρήστιος",
+                "ἔξω loco ἔξω",
+                "ἄῤῥοι falso",
+                "P. 10. 19. 20. γλῶτταν",
+                "μύϊτις",
+                "πυκτερίτις",
+                "ἀρζίτις",
+                "ἰξός",
+                "Ἴφρυοϊς",
+            ):
+                if rejected in page_0031_text:
+                    issues.append(f"FRONT_PAGE_0031_REJECTED_READING_PRESENT: {rejected}")
+
+        front_heading_order_checks = {
+            "0013": (
+                "FRONT_PAGE_0013_HEADING_ORDER",
+                (
+                    "que non raro confudit",
+                    "III. De aetate Dioscoridis.",
+                    "Cum Erotianus",
+                ),
+            ),
+            "0014": (
+                "FRONT_PAGE_0014_HEADING_ORDER",
+                (
+                    "nostrae computationi",
+                    "IV. De vitae genere.",
+                    "Medicum fuisse doctum",
+                ),
+            ),
+            "0015": (
+                "FRONT_PAGE_0015_HEADING_ORDER",
+                (
+                    "nationes, ad Taciti usque aetatem",
+                    "V. De secta, cui nomen dederit.",
+                    "Aetate Dioscoridis",
+                ),
+            ),
+            "0016": (
+                "FRONT_PAGE_0016_HEADING_ORDER",
+                (
+                    "fabulis anilibus",
+                    "VI. De dictionis genere.",
+                    "Si quis Strabonem",
+                ),
+            ),
+            "0020": (
+                "FRONT_PAGE_0020_HEADING_ORDER",
+                (
+                    "jam βαρβαροφωνεῖν coeperat",
+                    "C. De synonymis plantarum barbaris.",
+                    "Multum diuque",
+                ),
+            ),
+            "0021": (
+                "FRONT_PAGE_0021_HEADING_ORDER",
+                (
+                    "mendose scripta fuerunt",
+                    "VIII. De codicibus manuscriptis.",
+                    "Celebratissimi sunt",
+                ),
+            ),
+            "0024": (
+                "FRONT_PAGE_0024_HEADING_ORDER",
+                (
+                    "pendendas accepi",
+                    "IX. De editionibus.",
+                    "Editionum princeps",
+                ),
+            ),
+            "0025": (
+                "FRONT_PAGE_0025_HEADING_ORDER",
+                (
+                    "monumentis Dioscoridem excipientibus",
+                    "X. De aliis adminiculis.",
+                    "E veteribus autem",
+                ),
+            ),
+            "0029": (
+                "FRONT_PAGE_0029_HEADING_ORDER",
+                (
+                    "de homonymis hyles iatricae",
+                    "XI. De hujus editionis ratione.",
+                    "Omnibus iis praesidiis",
+                ),
+            ),
+        }
+        for page_suffix, (label, needles) in front_heading_order_checks.items():
+            page = page_by_facs(root, f"page_images/page-{page_suffix}.png")
+            if page is None:
+                issues.append(f"{label}_PAGE_MISSING")
+                continue
+            page_text = text_content(page)
+            check_text_order(issues, page_text, label, needles)
+            heading = needles[1]
+            if page_text.count(heading) != 1:
+                issues.append(f"{label}_HEADING_COUNT: {page_text.count(heading)}")
+
+    page_0033 = page_by_facs(root, "page_images/page-0033.png")
+    if page_0033 is None:
+        issues.append("BODY_PAGE_0033_MISSING")
+    else:
+        page_0033_text = text_content(page_0033)
+        if attr(page_0033, "n") != "1":
+            issues.append("BODY_PAGE_0033_BAD_N")
+        for expected, issue in (
+            (BOOK_1_GREEK_TITLE, "BODY_PAGE_0033_GREEK_TITLE_MISSING"),
+            (BOOK_1_PROEM_TITLE, "BODY_PAGE_0033_PROEM_TITLE_MISSING"),
+            ("Codices et Editiones", "BODY_PAGE_0033_COMMENTARY_TITLE_MISSING"),
+            (BOOK_1_LATIN_TITLE, "BODY_PAGE_0033_LATIN_TITLE_MISSING"),
+        ):
+            if expected not in page_0033_text:
+                issues.append(issue)
+        nearest = nearest_non_page_div(page_0033, parents)
+        if nearest is None or attr(nearest, "xml:id") != "spr-book-1-prooimion":
+            issues.append(
+                "BODY_PAGE_0033_BAD_PROEM_SECTION: %s"
+                % (attr(nearest, "xml:id") if nearest is not None else "")
+            )
+
+    check_chapter_title_line_break(
+        issues,
+        parents,
+        page_by_facs(root, "page_images/page-0100.png"),
+        "Κεφ. ξε΄. [Περὶ κυπρίνου στύψεως καὶ σκευασίας ἐλαίου.]",
+        "Ἐλαίου ὀμφακίνου",
+        "BODY_PAGE_0100_GRC_CHAPTER_65_TITLE_BREAK",
+    )
 
     head_numeric_markers = sum(
         1

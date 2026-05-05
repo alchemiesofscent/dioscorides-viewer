@@ -349,10 +349,26 @@ select {
 
 .tei-parallel .tei-page-boundary {
   grid-column: 1 / -1;
+  grid-row: 1;
 }
 
 .tei-parallel .tei-pagezone {
   min-width: 0;
+}
+
+.tei-parallel .tei-place-top {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.tei-parallel .tei-place-bottom {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.tei-parallel .tei-place-commentary {
+  grid-column: 1 / -1;
+  grid-row: 3;
 }
 
 .tei-fw {
