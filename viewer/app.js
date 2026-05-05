@@ -406,6 +406,40 @@
     return normalized.replace(/[.。]+$/, "").trim();
   }
 
+  function hasRendToken(element, token) {
+    return (element.getAttribute("rend") || "").toLowerCase().split(/\s+/).includes(token);
+  }
+
+  function leadingTranslationTitleContinuation(div, directHead) {
+    if (!div || !directHead) return "";
+    const children = Array.from(div.childNodes);
+    const headIndex = children.indexOf(directHead);
+    if (headIndex === -1) return "";
+    for (const child of children.slice(headIndex + 1)) {
+      if (child.nodeType === Node.TEXT_NODE && !(child.nodeValue || "").trim()) continue;
+      if (child.nodeType !== Node.ELEMENT_NODE) return "";
+      const name = localName(child);
+      if (name === "pb" || name === "fw") continue;
+      if (name !== "ab" || child.getAttribute("type") !== "translation") return "";
+      const parts = [];
+      for (const node of child.childNodes) {
+        if (node.nodeType === Node.TEXT_NODE && !(node.nodeValue || "").trim()) continue;
+        if (node.nodeType !== Node.ELEMENT_NODE) break;
+        const nodeName = localName(node);
+        if (nodeName === "lb" || nodeName === "ref") continue;
+        if (nodeName === "hi" && hasRendToken(node, "bold")) {
+          parts.push(normalizeText(node.textContent || ""));
+          if (/[.。]$/.test(normalizeText(node.textContent || ""))) break;
+          continue;
+        }
+        break;
+      }
+      const continuation = normalizeText(parts.join(" "));
+      return /[.。]$/.test(continuation) ? continuation.replace(/[.。]+$/, "").trim() : "";
+    }
+    return "";
+  }
+
   function extractBerendesHeadTitle(directHead) {
     const foreignHeads = Array.from(directHead.getElementsByTagNameNS("*", "foreign"))
       .filter((el) => elementLang(el) === "grc");
@@ -414,14 +448,24 @@
     return shortTitleFromHeadText(textAfterElement(directHead, lastForeign));
   }
 
+  function appendLeadingTranslationTitleContinuation(div, directHead, title) {
+    if (!title) return "";
+    const foreignHeads = Array.from(directHead.getElementsByTagNameNS("*", "foreign"))
+      .filter((el) => elementLang(el) === "grc");
+    const lastForeign = foreignHeads[foreignHeads.length - 1];
+    if (!lastForeign) return title;
+    const titleText = textAfterElement(directHead, lastForeign);
+    if (/[.。]\s*$/.test(normalizeText(titleText))) return title;
+    const continuation = leadingTranslationTitleContinuation(div, directHead);
+    return [title, continuation].filter(Boolean).join(" ");
+  }
+
   function extractNavTitle(div, title) {
     const directHead = directSectionHead(div);
     if (directHead) {
-      const berendesTitle = extractBerendesHeadTitle(directHead);
+      const berendesTitle = appendLeadingTranslationTitleContinuation(div, directHead, extractBerendesHeadTitle(directHead));
       if (berendesTitle) return berendesTitle;
-      const hi = Array.from(directHead.getElementsByTagNameNS("*", "hi")).find((el) => {
-        return (el.getAttribute("rend") || "").toLowerCase().split(/\s+/).includes("bold");
-      });
+      const hi = Array.from(directHead.getElementsByTagNameNS("*", "hi")).find((el) => hasRendToken(el, "bold"));
       if (hi) return normalizeText(hi.textContent || "").replace(/[.。]+$/, "");
     }
     if (/^Κεφ\./.test(title)) return cleanBracketedTitle(title);

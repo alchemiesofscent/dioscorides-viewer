@@ -25,6 +25,14 @@ HEAD_TRANSLATION_RE = re.compile(
     r'(?P<ab_open><ab\b(?=[^>]*\btype="translation")[^>]*>)',
     re.DOTALL,
 )
+SPLIT_TITLE_CONTINUATION_RE = re.compile(
+    r'(?P<head_open><head\b[^>]*>)(?P<head>.*?)(?P<head_close></head>)'
+    r'(?P<between>\s*)'
+    r'(?P<ab_open><ab\b(?=[^>]*\btype="translation")[^>]*>)'
+    r'(?P<prefix>\s*(?:<lb\b[^>]*/>\s*)*)'
+    r'(?P<title_hi><hi\b(?=[^>]*\brend="[^"]*\bbold\b[^"]*")[^>]*>.*?</hi>)',
+    re.DOTALL,
+)
 BODY_START_RE = re.compile(
     r'^\s*(?:'
     r'\[?Einige\b|Auch\b|Der\b|Die\b|Das\b|Den\b|Dem\b|Es\b|'
@@ -123,9 +131,13 @@ def last_greek_foreign_end(xml: str) -> int:
 
 
 def short_title_text(title_xml: str) -> str:
+    return raw_short_title_text(title_xml).rstrip(".")
+
+
+def raw_short_title_text(title_xml: str) -> str:
     foreign_end = last_greek_foreign_end(title_xml)
     title_part = title_xml[foreign_end:] if foreign_end != -1 else title_xml
-    return normalized_visible_text(title_part).rstrip(".")
+    return normalized_visible_text(title_part)
 
 
 def likely_translation_start(moved: str, title_xml: str = "") -> bool:
@@ -239,6 +251,38 @@ def normalize_chapter_head_translation_starts(text: str) -> tuple[str, int]:
     return HEAD_TRANSLATION_RE.sub(repl, text), changed
 
 
+def normalize_split_title_continuations(text: str) -> tuple[str, int]:
+    """Move leading bold translation text into the chapter head when it completes the title."""
+    changed = 0
+
+    def repl(match: re.Match[str]) -> str:
+        nonlocal changed
+        head = match.group("head")
+        title_text = raw_short_title_text(head)
+        continuation = normalized_visible_text(match.group("title_hi"))
+        if not title_text or title_text.endswith((".", "。")):
+            return match.group(0)
+        if not continuation.endswith((".", "。")):
+            return match.group(0)
+        if re.search(r"<(?:pb|fw|note)\b", match.group("prefix")):
+            return match.group(0)
+
+        changed += 1
+        spacer = "" if head.endswith((" ", "\n", "\t")) else " "
+        return (
+            match.group("head_open")
+            + head.rstrip()
+            + spacer
+            + match.group("prefix")
+            + match.group("title_hi")
+            + match.group("head_close")
+            + match.group("between")
+            + match.group("ab_open")
+        )
+
+    return SPLIT_TITLE_CONTINUATION_RE.sub(repl, text), changed
+
+
 def collect_ref_targets(paths: list[Path]) -> tuple[Counter[str], dict[str, list[str]], list[str]]:
     target_counts: Counter[str] = Counter()
     target_ref_ids: dict[str, list[str]] = defaultdict(list)
@@ -326,6 +370,7 @@ def normalize_chunks(chunks_dir: Path, dry_run: bool = False) -> int:
     total_ref_ids_added = 0
     total_notes_updated = 0
     total_heads_split = 0
+    total_title_continuations = 0
     normalized_pages: list[str] = []
     missing_note_n: list[str] = []
     unreferenced_notes: list[str] = []
@@ -333,6 +378,7 @@ def normalize_chunks(chunks_dir: Path, dry_run: bool = False) -> int:
     for path in paths:
         original = path.read_text(encoding="utf-8")
         updated, removed_lbs, decremented_lbs, pages = normalize_page_furniture(original)
+        updated, title_continuations = normalize_split_title_continuations(updated)
         updated, heads_split = normalize_chapter_head_translation_starts(updated)
         updated, ref_ids_added, notes_updated, missing_n, unreferenced = normalize_footnotes(
             updated, target_counts, target_ref_ids, ref_seen, path
@@ -348,6 +394,7 @@ def normalize_chunks(chunks_dir: Path, dry_run: bool = False) -> int:
         total_ref_ids_added += ref_ids_added
         total_notes_updated += notes_updated
         total_heads_split += heads_split
+        total_title_continuations += title_continuations
         normalized_pages.extend("%s:%s" % (path, page) for page in pages)
         missing_note_n.extend(missing_n)
         unreferenced_notes.extend(unreferenced)
@@ -356,6 +403,7 @@ def normalize_chunks(chunks_dir: Path, dry_run: bool = False) -> int:
     print("%s %d chunk files" % (action, changed_files))
     print("  Removed top-header lb n=1: %d" % total_removed_lbs)
     print("  Decremented page lb values: %d" % total_decremented_lbs)
+    print("  Moved split title continuations into chapter heads: %d" % total_title_continuations)
     print("  Moved translation starts out of chapter heads: %d" % total_heads_split)
     print("  Added footnote ref xml:id values: %d" % total_ref_ids_added)
     print("  Added/refreshed targeted footnote note corresp/place: %d" % total_notes_updated)
