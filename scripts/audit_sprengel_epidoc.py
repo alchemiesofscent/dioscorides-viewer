@@ -53,9 +53,17 @@ def main() -> int:
     }
 
     standalone_synonyma_after_head = 0
+    standalone_greek_chapter_heads = 0
     for element in root.iter():
         if local_name(element.tag) != "ab":
             continue
+        lang = element.get(f"{{{XML}}}lang") or element.get("xml:lang") or ""
+        if lang == "grc":
+            standalone_greek_chapter_heads += sum(
+                1
+                for child in list(element)
+                if local_name(child.tag) == "head" and text_content(child).startswith("Κεφ.")
+            )
         children = [child for child in list(element) if local_name(child.tag) != "milestone"]
         for left, right in zip(children, children[1:]):
             if (
@@ -65,6 +73,7 @@ def main() -> int:
             ):
                 standalone_synonyma_after_head += 1
     checks["STANDALONE_SYNONYMA_AFTER_HEAD"] = standalone_synonyma_after_head
+    checks["STANDALONE_GREEK_CHAPTER_HEAD"] = standalone_greek_chapter_heads
     for name, count in checks.items():
         if count:
             issues.append(f"{name}: {count}")

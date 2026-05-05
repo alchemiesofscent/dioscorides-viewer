@@ -258,6 +258,38 @@ def paragraph_with_synonyma_after_lemma(
     return clone, stripped
 
 
+def inline_chapter_head(head: ET.Element) -> ET.Element:
+    title = copy.deepcopy(head)
+    title.tag = f"{NS}seg"
+    title.attrib.clear()
+    title.set("type", "chapterTitle")
+    return title
+
+
+def paragraph_with_inline_head(
+    paragraph: ET.Element,
+    head: ET.Element,
+    strip_leading_head_close: bool = False,
+) -> tuple[ET.Element, bool]:
+    clone = copy.deepcopy(paragraph)
+    stripped = remove_leading_head_close(clone) if strip_leading_head_close else False
+    title = inline_chapter_head(head)
+
+    for index, child in enumerate(list(clone)):
+        if local_name(child.tag) == "lb":
+            existing_tail = child.tail or ""
+            child.tail = ""
+            title.tail = " " + existing_tail.lstrip()
+            clone.insert(index + 1, title)
+            return clone, stripped
+
+    existing_text = clone.text or ""
+    clone.text = ""
+    title.tail = " " + existing_text.lstrip()
+    clone.insert(0, title)
+    return clone, stripped
+
+
 class SprengelBuilder:
     def __init__(self, source: Path, archive_id: str, iiif_width: int) -> None:
         self.source = source
@@ -350,7 +382,8 @@ class SprengelBuilder:
         if not ref_id:
             ref_id = self.next_ref_id(target_id)
             ref.set(XML_ID, ref_id)
-        self.ref_ids_by_target[target_id].append(ref_id)
+        if ref_id not in self.ref_ids_by_target[target_id]:
+            self.ref_ids_by_target[target_id].append(ref_id)
         ref.text = normalized_label
         for child in list(ref):
             ref.remove(child)
@@ -413,6 +446,7 @@ class SprengelBuilder:
             "chapter_marker_pending": False,
             "chapter_raw_label": "",
             "consume_leading_head_close": False,
+            "pending_inline_head": None,
         }
 
         def process(node: ET.Element) -> None:
@@ -459,7 +493,7 @@ class SprengelBuilder:
                                     )
                                     state["chapter_marker_pending"] = False
                                 repaired_head, consumed = self.repaired_greek_head(child, page, str(state["book"]))
-                                page.zones[lang].append(repaired_head)
+                                state["pending_inline_head"] = repaired_head
                                 if consumed:
                                     state["consume_leading_head_close"] = True
                                 index += 1
@@ -475,8 +509,19 @@ class SprengelBuilder:
                                 and index + 1 < len(children)
                                 and local_name(children[index + 1].tag) == "p"
                             ):
+                                paragraph_source = children[index + 1]
+                                pending_head = state["pending_inline_head"]
+                                if isinstance(pending_head, ET.Element):
+                                    paragraph_source, stripped = paragraph_with_inline_head(
+                                        paragraph_source,
+                                        pending_head,
+                                        strip_leading_head_close=bool(state["consume_leading_head_close"]),
+                                    )
+                                    state["pending_inline_head"] = None
+                                    if stripped:
+                                        state["consume_leading_head_close"] = False
                                 paragraph, stripped = paragraph_with_synonyma_after_lemma(
-                                    children[index + 1],
+                                    paragraph_source,
                                     child,
                                     strip_leading_head_close=bool(state["consume_leading_head_close"]),
                                 )
@@ -492,6 +537,25 @@ class SprengelBuilder:
                                 page.zones[lang].append(synonyma)
                             index += 1
                             continue
+                        if (
+                            lang == "grc"
+                            and isinstance(state["pending_inline_head"], ET.Element)
+                            and local_name(child.tag) == "p"
+                        ):
+                            page = state["page"]
+                            if page is not None:
+                                paragraph, stripped = paragraph_with_inline_head(
+                                    child,
+                                    state["pending_inline_head"],
+                                    strip_leading_head_close=bool(state["consume_leading_head_close"]),
+                                )
+                                state["pending_inline_head"] = None
+                                if stripped:
+                                    state["consume_leading_head_close"] = False
+                                self.normalize_refs_in_tree(paragraph)
+                                page.zones[lang].append(paragraph)
+                                index += 1
+                                continue
                         if (
                             lang == "grc"
                             and state["consume_leading_head_close"]
