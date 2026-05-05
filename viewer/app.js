@@ -53,7 +53,7 @@
     chapters: [],
     currentIndex: 0,
     zoom: 1,
-    imageFitMode: false,
+    imageFitMode: true,
     selectedContext: null,
     searchResults: [],
     activeResult: -1,
