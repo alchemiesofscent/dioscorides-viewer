@@ -252,9 +252,44 @@
       .trim();
   }
 
+  function elementLang(element) {
+    return element.getAttributeNS(XML_NS, "lang") || element.getAttribute("xml:lang") || element.getAttribute("lang") || "";
+  }
+
+  function textAfterElement(root, marker) {
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    const parts = [];
+    let node = walker.nextNode();
+    while (node) {
+      if (!marker.contains(node) && (marker.compareDocumentPosition(node) & Node.DOCUMENT_POSITION_FOLLOWING)) {
+        parts.push(node.nodeValue || "");
+      }
+      node = walker.nextNode();
+    }
+    return normalizeText(parts.join(" "));
+  }
+
+  function shortTitleFromHeadText(text) {
+    let normalized = normalizeText(text).replace(/^[\s.:-]+/, "");
+    if (!normalized) return "";
+    const split = normalized.match(/^(.{1,90}?\.)\s+(?=\[?Einige\b|Auch\b|Der\b|Die\b|Das\b|Den\b|Dem\b|Ein\b|Eine\b|Es\b|Man\b|Wir\b|Nimm\b|Jede\b|Von\b|Wird\b|Fast\b|Als\b)/);
+    if (split) normalized = split[1];
+    return normalized.replace(/[.。]+$/, "").trim();
+  }
+
+  function extractBerendesHeadTitle(directHead) {
+    const foreignHeads = Array.from(directHead.getElementsByTagNameNS("*", "foreign"))
+      .filter((el) => elementLang(el) === "grc");
+    const lastForeign = foreignHeads[foreignHeads.length - 1];
+    if (!lastForeign) return "";
+    return shortTitleFromHeadText(textAfterElement(directHead, lastForeign));
+  }
+
   function extractNavTitle(div, title) {
     const directHead = directSectionHead(div);
     if (directHead) {
+      const berendesTitle = extractBerendesHeadTitle(directHead);
+      if (berendesTitle) return berendesTitle;
       const hi = Array.from(directHead.getElementsByTagNameNS("*", "hi")).find((el) => {
         return (el.getAttribute("rend") || "").toLowerCase().split(/\s+/).includes("bold");
       });
@@ -262,7 +297,7 @@
     }
     if (/^Κεφ\./.test(title)) return cleanBracketedTitle(title);
     return title
-      .replace(/^Cap\.\s*[-\d.()]+\.?\s*/i, "")
+      .replace(/^Cap\.\s*\d+(?:\s*\(\d+\))?\.?\s*/i, "")
       .replace(/Περὶ[^.]*\./g, "")
       .replace(/\s+/g, " ")
       .replace(/[.。]+$/, "")

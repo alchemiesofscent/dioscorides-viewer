@@ -28,7 +28,7 @@ HEAD_TRANSLATION_RE = re.compile(
 BODY_START_RE = re.compile(
     r'^\s*(?:'
     r'\[?Einige\b|Auch\b|Der\b|Die\b|Das\b|Den\b|Dem\b|Es\b|'
-    r'Man\b|Wir\b|Nimm\b|Jede\b|Von\b|Wird\b|Fast\b|Als\b'
+    r'Ein\b|Eine\b|Man\b|Wir\b|Nimm\b|Jede\b|Von\b|Wird\b|Fast\b|Als\b'
     r')'
 )
 
@@ -107,6 +107,94 @@ def visible_text(xml: str) -> str:
     return re.sub(r"<[^>]+>", "", xml).strip()
 
 
+def normalized_visible_text(xml: str) -> str:
+    return re.sub(r"\s+", " ", visible_text(xml)).strip()
+
+
+def last_greek_foreign_end(xml: str) -> int:
+    matches = list(
+        re.finditer(
+            r'<foreign\b(?=[^>]*\b(?:xml:)?lang="grc")[^>]*>.*?</foreign>',
+            xml,
+            re.DOTALL,
+        )
+    )
+    return matches[-1].end() if matches else -1
+
+
+def short_title_text(title_xml: str) -> str:
+    foreign_end = last_greek_foreign_end(title_xml)
+    title_part = title_xml[foreign_end:] if foreign_end != -1 else title_xml
+    return normalized_visible_text(title_part).rstrip(".")
+
+
+def likely_translation_start(moved: str, title_xml: str = "") -> bool:
+    moved_text = normalized_visible_text(moved)
+    title_text = short_title_text(title_xml)
+    return bool(
+        BODY_START_RE.match(moved_text)
+        or (title_text and moved_text.startswith(title_text + " "))
+    )
+
+
+def existing_translation_starts_with(text: str, start: int, moved: str) -> bool:
+    moved_text = normalized_visible_text(moved).rstrip("—- ").strip()
+    if not moved_text:
+        return False
+    following_text = normalized_visible_text(text[start : start + 600])
+    return following_text.startswith(moved_text)
+
+
+def split_head_after_plain_title(head: str) -> tuple[str, str] | None:
+    """Split Berendes heads after the short German title following the Greek head."""
+    foreign_end = last_greek_foreign_end(head)
+    if foreign_end == -1:
+        return None
+
+    cursor = foreign_end
+    while cursor < len(head):
+        if head[cursor] == "<":
+            end = head.find(">", cursor)
+            if end == -1:
+                return None
+            tag = head[cursor : end + 1]
+            if re.match(r"</?(?:lb|ref|hi|foreign|note)\b", tag):
+                cursor = end + 1
+                continue
+            cursor = end + 1
+            continue
+        if head[cursor].isspace():
+            cursor += 1
+            continue
+        break
+
+    title_start = cursor
+    in_tag = False
+    cursor = title_start
+    while cursor < len(head):
+        char = head[cursor]
+        if char == "<":
+            in_tag = True
+        elif char == ">":
+            in_tag = False
+        elif char == "." and not in_tag:
+            if re.search(r"<(?!/?(?:lb|ref)\b)", head[title_start : cursor + 1]):
+                return None
+            title = head[: cursor + 1].rstrip()
+            if not re.search(r"[A-Za-zÄÖÜäöüß]", short_title_text(title)):
+                return None
+            moved = head[cursor + 1 :].strip()
+            if (
+                moved
+                and not re.search(r"<(?:pb|fw|note)\b", moved)
+                and likely_translation_start(moved, title)
+            ):
+                return title, moved
+            return None
+        cursor += 1
+    return None
+
+
 def normalize_chapter_head_translation_starts(text: str) -> tuple[str, int]:
     """Move translation starts that were accidentally captured inside chapter heads."""
     changed = 0
@@ -114,19 +202,26 @@ def normalize_chapter_head_translation_starts(text: str) -> tuple[str, int]:
     def repl(match: re.Match[str]) -> str:
         nonlocal changed
         head = match.group("head")
-        split = head.rfind("</hi>")
-        if split == -1:
-            return match.group(0)
+        split = split_head_after_plain_title(head)
+        if split:
+            title, moved = split
+        else:
+            split_index = head.rfind("</hi>")
+            if split_index == -1:
+                return match.group(0)
 
-        split += len("</hi>")
-        title = head[:split].rstrip()
-        trailing = head[split:]
-        moved = trailing.strip()
+            split_index += len("</hi>")
+            title = head[:split_index].rstrip()
+            trailing = head[split_index:]
+            moved = trailing.strip()
+
         if not moved:
             return match.group(0)
         if re.search(r"<(?:pb|fw|note)\b", moved):
             return match.group(0)
-        if not BODY_START_RE.match(visible_text(moved)):
+        if not likely_translation_start(moved, title):
+            return match.group(0)
+        if existing_translation_starts_with(text, match.end(), moved):
             return match.group(0)
 
         changed += 1
