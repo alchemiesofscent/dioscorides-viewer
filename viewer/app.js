@@ -791,6 +791,17 @@
     return ["ab", "p", "head", "note", "fw", "lg", "list", "item", "quote"].includes(localName(element));
   }
 
+  function hasPageBreakBefore(element) {
+    for (let sibling = element.previousSibling; sibling; sibling = sibling.previousSibling) {
+      if (sibling.nodeType === Node.ELEMENT_NODE && localName(sibling) === "pb") return true;
+    }
+    return false;
+  }
+
+  function hasLineBreak(element) {
+    return Array.from(element.getElementsByTagNameNS("*", "lb")).length > 0;
+  }
+
   function isRenderableHead(element, context) {
     if (localName(element) !== "head") return true;
     const parent = element.parentElement;
@@ -798,6 +809,7 @@
     const parentName = localName(parent);
     if (parentName === "ab") return true;
     if (parentName === "div" && parent.getAttribute("subtype") === "diplomatic-page") return true;
+    if (parentName === "div" && context.currentPage && (hasPageBreakBefore(element) || hasLineBreak(element))) return true;
     return context.frames.some((frame) => frame.source === parent);
   }
 
