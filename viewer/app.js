@@ -105,18 +105,22 @@
     return page.chapters.map(chapterLabel).filter(Boolean);
   }
 
+  function pageChapterSummary(page) {
+    return pageChapterLabels(page).join(", ");
+  }
+
   function pageChapterStartLabels(page) {
     return page.chapterStarts.map(chapterLabel).filter(Boolean);
   }
 
   function pageSelectContext(page) {
-    const chapterSummary = pageChapterLabels(page).join(", ");
+    const chapterSummary = pageChapterSummary(page);
     return chapterSummary
       ? chapterSummary
       : page.book
         ? sectionLabel(page.book)
         : page.frontSection
-          ? sectionLabel(page.frontSection)
+          ? frontSectionLabels(page.frontSection).join(" · ")
           : page.manifest && page.manifest.section
             ? page.manifest.section
             : sectionLabel(page.section);
@@ -143,6 +147,57 @@
     return chapter && Number.isInteger(chapter.firstPageIndex) ? chapter.firstPageIndex : -1;
   }
 
+  function rootFrontSection(section) {
+    let current = section || null;
+    while (current && current.parent && current.parent.kind === "front") current = current.parent;
+    return current;
+  }
+
+  function frontSectionLabels(section) {
+    const labels = [];
+    const root = rootFrontSection(section);
+    if (root) labels.push(sectionLabel(root));
+    if (section && section !== root) labels.push(sectionLabel(section));
+    return labels;
+  }
+
+  function frontNavigationSections() {
+    const sections = [];
+    for (const section of state.frontSections) {
+      if (section.children.length) {
+        for (const child of section.children) {
+          if (Number.isInteger(child.firstPageIndex)) sections.push(child);
+        }
+      } else if (Number.isInteger(section.firstPageIndex)) {
+        sections.push(section);
+      }
+    }
+    return sections;
+  }
+
+  function frontSectionInPath(page, sectionId) {
+    let section = page.frontSection;
+    while (section) {
+      if (section.id === sectionId) return true;
+      section = section.parent && section.parent.kind === "front" ? section.parent : null;
+    }
+    return false;
+  }
+
+  function navigateFrontSection(delta) {
+    const page = state.pages[state.currentIndex];
+    if (!page || !page.frontSection) return false;
+    const sections = frontNavigationSections();
+    const currentIndex = sections.findIndex((section) => section === page.frontSection || section.id === page.frontSection.id);
+    if (currentIndex < 0) return false;
+    const nextIndex = currentIndex + delta;
+    if (nextIndex < 0 || nextIndex >= sections.length) return false;
+    const nextPageIndex = sections[nextIndex].firstPageIndex;
+    if (!Number.isInteger(nextPageIndex) || nextPageIndex === state.currentIndex) return false;
+    showPage(nextPageIndex);
+    return true;
+  }
+
   function navigatePage(delta) {
     if (!state.pages.length) return false;
     const nextIndex = state.currentIndex + delta;
@@ -152,8 +207,9 @@
   }
 
   function navigateChapter(delta) {
-    if (!state.chapters.length) return false;
     const page = state.pages[state.currentIndex];
+    if (page && page.frontSection && !page.book) return navigateFrontSection(delta);
+    if (!state.chapters.length) return false;
     const currentChapterIndex = chapterIndexForNavigation(page, delta);
     if (currentChapterIndex < 0) return false;
     const nextChapterIndex = currentChapterIndex + delta;
@@ -414,6 +470,7 @@
       parent,
       book: book || null,
       chapters: [],
+      children: [],
       currentChapter: null,
       firstPageIndex: null,
     };
@@ -421,7 +478,10 @@
     else if (kind === "chapter") {
       state.chapters.push(section);
       if (book) book.chapters.push(section);
-    } else if (kind === "front") state.frontSections.push(section);
+    } else if (kind === "front") {
+      if (parent && parent.kind === "front") addUnique(parent.children, section);
+      else state.frontSections.push(section);
+    }
     return section;
   }
 
@@ -431,6 +491,14 @@
 
   function markSectionPage(section, page) {
     if (section && section.firstPageIndex === null) section.firstPageIndex = page.index;
+  }
+
+  function markSectionPageWithAncestors(section, page) {
+    let current = section;
+    while (current) {
+      markSectionPage(current, page);
+      current = current.parent && current.parent.kind === "front" ? current.parent : null;
+    }
   }
 
   function registerBookOnPage(book, page) {
@@ -451,7 +519,7 @@
   function registerFrontOnPage(section, page) {
     if (!section || !page || section.kind !== "front") return;
     page.frontSection = section;
-    markSectionPage(section, page);
+    markSectionPageWithAncestors(section, page);
   }
 
   function createPage(pb, context, lookups) {
@@ -707,9 +775,13 @@
   }
 
   function enterSection(div, context) {
+    const type = div.getAttribute("type") || "";
     const subtype = div.getAttribute("subtype") || "";
     const startsNewPage = startsWithPageBreak(div);
     const next = { ...context };
+    if (subtype === "diplomatic-page" || (type === "edition" && subtype === "diplomatic")) {
+      return next;
+    }
     if (subtype === "book") {
       const book = buildSection(div, null, "book", null);
       next.book = book;
@@ -977,7 +1049,31 @@
     els.sectionList.innerHTML = "";
     for (const section of state.frontSections) {
       const meta = [section.subtype || section.type, `page ${pageLabel(state.pages[section.firstPageIndex])}`].filter(Boolean).join(" · ");
-      els.sectionList.appendChild(makeSectionButton(section, "front-button", sectionLabel(section), meta));
+      if (section.children.length) {
+        const details = document.createElement("details");
+        details.className = "book-group front-group";
+        details.open = true;
+        const summary = document.createElement("summary");
+        summary.className = "book-summary";
+        const sectionButton = makeSectionButton(section, "front-button", sectionLabel(section), meta);
+        sectionButton.addEventListener("click", (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          showPage(section.firstPageIndex);
+        });
+        summary.appendChild(sectionButton);
+        details.appendChild(summary);
+        const subsectionList = document.createElement("div");
+        subsectionList.className = "chapter-list front-subsection-list";
+        for (const child of section.children) {
+          const childMeta = `page ${pageLabel(state.pages[child.firstPageIndex])}`;
+          subsectionList.appendChild(makeSectionButton(child, "front-button", sectionLabel(child), childMeta));
+        }
+        details.appendChild(subsectionList);
+        els.sectionList.appendChild(details);
+      } else {
+        els.sectionList.appendChild(makeSectionButton(section, "front-button", sectionLabel(section), meta));
+      }
     }
 
     for (const book of state.books) {
@@ -1111,11 +1207,15 @@
       const sectionId = button.dataset.sectionId;
       const chapterIds = new Set(page.chapters.map((chapter) => chapter.id));
       const active =
-        (kind === "front" && page.frontSection && page.frontSection.id === sectionId) ||
+        (kind === "front" && frontSectionInPath(page, sectionId)) ||
         (kind === "book" && page.book && page.book.id === sectionId) ||
         (kind === "chapter" && chapterIds.has(sectionId));
       button.classList.toggle("active", active);
-      button.classList.toggle("current", kind === "chapter" && page.activeChapter && page.activeChapter.id === sectionId);
+      button.classList.toggle("current", kind === "chapter" && chapterIds.has(sectionId));
+    }
+    for (const details of els.sectionList.querySelectorAll(".front-group")) {
+      const frontButton = details.querySelector(".front-button");
+      if (frontButton && frontSectionInPath(page, frontButton.dataset.sectionId)) details.open = true;
     }
     for (const details of els.sectionList.querySelectorAll(".book-group")) {
       const bookButton = details.querySelector(".book-button");
@@ -1141,8 +1241,9 @@
     els.pageTitle.textContent = `Page ${pageLabel(page)}`;
     const chapterStarts = pageChapterStartLabels(page);
     const chapters = pageChapterLabels(page);
+    const frontLabels = frontSectionLabels(page.frontSection);
     els.pageMeta.textContent = [
-      page.book ? sectionLabel(page.book) : page.frontSection ? sectionLabel(page.frontSection) : "",
+      page.book ? sectionLabel(page.book) : frontLabels.join(" · "),
       chapters.length ? `chapters ${chapters.join(", ")}` : "",
       chapterStarts.length ? `starts ${chapterStarts.join(", ")}` : "",
       page.manifest && page.manifest.pdf_page ? `PDF page ${page.manifest.pdf_page}` : "",
@@ -1303,6 +1404,8 @@
     const page = state.pages[context.pageIndex] || state.pages[state.currentIndex];
     const manifest = page.manifest || {};
     const nearestChapter = chapterById(context.divId) || page.activeChapter || page.chapters[page.chapters.length - 1] || null;
+    const nearestFrontSubsection = page.frontSection && page.frontSection.parent && page.frontSection.parent.kind === "front" ? page.frontSection : null;
+    const nearestFrontSection = rootFrontSection(page.frontSection);
     const image = manifest.image || "";
     const imageLabelRoot = state.edition.imageLabelRoot || state.edition.localImageRoot || "";
     const facs = manifest.facs || page.facs || "";
@@ -1319,6 +1422,10 @@
       nearestBook: page.book ? sectionLabel(page.book) : "",
       nearestChapterId: nearestChapter ? nearestChapter.id : "",
       nearestChapter: nearestChapter ? chapterLabel(nearestChapter) : "",
+      nearestFrontSectionId: nearestFrontSection ? nearestFrontSection.id : "",
+      nearestFrontSection: nearestFrontSection ? sectionLabel(nearestFrontSection) : "",
+      nearestFrontSubsectionId: nearestFrontSubsection ? nearestFrontSubsection.id : "",
+      nearestFrontSubsection: nearestFrontSubsection ? sectionLabel(nearestFrontSubsection) : "",
       nearestLine: context.line || page.firstLine || "",
       selectedText: context.text || "",
       note: "",

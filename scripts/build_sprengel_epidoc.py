@@ -40,6 +40,7 @@ LATIN_CAP_RE = re.compile(
 )
 APPARATUS_SPLIT_RE = re.compile(r"(?:^|\s+)(\d+\s*[a-z]?)\)\s+", re.IGNORECASE)
 NOTE_LABEL_RE = re.compile(r"^\[(\d+[a-z]?)\]$", re.IGNORECASE)
+FRONT_SUBSECTION_PREFIX_RE = re.compile(r"^\s*([A-Z]+|[IVXLCDM]+)\.")
 
 
 @dataclass(frozen=True)
@@ -55,6 +56,9 @@ class Page:
     xml_id: str
     index: int
     front_section: str = ""
+    front_section_title: str = ""
+    front_subsection: str = ""
+    front_subsection_title: str = ""
     book: str = ""
     zones: dict[str, list[ET.Element | ChapterMarker]] = field(
         default_factory=lambda: {"grc": [], "la": [], "front": []}
@@ -108,6 +112,21 @@ def clean_label(text: str, lang: str) -> str:
     if match:
         return match.group(2).strip(" .")
     return re.sub(r"^Cap\.\s*[-IVXLCDM().]+\s*", "", text, flags=re.I).strip(" .")
+
+
+def class_token(text: str) -> str:
+    text = text.lower()
+    text = re.sub(r"[^a-z0-9]+", "-", text)
+    return text.strip("-")
+
+
+def front_subsection_key(section: str, title: str, counts: defaultdict[str, int]) -> str:
+    match = FRONT_SUBSECTION_PREFIX_RE.match(title)
+    base = match.group(1).lower() if match else class_token(title)[:40]
+    base = class_token(base) or "section"
+    key = f"{section}-{base}"
+    counts[key] += 1
+    return key if counts[key] == 1 else f"{key}-{counts[key]}"
 
 
 def roman_to_int(value: str) -> int | None:
@@ -302,6 +321,7 @@ class SprengelBuilder:
         self.marker_counts: dict[str, int] = {}
         self.ref_id_counts: defaultdict[str, int] = defaultdict(int)
         self.ref_ids_by_target: defaultdict[str, list[str]] = defaultdict(list)
+        self.front_unpaged: defaultdict[str, list[ET.Element]] = defaultdict(list)
         self.source_ids = {
             element.get(XML_ID)
             for element in self.root.iter()
@@ -425,16 +445,35 @@ class SprengelBuilder:
         front = self.root.find(f".//{NS}front")
         if front is None:
             return
+        subsection_counts: defaultdict[str, int] = defaultdict(int)
         for child in list(front):
             name = local_name(child.tag)
             section = "title_page" if name == "titlePage" else attr(child, "type") or name
+            direct_head = child.find(f"{NS}head")
+            section_title = FRONT_LABELS.get(section) or (text_content(direct_head) if direct_head is not None else "") or section
+            current_subsection = ""
+            current_subsection_title = ""
             current_page: Page | None = None
+            saw_page = False
             for node in list(child):
-                if local_name(node.tag) == "pb":
+                node_name = local_name(node.tag)
+                if node_name == "pb":
                     current_page = self.page_for_pb(node)
                     current_page.front_section = section
+                    current_page.front_section_title = section_title
+                    current_page.front_subsection = current_subsection
+                    current_page.front_subsection_title = current_subsection_title
+                    saw_page = True
                     continue
+                if node_name == "head" and saw_page:
+                    current_subsection_title = text_content(node)
+                    current_subsection = front_subsection_key(section, current_subsection_title, subsection_counts)
+                    if current_page is not None:
+                        current_page.front_subsection = current_subsection
+                        current_page.front_subsection_title = current_subsection_title
                 if current_page is None:
+                    if node_name != "head":
+                        self.front_unpaged[section].extend(self.output_items(node))
                     continue
                 current_page.zones["front"].extend(self.output_items(node))
 
@@ -771,6 +810,19 @@ class SprengelBuilder:
             element.set("corresp", f"#spr-ch-{chapter.key}-{other_lang}")
         return element
 
+    def append_front_page(self, parent: ET.Element, page: Page) -> None:
+        page_div = ET.SubElement(parent, f"{NS}div", {"type": "page", "subtype": "diplomatic-page", "n": page.n})
+        page_div.set("facs", page.facs)
+        page_div.set(XML_ID, f"spr-page-{page.index:04d}")
+        pb = ET.SubElement(page_div, f"{NS}pb")
+        if page.n:
+            pb.set("n", page.n)
+        pb.set("facs", page.facs)
+        pb.set(XML_ID, page.xml_id)
+        zone = ET.SubElement(page_div, f"{NS}ab", {"type": "pageZone", "place": "full"})
+        zone.set(XML_LANG, "la")
+        self.append_zone_items(zone, page.zones["front"])
+
     def append_zone_items(self, parent: ET.Element, items: list[ET.Element | ChapterMarker]) -> None:
         for item in items:
             if isinstance(item, ChapterMarker):
@@ -809,22 +861,34 @@ class SprengelBuilder:
         front = ET.SubElement(text, f"{NS}front")
         for section, label in FRONT_LABELS.items():
             section_pages = [self.pages[facs] for facs in self.page_order if self.pages[facs].front_section == section]
-            if not section_pages:
+            unpaged_items = self.front_unpaged.get(section, [])
+            if not section_pages and not unpaged_items:
                 continue
             div = ET.SubElement(front, f"{NS}div", {"type": section, "n": section})
+            div.set(XML_ID, f"spr-front-{class_token(section)}")
             ET.SubElement(div, f"{NS}head").text = label
+            current_subsection = ""
+            subsection_div: ET.Element | None = None
             for page in section_pages:
-                page_div = ET.SubElement(div, f"{NS}div", {"type": "page", "subtype": "diplomatic-page", "n": page.n})
-                page_div.set("facs", page.facs)
-                page_div.set(XML_ID, f"spr-page-{page.index:04d}")
-                pb = ET.SubElement(page_div, f"{NS}pb")
-                if page.n:
-                    pb.set("n", page.n)
-                pb.set("facs", page.facs)
-                pb.set(XML_ID, page.xml_id)
-                zone = ET.SubElement(page_div, f"{NS}ab", {"type": "pageZone", "place": "full"})
-                zone.set(XML_LANG, "la")
-                self.append_zone_items(zone, page.zones["front"])
+                if page.front_subsection:
+                    if page.front_subsection != current_subsection:
+                        subsection_n = page.front_subsection.replace(f"{section}-", "", 1)
+                        subsection_div = ET.SubElement(
+                            div,
+                            f"{NS}div",
+                            {"type": section, "subtype": "front-subsection", "n": subsection_n},
+                        )
+                        subsection_div.set(XML_ID, f"spr-front-{page.front_subsection}")
+                        ET.SubElement(subsection_div, f"{NS}head").text = page.front_subsection_title
+                        current_subsection = page.front_subsection
+                    self.append_front_page(subsection_div if subsection_div is not None else div, page)
+                else:
+                    current_subsection = ""
+                    subsection_div = None
+                    self.append_front_page(div, page)
+            if unpaged_items:
+                ab = ET.SubElement(div, f"{NS}ab", {"type": "unpaged"})
+                self.append_zone_items(ab, unpaged_items)
 
         body = ET.SubElement(text, f"{NS}body")
         edition = ET.SubElement(
@@ -876,6 +940,10 @@ class SprengelBuilder:
                     "archive_page_n": max(0, scan_number - 1),
                     "book_page": page.n,
                     "section": section,
+                    "front_section": page.front_section,
+                    "front_section_title": page.front_section_title,
+                    "front_subsection": page.front_subsection,
+                    "front_subsection_title": page.front_subsection_title,
                     "book": page.book,
                     "chapter_starts": chapter_keys,
                     "tei_facs": facs,

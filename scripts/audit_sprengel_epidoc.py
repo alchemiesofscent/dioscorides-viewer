@@ -5,6 +5,8 @@ from __future__ import annotations
 
 import argparse
 from collections import Counter, defaultdict
+import json
+from pathlib import Path
 import re
 import sys
 import xml.etree.ElementTree as ET
@@ -29,16 +31,116 @@ def text_content(element: ET.Element) -> str:
     return " ".join("".join(element.itertext()).split())
 
 
+def parent_map(root: ET.Element) -> dict[ET.Element, ET.Element]:
+    return {child: parent for parent in root.iter() for child in list(parent)}
+
+
+def nearest_non_page_div(element: ET.Element, parents: dict[ET.Element, ET.Element]) -> ET.Element | None:
+    current = parents.get(element)
+    while current is not None:
+        if local_name(current.tag) == "div" and attr(current, "subtype") != "diplomatic-page":
+            return current
+        current = parents.get(current)
+    return None
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("xml")
+    parser.add_argument("--manifest", default="editions/sprengel1829/manifest.json")
     args = parser.parse_args()
 
     raw = open(args.xml, encoding="utf-8").read()
     root = ET.fromstring(raw)
+    parents = parent_map(root)
 
     issues: list[str] = []
     warnings: list[str] = []
+
+    front = root.find(f".//{{{TEI}}}front")
+    if front is None:
+        issues.append("FRONT_MISSING")
+    else:
+        front_ids = {
+            attr(element, "xml:id")
+            for element in list(front)
+            if local_name(element.tag) == "div"
+        }
+        expected_front_ids = {
+            "spr-front-title-page",
+            "spr-front-dedication",
+            "spr-front-preface",
+            "spr-front-errata",
+            "spr-front-sigla",
+        }
+        missing_front_ids = sorted(expected_front_ids - front_ids)
+        if missing_front_ids:
+            issues.append(f"FRONT_TOP_SECTION_MISSING: {missing_front_ids}")
+        preface = next(
+            (
+                element
+                for element in list(front)
+                if local_name(element.tag) == "div" and attr(element, "type") == "preface"
+            ),
+            None,
+        )
+        if preface is None:
+            issues.append("FRONT_PREFACE_MISSING")
+        else:
+            if attr(preface, "xml:id") != "spr-front-preface":
+                issues.append("FRONT_PREFACE_BAD_ID")
+            direct_preface_pages = [
+                child
+                for child in list(preface)
+                if local_name(child.tag) == "div" and attr(child, "subtype") == "diplomatic-page"
+            ]
+            if direct_preface_pages:
+                issues.append(f"FRONT_PREFACE_DIRECT_PAGE_WRAPPERS: {len(direct_preface_pages)}")
+            subsection_titles = set()
+            for child in list(preface):
+                if local_name(child.tag) != "div" or attr(child, "subtype") != "front-subsection":
+                    continue
+                head = child.find(f"{{{TEI}}}head")
+                if head is not None:
+                    subsection_titles.add(text_content(head))
+            expected_titles = {
+                "I. De nomine auctoris.",
+                "II. De patria Dioscoridis, et de homonymis scriptoribus.",
+                "III. De aetate Dioscoridis.",
+                "IV. De vitae genere.",
+                "V. De secta, cui nomen dederit.",
+                "VI. De dictionis genere.",
+                "VII. De genuinorum a spuriis libris distinctione.",
+                "C. De synonymis plantarum barbaris.",
+                "VIII. De codicibus manuscriptis.",
+                "IX. De editionibus.",
+                "X. De aliis adminiculis.",
+                "XI. De hujus editionis ratione.",
+            }
+            missing_titles = sorted(expected_titles - subsection_titles)
+            if missing_titles:
+                issues.append(f"FRONT_PREFACE_SUBSECTION_MISSING: {missing_titles}")
+        page_xvii = next(
+            (
+                element
+                for element in root.iter()
+                if local_name(element.tag) == "div"
+                and attr(element, "subtype") == "diplomatic-page"
+                and attr(element, "n") == "XVII"
+            ),
+            None,
+        )
+        if page_xvii is None:
+            issues.append("FRONT_PAGE_XVII_MISSING")
+        else:
+            nearest = nearest_non_page_div(page_xvii, parents)
+            if nearest is None or attr(nearest, "xml:id") != "spr-front-preface-viii":
+                issues.append(
+                    "FRONT_PAGE_XVII_BAD_SECTION: %s"
+                    % (attr(nearest, "xml:id") if nearest is not None else "")
+                )
+            if "principis, qui, dum Xerxem comitaretur" not in text_content(page_xvii):
+                issues.append("FRONT_PAGE_XVII_TEXT_MISSING")
 
     head_numeric_markers = sum(
         1
@@ -146,6 +248,23 @@ def main() -> int:
         la = by_page_lang.get((page, "la"), 0)
         if grc and la and abs(grc - la) > 8:
             warnings.append(f"LINE_POLICY_DIVERGENCE: page={page} grc={grc} la={la}")
+
+    manifest_path = Path(args.manifest)
+    if manifest_path.exists():
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        manifest_page_xvii = next(
+            (page for page in manifest.get("pages", []) if page.get("book_page") == "XVII"),
+            None,
+        )
+        if manifest_page_xvii is None:
+            issues.append("MANIFEST_PAGE_XVII_MISSING")
+        else:
+            if manifest_page_xvii.get("front_section") != "preface":
+                issues.append("MANIFEST_PAGE_XVII_BAD_FRONT_SECTION")
+            if manifest_page_xvii.get("front_subsection") != "preface-viii":
+                issues.append("MANIFEST_PAGE_XVII_BAD_FRONT_SUBSECTION")
+            if manifest_page_xvii.get("front_subsection_title") != "VIII. De codicibus manuscriptis.":
+                issues.append("MANIFEST_PAGE_XVII_BAD_FRONT_SUBSECTION_TITLE")
 
     print(f"Footnote refs: {len(footnote_refs)}")
     print(f"Footnote notes: {len(notes_by_id)}")
