@@ -109,6 +109,79 @@
     return page.chapterStarts.map(chapterLabel).filter(Boolean);
   }
 
+  function pageSelectContext(page) {
+    const chapterSummary = pageChapterLabels(page).join(", ");
+    return chapterSummary
+      ? chapterSummary
+      : page.book
+        ? sectionLabel(page.book)
+        : page.frontSection
+          ? sectionLabel(page.frontSection)
+          : page.manifest && page.manifest.section
+            ? page.manifest.section
+            : sectionLabel(page.section);
+  }
+
+  function pageSelectCompactLabel(page) {
+    const pdf = page.manifest && page.manifest.pdf_page ? `PDF ${page.manifest.pdf_page}` : "PDF ?";
+    return `${pageLabel(page)} · ${pdf}`;
+  }
+
+  function activeChapterForNavigation(page, direction) {
+    if (!page) return null;
+    if (page.activeChapter) return page.activeChapter;
+    return direction < 0 ? page.chapters[0] || null : page.chapters[page.chapters.length - 1] || null;
+  }
+
+  function chapterIndexForNavigation(page, direction) {
+    const chapter = activeChapterForNavigation(page, direction);
+    if (!chapter) return -1;
+    return state.chapters.findIndex((candidate) => candidate === chapter || candidate.id === chapter.id);
+  }
+
+  function chapterPageIndex(chapter) {
+    return chapter && Number.isInteger(chapter.firstPageIndex) ? chapter.firstPageIndex : -1;
+  }
+
+  function navigatePage(delta) {
+    if (!state.pages.length) return false;
+    const nextIndex = state.currentIndex + delta;
+    if (nextIndex < 0 || nextIndex >= state.pages.length) return false;
+    showPage(nextIndex);
+    return true;
+  }
+
+  function navigateChapter(delta) {
+    if (!state.chapters.length) return false;
+    const page = state.pages[state.currentIndex];
+    const currentChapterIndex = chapterIndexForNavigation(page, delta);
+    if (currentChapterIndex < 0) return false;
+    const nextChapterIndex = currentChapterIndex + delta;
+    if (nextChapterIndex < 0 || nextChapterIndex >= state.chapters.length) return false;
+    const nextPageIndex = chapterPageIndex(state.chapters[nextChapterIndex]);
+    if (nextPageIndex < 0 || nextPageIndex === state.currentIndex) return false;
+    showPage(nextPageIndex);
+    return true;
+  }
+
+  function isNavigationShortcutTarget(target) {
+    if (!target || target === document || target === window) return true;
+    if (!(target instanceof Element)) return true;
+    if (target.isContentEditable || target.closest("[contenteditable]")) return false;
+    return !target.closest("input, select, textarea");
+  }
+
+  function handleKeyboardNavigation(event) {
+    if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
+    if (!isNavigationShortcutTarget(event.target)) return;
+    const handled =
+      (event.key === "ArrowLeft" && navigatePage(-1)) ||
+      (event.key === "ArrowRight" && navigatePage(1)) ||
+      (event.key === "ArrowUp" && navigateChapter(-1)) ||
+      (event.key === "ArrowDown" && navigateChapter(1));
+    if (handled) event.preventDefault();
+  }
+
   function normalizeText(text) {
     return text.replace(/\s+/g, " ").trim();
   }
@@ -877,17 +950,9 @@
     for (const page of state.pages) {
       const option = document.createElement("option");
       option.value = String(page.index);
-      const pdf = page.manifest && page.manifest.pdf_page ? `PDF ${page.manifest.pdf_page}` : "PDF ?";
-      const section = page.activeChapter
-        ? chapterLabel(page.activeChapter)
-        : page.book
-          ? sectionLabel(page.book)
-          : page.frontSection
-            ? sectionLabel(page.frontSection)
-            : page.manifest && page.manifest.section
-              ? page.manifest.section
-              : sectionLabel(page.section);
-      option.textContent = `${pageLabel(page)} · ${pdf} · ${section}`;
+      const compactLabel = pageSelectCompactLabel(page);
+      option.textContent = compactLabel;
+      option.title = `${compactLabel} · ${pageSelectContext(page)}`;
       els.pageSelect.appendChild(option);
     }
     els.pageSelect.disabled = state.pages.length === 0;
@@ -1343,6 +1408,7 @@
       const index = pageFromHash();
       if (index >= 0 && index !== state.currentIndex) showPage(index, { skipHash: true });
     });
+    window.addEventListener("keydown", handleKeyboardNavigation);
   }
 
   async function init() {
