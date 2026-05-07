@@ -372,6 +372,27 @@
     return directHead ? normalizeText(directHead.textContent || "") : "";
   }
 
+  function textWithoutRefs(element) {
+    const parts = [];
+    for (const node of element.childNodes) {
+      if (node.nodeType === Node.TEXT_NODE) {
+        parts.push(node.nodeValue || "");
+      } else if (node.nodeType === Node.ELEMENT_NODE && localName(node) !== "ref") {
+        parts.push(node.textContent || "");
+      }
+    }
+    return normalizeText(parts.join(" "));
+  }
+
+  function stripPrintedCapPrefix(text) {
+    return normalizeText(text)
+      .replace(/^\s*\(?\s*Cap\.\s*\d+\.?(?:\s*[A-Za-z])?(?:\s*\([^)]+\))?\s*\)?\.?\s*/i, "")
+      .replace(/^\s*\)?\s*/, "")
+      .replace(/\s+/g, " ")
+      .replace(/[.。]+$/, "")
+      .trim();
+  }
+
   function cleanBracketedTitle(text) {
     const bracketed = text.match(/\[([^\]]+)/);
     if (bracketed) {
@@ -483,8 +504,7 @@
       if (hi) return normalizeText(hi.textContent || "").replace(/[.。]+$/, "");
     }
     if (/^Κεφ\./.test(title)) return cleanBracketedTitle(title);
-    return title
-      .replace(/^Cap\.\s*\d+(?:\s*\(\d+\))?\.?\s*/i, "")
+    return stripPrintedCapPrefix(directHead ? textWithoutRefs(directHead) : title)
       .replace(/Περὶ[^.]*\./g, "")
       .replace(/\s+/g, " ")
       .replace(/[.。]+$/, "")

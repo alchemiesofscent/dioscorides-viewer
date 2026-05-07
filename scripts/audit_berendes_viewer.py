@@ -16,6 +16,10 @@ XML_NS = "{http://www.w3.org/XML/1998/namespace}"
 BODY_START_RE = re.compile(
     r"\b(\[?Einige|Auch|Der|Die|Das|Den|Dem|Ein|Eine|Es|Man|Wir|Nimm|Jede|Von|Wird|Fast|Als)\b"
 )
+CAP_PREFIX_RE = re.compile(
+    r"^\s*\(?\s*Cap\.\s*[0-9]+\.?(?:\s*[A-Za-z])?(?:\s*\([^)]+\))?\s*\)?\.?\s*",
+    re.IGNORECASE,
+)
 HEADING_COLLAPSE_RE = re.compile(
     r"\b([A-Z][^.!?]{1,90}\.)\s+"
     r"(?=\[?Einige\b|Auch\b|Der\b|Die\b|Das\b|Den\b|Dem\b|Ein\b|Eine\b|Es\b|"
@@ -80,6 +84,18 @@ def text_content(element: ET.Element) -> str:
     return normalize_text("".join(element.itertext()))
 
 
+def text_content_without_refs(element: ET.Element) -> str:
+    parts: list[str] = []
+    if element.text:
+        parts.append(element.text)
+    for child in list(element):
+        if local_name(child) != "ref":
+            parts.append(text_content(child))
+        if child.tail:
+            parts.append(child.tail)
+    return normalize_text(" ".join(parts))
+
+
 def direct_head(div: ET.Element) -> ET.Element | None:
     for child in list(div):
         if local_name(child) == "head":
@@ -128,7 +144,7 @@ def short_title_from_head(head: ET.Element) -> str:
     for hi in head.iter(TEI_NS + "hi"):
         if "bold" in (hi.get("rend") or "").lower().split():
             return text_content(hi).rstrip(".")
-    return re.sub(r"^Cap\.\s*\d+(?:\s*\(\d+\))?\.?\s*", "", text_content(head)).rstrip(".")
+    return CAP_PREFIX_RE.sub("", text_content_without_refs(head)).rstrip(".")
 
 
 def has_rend_token(element: ET.Element, token: str) -> bool:

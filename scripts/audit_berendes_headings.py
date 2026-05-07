@@ -54,6 +54,10 @@ DECISION_FIELDS = LEDGER_FIELDS + [
 ]
 
 CAP_RE = re.compile(r"\bCap\.\s*([0-9]+)(?:\s*\(([^)]+)\))?", re.IGNORECASE)
+CAP_PREFIX_RE = re.compile(
+    r"^\s*\(?\s*Cap\.\s*[0-9]+\.?(?:\s*[A-Za-z])?(?:\s*\([^)]+\))?\s*\)?\.?\s*",
+    re.IGNORECASE,
+)
 GREEK_RE = re.compile(r"[\u0370-\u03ff\u1f00-\u1fff]")
 HEADING_COLLAPSE_RE = re.compile(
     r"\b([A-ZÄÖÜ][^.!?]{1,90}\.)\s+"
@@ -105,6 +109,18 @@ def normalize_text(text: str) -> str:
 
 def text_content(element: ET.Element) -> str:
     return normalize_text("".join(element.itertext()))
+
+
+def text_content_without_refs(element: ET.Element) -> str:
+    parts: list[str] = []
+    if element.text:
+        parts.append(element.text)
+    for child in list(element):
+        if local_name(child) != "ref":
+            parts.append(text_content(child))
+        if child.tail:
+            parts.append(child.tail)
+    return normalize_text(" ".join(parts))
 
 
 def direct_child(element: ET.Element, name: str) -> ET.Element | None:
@@ -186,7 +202,7 @@ def german_title(head: ET.Element | None) -> str:
     ]
     if bold_parts:
         return normalize_text(" ".join(bold_parts)).rstrip(".")
-    return re.sub(r"^Cap\.\s*\d+(?:\s*\([^)]+\))?\.?\s*", "", text_content(head), flags=re.I).rstrip(".")
+    return CAP_PREFIX_RE.sub("", text_content_without_refs(head)).rstrip(".")
 
 
 def nav_label(head: ET.Element | None) -> str:
@@ -209,6 +225,13 @@ def generated_chapter_number(n: str) -> tuple[str, str]:
     if not match:
         return chapter, ""
     return match.group(1), match.group(2) or ""
+
+
+def is_variant_generated_n(n: str) -> bool:
+    if "." not in n:
+        return False
+    chapter = n.split(".", 1)[1]
+    return bool(re.match(r"^[0-9]+(?:[A-Za-z]+|\([^)]+\))$", chapter))
 
 
 def sort_key(n: str) -> tuple[int, int, str]:
@@ -308,9 +331,9 @@ def collect_rows(root: ET.Element, xml_path: Path, chunks_dir: Path) -> list[Cha
             if generated_book != row.book:
                 row.issue_codes.add("CHAPTER_BOOK_MISMATCH")
         chapter_primary, chapter_alt = generated_chapter_number(generated_n_value)
-        if printed_cap and chapter_primary and printed_cap != chapter_primary:
+        if printed_cap and chapter_primary and printed_cap != chapter_primary and not is_variant_generated_n(generated_n_value):
             row.issue_codes.add("PRINTED_CAP_MISMATCH")
-        if printed_alternate and chapter_alt and printed_alternate != chapter_alt:
+        if printed_alternate and chapter_alt and printed_alternate != chapter_alt and not is_variant_generated_n(generated_n_value):
             row.issue_codes.add("PRINTED_ALT_MISMATCH")
         if not row.nav_label:
             row.issue_codes.add("MISSING_NAV_LABEL")
@@ -352,7 +375,8 @@ def collect_rows(root: ET.Element, xml_path: Path, chunks_dir: Path) -> list[Cha
         if not primary.isdigit():
             continue
         number = int(primary)
-        seen_primary_by_book[row.book][number] += 1
+        if not is_variant_generated_n(row.generated_n):
+            seen_primary_by_book[row.book][number] += 1
         previous = previous_by_book.get(row.book)
         if previous is not None and number < previous:
             row.issue_codes.add("BACKWARD_NUMBER_JUMP")
@@ -404,7 +428,7 @@ def decision_note(row: ChapterRow) -> str:
 
 def write_csv(path: Path, fields: list[str], rows: list[dict[str, str]]) -> None:
     with path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fields)
+        writer = csv.DictWriter(handle, fieldnames=fields, lineterminator="\n")
         writer.writeheader()
         for row in rows:
             writer.writerow(row)
