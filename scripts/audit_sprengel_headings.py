@@ -74,8 +74,14 @@ BOOK_3_SUPPRESSED_GREEK_SOURCE_HEADS = {
 }
 BOOK_4_SUPPRESSED_GREEK_SOURCE_HEADS = {
     "spr-ch-4.90",
+    "spr-ch-4.106",
+    "spr-ch-4.107",
 }
 BOOK_3_SUPPRESSED_LATIN_SOURCE_LABELS = {"De Meliloto."}
+BOOK_4_SUPPRESSED_LATIN_SOURCE_HEADS = {
+    ("page_images/page-0631.png", "De Aethiopide."),
+    ("page_images/page-0631.png", "De Arctio."),
+}
 BOOK_3_REVIEWED_UNHEADED_GENERATED_N = {f"3.{number}" for number in range(54, 62)}
 
 GREEK_NUMERAL_VALUES = {
@@ -238,12 +244,15 @@ def suppress_source_heading(
     book: str,
     lang: str,
     page_n: str,
+    facs: str,
     source_xml_id: str,
     printed_primary: str,
     label: str,
 ) -> bool:
     if book == "4" and lang == "grc":
         return source_xml_id in BOOK_4_SUPPRESSED_GREEK_SOURCE_HEADS
+    if book == "4" and lang == "la":
+        return (facs, label) in BOOK_4_SUPPRESSED_LATIN_SOURCE_HEADS
     if book != "3":
         return False
     if lang == "grc":
@@ -347,6 +356,7 @@ def extract_source_headings(source_path: Path) -> list[SourceHeading]:
             state["book"],
             lang,
             state["page_n"],
+            state["facs"],
             state["source_xml_id"],
             printed_primary,
             label,

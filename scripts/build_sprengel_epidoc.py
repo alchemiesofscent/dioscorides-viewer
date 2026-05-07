@@ -198,8 +198,14 @@ BOOK_3_SUPPRESSED_GREEK_CHAPTER_MARKERS = {
 }
 BOOK_4_SUPPRESSED_GREEK_CHAPTER_MARKERS = {
     "spr-ch-4.90",
+    "spr-ch-4.106",
+    "spr-ch-4.107",
 }
 BOOK_3_SUPPRESSED_LATIN_LABELS = {"De Meliloto"}
+BOOK_4_SUPPRESSED_LATIN_MARKERS = {
+    ("page_images/page-0631.png", "De Aethiopide"),
+    ("page_images/page-0631.png", "De Arctio"),
+}
 BOOK_3_UNHEADED_CHAPTER_STARTS = {
     "spr-lb-3-0435-12": ("54", "Τὸ δὲ αἰθιοπικὸν λεγόμενον σέσελι", "Περὶ σεσέλεως αἰθιοπικοῦ"),
     "spr-lb-3-0436-04": ("55", "Τὸ δὲ ἐν Πελοποννήσῳ γεννώμενον", "Περὶ σεσέλεως πελοποννησιακοῦ"),
@@ -833,8 +839,12 @@ class SprengelBuilder:
             or (book == "4" and source_xml_id in BOOK_4_SUPPRESSED_GREEK_CHAPTER_MARKERS)
         )
 
-    def suppress_latin_marker(self, book: str, raw_label: str) -> bool:
-        return book == "3" and normalized_chapter_label(raw_label, "la") in BOOK_3_SUPPRESSED_LATIN_LABELS
+    def suppress_latin_marker(self, book: str, facs: str, raw_label: str) -> bool:
+        label = normalized_chapter_label(raw_label, "la")
+        return (
+            (book == "3" and label in BOOK_3_SUPPRESSED_LATIN_LABELS)
+            or (book == "4" and (facs, label) in BOOK_4_SUPPRESSED_LATIN_MARKERS)
+        )
 
     def enriched_greek_chapter_label(self, chapter_div: ET.Element, raw_label: str) -> str:
         if GREEK_HEAD_RE.search(raw_label):
@@ -1302,7 +1312,7 @@ class SprengelBuilder:
                     chapter_num = roman_to_int(match.group(1))
                     if chapter_num and state["book"]:
                         raw_label = match.group(0)
-                        if self.suppress_latin_marker(str(state["book"]), raw_label):
+                        if self.suppress_latin_marker(str(state["book"]), page.facs, raw_label):
                             continue
                         page.zones[lang].append(
                             self.add_chapter_start(
