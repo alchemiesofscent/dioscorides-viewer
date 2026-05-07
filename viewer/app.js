@@ -392,12 +392,19 @@
     return element.getAttributeNS(XML_NS, "lang") || element.getAttribute("xml:lang") || element.getAttribute("lang") || "";
   }
 
+  function isInsideFootnoteRef(node) {
+    for (let parent = node.parentElement; parent; parent = parent.parentElement) {
+      if (localName(parent) === "ref" && parent.getAttribute("type") === "footnote-ref") return true;
+    }
+    return false;
+  }
+
   function textAfterElement(root, marker) {
     const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
     const parts = [];
     let node = walker.nextNode();
     while (node) {
-      if (!marker.contains(node) && (marker.compareDocumentPosition(node) & Node.DOCUMENT_POSITION_FOLLOWING)) {
+      if (!isInsideFootnoteRef(node) && !marker.contains(node) && (marker.compareDocumentPosition(node) & Node.DOCUMENT_POSITION_FOLLOWING)) {
         parts.push(node.nodeValue || "");
       }
       node = walker.nextNode();
@@ -628,8 +635,16 @@
     return state.chapters.find((chapter) => chapter.book === book && chapter.n === n) || null;
   }
 
+  function looksGreek(text) {
+    return /[\u0370-\u03ff\u1f00-\u1fff]/.test(text || "");
+  }
+
   function combinedChapterTitle(primary, paired) {
-    return [primary, paired].filter(Boolean).join(" / ");
+    const labels = [primary, paired].filter(Boolean);
+    if (labels.length === 2 && !looksGreek(labels[0]) && looksGreek(labels[1])) {
+      return [labels[1], labels[0]].join(" / ");
+    }
+    return labels.join(" / ");
   }
 
   function registerChapterMilestone(milestone, context) {

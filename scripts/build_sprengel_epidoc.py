@@ -10,6 +10,7 @@ from collections import defaultdict
 from dataclasses import dataclass, field
 from pathlib import Path
 import re
+import unicodedata
 from typing import Callable
 import xml.etree.ElementTree as ET
 
@@ -87,15 +88,78 @@ TARGET_TAIL_REPLACEMENTS = {
     "#spr-app-fm-0020-34": {"Aetius": "Aëtius"},
 }
 
-GREEK_HEAD_RE = re.compile(r"Κεφ\.\s*([^.\[]+)\.?\s*\[([^\]]+)")
+GREEK_HEAD_RE = re.compile(r"Κεφ\.\s*([^.\[]+)\.?\s*(?:\([^)]+\)\.?\s*)?\[([^\]]+)\]?")
 MALFORMED_GREEK_HEAD_REF_RE = re.compile(r"^(?P<prefix>.*\S)\[(?P<label>\d+[a-z]?)\]\s*$", re.IGNORECASE)
 LATIN_CAP_RE = re.compile(
     r"Cap\.\s+([IVXLCDM]+)(?:\.\s*(?:\([^)]+\)\.)?)?\s*\[([^\]]+)\]",
     re.IGNORECASE,
 )
+GREEK_PAREN_TITLE_RE = re.compile(r"^\s*(\([^)]+\)\.?)\s*\[([^\]]+)\]?")
 APPARATUS_SPLIT_RE = re.compile(r"(?:^|\s+)(\d+\s*[a-z]?)\)\s+", re.IGNORECASE)
 NOTE_LABEL_RE = re.compile(r"^\[(\d+[a-z]?)\]$", re.IGNORECASE)
 FRONT_SUBSECTION_PREFIX_RE = re.compile(r"^\s*([A-Z]+|[IVXLCDM]+)\.")
+BOOK_1_UNHEADED_CHAPTER_STARTS = {
+    "spr-lb-1-0170-12": ("147", "Ῥοῦς ὁ ἐπὶ τὰ ὄψα", "Περὶ Ῥοῦ"),
+    "spr-lb-1-0171-17": ("148", "Φοῖνιξ ἐν Αἰγύπτῳ", "Περὶ Φοίνικος"),
+    "spr-lb-1-0172-13": ("149", "Τῶν δὲ θηβαϊκῶν", "Περὶ θηβαϊκῶν φοινίκων"),
+    "spr-lb-1-0173-12": ("150", "Φοῖνιξ, ἣν ἔνιοι ἐλάτην ἢ σπάθην καλοῦσι", "Περὶ σπάθης φοίνικος"),
+    "spr-lb-1-0174-15": ("151", "Ῥόα πᾶσα", "Περὶ Ῥόας"),
+}
+BOOK_1_GREEK_OCR_CHAPTER_OVERRIDES = {
+    "Περὶ Πισσελαίου": "95",
+    "Περὶ λιγνύος τῆς ἐξ ὑγρᾶς πίσσης": "96",
+    "Περὶ ξηρᾶς πίσσης": "97",
+    "Περὶ ζωπίσσης": "98",
+    "Περὶ ἀσφάλτου": "99",
+}
+BOOK_2_GREEK_LOGICAL_CHAPTER_OVERRIDES = {
+    "Περὶ ὀῤῥοῦ γάλακτος": "76",
+    "Περὶ σχιστοῦ γάλακτος": "77",
+    "Περὶ Πιτύας": "85",
+    "Περὶ Στέατος": "86",
+    "Πῶς τὸ στέαρ ἀρωματιστεῖον": "91",
+    "Πῶς σαμψυχίζεται τὸ στέαρ": "92",
+    "Περὶ Αἱμάτων": "97",
+    "Περὶ Ἀποπάτου": "98",
+    "Περὶ Οὔρων": "99",
+    "Περὶ Παγκρατίου": "203",
+    "Περὶ Καππάρεως": "204",
+    "Περὶ Λεπιδίου": "205",
+}
+BOOK_2_LATIN_LOGICAL_CHAPTER_OVERRIDES = {
+    "De Isatide sylvestri": "216",
+}
+GREEK_NUMERAL_VALUES = {
+    "α": 1,
+    "β": 2,
+    "γ": 3,
+    "δ": 4,
+    "ε": 5,
+    "ϛ": 6,
+    "ς": 6,
+    "ζ": 7,
+    "η": 8,
+    "θ": 9,
+    "ι": 10,
+    "κ": 20,
+    "λ": 30,
+    "μ": 40,
+    "ν": 50,
+    "ξ": 60,
+    "ο": 70,
+    "π": 80,
+    "ϟ": 90,
+    "ϙ": 90,
+    "ρ": 100,
+    "σ": 200,
+    "τ": 300,
+    "υ": 400,
+    "φ": 500,
+    "χ": 600,
+    "ψ": 700,
+    "ω": 800,
+    "ϡ": 900,
+}
 
 
 @dataclass(frozen=True)
@@ -226,6 +290,44 @@ def roman_to_int(value: str) -> int | None:
         next_value = values.get(roman[index + 1], 0) if index + 1 < len(roman) else 0
         total += -current if current < next_value else current
     return total
+
+
+def normalized_chapter_label(raw_label: str, lang: str) -> str:
+    return clean_label(raw_label, lang).replace("  ", " ").strip()
+
+
+def parse_greek_chapter_number(text: str) -> int | None:
+    match = GREEK_HEAD_RE.search(text)
+    if not match:
+        return None
+    numeral = match.group(1).split("(", 1)[0].strip()
+    numeral = re.split(r"\s+", numeral, maxsplit=1)[0]
+    numeral = unicodedata.normalize("NFD", numeral.lower())
+    numeral = "".join(char for char in numeral if unicodedata.category(char) != "Mn")
+    numeral = re.sub(r"[.'’ʻʼ`´΄ʹ᾽᾿]+", "", numeral)
+    if numeral == "στ":
+        return 6
+    total = 0
+    for char in numeral:
+        if char in {" ", "-", "‐", "‑"}:
+            continue
+        value = GREEK_NUMERAL_VALUES.get(char)
+        if value is None:
+            return None
+        total += value
+    return total or None
+
+
+def greek_head_raw_label(text: str) -> str:
+    match = GREEK_HEAD_RE.search(text)
+    return match.group(0).strip() if match else ""
+
+
+def chapter_key_sort_key(key: str) -> tuple[int, int | str]:
+    book, _, chapter = key.partition(".")
+    book_key = int(book) if book.isdigit() else 999
+    chapter_key: int | str = int(chapter) if chapter.isdigit() else chapter
+    return book_key, chapter_key
 
 
 def archive_scan_number(facs: str, fallback_index: int) -> int:
@@ -483,11 +585,19 @@ class SprengelBuilder:
             self.chapters[key] = Chapter(key=key, book=book, chapter=chapter)
         return self.chapters[key]
 
-    def add_chapter_start(self, page: Page, lang: str, book: str, chapter: str, raw_label: str) -> ChapterMarker:
+    def add_chapter_start(
+        self,
+        page: Page,
+        lang: str,
+        book: str,
+        chapter: str,
+        raw_label: str,
+        display_label: str = "",
+    ) -> ChapterMarker:
         normalized_chapter = str(int(chapter)) if chapter.isdigit() else chapter
         chapter_record = self.chapter_for(book, normalized_chapter)
         raw_label = normalize_chapter_label_text(raw_label, lang)
-        label = clean_label(raw_label, lang)
+        label = display_label or clean_label(raw_label, lang)
         if label:
             chapter_record.labels[lang] = label
         if raw_label:
@@ -496,6 +606,69 @@ class SprengelBuilder:
         if chapter_record.key not in page.chapter_starts[lang]:
             page.chapter_starts[lang].append(chapter_record.key)
         return ChapterMarker(lang=lang, key=chapter_record.key)
+
+    def printed_chapter_number(self, lang: str, raw_label: str) -> str:
+        if lang == "grc":
+            number = parse_greek_chapter_number(raw_label)
+            return str(number) if number is not None else ""
+        match = LATIN_CAP_RE.search(raw_label)
+        if match:
+            number = roman_to_int(match.group(1))
+            return str(number) if number is not None else ""
+        return ""
+
+    def canonical_chapter_number(
+        self,
+        book: str,
+        lang: str,
+        raw_label: str,
+        fallback_chapter: str = "",
+    ) -> str:
+        label = normalized_chapter_label(raw_label, lang)
+        if book == "1" and lang == "grc":
+            override = BOOK_1_GREEK_OCR_CHAPTER_OVERRIDES.get(label)
+            if override:
+                return override
+        if book == "2":
+            if lang == "grc":
+                override = BOOK_2_GREEK_LOGICAL_CHAPTER_OVERRIDES.get(label)
+                if override:
+                    return override
+                printed = self.printed_chapter_number(lang, raw_label)
+                # This duplicated Book 2 source-id block is twenty entries behind the logical sequence.
+                if fallback_chapter.isdigit() and 161 <= int(fallback_chapter) <= 179:
+                    return str(int(fallback_chapter) + 20)
+                if "(" in raw_label and printed:
+                    return printed
+                if fallback_chapter and fallback_chapter.isdigit() and "(" in raw_label:
+                    return fallback_chapter
+                if printed:
+                    return printed
+                if fallback_chapter and fallback_chapter.isdigit():
+                    return fallback_chapter
+            elif lang == "la":
+                override = BOOK_2_LATIN_LOGICAL_CHAPTER_OVERRIDES.get(label)
+                if override:
+                    return override
+        return self.printed_chapter_number(lang, raw_label) or fallback_chapter
+
+    def enriched_greek_chapter_label(self, chapter_div: ET.Element, raw_label: str) -> str:
+        if GREEK_HEAD_RE.search(raw_label):
+            return raw_label
+        paragraph = next((child for child in list(chapter_div) if local_name(child.tag) == "p"), None)
+        if paragraph is None:
+            return raw_label
+        match = GREEK_PAREN_TITLE_RE.match(text_content(paragraph))
+        if not match:
+            return raw_label
+        return f"{raw_label.rstrip()} {match.group(1)} [{match.group(2).strip()}]"
+
+    def source_chapter_hint(self, chapter_div: ET.Element, book: str) -> str:
+        source_id = attr(chapter_div, "xml:id")
+        match = re.fullmatch(rf"spr-ch-{re.escape(book)}\.(\d+)", source_id)
+        if match:
+            return match.group(1)
+        return attr(chapter_div, "n")
 
     def target_id_for_label(self, page: Page, book: str, label: str) -> str:
         scan_number = archive_scan_number(page.facs, page.index)
@@ -568,6 +741,61 @@ class SprengelBuilder:
 
     def should_break_after_inline_head(self, lang: str, book: str, chapter: str) -> bool:
         return lang == "grc" and book == "1" and chapter == "65"
+
+    def greek_marker_for_line(
+        self,
+        page: Page,
+        book: str,
+        line: ET.Element,
+        text: str,
+    ) -> ChapterMarker | None:
+        raw_label = greek_head_raw_label(text)
+        chapter = self.canonical_chapter_number(book, "grc", raw_label) if raw_label else ""
+        display_label = ""
+        if not chapter and book == "1":
+            override = BOOK_1_UNHEADED_CHAPTER_STARTS.get(attr(line, "xml:id"))
+            if override:
+                chapter, raw_label, display_label = override
+        if not chapter:
+            return None
+        return self.add_chapter_start(page, "grc", book, chapter, raw_label, display_label=display_label)
+
+    def add_greek_markers_in_paragraph(
+        self,
+        page: Page,
+        book: str,
+        paragraph: ET.Element,
+    ) -> list[ET.Element | ChapterMarker]:
+        if local_name(paragraph.tag) != "p":
+            return [paragraph]
+
+        output: list[ET.Element | ChapterMarker] = []
+
+        def new_paragraph() -> ET.Element:
+            clone = ET.Element(paragraph.tag, dict(paragraph.attrib))
+            clone.text = None
+            return clone
+
+        def paragraph_has_content(element: ET.Element) -> bool:
+            return bool((element.text or "").strip() or list(element))
+
+        current = new_paragraph()
+        current.text = paragraph.text
+        for child in list(paragraph):
+            marker = None
+            if local_name(child.tag) == "lb":
+                marker = self.greek_marker_for_line(page, book, child, child.tail or "")
+            if marker is not None:
+                if paragraph_has_content(current):
+                    output.append(current)
+                output.append(marker)
+                current = new_paragraph()
+            current.append(copy.deepcopy(child))
+
+        if paragraph_has_content(current):
+            current.tail = paragraph.tail
+            output.append(current)
+        return output
 
     def front_midpage_split(
         self,
@@ -690,11 +918,23 @@ class SprengelBuilder:
                     for child in list(node):
                         process(child)
                 elif subtype == "chapter":
-                    state["chapter"] = attr(node, "n")
                     state["chapter_marker_pending"] = True
                     head = next((child for child in list(node) if local_name(child.tag) == "head"), None)
                     state["chapter_raw_label"] = (
                         normalize_chapter_label_text(text_content(head), lang) if head is not None else ""
+                    )
+                    if lang == "grc" and state["chapter_raw_label"]:
+                        state["chapter_raw_label"] = self.enriched_greek_chapter_label(
+                            node,
+                            str(state["chapter_raw_label"]),
+                        )
+                    state["chapter"] = (
+                        self.canonical_chapter_number(
+                            str(state["book"]),
+                            lang,
+                            str(state["chapter_raw_label"]),
+                            self.source_chapter_hint(node, str(state["book"])),
+                        )
                     )
                     children = list(node)
                     index = 0
@@ -755,7 +995,9 @@ class SprengelBuilder:
                                 if stripped:
                                     state["consume_leading_head_close"] = False
                                 self.normalize_refs_in_tree(paragraph)
-                                page.zones[lang].append(paragraph)
+                                page.zones[lang].extend(
+                                    self.add_greek_markers_in_paragraph(page, str(state["book"]), paragraph)
+                                )
                                 index += 2
                                 continue
                             if page is not None:
@@ -785,7 +1027,9 @@ class SprengelBuilder:
                                 if stripped:
                                     state["consume_leading_head_close"] = False
                                 self.normalize_refs_in_tree(paragraph)
-                                page.zones[lang].append(paragraph)
+                                page.zones[lang].extend(
+                                    self.add_greek_markers_in_paragraph(page, str(state["book"]), paragraph)
+                                )
                                 index += 1
                                 continue
                         if (
@@ -799,7 +1043,9 @@ class SprengelBuilder:
                                 if remove_leading_head_close(paragraph):
                                     state["consume_leading_head_close"] = False
                                     self.normalize_refs_in_tree(paragraph)
-                                    page.zones[lang].append(paragraph)
+                                    page.zones[lang].extend(
+                                        self.add_greek_markers_in_paragraph(page, str(state["book"]), paragraph)
+                                    )
                                     index += 1
                                     continue
                         process(child)
@@ -833,17 +1079,32 @@ class SprengelBuilder:
                 for match in LATIN_CAP_RE.finditer(raw_text):
                     chapter_num = roman_to_int(match.group(1))
                     if chapter_num and state["book"]:
+                        raw_label = match.group(0)
                         page.zones[lang].append(
                             self.add_chapter_start(
                                 page,
                                 lang,
                                 str(state["book"]),
-                                str(chapter_num),
-                                match.group(0),
+                                self.canonical_chapter_number(
+                                    str(state["book"]),
+                                    lang,
+                                    raw_label,
+                                    str(chapter_num),
+                                ),
+                                raw_label,
                             )
                         )
 
-            page.zones[lang].extend(self.output_items(node))
+            items = self.output_items(node)
+            if lang == "grc" and state["book"] and local_name(node.tag) == "p":
+                marked_items: list[ET.Element | ChapterMarker] = []
+                for item in items:
+                    if isinstance(item, ET.Element):
+                        marked_items.extend(self.add_greek_markers_in_paragraph(page, str(state["book"]), item))
+                    else:
+                        marked_items.append(item)
+                items = marked_items
+            page.zones[lang].extend(items)
 
         for child in list(language_div):
             process(child)
@@ -1163,7 +1424,10 @@ class SprengelBuilder:
             page = self.pages[facs]
             scan_number = archive_scan_number(facs, fallback_index)
             section = page.front_section or (f"book {page.book}" if page.book else "")
-            chapter_keys = sorted({key for starts in page.chapter_starts.values() for key in starts})
+            chapter_keys = sorted(
+                {key for starts in page.chapter_starts.values() for key in starts},
+                key=chapter_key_sort_key,
+            )
             pages.append(
                 {
                     "pdf_page": scan_number,

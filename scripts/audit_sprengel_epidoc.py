@@ -72,6 +72,77 @@ def check_text_order(issues: list[str], text: str, label: str, needles: tuple[st
         issues.append(f"{label}_TEXT_ORDER")
 
 
+def xml_lang(element: ET.Element) -> str:
+    return element.get(f"{{{XML}}}lang") or element.get("xml:lang") or ""
+
+
+def chapter_milestones(root: ET.Element, chapter: str) -> list[ET.Element]:
+    return [
+        element
+        for element in root.iter()
+        if local_name(element.tag) == "milestone"
+        and attr(element, "unit") == "chapter"
+        and attr(element, "n") == chapter
+    ]
+
+
+def check_sprengel_chapter_numbering_repairs(issues: list[str], root: ET.Element) -> None:
+    def rows(chapter: str) -> list[ET.Element]:
+        return chapter_milestones(root, chapter)
+
+    def has_lang_label(chapter: str, lang: str) -> bool:
+        return any(xml_lang(milestone) == lang and attr(milestone, "label") for milestone in rows(chapter))
+
+    for chapter in ("1.95", "1.96", "1.97", "1.98", "1.99"):
+        if not has_lang_label(chapter, "grc") or not has_lang_label(chapter, "la"):
+            issues.append(f"SPRENGEL_CHAPTER_PAIR_MISSING: {chapter}")
+
+    for chapter in ("1.147", "1.148", "1.149", "1.150", "1.151"):
+        if not any((attr(milestone, "label") or "").startswith("Περὶ") for milestone in rows(chapter)):
+            issues.append(f"SPRENGEL_BOOK1_UNHEADED_LABEL_BAD: {chapter}")
+
+    for chapter in ("2.77", "2.86", "2.97", "2.98"):
+        if not has_lang_label(chapter, "grc"):
+            issues.append(f"SPRENGEL_BOOK2_GREEK_LABEL_MISSING: {chapter}")
+
+    for chapter in ("2.161", "2.162", "2.163", "2.164"):
+        if not has_lang_label(chapter, "grc"):
+            issues.append(f"SPRENGEL_BOOK2_DOUBLE_TITLE_MISSING: {chapter}")
+        if not any(xml_lang(milestone) == "grc" and "(" in attr(milestone, "sourceLabel") for milestone in rows(chapter)):
+            issues.append(f"SPRENGEL_BOOK2_DOUBLE_SOURCE_LABEL_MISSING: {chapter}")
+
+    for chapter in ("2.203", "2.204", "2.205"):
+        if not has_lang_label(chapter, "grc") or not has_lang_label(chapter, "la"):
+            issues.append(f"SPRENGEL_BOOK2_TRANSPOSED_PAIR_MISSING: {chapter}")
+
+    if rows("2.226"):
+        issues.append("SPRENGEL_BOOK2_TYPO_226_SHOULD_NOT_EXIST")
+    for chapter in ("2.215", "2.216", "2.217"):
+        if not rows(chapter):
+            issues.append(f"SPRENGEL_BOOK2_ISATIS_WINDOW_MISSING: {chapter}")
+
+    sequence: list[str] = []
+    for page in root.iter():
+        if local_name(page.tag) != "div" or attr(page, "subtype") != "diplomatic-page":
+            continue
+        page_chapters = []
+        for milestone in page.iter():
+            if local_name(milestone.tag) != "milestone" or attr(milestone, "unit") != "chapter":
+                continue
+            chapter = attr(milestone, "n")
+            if chapter.startswith("2.") and chapter not in page_chapters:
+                page_chapters.append(chapter)
+        sequence.extend(page_chapters)
+
+    previous: tuple[int, str] | None = None
+    for chapter in sequence:
+        number = int(chapter.split(".", 1)[1])
+        if previous and 70 <= previous[0] <= 217 and 70 <= number <= 217 and number < previous[0]:
+            issues.append(f"SPRENGEL_BOOK2_BACKWARDS_JUMP: {previous[1]} -> {chapter}")
+            break
+        previous = (number, chapter)
+
+
 def check_chapter_title_line_break(
     issues: list[str],
     parents: dict[ET.Element, ET.Element],
@@ -448,6 +519,7 @@ def main() -> int:
         "Ἐλαίου ὀμφακίνου",
         "BODY_PAGE_0100_GRC_CHAPTER_65_TITLE_BREAK",
     )
+    check_sprengel_chapter_numbering_repairs(issues, root)
 
     head_numeric_markers = sum(
         1
