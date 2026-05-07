@@ -97,11 +97,11 @@ LATIN_CAP_RE = re.compile(
 )
 LATIN_BRACKETED_CAP_RE = re.compile(r"\[Cap\.\s+([IVXLCDM]+)\.?\s+([^\]]+)\]", re.IGNORECASE)
 LATIN_BROKEN_CAP_RE = re.compile(
-    r"C[as]p[.,]\s+([IVXLCDM]+)\.?\s*(?:\([^)]+\)\.?\s*)?(De\s+[^\]]+)\]",
+    r"C[as]p[.,]\s+([IVXLCDM]+)\.?\s*(?:\([^)]+\)\.?\s*)?(De\s+(?:(?!C[as]p[.,]\s+[IVXLCDM]).)+?)\]",
     re.IGNORECASE,
 )
 LATIN_UNBRACKETED_DE_CAP_RE = re.compile(
-    r"C[as]p[.,]\s+([IVXLCDM]+)\.?\s*(?:\([^)]+\)\.?\s*)?(De\s+.*?\.\)?)\s+(?=[A-Z])",
+    r"C[as]p[.,]\s+([IVXLCDM]+)\.?\s*(?:\([^)]+\)\.?\s*)?(De\s+(?:(?!C[as]p[.,]\s+[IVXLCDM]).)*?\.\)?)\s+(?=[A-Z])",
     re.IGNORECASE,
 )
 GREEK_PAREN_TITLE_RE = re.compile(r"^\s*(\([^)]+\)\.?)\s*\[([^\]]+)\]?")
@@ -284,6 +284,7 @@ BOOK_4_SUPPRESSED_GREEK_CHAPTER_MARKERS = {
 }
 BOOK_3_SUPPRESSED_LATIN_LABELS = {"De Meliloto"}
 BOOK_4_SUPPRESSED_LATIN_MARKERS = {
+    ("page_images/page-0618.png", "De Sempervivo alio.)"),
     ("page_images/page-0631.png", "De Aethiopide"),
     ("page_images/page-0631.png", "De Arctio"),
     ("page_images/page-0670.png", "De Elaterio"),
@@ -428,6 +429,7 @@ def normalize_chapter_label_text(text: str, lang: str) -> str:
         match = MALFORMED_GREEK_HEAD_REF_RE.match(text)
         if match and "[Περὶ" in match.group("prefix"):
             return match.group("prefix").rstrip(" .") + ".]"
+        text = re.sub(r"(\[[^\]]+?\.\])\s*\[\d+[a-z]?\](?=\s|$)", r"\1", text, flags=re.IGNORECASE)
     return text
 
 

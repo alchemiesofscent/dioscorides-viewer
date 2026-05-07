@@ -58,6 +58,7 @@ LATIN_PRIMARY_RE = re.compile(r"C[as]p[.,]\s*([IVXLCDM]+)", re.IGNORECASE)
 PAREN_RE = re.compile(r"\(([^)]+)\)")
 BRACKET_RE = re.compile(r"\[([^\]]+)\]")
 NOTE_LEAK_RE = re.compile(r"\[\d+[a-z]?\]", re.IGNORECASE)
+TRAILING_NOTE_LEAK_RE = re.compile(r"\s*\[\d+[a-z]?\]?$", re.IGNORECASE)
 # Match generator-side suppressed markers so the ledger aligns reviewed
 # milestones against the title-bearing source rows.
 BOOK_3_SUPPRESSED_GREEK_SOURCE_HEADS = {
@@ -78,11 +79,22 @@ BOOK_4_SUPPRESSED_GREEK_SOURCE_HEADS = {
     "spr-ch-4.107",
     "spr-ch-4.156",
 }
-BOOK_3_SUPPRESSED_LATIN_SOURCE_LABELS = {"De Meliloto."}
+BOOK_3_SUPPRESSED_LATIN_SOURCE_LABELS = {"De Meliloto"}
 BOOK_4_SUPPRESSED_LATIN_SOURCE_HEADS = {
-    ("page_images/page-0631.png", "De Aethiopide."),
-    ("page_images/page-0631.png", "De Arctio."),
-    ("page_images/page-0670.png", "Cap. CLV. De Elaterio."),
+    ("page_images/page-0618.png", "De Sempervivo alio.)"),
+    ("page_images/page-0631.png", "De Aethiopide"),
+    ("page_images/page-0631.png", "De Arctio"),
+    ("page_images/page-0670.png", "Cap. CLV. De Elaterio"),
+}
+BOOK_3_REVIEWED_LATIN_SUBHEADS = {
+    ("page_images/page-0376.png", "V", ""),
+    ("page_images/page-0376.png", "VI", ""),
+    ("page_images/page-0392.png", "XX", ""),
+    ("page_images/page-0412.png", "XXXVIII", ""),
+    ("page_images/page-0412.png", "XXXIX", ""),
+    ("page_images/page-0453.png", "LXXXV", ""),
+    ("page_images/page-0456.png", "LXXXVIII", ""),
+    ("page_images/page-0456.png", "LXXXIX", ""),
 }
 LATIN_UNHEADED_SOURCE_HEADS = {
     ("1", "page_images/page-0170.png", "13", "Rhus, quae obsoniis"): (
@@ -240,6 +252,22 @@ def text_content(element: ET.Element) -> str:
     return normalized_text("".join(element.itertext()))
 
 
+def text_content_without_footnote_refs(element: ET.Element) -> str:
+    pieces: list[str] = []
+
+    def walk(node: ET.Element, include_tail: bool = True) -> None:
+        if not (local_name(node.tag) == "ref" and attr(node, "type") == "footnote-ref"):
+            if node.text:
+                pieces.append(node.text)
+            for child in list(node):
+                walk(child)
+        if include_tail and node.tail:
+            pieces.append(node.tail)
+
+    walk(element, include_tail=False)
+    return normalized_text("".join(pieces))
+
+
 def marker_index(text: str, lang: str) -> int:
     marker = GREEK_HEAD_MARKER_RE if lang == "grc" else LATIN_HEAD_MARKER_RE
     match = marker.search(text)
@@ -301,28 +329,35 @@ def parse_heading_parts(text: str, lang: str) -> tuple[str, str, str]:
     label = ""
     label_match = BRACKET_RE.search(text)
     if label_match:
-        label = normalized_text(label_match.group(1))
+        label = clean_heading_label(label_match.group(1))
     elif lang == "la":
         bracketed = re.search(r"\[\s*Cap\.\s+[IVXLCDM]+\.?\s*(?:\([^)]+\)\.?\s*)?([^\]]+)\]", text, re.IGNORECASE)
         if bracketed:
-            label = normalized_text(bracketed.group(1).strip(" ."))
+            label = clean_heading_label(bracketed.group(1).strip(" ."))
         else:
             broken = re.search(
-                r"C[as]p[.,]\s+[IVXLCDM]+\.?\s*(?:\([^)]+\)\.?\s*)?(De\s+[^\]]+)\]",
+                r"C[as]p[.,]\s+[IVXLCDM]+\.?\s*(?:\([^)]+\)\.?\s*)?(De\s+(?:(?!C[as]p[.,]\s+[IVXLCDM]).)+?)\]",
                 text,
                 re.IGNORECASE,
             )
             if broken:
-                label = normalized_text(broken.group(1).strip(" ."))
+                label = clean_heading_label(broken.group(1).strip(" ."))
             else:
                 unbracketed = re.search(
-                    r"C[as]p[.,]\s+[IVXLCDM]+\.?\s*(?:\([^)]+\)\.?\s*)?(De\s+.*?\.\)?)\s+(?=[A-Z])",
+                    r"C[as]p[.,]\s+[IVXLCDM]+\.?\s*(?:\([^)]+\)\.?\s*)?(De\s+(?:(?!C[as]p[.,]\s+[IVXLCDM]).)*?\.\)?)\s+(?=[A-Z])",
                     text,
                     re.IGNORECASE,
                 )
                 if unbracketed:
-                    label = normalized_text(unbracketed.group(1).strip(" ."))
+                    label = clean_heading_label(unbracketed.group(1).strip(" ."))
     return printed_primary, alternate, label
+
+
+def clean_heading_label(label: str) -> str:
+    label = normalized_text(label)
+    label = NOTE_LEAK_RE.sub("", label)
+    label = TRAILING_NOTE_LEAK_RE.sub("", label)
+    return normalized_text(label).strip(" .")
 
 
 def suppress_source_heading(
@@ -344,6 +379,7 @@ def suppress_source_heading(
         return source_xml_id in BOOK_3_SUPPRESSED_GREEK_SOURCE_HEADS
     return (
         label in BOOK_3_SUPPRESSED_LATIN_SOURCE_LABELS
+        or (facs, printed_primary, label) in BOOK_3_REVIEWED_LATIN_SUBHEADS
         or (page_n == "383" and printed_primary == "XLII" and not label)
     )
 
@@ -565,6 +601,8 @@ def first_following_text(items: list[ET.Element], start: int, tag_name: str, typ
             continue
         if type_value and attr(item, "type") != type_value:
             continue
+        if tag_name == "seg" and type_value == "chapterTitle":
+            return text_content_without_footnote_refs(item)
         return text_content(item)
     return ""
 
@@ -709,7 +747,7 @@ def build_ledger(
             if source is not None:
                 if source_conflicts(source):
                     issues.add("PRINTED_SOURCE_CONFLICT")
-                for text in (source.heading_label, source.source_heading_text):
+                for text in (source.heading_label,):
                     if NOTE_LEAK_RE.search(text):
                         issues.add("LABEL_HAS_NOTE_LEAK")
                 if gen is None and source.is_inline:

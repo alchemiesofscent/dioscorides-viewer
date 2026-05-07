@@ -2,24 +2,22 @@
 
 ## Totals
 
-- Source headings: 1832
+- Source headings: 1823
 - Source Greek headings: 905
-- Source Latin headings: 927
+- Source Latin headings: 918
 - Generated milestones: 1836
 - Generated Greek milestones: 918
 - Generated Latin milestones: 918
-- Ledger rows: 1845
-- Flagged rows: 957
+- Ledger rows: 1836
+- Flagged rows: 945
 
 ## Issue Counts
 
 - GENERATED_WITHOUT_SOURCE: 13
-- INLINE_HEAD_UNMODELED: 9
-- LABEL_HAS_NOTE_LEAK: 17
 - PRINTED_SOURCE_CONFLICT: 868
 - REVIEWED_ALTERNATE_NUMBER_CONFLICT: 36
 - REVIEWED_GENERATED_TITLE_VISIBLE: 8
-- SOURCE_VISIBLE_MISMATCH: 359
+- SOURCE_VISIBLE_MISMATCH: 345
 
 ## First Failing Ranges
 
@@ -36,31 +34,6 @@
 - book=3 lang=grc page=405 line=spr-lb-3-0437-12 ref=3.58: Ἄνισον
 - book=3 lang=grc page=406 line=spr-lb-3-0438-07 ref=3.59: Κάρος σπερμάτιόν ἐστι
 - book=3 lang=grc page=406 line=spr-lb-3-0438-12 ref=3.60: Ἄνηθον τὸ ἐσθιόμενον
-
-### INLINE_HEAD_UNMODELED
-- book=3 lang=la page=344 line= ref=3: Cap. V.) Longa aristolochia mascula appellatur et
-- book=3 lang=la page=344 line=spr-lb-3-0376-11 ref=3: Cap. VI.) Est et tertia longa, quae et clematitis
-- book=3 lang=la page=360 line=spr-lb-3-0392-14 ref=3: Cap. XVIII. (XXI.) [De Anonide.] Anonis, alii
-- book=3 lang=la page=380 line= ref=3: Cap. XXXVIII.) Quod pseudodictamnum vocant,
-- book=3 lang=la page=380 line=spr-lb-3-0412-12 ref=3: Cap. XXXIX.) Defertur et e Creta alterum dictamni
-- book=3 lang=la page=421 line=spr-lb-3-0453-10 ref=3: Cap. LXXVIII. (LXXXVI.) [De Pyrethro.] Pyre-
-- book=3 lang=la page=424 line= ref=3: Cap. LXXXVIII.) Cachry habet vim calefacien-
-- book=3 lang=la page=424 line=spr-lb-3-0456-11 ref=3: Cap. LXXXIX.) Libanotis, quam Romani rorem
-- book=4 lang=la page=586 line=spr-lb-4-0618-13 ref=4: Cap. XC. (XCII.) [De Cotyledone.] Cotyledon,
-
-### LABEL_HAS_NOTE_LEAK
-- book=1 lang=grc page=11 line= ref=1.2: Κεφ. β΄. [Περὶ Ἀκόρου[15]
-- book=1 lang=grc page=96 line= ref=1.93: Κεφ. ϟγ΄. [Περὶ τοῦ πῶς δεῖ καίειν τὴν ῥητίνην[35]
-- book=1 lang=grc page=109 line=spr-lb-1-0141-12 ref=1.110: Κεφ. ρι΄ (ριγ΄). [Περὶ Αἰγείρου.] [57] Αἰγείρου τὰ
-- book=1 lang=grc page=110 line=spr-lb-1-0142-11 ref=1.112: Κεφ. ριβ΄ (ρια΄). [Περὶ Πτελέας.] [58] Πτελέας τὰ φύλλα
-- book=1 lang=grc page=134 line=spr-lb-1-0166-10 ref=1.140: Κεφ. ρμ΄ (ρλδ΄). [Περὶ ἀμόργης.][22] Ἀμόργη ὑπο-
-- book=2 lang=grc page=217 line=spr-lb-2-0249-01 ref=2.93: Κεφ. ϟγ΄. [Περὶ στέατος χηνείου καὶ ὀρνιθείου[6]
-- book=2 lang=grc page=256 line=spr-lb-2-0288-01 ref=2.137: Κεφ. ρλζ΄. [Περὶ Ῥαφανίδος[10]
-- book=2 lang=grc page=265 line= ref=2.150: Κεφ. ρν΄. [Περὶ Ἀνδράχνης[57]
-- book=2 lang=grc page=307 line=spr-lb-2-0339-01 ref=2.195: Κεφ. ρξε΄. [Περὶ Δρακοντίας μεγάλης[31]
-- book=2 lang=grc page=309 line= ref=2.196: Κεφ. ρξϛ΄. [Περὶ Δρακοντίας μικρᾶς[40]
-- book=2 lang=grc page=335 line= ref=2.215: Κεφ. σιε΄. [Περὶ Ἰσάτιδος[66]
-- book=4 lang=grc page=534 line= ref=4.39: Κεφ. λθ΄. [Περὶ Ἑλξίνης[39]
 
 ### PRINTED_SOURCE_CONFLICT
 - book=1 lang=grc page=98 line= ref=1.95: Κεφ. ξε΄. [Περὶ Πισσελαίου.]
@@ -101,11 +74,6 @@
 - book=3 lang=grc page=407 line=spr-lb-3-0439-07 ref=3.61: Κύμινον τὸ ἥμερον
 
 ### SOURCE_VISIBLE_MISMATCH
-- book=1 lang=grc page=11 line= ref=1.2: Κεφ. β΄. [Περὶ Ἀκόρου[15]
-- book=1 lang=grc page=96 line= ref=1.93: Κεφ. ϟγ΄. [Περὶ τοῦ πῶς δεῖ καίειν τὴν ῥητίνην[35]
-- book=2 lang=grc page=217 line=spr-lb-2-0249-01 ref=2.93: Κεφ. ϟγ΄. [Περὶ στέατος χηνείου καὶ ὀρνιθείου[6]
-- book=2 lang=grc page=256 line=spr-lb-2-0288-01 ref=2.137: Κεφ. ρλζ΄. [Περὶ Ῥαφανίδος[10]
-- book=2 lang=grc page=265 line= ref=2.150: Κεφ. ρν΄. [Περὶ Ἀνδράχνης[57]
 - book=2 lang=grc page=277 line= ref=2.161: Κεφ. ρξα΄.
 - book=2 lang=grc page=278 line= ref=2.162: Κεφ. ρξβ΄.
 - book=2 lang=grc page=278 line= ref=2.163: Κεφ. ρξγ΄.
@@ -113,3 +81,8 @@
 - book=2 lang=grc page=280 line=spr-lb-2-0312-01 ref=2.165: Κεφ. ρξε΄.
 - book=2 lang=grc page=281 line=spr-lb-2-0313-01 ref=2.166: Κεφ. ρξϛ΄.
 - book=2 lang=grc page=281 line= ref=2.167: Κεφ. ρξζ΄.
+- book=2 lang=grc page=281 line= ref=2.168: Κεφ. ρξη΄.
+- book=2 lang=grc page=282 line= ref=2.169: Κεφ. ρξθ΄.
+- book=2 lang=grc page=283 line= ref=2.170: Κεφ. ρο΄.
+- book=2 lang=grc page=284 line= ref=2.171: Κεφ. ροα΄.
+- book=2 lang=grc page=284 line= ref=2.172: Κεφ. ροβ΄.
