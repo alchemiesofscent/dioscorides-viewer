@@ -200,11 +200,13 @@ BOOK_4_SUPPRESSED_GREEK_CHAPTER_MARKERS = {
     "spr-ch-4.90",
     "spr-ch-4.106",
     "spr-ch-4.107",
+    "spr-ch-4.156",
 }
 BOOK_3_SUPPRESSED_LATIN_LABELS = {"De Meliloto"}
 BOOK_4_SUPPRESSED_LATIN_MARKERS = {
     ("page_images/page-0631.png", "De Aethiopide"),
     ("page_images/page-0631.png", "De Arctio"),
+    ("page_images/page-0670.png", "De Elaterio"),
 }
 BOOK_3_UNHEADED_CHAPTER_STARTS = {
     "spr-lb-3-0435-12": ("54", "Τὸ δὲ αἰθιοπικὸν λεγόμενον σέσελι", "Περὶ σεσέλεως αἰθιοπικοῦ"),

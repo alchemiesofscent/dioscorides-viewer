@@ -76,11 +76,13 @@ BOOK_4_SUPPRESSED_GREEK_SOURCE_HEADS = {
     "spr-ch-4.90",
     "spr-ch-4.106",
     "spr-ch-4.107",
+    "spr-ch-4.156",
 }
 BOOK_3_SUPPRESSED_LATIN_SOURCE_LABELS = {"De Meliloto."}
 BOOK_4_SUPPRESSED_LATIN_SOURCE_HEADS = {
     ("page_images/page-0631.png", "De Aethiopide."),
     ("page_images/page-0631.png", "De Arctio."),
+    ("page_images/page-0670.png", "Cap. CLV. De Elaterio."),
 }
 BOOK_3_REVIEWED_UNHEADED_GENERATED_N = {f"3.{number}" for number in range(54, 62)}
 

@@ -2,34 +2,32 @@
 
 ## Totals
 
-- Source headings: 1819
-- Source Greek headings: 906
-- Source Latin headings: 913
-- Generated milestones: 1821
-- Generated Greek milestones: 919
-- Generated Latin milestones: 902
-- Ledger rows: 1832
-- Flagged rows: 962
+- Source headings: 1817
+- Source Greek headings: 905
+- Source Latin headings: 912
+- Generated milestones: 1819
+- Generated Greek milestones: 918
+- Generated Latin milestones: 901
+- Ledger rows: 1830
+- Flagged rows: 960
 
 ## Issue Counts
 
-- BACKWARD_JUMP: 5
-- DUPLICATE_GENERATED_N: 12
+- BACKWARD_JUMP: 3
+- DUPLICATE_GENERATED_N: 8
 - GENERATED_WITHOUT_SOURCE: 13
 - INLINE_HEAD_UNMODELED: 11
 - LABEL_HAS_NOTE_LEAK: 17
 - PAIR_MISSING_GRC: 4
 - PAIR_MISSING_LA: 17
-- PRINTED_SOURCE_CONFLICT: 869
+- PRINTED_SOURCE_CONFLICT: 868
 - REVIEWED_ALTERNATE_NUMBER_CONFLICT: 36
 - REVIEWED_GENERATED_TITLE_VISIBLE: 8
-- SOURCE_VISIBLE_MISMATCH: 359
+- SOURCE_VISIBLE_MISMATCH: 358
 
 ## First Failing Ranges
 
 ### BACKWARD_JUMP
-- book=4 lang=grc page=639 line= ref=4.153: Κεφ. ρνγ΄.
-- book=4 lang=la page=639 line=spr-lb-4-0673-16 ref=4.153: Cap. CLIII. (CLVI.) [De Staphide agria.] Staphis
 - book=4 lang=grc page=663 line= ref=4.139: Κεφ. οξθ΄.
 - book=4 lang=grc page=664 line= ref=4.100: Κεφ. ρ΄.
 - book=4 lang=grc page=667 line= ref=4.173: Κεφ. ρογ΄.
@@ -38,10 +36,6 @@
 - book=4 lang=grc page=593 line= ref=4.100: Κεφ. ρ΄.
 - book=4 lang=grc page=595 line= ref=4.102: Κεφ. ρβ΄.
 - book=4 lang=grc page=620 line= ref=4.139: Κεφ. ρλθ΄.
-- book=4 lang=grc page=636 line= ref=4.155: Κεφ. ρνε΄.
-- book=4 lang=la page=636 line= ref=4.155: [Cap. CLV. De Elaterio.] Quod elaterium dicitur,
-- book=4 lang=grc page=644 line= ref=4.155: Κεφ. ρνε΄.
-- book=4 lang=la page=644 line= ref=4.155: Cap. CLV. (CLVIII.) [De Spartio.] Spartium [quod
 - book=4 lang=grc page=663 line= ref=4.139: Κεφ. οξθ΄.
 - book=4 lang=grc page=664 line= ref=4.100: Κεφ. ρ΄.
 - book=4 lang=grc page=665 line= ref=4.102: Κεφ. ραα΄.
