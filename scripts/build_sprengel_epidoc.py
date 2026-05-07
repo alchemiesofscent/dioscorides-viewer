@@ -177,6 +177,7 @@ BOOK_3_LATIN_LOGICAL_CHAPTER_OVERRIDES = {
 BOOK_3_SUPPRESSED_GREEK_CHAPTER_MARKERS = {
     "spr-ch-3.5",
     "spr-ch-3.6",
+    "spr-ch-3.20",
     "spr-ch-3.38",
     "spr-ch-3.39",
     "spr-ch-3.42",

@@ -63,6 +63,7 @@ NOTE_LEAK_RE = re.compile(r"\[\d+[a-z]?\]", re.IGNORECASE)
 BOOK_3_SUPPRESSED_GREEK_SOURCE_HEADS = {
     "spr-ch-3.5",
     "spr-ch-3.6",
+    "spr-ch-3.20",
     "spr-ch-3.38",
     "spr-ch-3.39",
     "spr-ch-3.42",

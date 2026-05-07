@@ -2,19 +2,19 @@
 
 ## Totals
 
-- Source headings: 1828
-- Source Greek headings: 913
+- Source headings: 1827
+- Source Greek headings: 912
 - Source Latin headings: 915
-- Generated milestones: 1831
-- Generated Greek milestones: 926
+- Generated milestones: 1830
+- Generated Greek milestones: 925
 - Generated Latin milestones: 905
-- Ledger rows: 1842
-- Flagged rows: 979
+- Ledger rows: 1841
+- Flagged rows: 978
 
 ## Issue Counts
 
-- BACKWARD_JUMP: 12
-- DUPLICATE_GENERATED_N: 48
+- BACKWARD_JUMP: 11
+- DUPLICATE_GENERATED_N: 46
 - GENERATED_WITHOUT_SOURCE: 14
 - INLINE_HEAD_UNMODELED: 11
 - LABEL_HAS_NOTE_LEAK: 17
@@ -28,7 +28,6 @@
 ## First Failing Ranges
 
 ### BACKWARD_JUMP
-- book=3 lang=grc page=360 line= ref=3.18: Κεφ. ιη΄.
 - book=3 lang=grc page=425 line= ref=3.80: Κεφ. π΄.
 - book=3 lang=grc page=492 line= ref=3.103: Κεφ. ργ΄.
 - book=4 lang=grc page=586 line= ref=4.90: Κεφ. ϟ΄.
@@ -42,8 +41,6 @@
 - book=4 lang=grc page=667 line= ref=4.173: Κεφ. ρογ΄.
 
 ### DUPLICATE_GENERATED_N
-- book=3 lang=grc page=360 line= ref=3.20: Κεφ. κ΄.
-- book=3 lang=grc page=362 line= ref=3.20: Κεφ. κ΄.
 - book=3 lang=grc page=420 line= ref=3.77: Κεφ. οζ΄.
 - book=3 lang=grc page=421 line= ref=3.77: Κεφ. πε΄.
 - book=3 lang=grc page=424 line= ref=3.80: Κεφ. πη΄.
@@ -54,6 +51,8 @@
 - book=3 lang=la page=464 line=spr-lb-3-0496-12 ref=3.118: [Cap. CXVIII. (CXXVIII.) [De Artemisia tenuifo- lia.] Est et artemisia tenuifolia, quae circa rivulos et
 - book=3 lang=la page=464 line= ref=3.118: Cap. CXVIII. (CXXVIII.) [De Artemisia tenuifo- lia.]
 - book=3 lang=grc page=492 line= ref=3.103: Κεφ. ργ΄.
+- book=4 lang=grc page=552 line= ref=4.63: Κεφ. ξγ΄. [Περὶ Ὑακίνθου.]
+- book=4 lang=grc page=552 line= ref=4.64: Κεφ. ξδ΄. [Περὶ Μήκωνος ῥοιάδος.]
 
 ### GENERATED_WITHOUT_SOURCE
 - book=1 lang=grc page=138 line=spr-lb-1-0170-12 ref=1.147: Ῥοῦς ὁ ἐπὶ τὰ ὄψα
