@@ -187,6 +187,9 @@ BOOK_3_SUPPRESSED_GREEK_CHAPTER_MARKERS = {
     "spr-ch-3.42",
     "spr-ch-3.48",
 }
+BOOK_4_SUPPRESSED_GREEK_CHAPTER_MARKERS = {
+    "spr-ch-4.90",
+}
 BOOK_3_SUPPRESSED_LATIN_LABELS = {"De Meliloto"}
 BOOK_3_UNHEADED_CHAPTER_STARTS = {
     "spr-lb-3-0435-12": ("54", "Τὸ δὲ αἰθιοπικὸν λεγόμενον σέσελι", "Περὶ σεσέλεως αἰθιοπικοῦ"),
@@ -809,10 +812,12 @@ class SprengelBuilder:
         return self.heading_decisions.get((book, lang, label))
 
     def suppress_chapter_marker(self, chapter_div: ET.Element, book: str, lang: str) -> bool:
+        if lang != "grc":
+            return False
+        source_xml_id = attr(chapter_div, "xml:id")
         return (
-            book == "3"
-            and lang == "grc"
-            and attr(chapter_div, "xml:id") in BOOK_3_SUPPRESSED_GREEK_CHAPTER_MARKERS
+            (book == "3" and source_xml_id in BOOK_3_SUPPRESSED_GREEK_CHAPTER_MARKERS)
+            or (book == "4" and source_xml_id in BOOK_4_SUPPRESSED_GREEK_CHAPTER_MARKERS)
         )
 
     def suppress_latin_marker(self, book: str, raw_label: str) -> bool:

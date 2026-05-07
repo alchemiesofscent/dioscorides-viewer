@@ -2,33 +2,32 @@
 
 ## Totals
 
-- Source headings: 1824
-- Source Greek headings: 909
+- Source headings: 1823
+- Source Greek headings: 908
 - Source Latin headings: 915
-- Generated milestones: 1826
-- Generated Greek milestones: 922
+- Generated milestones: 1825
+- Generated Greek milestones: 921
 - Generated Latin milestones: 904
-- Ledger rows: 1837
-- Flagged rows: 974
+- Ledger rows: 1836
+- Flagged rows: 973
 
 ## Issue Counts
 
-- BACKWARD_JUMP: 9
-- DUPLICATE_GENERATED_N: 36
+- BACKWARD_JUMP: 8
+- DUPLICATE_GENERATED_N: 34
 - GENERATED_WITHOUT_SOURCE: 13
 - INLINE_HEAD_UNMODELED: 11
 - LABEL_HAS_NOTE_LEAK: 17
 - PAIR_MISSING_GRC: 11
 - PAIR_MISSING_LA: 17
-- PRINTED_SOURCE_CONFLICT: 874
+- PRINTED_SOURCE_CONFLICT: 873
 - REVIEWED_ALTERNATE_NUMBER_CONFLICT: 36
 - REVIEWED_GENERATED_TITLE_VISIBLE: 8
-- SOURCE_VISIBLE_MISMATCH: 362
+- SOURCE_VISIBLE_MISMATCH: 361
 
 ## First Failing Ranges
 
 ### BACKWARD_JUMP
-- book=4 lang=grc page=586 line= ref=4.90: Κεφ. ϟ΄.
 - book=4 lang=grc page=589 line= ref=4.63: Κεφ. ξγ΄.
 - book=4 lang=grc page=597 line=spr-lb-4-0631-01 ref=4.103: Κεφ. ργ΄.
 - book=4 lang=la page=597 line= ref=4.103: Cap. CIII. (CV.) [De Aethiopide.] Aethiopis folia
@@ -46,11 +45,11 @@
 - book=4 lang=grc page=559 line= ref=4.67: Κεφ. ξζ΄. [Περὶ Μήκωνος ἀφρώδους.]
 - book=4 lang=grc page=560 line= ref=4.68: Κεφ. ξη΄. [Περὶ Ὑπηκόου.]
 - book=4 lang=grc page=560 line= ref=4.69: Κεφ. ξθ΄. [Περὶ Ὑοσκυάμου.]
-- book=4 lang=grc page=586 line= ref=4.91: Κεφ. ϟα΄.
-- book=4 lang=grc page=587 line= ref=4.91: Κεφ. ϟα΄.
 - book=4 lang=grc page=589 line= ref=4.63: Κεφ. ξγ΄.
 - book=4 lang=grc page=590 line=spr-lb-4-0622-01 ref=4.64: Κεφ. ξδ΄.
 - book=4 lang=grc page=590 line= ref=4.65: Κεφ. ξε΄.
+- book=4 lang=grc page=591 line= ref=4.66: Κεφ. ξϛ΄.
+- book=4 lang=grc page=591 line= ref=4.67: Κεφ. ξζ΄.
 
 ### GENERATED_WITHOUT_SOURCE
 - book=1 lang=grc page=138 line=spr-lb-1-0170-12 ref=1.147: Ῥοῦς ὁ ἐπὶ τὰ ὄψα

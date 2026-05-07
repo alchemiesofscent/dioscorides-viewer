@@ -72,6 +72,9 @@ BOOK_3_SUPPRESSED_GREEK_SOURCE_HEADS = {
     "spr-ch-3.42",
     "spr-ch-3.48",
 }
+BOOK_4_SUPPRESSED_GREEK_SOURCE_HEADS = {
+    "spr-ch-4.90",
+}
 BOOK_3_SUPPRESSED_LATIN_SOURCE_LABELS = {"De Meliloto."}
 BOOK_3_REVIEWED_UNHEADED_GENERATED_N = {f"3.{number}" for number in range(54, 62)}
 
@@ -239,6 +242,8 @@ def suppress_source_heading(
     printed_primary: str,
     label: str,
 ) -> bool:
+    if book == "4" and lang == "grc":
+        return source_xml_id in BOOK_4_SUPPRESSED_GREEK_SOURCE_HEADS
     if book != "3":
         return False
     if lang == "grc":
