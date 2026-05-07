@@ -173,6 +173,15 @@ BOOK_3_LATIN_LOGICAL_CHAPTER_OVERRIDES = {
     "De Seseli massiliensi": "53",
     "De Cymino sylvatico": "62",
 }
+BOOK_4_GREEK_LOGICAL_CHAPTER_OVERRIDES = {
+    "Περὶ Γαλιόψεως": "93",
+    "Περὶ Γαλίου": "94",
+    "Περὶ Ἠριγέροντος": "95",
+    "Περὶ Θαλίκτρου": "96",
+    "Περὶ Βρύου θαλασσίου": "97",
+    "Περὶ Φύκου θαλασσίου": "98",
+    "Περὶ Ποταμογείτονος": "99",
+}
 # These printed markers stay in the inline diplomatic text, but they should not
 # mint standalone navigation milestones in the reviewed Book 3 sequence.
 BOOK_3_SUPPRESSED_GREEK_CHAPTER_MARKERS = {
@@ -803,6 +812,10 @@ class SprengelBuilder:
                 override = BOOK_3_LATIN_LOGICAL_CHAPTER_OVERRIDES.get(label)
                 if override:
                     return override
+        if book == "4" and lang == "grc":
+            override = BOOK_4_GREEK_LOGICAL_CHAPTER_OVERRIDES.get(label)
+            if override:
+                return override
         return self.printed_chapter_number(lang, raw_label) or fallback_chapter
 
     def heading_decision(self, book: str, lang: str, raw_label: str) -> HeadingDecision | None:

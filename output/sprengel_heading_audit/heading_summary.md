@@ -9,16 +9,16 @@
 - Generated Greek milestones: 921
 - Generated Latin milestones: 904
 - Ledger rows: 1836
-- Flagged rows: 973
+- Flagged rows: 966
 
 ## Issue Counts
 
-- BACKWARD_JUMP: 8
-- DUPLICATE_GENERATED_N: 34
+- BACKWARD_JUMP: 7
+- DUPLICATE_GENERATED_N: 20
 - GENERATED_WITHOUT_SOURCE: 13
 - INLINE_HEAD_UNMODELED: 11
 - LABEL_HAS_NOTE_LEAK: 17
-- PAIR_MISSING_GRC: 11
+- PAIR_MISSING_GRC: 4
 - PAIR_MISSING_LA: 17
 - PRINTED_SOURCE_CONFLICT: 873
 - REVIEWED_ALTERNATE_NUMBER_CONFLICT: 36
@@ -28,7 +28,6 @@
 ## First Failing Ranges
 
 ### BACKWARD_JUMP
-- book=4 lang=grc page=589 line= ref=4.63: Κεφ. ξγ΄.
 - book=4 lang=grc page=597 line=spr-lb-4-0631-01 ref=4.103: Κεφ. ργ΄.
 - book=4 lang=la page=597 line= ref=4.103: Cap. CIII. (CV.) [De Aethiopide.] Aethiopis folia
 - book=4 lang=grc page=639 line= ref=4.153: Κεφ. ρνγ΄.
@@ -38,18 +37,18 @@
 - book=4 lang=grc page=667 line= ref=4.173: Κεφ. ρογ΄.
 
 ### DUPLICATE_GENERATED_N
-- book=4 lang=grc page=552 line= ref=4.63: Κεφ. ξγ΄. [Περὶ Ὑακίνθου.]
-- book=4 lang=grc page=552 line= ref=4.64: Κεφ. ξδ΄. [Περὶ Μήκωνος ῥοιάδος.]
-- book=4 lang=grc page=554 line=spr-lb-4-0586-01 ref=4.65: Κεφ. ξε΄. [Περὶ Μήκωνος ἡμέρου.]
-- book=4 lang=grc page=558 line= ref=4.66: Κεφ. ξς΄. [Περὶ Μήκωνος κερατίτιδος.]
-- book=4 lang=grc page=559 line= ref=4.67: Κεφ. ξζ΄. [Περὶ Μήκωνος ἀφρώδους.]
-- book=4 lang=grc page=560 line= ref=4.68: Κεφ. ξη΄. [Περὶ Ὑπηκόου.]
-- book=4 lang=grc page=560 line= ref=4.69: Κεφ. ξθ΄. [Περὶ Ὑοσκυάμου.]
-- book=4 lang=grc page=589 line= ref=4.63: Κεφ. ξγ΄.
-- book=4 lang=grc page=590 line=spr-lb-4-0622-01 ref=4.64: Κεφ. ξδ΄.
-- book=4 lang=grc page=590 line= ref=4.65: Κεφ. ξε΄.
-- book=4 lang=grc page=591 line= ref=4.66: Κεφ. ξϛ΄.
-- book=4 lang=grc page=591 line= ref=4.67: Κεφ. ξζ΄.
+- book=4 lang=grc page=593 line= ref=4.100: Κεφ. ρ΄.
+- book=4 lang=grc page=595 line= ref=4.102: Κεφ. ρβ΄.
+- book=4 lang=grc page=597 line=spr-lb-4-0629-01 ref=4.103: Κεφ. ργ΄.
+- book=4 lang=grc page=597 line= ref=4.104: Κεφ. ρδ΄.
+- book=4 lang=la page=597 line= ref=4.103: Cap. CIII. (CV.) [De Aethiopide.] Aethiopis folia
+- book=4 lang=la page=597 line= ref=4.104: Cap. CIV. (CVI.) [De Arctio.] Arctium, quod
+- book=4 lang=grc page=597 line=spr-lb-4-0631-01 ref=4.103: Κεφ. ργ΄.
+- book=4 lang=grc page=597 line= ref=4.104: Κεφ. ρδ΄.
+- book=4 lang=la page=597 line= ref=4.103: Cap. CIII. (CV.) [De Aethiopide.] Aethiopis folia
+- book=4 lang=la page=597 line= ref=4.104: Cap. CIV. (CVI.) [De Arctio.] Arctium, quod
+- book=4 lang=grc page=620 line= ref=4.139: Κεφ. ρλθ΄.
+- book=4 lang=grc page=636 line= ref=4.155: Κεφ. ρνε΄.
 
 ### GENERATED_WITHOUT_SOURCE
 - book=1 lang=grc page=138 line=spr-lb-1-0170-12 ref=1.147: Ῥοῦς ὁ ἐπὶ τὰ ὄψα
@@ -93,13 +92,6 @@
 - book=4 lang=grc page=534 line= ref=4.39: Κεφ. λθ΄. [Περὶ Ἑλξίνης[39]
 
 ### PAIR_MISSING_GRC
-- book=4 lang=la page=589 line= ref=4.93: Cap. XCIII. (XCV.) [De Galiopsi.] Galiopsis, quam
-- book=4 lang=la page=590 line= ref=4.94: Cap. XCIV. (XCVI.) [De Galio.] Galium, quod
-- book=4 lang=la page=590 line=spr-lb-4-0622-10 ref=4.95: Cap. XCV. (XCVII.) [De Senecione.] Senecio,
-- book=4 lang=la page=591 line=spr-lb-4-0623-10 ref=4.96: Cap. XCVI. (XCVIII.) [De Thalictro.] Thalictrum
-- book=4 lang=la page=591 line=spr-lb-4-0623-15 ref=4.97: Cap. XCVII. (XCIX.) [De Musco marino.] Mu-
-- book=4 lang=la page=592 line= ref=4.98: Cap. XCVIII. (C.) [De Fuco marino.] E fuci ma-
-- book=4 lang=la page=592 line=spr-lb-4-0624-15 ref=4.99: Cap. XCIX. (CI.) [De Potamogetone.] Potamoge-
 - book=4 lang=la page=663 line=spr-lb-4-0697-10 ref=4.169: Cap. CLXIX. (CLXXII.) [De Chamelaea.] Cha-
 - book=4 lang=la page=664 line= ref=4.170: Cap. CLXX. (CLXXIII.) [De Thymeleaea.] Thy-
 - book=4 lang=la page=665 line=spr-lb-4-0699-18 ref=4.171: Cap. CLXXI. (CLXXIV.) [De Sambuco.] Sambu-
