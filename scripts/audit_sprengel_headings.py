@@ -51,9 +51,9 @@ DECISION_FIELDS = LEDGER_FIELDS + [
     "decision_note",
 ]
 
-GREEK_HEAD_MARKER_RE = re.compile(r"Κεφ\.", re.IGNORECASE)
+GREEK_HEAD_MARKER_RE = re.compile(r"Κε[φπ]\.", re.IGNORECASE)
 LATIN_HEAD_MARKER_RE = re.compile(r"\[?\s*Cap\.", re.IGNORECASE)
-GREEK_PRIMARY_RE = re.compile(r"Κεφ\.\s*([^\s.\(\[]+)")
+GREEK_PRIMARY_RE = re.compile(r"Κε[φπ]\.\s*([^\s.\(\[]+)")
 LATIN_PRIMARY_RE = re.compile(r"Cap\.\s*([IVXLCDM]+)", re.IGNORECASE)
 PAREN_RE = re.compile(r"\(([^)]+)\)")
 BRACKET_RE = re.compile(r"\[([^\]]+)\]")
@@ -581,18 +581,48 @@ def write_csv(path: Path, rows: list[dict[str, str]], fields: list[str]) -> None
             writer.writerow(row)
 
 
+def decision_preserve_keys(row: dict[str, str]) -> list[tuple[str, ...]]:
+    source_key = (
+        row.get("book", ""),
+        row.get("lang", ""),
+        row.get("facs", ""),
+        row.get("line_id", ""),
+        row.get("source_xml_id", ""),
+        row.get("source_heading_text", ""),
+    )
+    generated_key = source_key + (
+        row.get("generated_n", ""),
+        row.get("generated_source_label", ""),
+    )
+    return [source_key, generated_key]
+
+
+def read_existing_decisions(path: Path) -> dict[tuple[str, ...], dict[str, str]]:
+    if not path.exists():
+        return {}
+    preserved: dict[tuple[str, ...], dict[str, str]] = {}
+    with path.open(encoding="utf-8", newline="") as handle:
+        for row in csv.DictReader(handle):
+            if any(row.get(field, "") for field in ("canonical_n", "display_label", "source_label_policy", "decision_note")):
+                for key in decision_preserve_keys(row):
+                    preserved[key] = row
+    return preserved
+
+
 def write_decisions(path: Path, rows: list[dict[str, str]]) -> None:
+    preserved = read_existing_decisions(path)
     decision_rows = []
     for row in rows:
-        if not row["issue_codes"]:
+        previous = next((preserved[key] for key in decision_preserve_keys(row) if key in preserved), {})
+        if not row["issue_codes"] and not previous:
             continue
         decision = dict(row)
         decision.update(
             {
-                "canonical_n": "",
-                "display_label": "",
-                "source_label_policy": "",
-                "decision_note": "",
+                "canonical_n": previous.get("canonical_n", ""),
+                "display_label": previous.get("display_label", ""),
+                "source_label_policy": previous.get("source_label_policy", ""),
+                "decision_note": previous.get("decision_note", ""),
             }
         )
         decision_rows.append(decision)
