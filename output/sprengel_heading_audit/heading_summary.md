@@ -2,25 +2,25 @@
 
 ## Totals
 
-- Source headings: 1827
-- Source Greek headings: 912
+- Source headings: 1824
+- Source Greek headings: 909
 - Source Latin headings: 915
-- Generated milestones: 1830
-- Generated Greek milestones: 925
+- Generated milestones: 1827
+- Generated Greek milestones: 922
 - Generated Latin milestones: 905
-- Ledger rows: 1841
-- Flagged rows: 978
+- Ledger rows: 1838
+- Flagged rows: 975
 
 ## Issue Counts
 
-- BACKWARD_JUMP: 11
-- DUPLICATE_GENERATED_N: 46
+- BACKWARD_JUMP: 10
+- DUPLICATE_GENERATED_N: 40
 - GENERATED_WITHOUT_SOURCE: 14
 - INLINE_HEAD_UNMODELED: 11
 - LABEL_HAS_NOTE_LEAK: 17
 - PAIR_MISSING_GRC: 12
 - PAIR_MISSING_LA: 17
-- PRINTED_SOURCE_CONFLICT: 877
+- PRINTED_SOURCE_CONFLICT: 874
 - REVIEWED_ALTERNATE_NUMBER_CONFLICT: 36
 - REVIEWED_GENERATED_TITLE_VISIBLE: 8
 - SOURCE_VISIBLE_MISMATCH: 362
@@ -28,7 +28,6 @@
 ## First Failing Ranges
 
 ### BACKWARD_JUMP
-- book=3 lang=grc page=425 line= ref=3.80: Κεφ. π΄.
 - book=3 lang=grc page=492 line= ref=3.103: Κεφ. ργ΄.
 - book=4 lang=grc page=586 line= ref=4.90: Κεφ. ϟ΄.
 - book=4 lang=grc page=589 line= ref=4.63: Κεφ. ξγ΄.
@@ -41,18 +40,18 @@
 - book=4 lang=grc page=667 line= ref=4.173: Κεφ. ρογ΄.
 
 ### DUPLICATE_GENERATED_N
-- book=3 lang=grc page=420 line= ref=3.77: Κεφ. οζ΄.
-- book=3 lang=grc page=421 line= ref=3.77: Κεφ. πε΄.
-- book=3 lang=grc page=424 line= ref=3.80: Κεφ. πη΄.
-- book=3 lang=grc page=424 line= ref=3.81: Κεφ. πθ΄.
-- book=3 lang=grc page=425 line= ref=3.80: Κεφ. π΄.
-- book=3 lang=grc page=426 line= ref=3.81: Κεφ. πα΄.
 - book=3 lang=grc page=450 line=spr-lb-3-0482-01 ref=3.103: Κεφ. ργ΄.
 - book=3 lang=la page=464 line=spr-lb-3-0496-12 ref=3.118: [Cap. CXVIII. (CXXVIII.) [De Artemisia tenuifo- lia.] Est et artemisia tenuifolia, quae circa rivulos et
 - book=3 lang=la page=464 line= ref=3.118: Cap. CXVIII. (CXXVIII.) [De Artemisia tenuifo- lia.]
 - book=3 lang=grc page=492 line= ref=3.103: Κεφ. ργ΄.
 - book=4 lang=grc page=552 line= ref=4.63: Κεφ. ξγ΄. [Περὶ Ὑακίνθου.]
 - book=4 lang=grc page=552 line= ref=4.64: Κεφ. ξδ΄. [Περὶ Μήκωνος ῥοιάδος.]
+- book=4 lang=grc page=554 line=spr-lb-4-0586-01 ref=4.65: Κεφ. ξε΄. [Περὶ Μήκωνος ἡμέρου.]
+- book=4 lang=grc page=558 line= ref=4.66: Κεφ. ξς΄. [Περὶ Μήκωνος κερατίτιδος.]
+- book=4 lang=grc page=559 line= ref=4.67: Κεφ. ξζ΄. [Περὶ Μήκωνος ἀφρώδους.]
+- book=4 lang=grc page=560 line= ref=4.68: Κεφ. ξη΄. [Περὶ Ὑπηκόου.]
+- book=4 lang=grc page=560 line= ref=4.69: Κεφ. ξθ΄. [Περὶ Ὑοσκυάμου.]
+- book=4 lang=grc page=586 line= ref=4.91: Κεφ. ϟα΄.
 
 ### GENERATED_WITHOUT_SOURCE
 - book=1 lang=grc page=138 line=spr-lb-1-0170-12 ref=1.147: Ῥοῦς ὁ ἐπὶ τὰ ὄψα

@@ -8404,7 +8404,6 @@
       "front_subsection_title": "",
       "book": "3",
       "chapter_starts": [
-        "3.77",
         "3.78"
       ],
       "tei_facs": "page_images/page-0453.png",
@@ -8459,10 +8458,7 @@
       "front_subsection": "",
       "front_subsection_title": "",
       "book": "3",
-      "chapter_starts": [
-        "3.80",
-        "3.81"
-      ],
+      "chapter_starts": [],
       "tei_facs": "page_images/page-0456.png",
       "facs": "https://archive.org/details/b23982500_0001/page/n455/mode/1up",
       "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0001%2Fb23982500_0001_jp2.zip%2Fb23982500_0001_jp2%2Fb23982500_0001_0456.jp2/full/1200,/0/default.jpg",
