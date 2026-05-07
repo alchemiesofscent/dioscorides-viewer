@@ -2,21 +2,20 @@
 
 ## Totals
 
-- Source headings: 1817
+- Source headings: 1832
 - Source Greek headings: 905
-- Source Latin headings: 912
-- Generated milestones: 1819
+- Source Latin headings: 927
+- Generated milestones: 1836
 - Generated Greek milestones: 918
-- Generated Latin milestones: 901
-- Ledger rows: 1830
-- Flagged rows: 960
+- Generated Latin milestones: 918
+- Ledger rows: 1845
+- Flagged rows: 957
 
 ## Issue Counts
 
 - GENERATED_WITHOUT_SOURCE: 13
-- INLINE_HEAD_UNMODELED: 11
+- INLINE_HEAD_UNMODELED: 9
 - LABEL_HAS_NOTE_LEAK: 17
-- PAIR_MISSING_LA: 17
 - PRINTED_SOURCE_CONFLICT: 868
 - REVIEWED_ALTERNATE_NUMBER_CONFLICT: 36
 - REVIEWED_GENERATED_TITLE_VISIBLE: 8
@@ -39,11 +38,9 @@
 - book=3 lang=grc page=406 line=spr-lb-3-0438-12 ref=3.60: Ἄνηθον τὸ ἐσθιόμενον
 
 ### INLINE_HEAD_UNMODELED
-- book=1 lang=la page=90 line= ref=1: Cap. LXXXVI. De Pinu (Pinea.) Pinus (Pinea)
 - book=3 lang=la page=344 line= ref=3: Cap. V.) Longa aristolochia mascula appellatur et
 - book=3 lang=la page=344 line=spr-lb-3-0376-11 ref=3: Cap. VI.) Est et tertia longa, quae et clematitis
 - book=3 lang=la page=360 line=spr-lb-3-0392-14 ref=3: Cap. XVIII. (XXI.) [De Anonide.] Anonis, alii
-- book=3 lang=la page=369 line=spr-lb-3-0401-09 ref=3: Cap. XXIV. (XXVII.) De Absinthio marino.] Ab-
 - book=3 lang=la page=380 line= ref=3: Cap. XXXVIII.) Quod pseudodictamnum vocant,
 - book=3 lang=la page=380 line=spr-lb-3-0412-12 ref=3: Cap. XXXIX.) Defertur et e Creta alterum dictamni
 - book=3 lang=la page=421 line=spr-lb-3-0453-10 ref=3: Cap. LXXVIII. (LXXXVI.) [De Pyrethro.] Pyre-
@@ -64,20 +61,6 @@
 - book=2 lang=grc page=309 line= ref=2.196: Κεφ. ρξϛ΄. [Περὶ Δρακοντίας μικρᾶς[40]
 - book=2 lang=grc page=335 line= ref=2.215: Κεφ. σιε΄. [Περὶ Ἰσάτιδος[66]
 - book=4 lang=grc page=534 line= ref=4.39: Κεφ. λθ΄. [Περὶ Ἑλξίνης[39]
-
-### PAIR_MISSING_LA
-- book=1 lang=grc page=90 line= ref=1.86: Κεφ. πϛ΄. [Περὶ πίτυος.]
-- book=1 lang=grc page=138 line=spr-lb-1-0170-12 ref=1.147: Ῥοῦς ὁ ἐπὶ τὰ ὄψα
-- book=1 lang=grc page=139 line=spr-lb-1-0171-17 ref=1.148: Φοῖνιξ ἐν Αἰγύπτῳ
-- book=1 lang=grc page=140 line=spr-lb-1-0172-13 ref=1.149: Τῶν δὲ θηβαϊκῶν
-- book=1 lang=grc page=141 line=spr-lb-1-0173-12 ref=1.150: Φοῖνιξ, ἣν ἔνιοι ἐλάτην ἢ σπάθην καλοῦσι
-- book=1 lang=grc page=142 line=spr-lb-1-0174-15 ref=1.151: Ῥόα πᾶσα
-- book=2 lang=grc page=239 line= ref=2.117: Κεφ. ριζ΄. [Περὶ Ὀρύζης.]
-- book=3 lang=grc page=369 line= ref=3.24: Κεφ. κδ΄.
-- book=3 lang=grc page=403 line=spr-lb-3-0435-12 ref=3.54: Τὸ δὲ αἰθιοπικὸν λεγόμενον σέσελι
-- book=3 lang=grc page=404 line=spr-lb-3-0436-04 ref=3.55: Τὸ δὲ ἐν Πελοποννήσῳ γεννώμενον
-- book=3 lang=grc page=404 line=spr-lb-3-0436-11 ref=3.56: Τορδύλεον, οἱ δὲ τόρδυλον
-- book=3 lang=grc page=405 line=spr-lb-3-0437-06 ref=3.57: Σίσων σπερμάτιόν ἐστι
 
 ### PRINTED_SOURCE_CONFLICT
 - book=1 lang=grc page=98 line= ref=1.95: Κεφ. ξε΄. [Περὶ Πισσελαίου.]

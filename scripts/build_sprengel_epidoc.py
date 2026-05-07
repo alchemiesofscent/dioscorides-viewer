@@ -92,10 +92,18 @@ TARGET_TAIL_REPLACEMENTS = {
 GREEK_HEAD_RE = re.compile(r"Κε[φπ]\.\s*([^.\[]+)\.?\s*(?:\([^)]+\)\.?\s*)?\[([^\]]+)\]?")
 MALFORMED_GREEK_HEAD_REF_RE = re.compile(r"^(?P<prefix>.*\S)\[(?P<label>\d+[a-z]?)\]\s*$", re.IGNORECASE)
 LATIN_CAP_RE = re.compile(
-    r"Cap\.\s+([IVXLCDM]+)\.?\s*(?:\([^)]+\)\.?\s*)?\[([^\]]+)\]",
+    r"C[as]p[.,]\s+([IVXLCDM]+)\.?\s*(?:\([^)]+\)\.?\s*)?\[([^\]]+)\]",
     re.IGNORECASE,
 )
 LATIN_BRACKETED_CAP_RE = re.compile(r"\[Cap\.\s+([IVXLCDM]+)\.?\s+([^\]]+)\]", re.IGNORECASE)
+LATIN_BROKEN_CAP_RE = re.compile(
+    r"C[as]p[.,]\s+([IVXLCDM]+)\.?\s*(?:\([^)]+\)\.?\s*)?(De\s+[^\]]+)\]",
+    re.IGNORECASE,
+)
+LATIN_UNBRACKETED_DE_CAP_RE = re.compile(
+    r"C[as]p[.,]\s+([IVXLCDM]+)\.?\s*(?:\([^)]+\)\.?\s*)?(De\s+.*?\.\)?)\s+(?=[A-Z])",
+    re.IGNORECASE,
+)
 GREEK_PAREN_TITLE_RE = re.compile(r"^\s*(\([^)]+\)\.?)\s*\[([^\]]+)\]?")
 GREEK_PAREN_BROKEN_TITLE_RE = re.compile(r"^\s*(\([^)]+\)\.?)\s*(Περὶ[^\]]+)\]\.?\s*")
 GREEK_BROKEN_TITLE_RE = re.compile(r"^\s*(Περὶ[^\]]+)\]\.?\s*")
@@ -108,6 +116,73 @@ BOOK_1_UNHEADED_CHAPTER_STARTS = {
     "spr-lb-1-0172-13": ("149", "Τῶν δὲ θηβαϊκῶν", "Περὶ θηβαϊκῶν φοινίκων"),
     "spr-lb-1-0173-12": ("150", "Φοῖνιξ, ἣν ἔνιοι ἐλάτην ἢ σπάθην καλοῦσι", "Περὶ σπάθης φοίνικος"),
     "spr-lb-1-0174-15": ("151", "Ῥόα πᾶσα", "Περὶ Ῥόας"),
+}
+LATIN_UNHEADED_CHAPTER_STARTS = {
+    ("1", "page_images/page-0170.png", "13", "Rhus, quae obsoniis"): (
+        "147",
+        "Rhus, quae obsoniis aspergitur",
+        "De Rho",
+    ),
+    ("1", "page_images/page-0171.png", "18", "Palma in Aegypto"): (
+        "148",
+        "Palma in Aegypto nascitur",
+        "De Phoenice",
+    ),
+    ("1", "page_images/page-0172.png", "14", "Thebaica-"): (
+        "149",
+        "Thebaicarum decoctum",
+        "De Thebaicis palmis",
+    ),
+    ("1", "page_images/page-0173.png", "13", "Palma, quam non-"): (
+        "150",
+        "Palma, quam nonnulli elaten aut spatham appellant",
+        "De palmae spatha",
+    ),
+    ("1", "page_images/page-0174.png", "14", "Malum punicum omne"): (
+        "151",
+        "Malum punicum omne",
+        "De malo punico",
+    ),
+    ("3", "page_images/page-0435.png", "12", "Seseli"): (
+        "54",
+        "Seseli aethiopicum",
+        "De Seseli aethiopico",
+    ),
+    ("3", "page_images/page-0436.png", "4", "Quod"): (
+        "55",
+        "Quod autem in Peloponneso nascitur",
+        "De Seseli peloponnesiaco",
+    ),
+    ("3", "page_images/page-0436.png", "11", "Tordylium,"): (
+        "56",
+        "Tordylium",
+        "De Tordylio",
+    ),
+    ("3", "page_images/page-0437.png", "8", "Sison exiguum"): (
+        "57",
+        "Sison exiguum",
+        "De Sisone",
+    ),
+    ("3", "page_images/page-0437.png", "14", "Anisum,"): (
+        "58",
+        "Anisum",
+        "De Aniso",
+    ),
+    ("3", "page_images/page-0438.png", "8", "Carum semen est"): (
+        "59",
+        "Carum semen est",
+        "De Caro",
+    ),
+    ("3", "page_images/page-0438.png", "14", "Anethum ve-"): (
+        "60",
+        "Anethum vescum",
+        "De Anetho",
+    ),
+    ("3", "page_images/page-0439.png", "6", "Cymi-"): (
+        "61",
+        "Cyminum sativum",
+        "De Cymino",
+    ),
 }
 BOOK_1_GREEK_OCR_CHAPTER_OVERRIDES = {
     "Περὶ Πισσελαίου": "95",
@@ -367,6 +442,12 @@ def clean_label(text: str, lang: str) -> str:
     if match:
         return match.group(2).strip(" .")
     match = LATIN_BRACKETED_CAP_RE.search(text)
+    if match:
+        return match.group(2).strip(" .")
+    match = LATIN_BROKEN_CAP_RE.search(text)
+    if match:
+        return match.group(2).strip(" .")
+    match = LATIN_UNBRACKETED_DE_CAP_RE.search(text)
     if match:
         return match.group(2).strip(" .")
     return re.sub(r"^Cap\.\s*[-IVXLCDM().]+\s*", "", text, flags=re.I).strip(" .")
@@ -778,6 +859,14 @@ class SprengelBuilder:
         if match:
             number = roman_to_int(match.group(1))
             return str(number) if number is not None else ""
+        match = LATIN_BROKEN_CAP_RE.search(raw_label)
+        if match:
+            number = roman_to_int(match.group(1))
+            return str(number) if number is not None else ""
+        match = LATIN_UNBRACKETED_DE_CAP_RE.search(raw_label)
+        if match:
+            number = roman_to_int(match.group(1))
+            return str(number) if number is not None else ""
         return ""
 
     def canonical_chapter_number(
@@ -1022,6 +1111,65 @@ class SprengelBuilder:
                 current.append(title)
             else:
                 current.append(child_clone)
+
+        if paragraph_has_content(current):
+            current.tail = paragraph.tail
+            output.append(current)
+        return output
+
+    def latin_marker_for_line(
+        self,
+        page: Page,
+        book: str,
+        line: ET.Element,
+        text: str,
+    ) -> ChapterMarker | None:
+        normalized = " ".join(text.split())
+        key_prefix = (book, page.facs, attr(line, "n"))
+        for (rule_book, facs, line_n, prefix), marker in LATIN_UNHEADED_CHAPTER_STARTS.items():
+            if key_prefix == (rule_book, facs, line_n) and normalized.startswith(prefix):
+                chapter, raw_label, display_label = marker
+                return self.add_chapter_start(
+                    page,
+                    "la",
+                    book,
+                    chapter,
+                    raw_label,
+                    display_label=display_label,
+                )
+        return None
+
+    def add_latin_markers_in_paragraph(
+        self,
+        page: Page,
+        book: str,
+        paragraph: ET.Element,
+    ) -> list[ET.Element | ChapterMarker]:
+        if local_name(paragraph.tag) != "p":
+            return [paragraph]
+
+        output: list[ET.Element | ChapterMarker] = []
+
+        def new_paragraph() -> ET.Element:
+            clone = ET.Element(paragraph.tag, dict(paragraph.attrib))
+            clone.text = None
+            return clone
+
+        def paragraph_has_content(element: ET.Element) -> bool:
+            return bool((element.text or "").strip() or list(element))
+
+        current = new_paragraph()
+        current.text = paragraph.text
+        for child in list(paragraph):
+            marker = None
+            if local_name(child.tag) == "lb":
+                marker = self.latin_marker_for_line(page, book, child, child.tail or "")
+            if marker is not None:
+                if paragraph_has_content(current):
+                    output.append(current)
+                output.append(marker)
+                current = new_paragraph()
+            current.append(copy.deepcopy(child))
 
         if paragraph_has_content(current):
             current.tail = paragraph.tail
@@ -1309,7 +1457,12 @@ class SprengelBuilder:
 
             if lang == "la":
                 raw_text = text_content(node)
-                matches = list(LATIN_CAP_RE.finditer(raw_text)) + list(LATIN_BRACKETED_CAP_RE.finditer(raw_text))
+                matches = (
+                    list(LATIN_CAP_RE.finditer(raw_text))
+                    + list(LATIN_BRACKETED_CAP_RE.finditer(raw_text))
+                    + list(LATIN_BROKEN_CAP_RE.finditer(raw_text))
+                    + list(LATIN_UNBRACKETED_DE_CAP_RE.finditer(raw_text))
+                )
                 matches.sort(key=lambda match: match.start())
                 accepted_matches = []
                 previous_end = -1
@@ -1345,6 +1498,14 @@ class SprengelBuilder:
                 for item in items:
                     if isinstance(item, ET.Element):
                         marked_items.extend(self.add_greek_markers_in_paragraph(page, str(state["book"]), item))
+                    else:
+                        marked_items.append(item)
+                items = marked_items
+            if lang == "la" and state["book"] and local_name(node.tag) == "p":
+                marked_items = []
+                for item in items:
+                    if isinstance(item, ET.Element):
+                        marked_items.extend(self.add_latin_markers_in_paragraph(page, str(state["book"]), item))
                     else:
                         marked_items.append(item)
                 items = marked_items

@@ -52,9 +52,9 @@ DECISION_FIELDS = LEDGER_FIELDS + [
 ]
 
 GREEK_HEAD_MARKER_RE = re.compile(r"Κε[φπ]\.", re.IGNORECASE)
-LATIN_HEAD_MARKER_RE = re.compile(r"\[?\s*Cap\.", re.IGNORECASE)
+LATIN_HEAD_MARKER_RE = re.compile(r"\[?\s*C[as]p[.,]", re.IGNORECASE)
 GREEK_PRIMARY_RE = re.compile(r"Κε[φπ]\.\s*([^\s.\(\[]+)")
-LATIN_PRIMARY_RE = re.compile(r"Cap\.\s*([IVXLCDM]+)", re.IGNORECASE)
+LATIN_PRIMARY_RE = re.compile(r"C[as]p[.,]\s*([IVXLCDM]+)", re.IGNORECASE)
 PAREN_RE = re.compile(r"\(([^)]+)\)")
 BRACKET_RE = re.compile(r"\[([^\]]+)\]")
 NOTE_LEAK_RE = re.compile(r"\[\d+[a-z]?\]", re.IGNORECASE)
@@ -83,6 +83,73 @@ BOOK_4_SUPPRESSED_LATIN_SOURCE_HEADS = {
     ("page_images/page-0631.png", "De Aethiopide."),
     ("page_images/page-0631.png", "De Arctio."),
     ("page_images/page-0670.png", "Cap. CLV. De Elaterio."),
+}
+LATIN_UNHEADED_SOURCE_HEADS = {
+    ("1", "page_images/page-0170.png", "13", "Rhus, quae obsoniis"): (
+        "147",
+        "Rhus, quae obsoniis aspergitur",
+        "De Rho",
+    ),
+    ("1", "page_images/page-0171.png", "18", "Palma in Aegypto"): (
+        "148",
+        "Palma in Aegypto nascitur",
+        "De Phoenice",
+    ),
+    ("1", "page_images/page-0172.png", "14", "Thebaica-"): (
+        "149",
+        "Thebaicarum decoctum",
+        "De Thebaicis palmis",
+    ),
+    ("1", "page_images/page-0173.png", "13", "Palma, quam non-"): (
+        "150",
+        "Palma, quam nonnulli elaten aut spatham appellant",
+        "De palmae spatha",
+    ),
+    ("1", "page_images/page-0174.png", "14", "Malum punicum omne"): (
+        "151",
+        "Malum punicum omne",
+        "De malo punico",
+    ),
+    ("3", "page_images/page-0435.png", "12", "Seseli"): (
+        "54",
+        "Seseli aethiopicum",
+        "De Seseli aethiopico",
+    ),
+    ("3", "page_images/page-0436.png", "4", "Quod"): (
+        "55",
+        "Quod autem in Peloponneso nascitur",
+        "De Seseli peloponnesiaco",
+    ),
+    ("3", "page_images/page-0436.png", "11", "Tordylium,"): (
+        "56",
+        "Tordylium",
+        "De Tordylio",
+    ),
+    ("3", "page_images/page-0437.png", "8", "Sison exiguum"): (
+        "57",
+        "Sison exiguum",
+        "De Sisone",
+    ),
+    ("3", "page_images/page-0437.png", "14", "Anisum,"): (
+        "58",
+        "Anisum",
+        "De Aniso",
+    ),
+    ("3", "page_images/page-0438.png", "8", "Carum semen est"): (
+        "59",
+        "Carum semen est",
+        "De Caro",
+    ),
+    ("3", "page_images/page-0438.png", "14", "Anethum ve-"): (
+        "60",
+        "Anethum vescum",
+        "De Anetho",
+    ),
+    ("3", "page_images/page-0439.png", "6", "Cymi-"): (
+        "61",
+        "Cyminum sativum",
+        "De Cymino",
+    ),
 }
 BOOK_3_REVIEWED_UNHEADED_GENERATED_N = {f"3.{number}" for number in range(54, 62)}
 
@@ -239,6 +306,22 @@ def parse_heading_parts(text: str, lang: str) -> tuple[str, str, str]:
         bracketed = re.search(r"\[\s*Cap\.\s+[IVXLCDM]+\.?\s*(?:\([^)]+\)\.?\s*)?([^\]]+)\]", text, re.IGNORECASE)
         if bracketed:
             label = normalized_text(bracketed.group(1).strip(" ."))
+        else:
+            broken = re.search(
+                r"C[as]p[.,]\s+[IVXLCDM]+\.?\s*(?:\([^)]+\)\.?\s*)?(De\s+[^\]]+)\]",
+                text,
+                re.IGNORECASE,
+            )
+            if broken:
+                label = normalized_text(broken.group(1).strip(" ."))
+            else:
+                unbracketed = re.search(
+                    r"C[as]p[.,]\s+[IVXLCDM]+\.?\s*(?:\([^)]+\)\.?\s*)?(De\s+.*?\.\)?)\s+(?=[A-Z])",
+                    text,
+                    re.IGNORECASE,
+                )
+                if unbracketed:
+                    label = normalized_text(unbracketed.group(1).strip(" ."))
     return printed_primary, alternate, label
 
 
@@ -385,6 +468,37 @@ def extract_source_headings(source_path: Path) -> list[SourceHeading]:
             )
         )
 
+    def add_reviewed_unheaded_latin(line: dict[str, str]) -> None:
+        if state["lang"] != "la" or not state["book"]:
+            return
+        normalized = normalized_text(line["text"])
+        key_prefix = (state["book"], state["facs"], line["line_n"])
+        for (book, facs, line_n, prefix), marker in LATIN_UNHEADED_SOURCE_HEADS.items():
+            if key_prefix != (book, facs, line_n) or not normalized.startswith(prefix):
+                continue
+            _chapter, source_text, label = marker
+            key = (state["book"], state["lang"], state["facs"])
+            page_counts[key] += 1
+            headings.append(
+                SourceHeading(
+                    book=state["book"],
+                    lang=state["lang"],
+                    source_order=len(headings) + 1,
+                    page_n=state["page_n"],
+                    facs=state["facs"],
+                    line_id=line["line_id"],
+                    source_div_n=state["source_div_n"],
+                    source_xml_id=state["source_xml_id"],
+                    printed_primary="",
+                    printed_alternate="",
+                    heading_label=label,
+                    source_heading_text=source_text,
+                    is_inline=True,
+                    page_order=page_counts[key],
+                )
+            )
+            return
+
     def walk(node: ET.Element) -> None:
         previous = state.copy()
         name = local_name(node.tag)
@@ -418,6 +532,8 @@ def extract_source_headings(source_path: Path) -> list[SourceHeading]:
             for index, line in enumerate(lines):
                 if marker_index(line["text"], state["lang"]) >= 0:
                     add_heading(heading_snippet(lines, index, state["lang"]), line["line_id"], True)
+                elif state["lang"] == "la":
+                    add_reviewed_unheaded_latin(line)
 
         for child in list(node):
             walk(child)
