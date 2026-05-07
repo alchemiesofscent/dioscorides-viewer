@@ -6960,10 +6960,7 @@
       "front_subsection": "",
       "front_subsection_title": "",
       "book": "3",
-      "chapter_starts": [
-        "3.5",
-        "3.6"
-      ],
+      "chapter_starts": [],
       "tei_facs": "page_images/page-0376.png",
       "facs": "https://archive.org/details/b23982500_0001/page/n375/mode/1up",
       "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0001%2Fb23982500_0001_jp2.zip%2Fb23982500_0001_jp2%2Fb23982500_0001_0376.jp2/full/1200,/0/default.jpg",

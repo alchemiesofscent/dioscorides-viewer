@@ -61,6 +61,8 @@ NOTE_LEAK_RE = re.compile(r"\[\d+[a-z]?\]", re.IGNORECASE)
 # Match generator-side suppressed markers so the ledger aligns reviewed
 # milestones against the title-bearing source rows.
 BOOK_3_SUPPRESSED_GREEK_SOURCE_HEADS = {
+    "spr-ch-3.5",
+    "spr-ch-3.6",
     "spr-ch-3.38",
     "spr-ch-3.39",
     "spr-ch-3.42",

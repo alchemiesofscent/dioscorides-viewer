@@ -175,6 +175,8 @@ BOOK_3_LATIN_LOGICAL_CHAPTER_OVERRIDES = {
 # These printed markers stay in the inline diplomatic text, but they should not
 # mint standalone navigation milestones in the reviewed Book 3 sequence.
 BOOK_3_SUPPRESSED_GREEK_CHAPTER_MARKERS = {
+    "spr-ch-3.5",
+    "spr-ch-3.6",
     "spr-ch-3.38",
     "spr-ch-3.39",
     "spr-ch-3.42",

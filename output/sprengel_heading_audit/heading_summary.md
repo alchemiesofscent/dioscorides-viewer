@@ -2,19 +2,19 @@
 
 ## Totals
 
-- Source headings: 1830
-- Source Greek headings: 915
+- Source headings: 1828
+- Source Greek headings: 913
 - Source Latin headings: 915
-- Generated milestones: 1833
-- Generated Greek milestones: 928
+- Generated milestones: 1831
+- Generated Greek milestones: 926
 - Generated Latin milestones: 905
-- Ledger rows: 1844
-- Flagged rows: 981
+- Ledger rows: 1842
+- Flagged rows: 979
 
 ## Issue Counts
 
-- BACKWARD_JUMP: 13
-- DUPLICATE_GENERATED_N: 52
+- BACKWARD_JUMP: 12
+- DUPLICATE_GENERATED_N: 48
 - GENERATED_WITHOUT_SOURCE: 14
 - INLINE_HEAD_UNMODELED: 11
 - LABEL_HAS_NOTE_LEAK: 17
@@ -28,7 +28,6 @@
 ## First Failing Ranges
 
 ### BACKWARD_JUMP
-- book=3 lang=grc page=346 line= ref=3.5: Κεφ. ε΄.
 - book=3 lang=grc page=360 line= ref=3.18: Κεφ. ιη΄.
 - book=3 lang=grc page=425 line= ref=3.80: Κεφ. π΄.
 - book=3 lang=grc page=492 line= ref=3.103: Κεφ. ργ΄.
@@ -40,12 +39,9 @@
 - book=4 lang=la page=639 line=spr-lb-4-0673-16 ref=4.153: Cap. CLIII. (CLVI.) [De Staphide agria.] Staphis
 - book=4 lang=grc page=663 line= ref=4.139: Κεφ. οξθ΄.
 - book=4 lang=grc page=664 line= ref=4.100: Κεφ. ρ΄.
+- book=4 lang=grc page=667 line= ref=4.173: Κεφ. ρογ΄.
 
 ### DUPLICATE_GENERATED_N
-- book=3 lang=grc page=344 line= ref=3.5: Κεφ. ε΄.
-- book=3 lang=grc page=344 line= ref=3.6: Κεφ. ς΄.
-- book=3 lang=grc page=346 line= ref=3.5: Κεφ. ε΄.
-- book=3 lang=grc page=347 line= ref=3.6: Κεφ. ς΄.
 - book=3 lang=grc page=360 line= ref=3.20: Κεφ. κ΄.
 - book=3 lang=grc page=362 line= ref=3.20: Κεφ. κ΄.
 - book=3 lang=grc page=420 line= ref=3.77: Κεφ. οζ΄.
@@ -54,6 +50,10 @@
 - book=3 lang=grc page=424 line= ref=3.81: Κεφ. πθ΄.
 - book=3 lang=grc page=425 line= ref=3.80: Κεφ. π΄.
 - book=3 lang=grc page=426 line= ref=3.81: Κεφ. πα΄.
+- book=3 lang=grc page=450 line=spr-lb-3-0482-01 ref=3.103: Κεφ. ργ΄.
+- book=3 lang=la page=464 line=spr-lb-3-0496-12 ref=3.118: [Cap. CXVIII. (CXXVIII.) [De Artemisia tenuifo- lia.] Est et artemisia tenuifolia, quae circa rivulos et
+- book=3 lang=la page=464 line= ref=3.118: Cap. CXVIII. (CXXVIII.) [De Artemisia tenuifo- lia.]
+- book=3 lang=grc page=492 line= ref=3.103: Κεφ. ργ΄.
 
 ### GENERATED_WITHOUT_SOURCE
 - book=1 lang=grc page=138 line=spr-lb-1-0170-12 ref=1.147: Ῥοῦς ὁ ἐπὶ τὰ ὄψα
