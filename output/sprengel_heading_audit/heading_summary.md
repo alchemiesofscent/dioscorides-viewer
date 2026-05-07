@@ -2,56 +2,56 @@
 
 ## Totals
 
-- Source headings: 1835
-- Source Greek headings: 918
+- Source headings: 1836
+- Source Greek headings: 919
 - Source Latin headings: 917
-- Generated milestones: 1459
-- Generated Greek milestones: 923
-- Generated Latin milestones: 536
-- Ledger rows: 1840
-- Flagged rows: 993
+- Generated milestones: 1830
+- Generated Greek milestones: 924
+- Generated Latin milestones: 906
+- Ledger rows: 1842
+- Flagged rows: 979
 
 ## Issue Counts
 
-- BACKWARD_JUMP: 14
-- DUPLICATE_GENERATED_N: 85
-- GENERATED_WITHOUT_SOURCE: 5
-- INLINE_HEAD_UNMODELED: 381
+- BACKWARD_JUMP: 15
+- DUPLICATE_GENERATED_N: 64
+- GENERATED_WITHOUT_SOURCE: 6
+- INLINE_HEAD_UNMODELED: 12
 - LABEL_HAS_NOTE_LEAK: 17
-- PAIR_MISSING_GRC: 10
-- PAIR_MISSING_LA: 383
-- PRINTED_SOURCE_CONFLICT: 914
-- SOURCE_VISIBLE_MISMATCH: 385
+- PAIR_MISSING_GRC: 13
+- PAIR_MISSING_LA: 9
+- PRINTED_SOURCE_CONFLICT: 915
+- SOURCE_VISIBLE_MISMATCH: 363
 
 ## First Failing Ranges
 
 ### BACKWARD_JUMP
-- book=1 lang=grc page=143 line= ref=1.136: Κεφ. ρνβʹ. [Περὶ κυτίνων.]
 - book=3 lang=grc page=346 line= ref=3.5: Κεφ. ε΄.
 - book=3 lang=grc page=360 line= ref=3.18: Κεφ. ιη΄.
 - book=3 lang=grc page=381 line= ref=3.35: Κεφ. λε΄.
 - book=3 lang=grc page=383 line= ref=3.33: Κεφ. λγ΄.
 - book=3 lang=grc page=425 line= ref=3.80: Κεφ. π΄.
 - book=3 lang=grc page=492 line= ref=3.103: Κεφ. ργ΄.
+- book=4 lang=grc page=586 line= ref=4.90: Κεφ. ϟ΄.
 - book=4 lang=grc page=589 line= ref=4.63: Κεφ. ξγ΄.
 - book=4 lang=grc page=597 line=spr-lb-4-0631-01 ref=4.103: Κεφ. ργ΄.
+- book=4 lang=la page=597 line= ref=4.103: Cap. CIII. (CV.) [De Aethiopide.] Aethiopis folia
 - book=4 lang=grc page=639 line= ref=4.153: Κεφ. ρνγ΄.
-- book=4 lang=grc page=663 line= ref=4.139: Κεφ. οξθ΄.
-- book=4 lang=grc page=664 line= ref=4.100: Κεφ. ρ΄.
+- book=4 lang=la page=639 line=spr-lb-4-0673-16 ref=4.153: Cap. CLIII. (CLVI.) [De Staphide agria.] Staphis
 
 ### DUPLICATE_GENERATED_N
-- book=1 lang=grc page=131 line=spr-lb-1-0163-14 ref=1.136: Κεφ. ρλϛ΄ (ρλζ΄). [Περὶ Ἀγριελαίας.] Ἀγριελαία, ἣν
-- book=1 lang=grc page=133 line=spr-lb-1-0165-04 ref=1.137: Κεφ. ρλζ΄ (ρλη΄). [Περὶ Ἐλαίας.] Δύναται δὲ τὰ
-- book=1 lang=grc page=133 line=spr-lb-1-0165-12 ref=1.138: Κεφ. ρλη΄ (ρλθ΄). [Περὶ κολυμβάδων ἐλαιῶν.] Ἐλαῖαι
-- book=1 lang=grc page=134 line=spr-lb-1-0166-04 ref=1.139: Κεφ. ρλθ΄ (ρμ΄). [Περὶ ἐλαίου ἀγρίας ἐλαίας.] Τὸ δὲ
-- book=1 lang=grc page=134 line=spr-lb-1-0166-10 ref=1.140: Κεφ. ρμ΄ (ρλδ΄). [Περὶ ἀμόργης.][22] Ἀμόργη ὑπο-
-- book=1 lang=grc page=135 line= ref=1.141: Κεφ. ρμα΄. [Περὶ δακρύου ἐλαίας αἰθιοπικῆς.]
-- book=1 lang=grc page=136 line= ref=1.142: Κεφ. ρμβ΄. [Περὶ Δρυός.]
-- book=1 lang=grc page=136 line= ref=1.143: Κεφ. ρμγ΄. [Περὶ βαλάνων.]
-- book=1 lang=grc page=143 line= ref=1.136: Κεφ. ρνβʹ. [Περὶ κυτίνων.]
-- book=1 lang=grc page=144 line= ref=1.137: Κεφ. ρνγʹ. [Περὶ σιδίων.]
-- book=1 lang=grc page=144 line= ref=1.138: Κεφ. ρνδʹ. [Περὶ βαλαυστίων.]
-- book=1 lang=grc page=144 line= ref=1.139: Κεφ. ρνεʹ. [Περὶ Μυρσίνης]
+- book=3 lang=grc page=344 line= ref=3.5: Κεφ. ε΄.
+- book=3 lang=grc page=344 line= ref=3.6: Κεφ. ς΄.
+- book=3 lang=grc page=346 line= ref=3.5: Κεφ. ε΄.
+- book=3 lang=grc page=347 line= ref=3.6: Κεφ. ς΄.
+- book=3 lang=grc page=360 line= ref=3.20: Κεφ. κ΄.
+- book=3 lang=grc page=362 line= ref=3.20: Κεφ. κ΄.
+- book=3 lang=grc page=377 line=spr-lb-3-0409-01 ref=3.33: Κεφ. λγ΄.
+- book=3 lang=grc page=380 line= ref=3.38: Κεφ. λη΄.
+- book=3 lang=grc page=380 line= ref=3.39: Κεφ. λθ΄.
+- book=3 lang=grc page=383 line= ref=3.42: Κεφ. μβ΄.
+- book=3 lang=grc page=383 line= ref=3.33: Κεφ. λγ΄.
+- book=3 lang=grc page=384 line= ref=3.38: Κεφ. λη΄.
 
 ### GENERATED_WITHOUT_SOURCE
 - book=1 lang=grc page=138 line=spr-lb-1-0170-12 ref=1.147: Ῥοῦς ὁ ἐπὶ τὰ ὄψα
@@ -59,20 +59,21 @@
 - book=1 lang=grc page=140 line=spr-lb-1-0172-13 ref=1.149: Τῶν δὲ θηβαϊκῶν
 - book=1 lang=grc page=141 line=spr-lb-1-0173-12 ref=1.150: Φοῖνιξ, ἣν ἔνιοι ἐλάτην ἢ σπάθην καλοῦσι
 - book=1 lang=grc page=142 line=spr-lb-1-0174-15 ref=1.151: Ῥόα πᾶσα
+- book=3 lang=la page=464 line= ref=3.118: Cap. CXVIII. (CXXVIII.) [De Artemisia tenuifo- lia.]
 
 ### INLINE_HEAD_UNMODELED
 - book=1 lang=la page=90 line= ref=1: Cap. LXXXVI. De Pinu (Pinea.) Pinus (Pinea)
-- book=1 lang=la page=109 line=spr-lb-1-0141-15 ref=1: Cap. CX. (CXIII.) [De Populo nigra.] Populi ni-
-- book=1 lang=la page=110 line= ref=1: Cap. CXI. (CX.) [De Macere.] Macer cortex est
-- book=1 lang=la page=110 line= ref=1: Cap. CXII. (CXI.) [De Ulmo.] Ulmi et folia et
-- book=1 lang=la page=111 line=spr-lb-1-0143-12 ref=1: Cap. CXIV. [De arundinibus.] Arundinum species
-- book=1 lang=la page=129 line= ref=1: Cap. CXXXIV. (CXXXV.) [De Vitice.] Vitex, sive
-- book=1 lang=la page=130 line= ref=1: Cap. CXXXV. (CXXXVI.) [De Salice.] Salix est
-- book=1 lang=la page=131 line= ref=1: Cap. CXXXVI. (CXXXVII.) [De Oleastro.] Olea-
-- book=1 lang=la page=133 line= ref=1: Cap. CXXXVII. (CXXXVIII.) [De Olea.] Iisdem
-- book=1 lang=la page=133 line= ref=1: Cap. CXXXVIII. (CXXXIX.) [De olivis muria con- ditis.] Olivae muria conditae, tritae et ambustis illitae pu-
-- book=1 lang=la page=134 line= ref=1: Cap. CXXXIX. (CXL.) [De oleo sylvestris oleae.]
-- book=1 lang=la page=134 line= ref=1: Cap. CXL. (CXXXIV.) [De amurca.] Amurca est
+- book=3 lang=la page=344 line= ref=3: Cap. V.) Longa aristolochia mascula appellatur et
+- book=3 lang=la page=344 line=spr-lb-3-0376-11 ref=3: Cap. VI.) Est et tertia longa, quae et clematitis
+- book=3 lang=la page=360 line=spr-lb-3-0392-14 ref=3: Cap. XVIII. (XXI.) [De Anonide.] Anonis, alii
+- book=3 lang=la page=369 line=spr-lb-3-0401-09 ref=3: Cap. XXIV. (XXVII.) De Absinthio marino.] Ab-
+- book=3 lang=la page=380 line= ref=3: Cap. XXXVIII.) Quod pseudodictamnum vocant,
+- book=3 lang=la page=380 line=spr-lb-3-0412-12 ref=3: Cap. XXXIX.) Defertur et e Creta alterum dictamni
+- book=3 lang=la page=383 line= ref=3: Cap. XXXVII. (XLIII.) [De Calamintha.] E ca-
+- book=3 lang=la page=421 line=spr-lb-3-0453-10 ref=3: Cap. LXXVIII. (LXXXVI.) [De Pyrethro.] Pyre-
+- book=3 lang=la page=424 line= ref=3: Cap. LXXXVIII.) Cachry habet vim calefacien-
+- book=3 lang=la page=424 line=spr-lb-3-0456-11 ref=3: Cap. LXXXIX.) Libanotis, quam Romani rorem
+- book=4 lang=la page=586 line=spr-lb-4-0618-13 ref=4: Cap. XC. (XCII.) [De Cotyledone.] Cotyledon,
 
 ### LABEL_HAS_NOTE_LEAK
 - book=1 lang=grc page=11 line= ref=1.2: Κεφ. β΄. [Περὶ Ἀκόρου[15]
@@ -89,30 +90,29 @@
 - book=4 lang=grc page=534 line= ref=4.39: Κεφ. λθ΄. [Περὶ Ἑλξίνης[39]
 
 ### PAIR_MISSING_GRC
-- book=1 lang=la page=143 line=spr-lb-1-0175-15 ref=1.152: Cap. CLII. [De cytinis.] Huius flores, qui et cy-
-- book=1 lang=la page=144 line= ref=1.153: Cap. CLIII. [De Malicorio.] Et ipsa quoque putami-
-- book=1 lang=la page=144 line=spr-lb-1-0176-08 ref=1.154: Cap. CLIV. [De Balaustiis.] Balaustium est sylve-
-- book=1 lang=la page=144 line=spr-lb-1-0176-14 ref=1.155: Cap. CLV. [De Myrto.] Myrtus sativa nigra me-
-- book=1 lang=la page=146 line=spr-lb-1-0178-16 ref=1.156: Cap. CLVI. [De Myrtidano.] Quod myrtidanum
-- book=1 lang=la page=147 line= ref=1.157: Cap. CLVII. [De Cerasis.] Cerasa et ipsa recen-
-- book=1 lang=la page=147 line=spr-lb-1-0179-11 ref=1.158: Cap. CLVIII. [De siliquis] (Ceratoniae). Siliquae
-- book=1 lang=la page=147 line=spr-lb-1-0179-16 ref=1.159: Cap. CLIX. [De Malo.] Tum omnis mali, tum
-- book=5 lang=la page=731 line= ref=5.66: Cap. LXVI. [De vino nectarite.] Nectarites para-
-- book=5 lang=la page=735 line=spr-lb-5-0769-17 ref=5.81: Cap. LXXXI. [De mandragorite.] Corticem radi-
+- book=3 lang=la page=383 line= ref=3.37: Cap. XLII.)
+- book=3 lang=la page=492 line= ref=3.153: Cap. CLIII. (CLXIII.) [De Althaea.] Althaeam
+- book=4 lang=la page=589 line= ref=4.93: Cap. XCIII. (XCV.) [De Galiopsi.] Galiopsis, quam
+- book=4 lang=la page=590 line= ref=4.94: Cap. XCIV. (XCVI.) [De Galio.] Galium, quod
+- book=4 lang=la page=590 line=spr-lb-4-0622-10 ref=4.95: Cap. XCV. (XCVII.) [De Senecione.] Senecio,
+- book=4 lang=la page=591 line=spr-lb-4-0623-10 ref=4.96: Cap. XCVI. (XCVIII.) [De Thalictro.] Thalictrum
+- book=4 lang=la page=591 line=spr-lb-4-0623-15 ref=4.97: Cap. XCVII. (XCIX.) [De Musco marino.] Mu-
+- book=4 lang=la page=592 line= ref=4.98: Cap. XCVIII. (C.) [De Fuco marino.] E fuci ma-
+- book=4 lang=la page=592 line=spr-lb-4-0624-15 ref=4.99: Cap. XCIX. (CI.) [De Potamogetone.] Potamoge-
+- book=4 lang=la page=663 line=spr-lb-4-0697-10 ref=4.169: Cap. CLXIX. (CLXXII.) [De Chamelaea.] Cha-
+- book=4 lang=la page=664 line= ref=4.170: Cap. CLXX. (CLXXIII.) [De Thymeleaea.] Thy-
+- book=4 lang=la page=665 line=spr-lb-4-0699-18 ref=4.171: Cap. CLXXI. (CLXXIV.) [De Sambuco.] Sambu-
 
 ### PAIR_MISSING_LA
 - book=1 lang=grc page=90 line= ref=1.86: Κεφ. πϛ΄. [Περὶ πίτυος.]
-- book=1 lang=grc page=109 line=spr-lb-1-0141-12 ref=1.110: Κεφ. ρι΄ (ριγ΄). [Περὶ Αἰγείρου.] [57] Αἰγείρου τὰ
-- book=1 lang=grc page=110 line=spr-lb-1-0142-07 ref=1.111: Κεφ. ρια΄ (ρι΄). [Περὶ Μάκερος.] Μάκερ φλοιός ἐστι
-- book=1 lang=grc page=110 line=spr-lb-1-0142-11 ref=1.112: Κεφ. ριβ΄ (ρια΄). [Περὶ Πτελέας.] [58] Πτελέας τὰ φύλλα
-- book=1 lang=grc page=111 line=spr-lb-1-0143-06 ref=1.113: Κεφ. ριγ΄ (ριβ΄). [Περὶ σαπρότητος ξύλων.] Ἡ δὲ ἀπὸ
-- book=1 lang=grc page=129 line=spr-lb-1-0161-05 ref=1.134: Κεφ. ρλδ΄ (ρλε΄). [Περὶ Ἄγνου.] Ἄγνος ἢ Λύγος [οἱ
-- book=1 lang=grc page=130 line=spr-lb-1-0162-18 ref=1.135: Κεφ. ρλε΄ (ρλϛ΄). [Περὶ Ἰτέας.] Ἰτέα δένδρον ἐστὶ
-- book=1 lang=grc page=131 line=spr-lb-1-0163-14 ref=1.136: Κεφ. ρλϛ΄ (ρλζ΄). [Περὶ Ἀγριελαίας.] Ἀγριελαία, ἣν
-- book=1 lang=grc page=133 line=spr-lb-1-0165-04 ref=1.137: Κεφ. ρλζ΄ (ρλη΄). [Περὶ Ἐλαίας.] Δύναται δὲ τὰ
-- book=1 lang=grc page=133 line=spr-lb-1-0165-12 ref=1.138: Κεφ. ρλη΄ (ρλθ΄). [Περὶ κολυμβάδων ἐλαιῶν.] Ἐλαῖαι
-- book=1 lang=grc page=134 line=spr-lb-1-0166-04 ref=1.139: Κεφ. ρλθ΄ (ρμ΄). [Περὶ ἐλαίου ἀγρίας ἐλαίας.] Τὸ δὲ
-- book=1 lang=grc page=134 line=spr-lb-1-0166-10 ref=1.140: Κεφ. ρμ΄ (ρλδ΄). [Περὶ ἀμόργης.][22] Ἀμόργη ὑπο-
+- book=1 lang=grc page=138 line=spr-lb-1-0170-12 ref=1.147: Ῥοῦς ὁ ἐπὶ τὰ ὄψα
+- book=1 lang=grc page=139 line=spr-lb-1-0171-17 ref=1.148: Φοῖνιξ ἐν Αἰγύπτῳ
+- book=1 lang=grc page=140 line=spr-lb-1-0172-13 ref=1.149: Τῶν δὲ θηβαϊκῶν
+- book=1 lang=grc page=141 line=spr-lb-1-0173-12 ref=1.150: Φοῖνιξ, ἣν ἔνιοι ἐλάτην ἢ σπάθην καλοῦσι
+- book=1 lang=grc page=142 line=spr-lb-1-0174-15 ref=1.151: Ῥόα πᾶσα
+- book=2 lang=grc page=239 line= ref=2.117: Κεφ. ριζ΄. [Περὶ Ὀρύζης.]
+- book=3 lang=grc page=369 line= ref=3.24: Κεφ. κδ΄.
+- book=4 lang=grc page=545 line= ref=4.55: Κεφ. νε΄. [Περὶ Χρυσοκόμης.]
 
 ### PRINTED_SOURCE_CONFLICT
 - book=1 lang=grc page=98 line= ref=1.95: Κεφ. ξε΄. [Περὶ Πισσελαίου.]
@@ -121,19 +121,16 @@
 - book=1 lang=grc page=100 line= ref=1.98: Κεφ. ξη΄. [Περὶ ζωπίσσης.]
 - book=1 lang=grc page=100 line= ref=1.99: Κεφ. ξθ΄. [Περὶ ἀσφάλτου.]
 - book=1 lang=grc page=109 line=spr-lb-1-0141-12 ref=1.110: Κεφ. ρι΄ (ριγ΄). [Περὶ Αἰγείρου.] [57] Αἰγείρου τὰ
-- book=1 lang=la page=109 line=spr-lb-1-0141-15 ref=1: Cap. CX. (CXIII.) [De Populo nigra.] Populi ni-
+- book=1 lang=la page=109 line=spr-lb-1-0141-15 ref=1.110: Cap. CX. (CXIII.) [De Populo nigra.] Populi ni-
 - book=1 lang=grc page=110 line=spr-lb-1-0142-07 ref=1.111: Κεφ. ρια΄ (ρι΄). [Περὶ Μάκερος.] Μάκερ φλοιός ἐστι
 - book=1 lang=grc page=110 line=spr-lb-1-0142-11 ref=1.112: Κεφ. ριβ΄ (ρια΄). [Περὶ Πτελέας.] [58] Πτελέας τὰ φύλλα
-- book=1 lang=la page=110 line= ref=1: Cap. CXI. (CX.) [De Macere.] Macer cortex est
-- book=1 lang=la page=110 line= ref=1: Cap. CXII. (CXI.) [De Ulmo.] Ulmi et folia et
+- book=1 lang=la page=110 line= ref=1.111: Cap. CXI. (CX.) [De Macere.] Macer cortex est
+- book=1 lang=la page=110 line= ref=1.112: Cap. CXII. (CXI.) [De Ulmo.] Ulmi et folia et
 - book=1 lang=grc page=111 line=spr-lb-1-0143-06 ref=1.113: Κεφ. ριγ΄ (ριβ΄). [Περὶ σαπρότητος ξύλων.] Ἡ δὲ ἀπὸ
 
 ### SOURCE_VISIBLE_MISMATCH
 - book=1 lang=grc page=11 line= ref=1.2: Κεφ. β΄. [Περὶ Ἀκόρου[15]
 - book=1 lang=grc page=96 line= ref=1.93: Κεφ. ϟγ΄. [Περὶ τοῦ πῶς δεῖ καίειν τὴν ῥητίνην[35]
-- book=1 lang=grc page=135 line= ref=1.141: Κεφ. ρμα΄. [Περὶ δακρύου ἐλαίας αἰθιοπικῆς.]
-- book=1 lang=grc page=136 line= ref=1.142: Κεφ. ρμβ΄. [Περὶ Δρυός.]
-- book=1 lang=grc page=136 line= ref=1.143: Κεφ. ρμγ΄. [Περὶ βαλάνων.]
 - book=2 lang=grc page=217 line=spr-lb-2-0249-01 ref=2.93: Κεφ. ϟγ΄. [Περὶ στέατος χηνείου καὶ ὀρνιθείου[6]
 - book=2 lang=grc page=256 line=spr-lb-2-0288-01 ref=2.137: Κεφ. ρλζ΄. [Περὶ Ῥαφανίδος[10]
 - book=2 lang=grc page=265 line= ref=2.150: Κεφ. ρν΄. [Περὶ Ἀνδράχνης[57]
@@ -141,3 +138,6 @@
 - book=2 lang=grc page=278 line= ref=2.162: Κεφ. ρξβ΄.
 - book=2 lang=grc page=278 line= ref=2.163: Κεφ. ρξγ΄.
 - book=2 lang=grc page=279 line= ref=2.164: Κεφ. ρξδ΄.
+- book=2 lang=grc page=280 line=spr-lb-2-0312-01 ref=2.165: Κεφ. ρξε΄.
+- book=2 lang=grc page=281 line=spr-lb-2-0313-01 ref=2.166: Κεφ. ρξϛ΄.
+- book=2 lang=grc page=281 line= ref=2.167: Κεφ. ρξζ΄.

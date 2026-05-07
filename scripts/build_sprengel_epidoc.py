@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import copy
+import csv
 import json
 from collections import defaultdict
 from dataclasses import dataclass, field
@@ -88,13 +89,15 @@ TARGET_TAIL_REPLACEMENTS = {
     "#spr-app-fm-0020-34": {"Aetius": "Aëtius"},
 }
 
-GREEK_HEAD_RE = re.compile(r"Κεφ\.\s*([^.\[]+)\.?\s*(?:\([^)]+\)\.?\s*)?\[([^\]]+)\]?")
+GREEK_HEAD_RE = re.compile(r"Κε[φπ]\.\s*([^.\[]+)\.?\s*(?:\([^)]+\)\.?\s*)?\[([^\]]+)\]?")
 MALFORMED_GREEK_HEAD_REF_RE = re.compile(r"^(?P<prefix>.*\S)\[(?P<label>\d+[a-z]?)\]\s*$", re.IGNORECASE)
 LATIN_CAP_RE = re.compile(
-    r"Cap\.\s+([IVXLCDM]+)(?:\.\s*(?:\([^)]+\)\.)?)?\s*\[([^\]]+)\]",
+    r"Cap\.\s+([IVXLCDM]+)\.?\s*(?:\([^)]+\)\.?\s*)?\[([^\]]+)\]",
     re.IGNORECASE,
 )
+LATIN_BRACKETED_CAP_RE = re.compile(r"\[Cap\.\s+([IVXLCDM]+)\.?\s+([^\]]+)\]", re.IGNORECASE)
 GREEK_PAREN_TITLE_RE = re.compile(r"^\s*(\([^)]+\)\.?)\s*\[([^\]]+)\]?")
+GREEK_BROKEN_TITLE_RE = re.compile(r"^\s*(Περὶ[^\]]+)\]\.?\s*")
 APPARATUS_SPLIT_RE = re.compile(r"(?:^|\s+)(\d+\s*[a-z]?)\)\s+", re.IGNORECASE)
 NOTE_LABEL_RE = re.compile(r"^\[(\d+[a-z]?)\]$", re.IGNORECASE)
 FRONT_SUBSECTION_PREFIX_RE = re.compile(r"^\s*([A-Z]+|[IVXLCDM]+)\.")
@@ -166,6 +169,16 @@ GREEK_NUMERAL_VALUES = {
 class ChapterMarker:
     lang: str
     key: str
+    label: str = ""
+    raw_label: str = ""
+
+
+@dataclass(frozen=True)
+class HeadingDecision:
+    canonical_n: str = ""
+    display_label: str = ""
+    source_label_policy: str = ""
+    decision_note: str = ""
 
 
 @dataclass
@@ -257,8 +270,11 @@ def clean_label(text: str, lang: str) -> str:
         match = GREEK_HEAD_RE.search(text)
         if match:
             return match.group(2).replace("[", "").strip(" .")
-        return re.sub(r"^Κεφ\.\s*[^.]+\.?\s*", "", text).strip(" .")
+        return re.sub(r"^Κε[φπ]\.\s*[^.]+\.?\s*", "", text).strip(" .")
     match = LATIN_CAP_RE.search(text)
+    if match:
+        return match.group(2).strip(" .")
+    match = LATIN_BRACKETED_CAP_RE.search(text)
     if match:
         return match.group(2).strip(" .")
     return re.sub(r"^Cap\.\s*[-IVXLCDM().]+\s*", "", text, flags=re.I).strip(" .")
@@ -296,6 +312,40 @@ def normalized_chapter_label(raw_label: str, lang: str) -> str:
     return clean_label(raw_label, lang).replace("  ", " ").strip()
 
 
+def heading_decision_key(book: str, lang: str, label: str) -> tuple[str, str, str]:
+    return (book, lang, normalized_chapter_label(label, lang))
+
+
+def load_heading_decisions(path: Path | None) -> dict[tuple[str, str, str], HeadingDecision]:
+    if path is None or not path.exists():
+        return {}
+    decisions: dict[tuple[str, str, str], HeadingDecision] = {}
+    with path.open(encoding="utf-8", newline="") as handle:
+        for row in csv.DictReader(handle):
+            canonical_n = (row.get("canonical_n") or "").strip()
+            if not canonical_n:
+                continue
+            book = (row.get("book") or "").strip()
+            lang = (row.get("lang") or "").strip()
+            if not book or lang not in {"grc", "la"}:
+                continue
+            decision = HeadingDecision(
+                canonical_n=canonical_n,
+                display_label=(row.get("display_label") or "").strip(),
+                source_label_policy=(row.get("source_label_policy") or "").strip(),
+                decision_note=(row.get("decision_note") or "").strip(),
+            )
+            for value in (
+                row.get("display_label") or "",
+                row.get("heading_label") or "",
+                row.get("source_heading_text") or "",
+            ):
+                key = heading_decision_key(book, lang, value)
+                if key[2]:
+                    decisions[key] = decision
+    return decisions
+
+
 def parse_greek_chapter_number(text: str) -> int | None:
     match = GREEK_HEAD_RE.search(text)
     if not match:
@@ -304,7 +354,7 @@ def parse_greek_chapter_number(text: str) -> int | None:
     numeral = re.split(r"\s+", numeral, maxsplit=1)[0]
     numeral = unicodedata.normalize("NFD", numeral.lower())
     numeral = "".join(char for char in numeral if unicodedata.category(char) != "Mn")
-    numeral = re.sub(r"[.'’ʻʼ`´΄ʹ᾽᾿]+", "", numeral)
+    numeral = re.sub(r"[.'’ʻʼ`´΄ʹʹ᾽᾿]+", "", numeral)
     if numeral == "στ":
         return 6
     total = 0
@@ -536,11 +586,18 @@ def paragraph_with_inline_head(
 
 
 class SprengelBuilder:
-    def __init__(self, source: Path, archive_id: str, iiif_width: int) -> None:
+    def __init__(
+        self,
+        source: Path,
+        archive_id: str,
+        iiif_width: int,
+        heading_decisions: Path | None = None,
+    ) -> None:
         self.source = source
         self.archive_id = archive_id
         self.iiif_width = iiif_width
         self.root = ET.parse(source).getroot()
+        self.heading_decisions = load_heading_decisions(heading_decisions)
         self.pages: dict[str, Page] = {}
         self.page_order: list[str] = []
         self.chapters: dict[str, Chapter] = {}
@@ -598,20 +655,32 @@ class SprengelBuilder:
         chapter_record = self.chapter_for(book, normalized_chapter)
         raw_label = normalize_chapter_label_text(raw_label, lang)
         label = display_label or clean_label(raw_label, lang)
-        if label:
+        decision = self.heading_decision(book, lang, raw_label)
+        if decision and decision.display_label:
+            label = decision.display_label
+        if label and lang not in chapter_record.labels:
             chapter_record.labels[lang] = label
-        if raw_label:
+        if raw_label and lang not in chapter_record.raw_labels:
             chapter_record.raw_labels[lang] = " ".join(raw_label.split())
         chapter_record.pages[lang] = page.facs
         if chapter_record.key not in page.chapter_starts[lang]:
             page.chapter_starts[lang].append(chapter_record.key)
-        return ChapterMarker(lang=lang, key=chapter_record.key)
+        return ChapterMarker(
+            lang=lang,
+            key=chapter_record.key,
+            label=label,
+            raw_label=" ".join(raw_label.split()) if raw_label else "",
+        )
 
     def printed_chapter_number(self, lang: str, raw_label: str) -> str:
         if lang == "grc":
             number = parse_greek_chapter_number(raw_label)
             return str(number) if number is not None else ""
         match = LATIN_CAP_RE.search(raw_label)
+        if match:
+            number = roman_to_int(match.group(1))
+            return str(number) if number is not None else ""
+        match = LATIN_BRACKETED_CAP_RE.search(raw_label)
         if match:
             number = roman_to_int(match.group(1))
             return str(number) if number is not None else ""
@@ -625,6 +694,9 @@ class SprengelBuilder:
         fallback_chapter: str = "",
     ) -> str:
         label = normalized_chapter_label(raw_label, lang)
+        decision = self.heading_decision(book, lang, raw_label)
+        if decision and decision.canonical_n:
+            return decision.canonical_n
         if book == "1" and lang == "grc":
             override = BOOK_1_GREEK_OCR_CHAPTER_OVERRIDES.get(label)
             if override:
@@ -652,6 +724,12 @@ class SprengelBuilder:
                     return override
         return self.printed_chapter_number(lang, raw_label) or fallback_chapter
 
+    def heading_decision(self, book: str, lang: str, raw_label: str) -> HeadingDecision | None:
+        label = normalized_chapter_label(raw_label, lang)
+        if not label:
+            return None
+        return self.heading_decisions.get((book, lang, label))
+
     def enriched_greek_chapter_label(self, chapter_div: ET.Element, raw_label: str) -> str:
         if GREEK_HEAD_RE.search(raw_label):
             return raw_label
@@ -659,9 +737,12 @@ class SprengelBuilder:
         if paragraph is None:
             return raw_label
         match = GREEK_PAREN_TITLE_RE.match(text_content(paragraph))
-        if not match:
-            return raw_label
-        return f"{raw_label.rstrip()} {match.group(1)} [{match.group(2).strip()}]"
+        if match:
+            return f"{raw_label.rstrip()} {match.group(1)} [{match.group(2).strip()}]"
+        match = GREEK_BROKEN_TITLE_RE.match(text_content(paragraph))
+        if match:
+            return f"{raw_label.rstrip()} [{match.group(1).strip(' .')}]"
+        return raw_label
 
     def source_chapter_hint(self, chapter_div: ET.Element, book: str) -> str:
         source_id = attr(chapter_div, "xml:id")
@@ -1076,7 +1157,9 @@ class SprengelBuilder:
 
             if lang == "la":
                 raw_text = text_content(node)
-                for match in LATIN_CAP_RE.finditer(raw_text):
+                matches = list(LATIN_CAP_RE.finditer(raw_text)) + list(LATIN_BRACKETED_CAP_RE.finditer(raw_text))
+                matches.sort(key=lambda match: match.start())
+                for match in matches:
                     chapter_num = roman_to_int(match.group(1))
                     if chapter_num and state["book"]:
                         raw_label = match.group(0)
@@ -1269,10 +1352,12 @@ class SprengelBuilder:
         element.set("n", chapter.key)
         element.set(XML_ID, id_base if marker_count == 1 else f"{id_base}-{marker_count}")
         element.set(XML_LANG, marker.lang)
-        if chapter.labels.get(marker.lang):
-            element.set("label", chapter.labels[marker.lang])
-        if chapter.raw_labels.get(marker.lang):
-            element.set("sourceLabel", chapter.raw_labels[marker.lang])
+        label = marker.label or chapter.labels.get(marker.lang, "")
+        raw_label = marker.raw_label or chapter.raw_labels.get(marker.lang, "")
+        if label:
+            element.set("label", label)
+        if raw_label:
+            element.set("sourceLabel", raw_label)
         if chapter.labels.get(other_lang):
             element.set("pairedLabel", chapter.labels[other_lang])
         if chapter.raw_labels.get(other_lang):
@@ -1465,9 +1550,15 @@ def main() -> None:
     parser.add_argument("--manifest", required=True, type=Path)
     parser.add_argument("--archive-id", default=ARCHIVE_ID)
     parser.add_argument("--iiif-width", type=int, default=1200)
+    parser.add_argument(
+        "--heading-decisions",
+        type=Path,
+        default=Path("output/sprengel_heading_audit/heading_decisions.csv"),
+        help="Optional reviewed heading decisions CSV.",
+    )
     args = parser.parse_args()
 
-    builder = SprengelBuilder(args.source, args.archive_id, args.iiif_width)
+    builder = SprengelBuilder(args.source, args.archive_id, args.iiif_width, args.heading_decisions)
     tei = builder.build_tei()
 
     args.output.parent.mkdir(parents=True, exist_ok=True)
