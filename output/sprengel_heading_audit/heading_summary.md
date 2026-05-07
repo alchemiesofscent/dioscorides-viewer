@@ -5,17 +5,17 @@
 - Source headings: 1824
 - Source Greek headings: 909
 - Source Latin headings: 915
-- Generated milestones: 1827
+- Generated milestones: 1826
 - Generated Greek milestones: 922
-- Generated Latin milestones: 905
-- Ledger rows: 1838
-- Flagged rows: 975
+- Generated Latin milestones: 904
+- Ledger rows: 1837
+- Flagged rows: 974
 
 ## Issue Counts
 
 - BACKWARD_JUMP: 9
-- DUPLICATE_GENERATED_N: 38
-- GENERATED_WITHOUT_SOURCE: 14
+- DUPLICATE_GENERATED_N: 36
+- GENERATED_WITHOUT_SOURCE: 13
 - INLINE_HEAD_UNMODELED: 11
 - LABEL_HAS_NOTE_LEAK: 17
 - PAIR_MISSING_GRC: 11
@@ -39,8 +39,6 @@
 - book=4 lang=grc page=667 line= ref=4.173: Κεφ. ρογ΄.
 
 ### DUPLICATE_GENERATED_N
-- book=3 lang=la page=464 line=spr-lb-3-0496-12 ref=3.118: [Cap. CXVIII. (CXXVIII.) [De Artemisia tenuifo- lia.] Est et artemisia tenuifolia, quae circa rivulos et
-- book=3 lang=la page=464 line= ref=3.118: Cap. CXVIII. (CXXVIII.) [De Artemisia tenuifo- lia.]
 - book=4 lang=grc page=552 line= ref=4.63: Κεφ. ξγ΄. [Περὶ Ὑακίνθου.]
 - book=4 lang=grc page=552 line= ref=4.64: Κεφ. ξδ΄. [Περὶ Μήκωνος ῥοιάδος.]
 - book=4 lang=grc page=554 line=spr-lb-4-0586-01 ref=4.65: Κεφ. ξε΄. [Περὶ Μήκωνος ἡμέρου.]
@@ -51,6 +49,8 @@
 - book=4 lang=grc page=586 line= ref=4.91: Κεφ. ϟα΄.
 - book=4 lang=grc page=587 line= ref=4.91: Κεφ. ϟα΄.
 - book=4 lang=grc page=589 line= ref=4.63: Κεφ. ξγ΄.
+- book=4 lang=grc page=590 line=spr-lb-4-0622-01 ref=4.64: Κεφ. ξδ΄.
+- book=4 lang=grc page=590 line= ref=4.65: Κεφ. ξε΄.
 
 ### GENERATED_WITHOUT_SOURCE
 - book=1 lang=grc page=138 line=spr-lb-1-0170-12 ref=1.147: Ῥοῦς ὁ ἐπὶ τὰ ὄψα

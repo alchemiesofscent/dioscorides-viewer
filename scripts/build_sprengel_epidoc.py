@@ -1273,7 +1273,14 @@ class SprengelBuilder:
                 raw_text = text_content(node)
                 matches = list(LATIN_CAP_RE.finditer(raw_text)) + list(LATIN_BRACKETED_CAP_RE.finditer(raw_text))
                 matches.sort(key=lambda match: match.start())
+                accepted_matches = []
+                previous_end = -1
                 for match in matches:
+                    if match.start() < previous_end:
+                        continue
+                    accepted_matches.append(match)
+                    previous_end = match.end()
+                for match in accepted_matches:
                     chapter_num = roman_to_int(match.group(1))
                     if chapter_num and state["book"]:
                         raw_label = match.group(0)
