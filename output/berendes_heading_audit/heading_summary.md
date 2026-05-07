@@ -1,0 +1,44 @@
+# Berendes Heading Audit Summary
+
+- XML: `output/berendes1902_epidoc.xml`
+- Chunk evidence: `chunks`
+- Chapter rows: 952
+- Unique generated `@n` values: 948
+- Rows with issue codes: 19
+
+## Rows By Book
+
+- Book 1: 187
+- Book 2: 218
+- Book 3: 169
+- Book 4: 195
+- Book 5: 183
+
+## Issue Counts
+
+- DUPLICATE_PRIMARY_NUMBER: 16
+- DUPLICATE_GENERATED_N: 8
+- BACKWARD_NUMBER_JUMP: 3
+- POLLUTED_NAV_LABEL: 2
+
+## Highest-Risk Rows
+
+- 3.88 page 313: DUPLICATE_GENERATED_N;DUPLICATE_PRIMARY_NUMBER;POLLUTED_NAV_LABEL -- (Cap. 88.) Das Kachry1)
+- 3.88 page 322: DUPLICATE_GENERATED_N;DUPLICATE_PRIMARY_NUMBER -- Ammoniakum
+- 3.89 page 313: DUPLICATE_GENERATED_N;DUPLICATE_PRIMARY_NUMBER;POLLUTED_NAV_LABEL -- (Cap. 89.) Die Libanotis
+- 3.89 page 323: DUPLICATE_GENERATED_N;DUPLICATE_PRIMARY_NUMBER -- Sarkokolla
+- 4.155 page 449: DUPLICATE_GENERATED_N;DUPLICATE_PRIMARY_NUMBER -- Elaterion
+- 4.155 page 454: DUPLICATE_GENERATED_N;DUPLICATE_PRIMARY_NUMBER -- Pfriemen
+- 4.91 page 420: DUPLICATE_GENERATED_N;DUPLICATE_PRIMARY_NUMBER -- Andere Hauswurz
+- 4.91 page 420: DUPLICATE_GENERATED_N;DUPLICATE_PRIMARY_NUMBER -- Anderes Nabel- kraut
+- 3.80 page 313: BACKWARD_NUMBER_JUMP -- Bärenklau
+- 4.153 page 451: BACKWARD_NUMBER_JUMP -- Scharfer Rittersporn
+- 4.90 page 420: BACKWARD_NUMBER_JUMP -- Nabelblatt
+- 2.205 page 250: DUPLICATE_PRIMARY_NUMBER -- Gartenkresse
+- 2.205a page 250: DUPLICATE_PRIMARY_NUMBER -- Iberis
+- 3.41a page 290: DUPLICATE_PRIMARY_NUMBER -- Majoran
+- 3.41b page 291: DUPLICATE_PRIMARY_NUMBER -- Steinklee
+- 4.15 page 373: DUPLICATE_PRIMARY_NUMBER -- Tribolos
+- 4.15a page 374: DUPLICATE_PRIMARY_NUMBER -- Saxifragon
+- 5.116 page 527: DUPLICATE_PRIMARY_NUMBER -- Psorikon
+- 5.116(117) page 528: DUPLICATE_PRIMARY_NUMBER -- Misy
