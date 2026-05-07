@@ -151,6 +151,7 @@ BOOK_3_GREEK_LOGICAL_CHAPTER_OVERRIDES = {
     "Περὶ Σταφυλίνου": "52",
     "Περὶ Σεσελέως μασσαλεωτικοῦ": "53",
     "Περὶ Κυμίνου ἀγρίου": "62",
+    "Περὶ Ἀλθαίας": "153",
 }
 BOOK_3_LATIN_LOGICAL_CHAPTER_OVERRIDES = {
     "De Calamintha": "37",

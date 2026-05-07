@@ -13,12 +13,12 @@
 
 ## Issue Counts
 
-- BACKWARD_JUMP: 10
-- DUPLICATE_GENERATED_N: 40
+- BACKWARD_JUMP: 9
+- DUPLICATE_GENERATED_N: 38
 - GENERATED_WITHOUT_SOURCE: 14
 - INLINE_HEAD_UNMODELED: 11
 - LABEL_HAS_NOTE_LEAK: 17
-- PAIR_MISSING_GRC: 12
+- PAIR_MISSING_GRC: 11
 - PAIR_MISSING_LA: 17
 - PRINTED_SOURCE_CONFLICT: 874
 - REVIEWED_ALTERNATE_NUMBER_CONFLICT: 36
@@ -28,7 +28,6 @@
 ## First Failing Ranges
 
 ### BACKWARD_JUMP
-- book=3 lang=grc page=492 line= ref=3.103: Κεφ. ργ΄.
 - book=4 lang=grc page=586 line= ref=4.90: Κεφ. ϟ΄.
 - book=4 lang=grc page=589 line= ref=4.63: Κεφ. ξγ΄.
 - book=4 lang=grc page=597 line=spr-lb-4-0631-01 ref=4.103: Κεφ. ργ΄.
@@ -40,10 +39,8 @@
 - book=4 lang=grc page=667 line= ref=4.173: Κεφ. ρογ΄.
 
 ### DUPLICATE_GENERATED_N
-- book=3 lang=grc page=450 line=spr-lb-3-0482-01 ref=3.103: Κεφ. ργ΄.
 - book=3 lang=la page=464 line=spr-lb-3-0496-12 ref=3.118: [Cap. CXVIII. (CXXVIII.) [De Artemisia tenuifo- lia.] Est et artemisia tenuifolia, quae circa rivulos et
 - book=3 lang=la page=464 line= ref=3.118: Cap. CXVIII. (CXXVIII.) [De Artemisia tenuifo- lia.]
-- book=3 lang=grc page=492 line= ref=3.103: Κεφ. ργ΄.
 - book=4 lang=grc page=552 line= ref=4.63: Κεφ. ξγ΄. [Περὶ Ὑακίνθου.]
 - book=4 lang=grc page=552 line= ref=4.64: Κεφ. ξδ΄. [Περὶ Μήκωνος ῥοιάδος.]
 - book=4 lang=grc page=554 line=spr-lb-4-0586-01 ref=4.65: Κεφ. ξε΄. [Περὶ Μήκωνος ἡμέρου.]
@@ -52,6 +49,8 @@
 - book=4 lang=grc page=560 line= ref=4.68: Κεφ. ξη΄. [Περὶ Ὑπηκόου.]
 - book=4 lang=grc page=560 line= ref=4.69: Κεφ. ξθ΄. [Περὶ Ὑοσκυάμου.]
 - book=4 lang=grc page=586 line= ref=4.91: Κεφ. ϟα΄.
+- book=4 lang=grc page=587 line= ref=4.91: Κεφ. ϟα΄.
+- book=4 lang=grc page=589 line= ref=4.63: Κεφ. ξγ΄.
 
 ### GENERATED_WITHOUT_SOURCE
 - book=1 lang=grc page=138 line=spr-lb-1-0170-12 ref=1.147: Ῥοῦς ὁ ἐπὶ τὰ ὄψα
@@ -95,7 +94,6 @@
 - book=4 lang=grc page=534 line= ref=4.39: Κεφ. λθ΄. [Περὶ Ἑλξίνης[39]
 
 ### PAIR_MISSING_GRC
-- book=3 lang=la page=492 line= ref=3.153: Cap. CLIII. (CLXIII.) [De Althaea.] Althaeam
 - book=4 lang=la page=589 line= ref=4.93: Cap. XCIII. (XCV.) [De Galiopsi.] Galiopsis, quam
 - book=4 lang=la page=590 line= ref=4.94: Cap. XCIV. (XCVI.) [De Galio.] Galium, quod
 - book=4 lang=la page=590 line=spr-lb-4-0622-10 ref=4.95: Cap. XCV. (XCVII.) [De Senecione.] Senecio,
