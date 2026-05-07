@@ -12996,7 +12996,6 @@
       "front_subsection_title": "",
       "book": "4",
       "chapter_starts": [
-        "4.139",
         "4.169"
       ],
       "tei_facs": "page_images/page-0697.png",
@@ -13016,7 +13015,6 @@
       "front_subsection_title": "",
       "book": "4",
       "chapter_starts": [
-        "4.100",
         "4.170"
       ],
       "tei_facs": "page_images/page-0698.png",
@@ -13036,7 +13034,6 @@
       "front_subsection_title": "",
       "book": "4",
       "chapter_starts": [
-        "4.102",
         "4.171"
       ],
       "tei_facs": "page_images/page-0699.png",
@@ -13056,8 +13053,7 @@
       "front_subsection_title": "",
       "book": "4",
       "chapter_starts": [
-        "4.172",
-        "4.176"
+        "4.172"
       ],
       "tei_facs": "page_images/page-0700.png",
       "facs": "https://archive.org/details/b23982500_0001/page/n699/mode/1up",

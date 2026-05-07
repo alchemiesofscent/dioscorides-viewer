@@ -97,6 +97,7 @@ LATIN_CAP_RE = re.compile(
 )
 LATIN_BRACKETED_CAP_RE = re.compile(r"\[Cap\.\s+([IVXLCDM]+)\.?\s+([^\]]+)\]", re.IGNORECASE)
 GREEK_PAREN_TITLE_RE = re.compile(r"^\s*(\([^)]+\)\.?)\s*\[([^\]]+)\]?")
+GREEK_PAREN_BROKEN_TITLE_RE = re.compile(r"^\s*(\([^)]+\)\.?)\s*(Περὶ[^\]]+)\]\.?\s*")
 GREEK_BROKEN_TITLE_RE = re.compile(r"^\s*(Περὶ[^\]]+)\]\.?\s*")
 APPARATUS_SPLIT_RE = re.compile(r"(?:^|\s+)(\d+\s*[a-z]?)\)\s+", re.IGNORECASE)
 NOTE_LABEL_RE = re.compile(r"^\[(\d+[a-z]?)\]$", re.IGNORECASE)
@@ -181,6 +182,10 @@ BOOK_4_GREEK_LOGICAL_CHAPTER_OVERRIDES = {
     "Περὶ Βρύου θαλασσίου": "97",
     "Περὶ Φύκου θαλασσίου": "98",
     "Περὶ Ποταμογείτονος": "99",
+    "Περὶ Χαμελαίας": "169",
+    "Περὶ Θυμελαίας": "170",
+    "Περὶ Ἀκτῆς": "171",
+    "Περὶ Χαμαιάκτης": "172",
 }
 # These printed markers stay in the inline diplomatic text, but they should not
 # mint standalone navigation milestones in the reviewed Book 3 sequence.
@@ -857,6 +862,9 @@ class SprengelBuilder:
         match = GREEK_PAREN_TITLE_RE.match(text_content(paragraph))
         if match:
             return f"{raw_label.rstrip()} {match.group(1)} [{match.group(2).strip()}]"
+        match = GREEK_PAREN_BROKEN_TITLE_RE.match(text_content(paragraph))
+        if match:
+            return f"{raw_label.rstrip()} {match.group(1)} [{match.group(2).strip(' .')}]"
         match = GREEK_BROKEN_TITLE_RE.match(text_content(paragraph))
         if match:
             return f"{raw_label.rstrip()} [{match.group(1).strip(' .')}]"

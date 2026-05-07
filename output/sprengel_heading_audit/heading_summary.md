@@ -13,34 +13,16 @@
 
 ## Issue Counts
 
-- BACKWARD_JUMP: 3
-- DUPLICATE_GENERATED_N: 8
 - GENERATED_WITHOUT_SOURCE: 13
 - INLINE_HEAD_UNMODELED: 11
 - LABEL_HAS_NOTE_LEAK: 17
-- PAIR_MISSING_GRC: 4
 - PAIR_MISSING_LA: 17
 - PRINTED_SOURCE_CONFLICT: 868
 - REVIEWED_ALTERNATE_NUMBER_CONFLICT: 36
 - REVIEWED_GENERATED_TITLE_VISIBLE: 8
-- SOURCE_VISIBLE_MISMATCH: 358
+- SOURCE_VISIBLE_MISMATCH: 359
 
 ## First Failing Ranges
-
-### BACKWARD_JUMP
-- book=4 lang=grc page=663 line= ref=4.139: Κεφ. οξθ΄.
-- book=4 lang=grc page=664 line= ref=4.100: Κεφ. ρ΄.
-- book=4 lang=grc page=667 line= ref=4.173: Κεφ. ρογ΄.
-
-### DUPLICATE_GENERATED_N
-- book=4 lang=grc page=593 line= ref=4.100: Κεφ. ρ΄.
-- book=4 lang=grc page=595 line= ref=4.102: Κεφ. ρβ΄.
-- book=4 lang=grc page=620 line= ref=4.139: Κεφ. ρλθ΄.
-- book=4 lang=grc page=663 line= ref=4.139: Κεφ. οξθ΄.
-- book=4 lang=grc page=664 line= ref=4.100: Κεφ. ρ΄.
-- book=4 lang=grc page=665 line= ref=4.102: Κεφ. ραα΄.
-- book=4 lang=grc page=666 line= ref=4.176: Κεφ. ροβ΄.
-- book=4 lang=grc page=670 line= ref=4.176: Κεφ. ρος΄.
 
 ### GENERATED_WITHOUT_SOURCE
 - book=1 lang=grc page=138 line=spr-lb-1-0170-12 ref=1.147: Ῥοῦς ὁ ἐπὶ τὰ ὄψα
@@ -82,12 +64,6 @@
 - book=2 lang=grc page=309 line= ref=2.196: Κεφ. ρξϛ΄. [Περὶ Δρακοντίας μικρᾶς[40]
 - book=2 lang=grc page=335 line= ref=2.215: Κεφ. σιε΄. [Περὶ Ἰσάτιδος[66]
 - book=4 lang=grc page=534 line= ref=4.39: Κεφ. λθ΄. [Περὶ Ἑλξίνης[39]
-
-### PAIR_MISSING_GRC
-- book=4 lang=la page=663 line=spr-lb-4-0697-10 ref=4.169: Cap. CLXIX. (CLXXII.) [De Chamelaea.] Cha-
-- book=4 lang=la page=664 line= ref=4.170: Cap. CLXX. (CLXXIII.) [De Thymeleaea.] Thy-
-- book=4 lang=la page=665 line=spr-lb-4-0699-18 ref=4.171: Cap. CLXXI. (CLXXIV.) [De Sambuco.] Sambu-
-- book=4 lang=la page=666 line= ref=4.172: [Cap. CLXXII. (CLXXV.) De Chamaeacte seu Ebulo.]
 
 ### PAIR_MISSING_LA
 - book=1 lang=grc page=90 line= ref=1.86: Κεφ. πϛ΄. [Περὶ πίτυος.]
