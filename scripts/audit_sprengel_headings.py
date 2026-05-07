@@ -58,6 +58,16 @@ LATIN_PRIMARY_RE = re.compile(r"Cap\.\s*([IVXLCDM]+)", re.IGNORECASE)
 PAREN_RE = re.compile(r"\(([^)]+)\)")
 BRACKET_RE = re.compile(r"\[([^\]]+)\]")
 NOTE_LEAK_RE = re.compile(r"\[\d+[a-z]?\]", re.IGNORECASE)
+# Match generator-side suppressed markers so the ledger aligns reviewed
+# milestones against the title-bearing source rows.
+BOOK_3_SUPPRESSED_GREEK_SOURCE_HEADS = {
+    "spr-ch-3.38",
+    "spr-ch-3.39",
+    "spr-ch-3.42",
+    "spr-ch-3.48",
+}
+BOOK_3_SUPPRESSED_LATIN_SOURCE_LABELS = {"De Meliloto."}
+BOOK_3_REVIEWED_UNHEADED_GENERATED_N = {f"3.{number}" for number in range(54, 62)}
 
 GREEK_NUMERAL_VALUES = {
     "α": 1,
@@ -215,6 +225,24 @@ def parse_heading_parts(text: str, lang: str) -> tuple[str, str, str]:
     return printed_primary, alternate, label
 
 
+def suppress_source_heading(
+    book: str,
+    lang: str,
+    page_n: str,
+    source_xml_id: str,
+    printed_primary: str,
+    label: str,
+) -> bool:
+    if book != "3":
+        return False
+    if lang == "grc":
+        return source_xml_id in BOOK_3_SUPPRESSED_GREEK_SOURCE_HEADS
+    return (
+        label in BOOK_3_SUPPRESSED_LATIN_SOURCE_LABELS
+        or (page_n == "383" and printed_primary == "XLII" and not label)
+    )
+
+
 def line_segments(element: ET.Element) -> list[dict[str, str]]:
     lines: list[dict[str, str]] = []
     current = {"line_id": "", "line_n": "", "text": ""}
@@ -304,6 +332,15 @@ def extract_source_headings(source_path: Path) -> list[SourceHeading]:
         if marker_index(text, lang) < 0:
             return
         printed_primary, printed_alternate, label = parse_heading_parts(text, lang)
+        if suppress_source_heading(
+            state["book"],
+            lang,
+            state["page_n"],
+            state["source_xml_id"],
+            printed_primary,
+            label,
+        ):
+            return
         key = (state["book"], lang, state["facs"])
         page_counts[key] += 1
         headings.append(
@@ -629,6 +666,29 @@ def write_decisions(path: Path, rows: list[dict[str, str]]) -> None:
     write_csv(path, decision_rows, DECISION_FIELDS)
 
 
+def apply_reviewed_classifications(rows: list[dict[str, str]], decisions_path: Path) -> None:
+    preserved = read_existing_decisions(decisions_path)
+    for row in rows:
+        previous = next((preserved[key] for key in decision_preserve_keys(row) if key in preserved), {})
+        if (
+            row.get("book") == "3"
+            and previous.get("canonical_n")
+            and previous.get("source_label_policy") == "reviewed_canonical_override"
+        ):
+            issues = set(filter(None, row.get("issue_codes", "").split(";")))
+            if "PRINTED_SOURCE_CONFLICT" in issues:
+                issues.remove("PRINTED_SOURCE_CONFLICT")
+                issues.add("REVIEWED_ALTERNATE_NUMBER_CONFLICT")
+            if (
+                row.get("generated_n") in BOOK_3_REVIEWED_UNHEADED_GENERATED_N
+                and "GENERATED_WITHOUT_SOURCE" in issues
+                and "SOURCE_VISIBLE_MISMATCH" in issues
+            ):
+                issues.remove("SOURCE_VISIBLE_MISMATCH")
+                issues.add("REVIEWED_GENERATED_TITLE_VISIBLE")
+            row["issue_codes"] = ";".join(sorted(issues))
+
+
 def write_html(path: Path, rows: list[dict[str, str]], image_lookup: dict[str, dict[str, str]]) -> None:
     grouped: dict[tuple[str, str], list[dict[str, str]]] = defaultdict(list)
     for row in rows:
@@ -780,6 +840,7 @@ def main() -> int:
     source_headings = extract_source_headings(source_path)
     generated_headings = extract_generated_headings(generated_path)
     rows = build_ledger(source_headings, generated_headings, image_lookup)
+    apply_reviewed_classifications(rows, outdir / "heading_decisions.csv")
 
     write_csv(outdir / "heading_ledger.csv", rows, LEDGER_FIELDS)
     write_html(outdir / "heading_ledger.html", rows, image_lookup)

@@ -132,6 +132,65 @@ BOOK_2_GREEK_LOGICAL_CHAPTER_OVERRIDES = {
 BOOK_2_LATIN_LOGICAL_CHAPTER_OVERRIDES = {
     "De Isatide sylvestri": "216",
 }
+BOOK_3_GREEK_LOGICAL_CHAPTER_OVERRIDES = {
+    "Περὶ Καλαμίνθης": "37",
+    "Περὶ Θύμου": "38",
+    "Περὶ Θύμβρας": "39",
+    "Περὶ Ἑρπύλλου": "40",
+    "Περὶ Σαμψύχου": "41",
+    "Περὶ Μάρου": "42",
+    "Περὶ Ἀκίνου": "43",
+    "Περὶ Βακχάρεως": "44",
+    "Περὶ Πηγάνου": "45",
+    "Περὶ Πηγάνου ἀγρίου": "46",
+    "Περὶ Μώλυος": "47",
+    "Περὶ Πάνακος": "48",
+    "Περὶ Πάνακος Ἀσκληπιοῦ": "49",
+    "Περὶ Πάνακος Χειρωνίου": "50",
+    "Περὶ Λιγυστικοῦ": "51",
+    "Περὶ Σταφυλίνου": "52",
+    "Περὶ Σεσελέως μασσαλεωτικοῦ": "53",
+    "Περὶ Κυμίνου ἀγρίου": "62",
+}
+BOOK_3_LATIN_LOGICAL_CHAPTER_OVERRIDES = {
+    "De Calamintha": "37",
+    "De Thymo": "38",
+    "De Thymbra": "39",
+    "De Serpyllo": "40",
+    "De Maiorana": "41",
+    "De Maro": "42",
+    "De Acino": "43",
+    "De Bacchare": "44",
+    "De Ruta": "45",
+    "De ruta sylvestri": "46",
+    "De Moly": "47",
+    "De Panace Heracleo": "48",
+    "De Panace Asclepio": "49",
+    "De Panace Chironio": "50",
+    "De Ligustico": "51",
+    "De Dauco sylvestri": "52",
+    "De Seseli massiliensi": "53",
+    "De Cymino sylvatico": "62",
+}
+# These printed markers stay in the inline diplomatic text, but they should not
+# mint standalone navigation milestones in the reviewed Book 3 sequence.
+BOOK_3_SUPPRESSED_GREEK_CHAPTER_MARKERS = {
+    "spr-ch-3.38",
+    "spr-ch-3.39",
+    "spr-ch-3.42",
+    "spr-ch-3.48",
+}
+BOOK_3_SUPPRESSED_LATIN_LABELS = {"De Meliloto"}
+BOOK_3_UNHEADED_CHAPTER_STARTS = {
+    "spr-lb-3-0435-12": ("54", "Τὸ δὲ αἰθιοπικὸν λεγόμενον σέσελι", "Περὶ σεσέλεως αἰθιοπικοῦ"),
+    "spr-lb-3-0436-04": ("55", "Τὸ δὲ ἐν Πελοποννήσῳ γεννώμενον", "Περὶ σεσέλεως πελοποννησιακοῦ"),
+    "spr-lb-3-0436-11": ("56", "Τορδύλεον, οἱ δὲ τόρδυλον", "Περὶ Τορδυλείου"),
+    "spr-lb-3-0437-06": ("57", "Σίσων σπερμάτιόν ἐστι", "Περὶ Σίσωνος"),
+    "spr-lb-3-0437-12": ("58", "Ἄνισον", "Περὶ Ἀνίσου"),
+    "spr-lb-3-0438-07": ("59", "Κάρος σπερμάτιόν ἐστι", "Περὶ Κάρου"),
+    "spr-lb-3-0438-12": ("60", "Ἄνηθον τὸ ἐσθιόμενον", "Περὶ Ἀνήθου"),
+    "spr-lb-3-0439-07": ("61", "Κύμινον τὸ ἥμερον", "Περὶ Κυμίνου"),
+}
 GREEK_NUMERAL_VALUES = {
     "α": 1,
     "β": 2,
@@ -171,6 +230,7 @@ class ChapterMarker:
     key: str
     label: str = ""
     raw_label: str = ""
+    inline_title: str = ""
 
 
 @dataclass(frozen=True)
@@ -650,6 +710,7 @@ class SprengelBuilder:
         chapter: str,
         raw_label: str,
         display_label: str = "",
+        inline_title: str = "",
     ) -> ChapterMarker:
         normalized_chapter = str(int(chapter)) if chapter.isdigit() else chapter
         chapter_record = self.chapter_for(book, normalized_chapter)
@@ -670,6 +731,7 @@ class SprengelBuilder:
             key=chapter_record.key,
             label=label,
             raw_label=" ".join(raw_label.split()) if raw_label else "",
+            inline_title=inline_title.format(n=chapter_record.key, label=label) if inline_title else "",
         )
 
     def printed_chapter_number(self, lang: str, raw_label: str) -> str:
@@ -722,6 +784,15 @@ class SprengelBuilder:
                 override = BOOK_2_LATIN_LOGICAL_CHAPTER_OVERRIDES.get(label)
                 if override:
                     return override
+        if book == "3":
+            if lang == "grc":
+                override = BOOK_3_GREEK_LOGICAL_CHAPTER_OVERRIDES.get(label)
+                if override:
+                    return override
+            elif lang == "la":
+                override = BOOK_3_LATIN_LOGICAL_CHAPTER_OVERRIDES.get(label)
+                if override:
+                    return override
         return self.printed_chapter_number(lang, raw_label) or fallback_chapter
 
     def heading_decision(self, book: str, lang: str, raw_label: str) -> HeadingDecision | None:
@@ -729,6 +800,16 @@ class SprengelBuilder:
         if not label:
             return None
         return self.heading_decisions.get((book, lang, label))
+
+    def suppress_chapter_marker(self, chapter_div: ET.Element, book: str, lang: str) -> bool:
+        return (
+            book == "3"
+            and lang == "grc"
+            and attr(chapter_div, "xml:id") in BOOK_3_SUPPRESSED_GREEK_CHAPTER_MARKERS
+        )
+
+    def suppress_latin_marker(self, book: str, raw_label: str) -> bool:
+        return book == "3" and normalized_chapter_label(raw_label, "la") in BOOK_3_SUPPRESSED_LATIN_LABELS
 
     def enriched_greek_chapter_label(self, chapter_div: ET.Element, raw_label: str) -> str:
         if GREEK_HEAD_RE.search(raw_label):
@@ -837,9 +918,22 @@ class SprengelBuilder:
             override = BOOK_1_UNHEADED_CHAPTER_STARTS.get(attr(line, "xml:id"))
             if override:
                 chapter, raw_label, display_label = override
+        if not chapter and book == "3":
+            override = BOOK_3_UNHEADED_CHAPTER_STARTS.get(attr(line, "xml:id"))
+            if override:
+                chapter, raw_label, display_label = override
         if not chapter:
             return None
-        return self.add_chapter_start(page, "grc", book, chapter, raw_label, display_label=display_label)
+        inline_title = "{n} {label}" if book == "3" and display_label else ""
+        return self.add_chapter_start(
+            page,
+            "grc",
+            book,
+            chapter,
+            raw_label,
+            display_label=display_label,
+            inline_title=inline_title,
+        )
 
     def add_greek_markers_in_paragraph(
         self,
@@ -871,7 +965,18 @@ class SprengelBuilder:
                     output.append(current)
                 output.append(marker)
                 current = new_paragraph()
-            current.append(copy.deepcopy(child))
+            child_clone = copy.deepcopy(child)
+            if marker is not None and marker.inline_title:
+                existing_tail = child_clone.tail or ""
+                child_clone.tail = ""
+                title = ET.Element(f"{NS}seg")
+                title.set("type", "chapterTitle")
+                title.text = marker.inline_title
+                title.tail = " " + existing_tail.lstrip()
+                current.append(child_clone)
+                current.append(title)
+            else:
+                current.append(child_clone)
 
         if paragraph_has_content(current):
             current.tail = paragraph.tail
@@ -1017,6 +1122,8 @@ class SprengelBuilder:
                             self.source_chapter_hint(node, str(state["book"])),
                         )
                     )
+                    if self.suppress_chapter_marker(node, str(state["book"]), lang):
+                        state["chapter"] = ""
                     children = list(node)
                     index = 0
                     while index < len(children):
@@ -1163,6 +1270,8 @@ class SprengelBuilder:
                     chapter_num = roman_to_int(match.group(1))
                     if chapter_num and state["book"]:
                         raw_label = match.group(0)
+                        if self.suppress_latin_marker(str(state["book"]), raw_label):
+                            continue
                         page.zones[lang].append(
                             self.add_chapter_start(
                                 page,

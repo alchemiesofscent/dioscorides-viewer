@@ -2,34 +2,34 @@
 
 ## Totals
 
-- Source headings: 1836
-- Source Greek headings: 919
-- Source Latin headings: 917
-- Generated milestones: 1830
-- Generated Greek milestones: 924
-- Generated Latin milestones: 906
-- Ledger rows: 1842
-- Flagged rows: 979
+- Source headings: 1830
+- Source Greek headings: 915
+- Source Latin headings: 915
+- Generated milestones: 1833
+- Generated Greek milestones: 928
+- Generated Latin milestones: 905
+- Ledger rows: 1844
+- Flagged rows: 981
 
 ## Issue Counts
 
-- BACKWARD_JUMP: 15
-- DUPLICATE_GENERATED_N: 64
-- GENERATED_WITHOUT_SOURCE: 6
-- INLINE_HEAD_UNMODELED: 12
+- BACKWARD_JUMP: 13
+- DUPLICATE_GENERATED_N: 52
+- GENERATED_WITHOUT_SOURCE: 14
+- INLINE_HEAD_UNMODELED: 11
 - LABEL_HAS_NOTE_LEAK: 17
-- PAIR_MISSING_GRC: 13
-- PAIR_MISSING_LA: 9
-- PRINTED_SOURCE_CONFLICT: 915
-- SOURCE_VISIBLE_MISMATCH: 363
+- PAIR_MISSING_GRC: 12
+- PAIR_MISSING_LA: 17
+- PRINTED_SOURCE_CONFLICT: 877
+- REVIEWED_ALTERNATE_NUMBER_CONFLICT: 36
+- REVIEWED_GENERATED_TITLE_VISIBLE: 8
+- SOURCE_VISIBLE_MISMATCH: 362
 
 ## First Failing Ranges
 
 ### BACKWARD_JUMP
 - book=3 lang=grc page=346 line= ref=3.5: Κεφ. ε΄.
 - book=3 lang=grc page=360 line= ref=3.18: Κεφ. ιη΄.
-- book=3 lang=grc page=381 line= ref=3.35: Κεφ. λε΄.
-- book=3 lang=grc page=383 line= ref=3.33: Κεφ. λγ΄.
 - book=3 lang=grc page=425 line= ref=3.80: Κεφ. π΄.
 - book=3 lang=grc page=492 line= ref=3.103: Κεφ. ργ΄.
 - book=4 lang=grc page=586 line= ref=4.90: Κεφ. ϟ΄.
@@ -38,6 +38,8 @@
 - book=4 lang=la page=597 line= ref=4.103: Cap. CIII. (CV.) [De Aethiopide.] Aethiopis folia
 - book=4 lang=grc page=639 line= ref=4.153: Κεφ. ρνγ΄.
 - book=4 lang=la page=639 line=spr-lb-4-0673-16 ref=4.153: Cap. CLIII. (CLVI.) [De Staphide agria.] Staphis
+- book=4 lang=grc page=663 line= ref=4.139: Κεφ. οξθ΄.
+- book=4 lang=grc page=664 line= ref=4.100: Κεφ. ρ΄.
 
 ### DUPLICATE_GENERATED_N
 - book=3 lang=grc page=344 line= ref=3.5: Κεφ. ε΄.
@@ -46,12 +48,12 @@
 - book=3 lang=grc page=347 line= ref=3.6: Κεφ. ς΄.
 - book=3 lang=grc page=360 line= ref=3.20: Κεφ. κ΄.
 - book=3 lang=grc page=362 line= ref=3.20: Κεφ. κ΄.
-- book=3 lang=grc page=377 line=spr-lb-3-0409-01 ref=3.33: Κεφ. λγ΄.
-- book=3 lang=grc page=380 line= ref=3.38: Κεφ. λη΄.
-- book=3 lang=grc page=380 line= ref=3.39: Κεφ. λθ΄.
-- book=3 lang=grc page=383 line= ref=3.42: Κεφ. μβ΄.
-- book=3 lang=grc page=383 line= ref=3.33: Κεφ. λγ΄.
-- book=3 lang=grc page=384 line= ref=3.38: Κεφ. λη΄.
+- book=3 lang=grc page=420 line= ref=3.77: Κεφ. οζ΄.
+- book=3 lang=grc page=421 line= ref=3.77: Κεφ. πε΄.
+- book=3 lang=grc page=424 line= ref=3.80: Κεφ. πη΄.
+- book=3 lang=grc page=424 line= ref=3.81: Κεφ. πθ΄.
+- book=3 lang=grc page=425 line= ref=3.80: Κεφ. π΄.
+- book=3 lang=grc page=426 line= ref=3.81: Κεφ. πα΄.
 
 ### GENERATED_WITHOUT_SOURCE
 - book=1 lang=grc page=138 line=spr-lb-1-0170-12 ref=1.147: Ῥοῦς ὁ ἐπὶ τὰ ὄψα
@@ -59,7 +61,13 @@
 - book=1 lang=grc page=140 line=spr-lb-1-0172-13 ref=1.149: Τῶν δὲ θηβαϊκῶν
 - book=1 lang=grc page=141 line=spr-lb-1-0173-12 ref=1.150: Φοῖνιξ, ἣν ἔνιοι ἐλάτην ἢ σπάθην καλοῦσι
 - book=1 lang=grc page=142 line=spr-lb-1-0174-15 ref=1.151: Ῥόα πᾶσα
-- book=3 lang=la page=464 line= ref=3.118: Cap. CXVIII. (CXXVIII.) [De Artemisia tenuifo- lia.]
+- book=3 lang=grc page=403 line=spr-lb-3-0435-12 ref=3.54: Τὸ δὲ αἰθιοπικὸν λεγόμενον σέσελι
+- book=3 lang=grc page=404 line=spr-lb-3-0436-04 ref=3.55: Τὸ δὲ ἐν Πελοποννήσῳ γεννώμενον
+- book=3 lang=grc page=404 line=spr-lb-3-0436-11 ref=3.56: Τορδύλεον, οἱ δὲ τόρδυλον
+- book=3 lang=grc page=405 line=spr-lb-3-0437-06 ref=3.57: Σίσων σπερμάτιόν ἐστι
+- book=3 lang=grc page=405 line=spr-lb-3-0437-12 ref=3.58: Ἄνισον
+- book=3 lang=grc page=406 line=spr-lb-3-0438-07 ref=3.59: Κάρος σπερμάτιόν ἐστι
+- book=3 lang=grc page=406 line=spr-lb-3-0438-12 ref=3.60: Ἄνηθον τὸ ἐσθιόμενον
 
 ### INLINE_HEAD_UNMODELED
 - book=1 lang=la page=90 line= ref=1: Cap. LXXXVI. De Pinu (Pinea.) Pinus (Pinea)
@@ -69,7 +77,6 @@
 - book=3 lang=la page=369 line=spr-lb-3-0401-09 ref=3: Cap. XXIV. (XXVII.) De Absinthio marino.] Ab-
 - book=3 lang=la page=380 line= ref=3: Cap. XXXVIII.) Quod pseudodictamnum vocant,
 - book=3 lang=la page=380 line=spr-lb-3-0412-12 ref=3: Cap. XXXIX.) Defertur et e Creta alterum dictamni
-- book=3 lang=la page=383 line= ref=3: Cap. XXXVII. (XLIII.) [De Calamintha.] E ca-
 - book=3 lang=la page=421 line=spr-lb-3-0453-10 ref=3: Cap. LXXVIII. (LXXXVI.) [De Pyrethro.] Pyre-
 - book=3 lang=la page=424 line= ref=3: Cap. LXXXVIII.) Cachry habet vim calefacien-
 - book=3 lang=la page=424 line=spr-lb-3-0456-11 ref=3: Cap. LXXXIX.) Libanotis, quam Romani rorem
@@ -90,7 +97,6 @@
 - book=4 lang=grc page=534 line= ref=4.39: Κεφ. λθ΄. [Περὶ Ἑλξίνης[39]
 
 ### PAIR_MISSING_GRC
-- book=3 lang=la page=383 line= ref=3.37: Cap. XLII.)
 - book=3 lang=la page=492 line= ref=3.153: Cap. CLIII. (CLXIII.) [De Althaea.] Althaeam
 - book=4 lang=la page=589 line= ref=4.93: Cap. XCIII. (XCV.) [De Galiopsi.] Galiopsis, quam
 - book=4 lang=la page=590 line= ref=4.94: Cap. XCIV. (XCVI.) [De Galio.] Galium, quod
@@ -102,6 +108,7 @@
 - book=4 lang=la page=663 line=spr-lb-4-0697-10 ref=4.169: Cap. CLXIX. (CLXXII.) [De Chamelaea.] Cha-
 - book=4 lang=la page=664 line= ref=4.170: Cap. CLXX. (CLXXIII.) [De Thymeleaea.] Thy-
 - book=4 lang=la page=665 line=spr-lb-4-0699-18 ref=4.171: Cap. CLXXI. (CLXXIV.) [De Sambuco.] Sambu-
+- book=4 lang=la page=666 line= ref=4.172: [Cap. CLXXII. (CLXXV.) De Chamaeacte seu Ebulo.]
 
 ### PAIR_MISSING_LA
 - book=1 lang=grc page=90 line= ref=1.86: Κεφ. πϛ΄. [Περὶ πίτυος.]
@@ -112,7 +119,10 @@
 - book=1 lang=grc page=142 line=spr-lb-1-0174-15 ref=1.151: Ῥόα πᾶσα
 - book=2 lang=grc page=239 line= ref=2.117: Κεφ. ριζ΄. [Περὶ Ὀρύζης.]
 - book=3 lang=grc page=369 line= ref=3.24: Κεφ. κδ΄.
-- book=4 lang=grc page=545 line= ref=4.55: Κεφ. νε΄. [Περὶ Χρυσοκόμης.]
+- book=3 lang=grc page=403 line=spr-lb-3-0435-12 ref=3.54: Τὸ δὲ αἰθιοπικὸν λεγόμενον σέσελι
+- book=3 lang=grc page=404 line=spr-lb-3-0436-04 ref=3.55: Τὸ δὲ ἐν Πελοποννήσῳ γεννώμενον
+- book=3 lang=grc page=404 line=spr-lb-3-0436-11 ref=3.56: Τορδύλεον, οἱ δὲ τόρδυλον
+- book=3 lang=grc page=405 line=spr-lb-3-0437-06 ref=3.57: Σίσων σπερμάτιόν ἐστι
 
 ### PRINTED_SOURCE_CONFLICT
 - book=1 lang=grc page=98 line= ref=1.95: Κεφ. ξε΄. [Περὶ Πισσελαίου.]
@@ -127,6 +137,30 @@
 - book=1 lang=la page=110 line= ref=1.111: Cap. CXI. (CX.) [De Macere.] Macer cortex est
 - book=1 lang=la page=110 line= ref=1.112: Cap. CXII. (CXI.) [De Ulmo.] Ulmi et folia et
 - book=1 lang=grc page=111 line=spr-lb-1-0143-06 ref=1.113: Κεφ. ριγ΄ (ριβ΄). [Περὶ σαπρότητος ξύλων.] Ἡ δὲ ἀπὸ
+
+### REVIEWED_ALTERNATE_NUMBER_CONFLICT
+- book=3 lang=grc page=383 line= ref=3.37: Κεφ. λγ΄.
+- book=3 lang=la page=383 line= ref=3.37: Cap. XXXVII. (XLIII.) [De Calamintha.] E ca-
+- book=3 lang=grc page=384 line= ref=3.38: Κεφ. λη΄.
+- book=3 lang=la page=384 line=spr-lb-3-0416-13 ref=3.38: Cap. XXXVIII. (XLIV.) [De Thymo.] Thymum
+- book=3 lang=grc page=385 line= ref=3.39: Κεφ. λθ΄.
+- book=3 lang=la page=385 line=spr-lb-3-0417-12 ref=3.39: Cap. XXXIX. (XLV.) [De Thymbra.] Thymbra
+- book=3 lang=grc page=386 line= ref=3.40: Κεφ. μ΄.
+- book=3 lang=la page=386 line= ref=3.40: Cap. XL. (XLVI.) [De Serpyllo.] Serpyllum [quod
+- book=3 lang=grc page=387 line= ref=3.41: Κεφ. μα΄.
+- book=3 lang=la page=387 line= ref=3.41: Cap. XLI. (XLVII.) [De Maiorana.] Maiorana
+- book=3 lang=grc page=389 line= ref=3.42: Κεφ. μβ΄.
+- book=3 lang=la page=389 line=spr-lb-3-0421-12 ref=3.42: Cap. XLII. (XLIX.) [De Maro.] Marum, quod
+
+### REVIEWED_GENERATED_TITLE_VISIBLE
+- book=3 lang=grc page=403 line=spr-lb-3-0435-12 ref=3.54: Τὸ δὲ αἰθιοπικὸν λεγόμενον σέσελι
+- book=3 lang=grc page=404 line=spr-lb-3-0436-04 ref=3.55: Τὸ δὲ ἐν Πελοποννήσῳ γεννώμενον
+- book=3 lang=grc page=404 line=spr-lb-3-0436-11 ref=3.56: Τορδύλεον, οἱ δὲ τόρδυλον
+- book=3 lang=grc page=405 line=spr-lb-3-0437-06 ref=3.57: Σίσων σπερμάτιόν ἐστι
+- book=3 lang=grc page=405 line=spr-lb-3-0437-12 ref=3.58: Ἄνισον
+- book=3 lang=grc page=406 line=spr-lb-3-0438-07 ref=3.59: Κάρος σπερμάτιόν ἐστι
+- book=3 lang=grc page=406 line=spr-lb-3-0438-12 ref=3.60: Ἄνηθον τὸ ἐσθιόμενον
+- book=3 lang=grc page=407 line=spr-lb-3-0439-07 ref=3.61: Κύμινον τὸ ἥμερον
 
 ### SOURCE_VISIBLE_MISMATCH
 - book=1 lang=grc page=11 line= ref=1.2: Κεφ. β΄. [Περὶ Ἀκόρου[15]

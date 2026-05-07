@@ -7632,10 +7632,7 @@
       "front_subsection": "",
       "front_subsection_title": "",
       "book": "3",
-      "chapter_starts": [
-        "3.38",
-        "3.39"
-      ],
+      "chapter_starts": [],
       "tei_facs": "page_images/page-0412.png",
       "facs": "https://archive.org/details/b23982500_0001/page/n411/mode/1up",
       "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0001%2Fb23982500_0001_jp2.zip%2Fb23982500_0001_jp2%2Fb23982500_0001_0412.jp2/full/1200,/0/default.jpg",
@@ -7691,9 +7688,7 @@
       "front_subsection_title": "",
       "book": "3",
       "chapter_starts": [
-        "3.33",
-        "3.37",
-        "3.42"
+        "3.37"
       ],
       "tei_facs": "page_images/page-0415.png",
       "facs": "https://archive.org/details/b23982500_0001/page/n414/mode/1up",
@@ -7787,9 +7782,7 @@
       "front_subsection": "",
       "front_subsection_title": "",
       "book": "3",
-      "chapter_starts": [
-        "3.41"
-      ],
+      "chapter_starts": [],
       "tei_facs": "page_images/page-0420.png",
       "facs": "https://archive.org/details/b23982500_0001/page/n419/mode/1up",
       "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0001%2Fb23982500_0001_jp2.zip%2Fb23982500_0001_jp2%2Fb23982500_0001_0420.jp2/full/1200,/0/default.jpg",
@@ -8066,7 +8059,9 @@
       "front_subsection": "",
       "front_subsection_title": "",
       "book": "3",
-      "chapter_starts": [],
+      "chapter_starts": [
+        "3.54"
+      ],
       "tei_facs": "page_images/page-0435.png",
       "facs": "https://archive.org/details/b23982500_0001/page/n434/mode/1up",
       "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0001%2Fb23982500_0001_jp2.zip%2Fb23982500_0001_jp2%2Fb23982500_0001_0435.jp2/full/1200,/0/default.jpg",
@@ -8083,7 +8078,10 @@
       "front_subsection": "",
       "front_subsection_title": "",
       "book": "3",
-      "chapter_starts": [],
+      "chapter_starts": [
+        "3.55",
+        "3.56"
+      ],
       "tei_facs": "page_images/page-0436.png",
       "facs": "https://archive.org/details/b23982500_0001/page/n435/mode/1up",
       "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0001%2Fb23982500_0001_jp2.zip%2Fb23982500_0001_jp2%2Fb23982500_0001_0436.jp2/full/1200,/0/default.jpg",
@@ -8100,7 +8098,10 @@
       "front_subsection": "",
       "front_subsection_title": "",
       "book": "3",
-      "chapter_starts": [],
+      "chapter_starts": [
+        "3.57",
+        "3.58"
+      ],
       "tei_facs": "page_images/page-0437.png",
       "facs": "https://archive.org/details/b23982500_0001/page/n436/mode/1up",
       "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0001%2Fb23982500_0001_jp2.zip%2Fb23982500_0001_jp2%2Fb23982500_0001_0437.jp2/full/1200,/0/default.jpg",
@@ -8117,7 +8118,10 @@
       "front_subsection": "",
       "front_subsection_title": "",
       "book": "3",
-      "chapter_starts": [],
+      "chapter_starts": [
+        "3.59",
+        "3.60"
+      ],
       "tei_facs": "page_images/page-0438.png",
       "facs": "https://archive.org/details/b23982500_0001/page/n437/mode/1up",
       "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0001%2Fb23982500_0001_jp2.zip%2Fb23982500_0001_jp2%2Fb23982500_0001_0438.jp2/full/1200,/0/default.jpg",
@@ -8134,7 +8138,9 @@
       "front_subsection": "",
       "front_subsection_title": "",
       "book": "3",
-      "chapter_starts": [],
+      "chapter_starts": [
+        "3.61"
+      ],
       "tei_facs": "page_images/page-0439.png",
       "facs": "https://archive.org/details/b23982500_0001/page/n438/mode/1up",
       "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0001%2Fb23982500_0001_jp2.zip%2Fb23982500_0001_jp2%2Fb23982500_0001_0439.jp2/full/1200,/0/default.jpg",
