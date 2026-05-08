@@ -68,3 +68,58 @@ hOCR is a derived layer, not a blocker for first ingest. When added, keep it
 edition-specific and generated from page images or IIIF image services. The
 target shape should map page, line, and word boxes to TEI page/line positions so
 the viewer can later overlay text selections on the facsimile image.
+
+## Sprengel Volume 2 OCR
+
+The local `b23982500_0002_jp2.zip` source should be treated as an ignored
+facsimile asset, not committed data. Generate hOCR and plain text into
+`ocr/sprengel/b23982500_0002/`:
+
+```bash
+python3 scripts/ocr_sprengel_jp2_zip.py \
+  --zip b23982500_0002_jp2.zip \
+  --output-dir ocr/sprengel/b23982500_0002
+```
+
+This runner is intentionally page-first. It keeps raw whole-page hOCR in
+`pass1/`, reruns low-confidence regions into `pass2_regions/`, and writes a
+refined text layer plus per-page retry metadata into `refined/`. It also writes
+`context.json`, a cross-page lexicon and revisit queue built from the refined
+text layer after the run. The raw hOCR is the coordinate-bearing evidence layer;
+refined text and context suggestions are review aids and should not be promoted
+to diplomatic TEI without checking the page image.
+
+The default OCR languages are Latin, Ancient Greek, Arabic, Hebrew, and Syriac:
+`lat+grc+ara+heb+syr`. There is no German in Sprengel volume 2 OCR. On Debian or
+Ubuntu, install the expected Tesseract data with:
+
+```bash
+sudo apt install \
+  tesseract-ocr-lat tesseract-ocr-grc \
+  tesseract-ocr-ara tesseract-ocr-heb tesseract-ocr-syr \
+  tesseract-ocr-script-latn tesseract-ocr-script-grek \
+  tesseract-ocr-script-arab tesseract-ocr-script-hebr \
+  tesseract-ocr-script-syrc
+```
+
+For a small smoke test before a full run:
+
+```bash
+python3 scripts/ocr_sprengel_jp2_zip.py --pages 700-702
+```
+
+The first strict multilingual pilot on index scans `700-703` produced usable
+OCR with `lat+grc+ara+heb+syr`: page confidence was roughly `75-79`, and only
+scan `703` required a weak-region revisit. The text preserved recognizable
+Arabic, Hebrew, Syriac, Greek, and Latin page-reference evidence, but it should
+still be treated as OCR evidence rather than a corrected index.
+
+For the full local run on an 8-core machine, use bounded parallelism and keep
+the default language set:
+
+```bash
+python3 scripts/ocr_sprengel_jp2_zip.py --workers 4
+```
+
+If language packs are not installed yet, a non-final script smoke test can use
+`--allow-missing-langs`; do not treat that output as the multilingual baseline.
