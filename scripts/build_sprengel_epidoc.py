@@ -349,6 +349,15 @@ class HeadingDecision:
     decision_note: str = ""
 
 
+@dataclass(frozen=True)
+class PageHeader:
+    header_text: str = ""
+    page_num_text: str = ""
+    source: str = ""
+    confidence: str = ""
+    needs_review: str = ""
+
+
 @dataclass
 class Page:
     facs: str
@@ -386,6 +395,25 @@ def attr(element: ET.Element, name: str) -> str:
     if name == "xml:lang":
         return element.get(XML_LANG) or element.get("xml:lang") or ""
     return element.get(name) or ""
+
+
+def load_page_headers(path: Path | None) -> dict[str, PageHeader]:
+    if path is None or not path.exists():
+        return {}
+    headers: dict[str, PageHeader] = {}
+    with path.open(encoding="utf-8", newline="") as handle:
+        for row in csv.DictReader(handle):
+            facs = (row.get("tei_facs") or "").strip()
+            if not facs:
+                continue
+            headers[facs] = PageHeader(
+                header_text=" ".join((row.get("header_text") or "").split()),
+                page_num_text=" ".join((row.get("page_num_text") or "").split()),
+                source=(row.get("source") or "").strip(),
+                confidence=(row.get("confidence") or "").strip(),
+                needs_review=(row.get("needs_review") or "").strip(),
+            )
+    return headers
 
 
 def text_content(element: ET.Element) -> str:
@@ -767,12 +795,14 @@ class SprengelBuilder:
         archive_id: str,
         iiif_width: int,
         heading_decisions: Path | None = None,
+        page_headers: Path | None = None,
     ) -> None:
         self.source = source
         self.archive_id = archive_id
         self.iiif_width = iiif_width
         self.root = ET.parse(source).getroot()
         self.heading_decisions = load_heading_decisions(heading_decisions)
+        self.page_headers = load_page_headers(page_headers)
         self.pages: dict[str, Page] = {}
         self.page_order: list[str] = []
         self.chapters: dict[str, Chapter] = {}
@@ -1699,9 +1729,21 @@ class SprengelBuilder:
             pb.set("n", page.n)
         pb.set("facs", page.facs)
         pb.set(XML_ID, page.xml_id)
+        self.append_page_header(page_div, page)
         zone = ET.SubElement(page_div, f"{NS}ab", {"type": "pageZone", "place": "full"})
         zone.set(XML_LANG, "la")
         self.append_zone_items(zone, page.zones["front"])
+
+    def append_page_header(self, page_div: ET.Element, page: Page) -> None:
+        header = self.page_headers.get(page.facs)
+        if header is None:
+            return
+        if header.header_text:
+            fw = ET.SubElement(page_div, f"{NS}fw", {"type": "header", "place": "top"})
+            fw.text = header.header_text
+        if header.page_num_text:
+            fw = ET.SubElement(page_div, f"{NS}fw", {"type": "pageNum", "place": "top-outer"})
+            fw.text = header.page_num_text
 
     def append_zone_items(self, parent: ET.Element, items: list[ET.Element | ChapterMarker]) -> None:
         for item in items:
@@ -1719,6 +1761,7 @@ class SprengelBuilder:
             pb.set("n", page.n)
         pb.set("facs", page.facs)
         pb.set(XML_ID, page.xml_id)
+        self.append_page_header(page_div, page)
         for lang, place in (("grc", "top"), ("commentary", "commentary"), ("la", "bottom")):
             if not page.zones[lang]:
                 continue
@@ -1880,9 +1923,21 @@ def main() -> None:
         default=Path("output/sprengel_heading_audit/heading_decisions.csv"),
         help="Optional reviewed heading decisions CSV.",
     )
+    parser.add_argument(
+        "--page-headers",
+        type=Path,
+        default=Path("editions/sprengel1829/page_headers.csv"),
+        help="Optional page-header sidecar CSV generated from facsimile OCR.",
+    )
     args = parser.parse_args()
 
-    builder = SprengelBuilder(args.source, args.archive_id, args.iiif_width, args.heading_decisions)
+    builder = SprengelBuilder(
+        args.source,
+        args.archive_id,
+        args.iiif_width,
+        args.heading_decisions,
+        args.page_headers,
+    )
     tei = builder.build_tei()
 
     args.output.parent.mkdir(parents=True, exist_ok=True)

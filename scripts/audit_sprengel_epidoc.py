@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 from collections import Counter, defaultdict
+import csv
 import json
 from pathlib import Path
 import re
@@ -58,6 +59,19 @@ def page_by_facs(root: ET.Element, facs: str) -> ET.Element | None:
         ),
         None,
     )
+
+
+def page_furniture_texts(page: ET.Element) -> tuple[str, str]:
+    header = ""
+    page_num = ""
+    for child in list(page):
+        if local_name(child.tag) != "fw":
+            continue
+        if attr(child, "type") == "header":
+            header = text_content(child)
+        elif attr(child, "type") == "pageNum":
+            page_num = text_content(child)
+    return header, page_num
 
 
 def check_text_order(issues: list[str], text: str, label: str, needles: tuple[str, ...]) -> None:
@@ -187,6 +201,7 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("xml")
     parser.add_argument("--manifest", default="editions/sprengel1829/manifest.json")
+    parser.add_argument("--page-headers", default="editions/sprengel1829/page_headers.csv")
     args = parser.parse_args()
 
     raw = open(args.xml, encoding="utf-8").read()
@@ -644,6 +659,32 @@ def main() -> int:
                 issues.append("MANIFEST_PAGE_XVII_BAD_FRONT_SUBSECTION")
             if manifest_page_xvii.get("front_subsection_title") != "VIII. De codicibus manuscriptis.":
                 issues.append("MANIFEST_PAGE_XVII_BAD_FRONT_SUBSECTION_TITLE")
+
+    page_headers_path = Path(args.page_headers)
+    if page_headers_path.exists():
+        pages_by_facs = {
+            attr(element, "facs"): element
+            for element in root.iter()
+            if local_name(element.tag) == "div" and attr(element, "subtype") == "diplomatic-page"
+        }
+        with page_headers_path.open(encoding="utf-8", newline="") as handle:
+            for row in csv.DictReader(handle):
+                facs = (row.get("tei_facs") or "").strip()
+                book_page = (row.get("book_page") or "").strip()
+                needs_review = (row.get("needs_review") or "").strip().lower()
+                if not facs or needs_review in {"1", "true", "yes"} or not book_page.isdigit():
+                    continue
+                page = pages_by_facs.get(facs)
+                if page is None:
+                    issues.append(f"PAGE_HEADER_PAGE_MISSING: {facs}")
+                    continue
+                header_text, page_num_text = page_furniture_texts(page)
+                expected_header = " ".join((row.get("header_text") or "").split())
+                expected_page_num = " ".join((row.get("page_num_text") or "").split())
+                if expected_header and header_text != expected_header:
+                    issues.append(f"PAGE_HEADER_TEXT_MISMATCH: {facs}")
+                if expected_page_num and page_num_text != expected_page_num:
+                    issues.append(f"PAGE_HEADER_NUM_MISMATCH: {facs}")
 
     print(f"Footnote refs: {len(footnote_refs)}")
     print(f"Footnote notes: {len(notes_by_id)}")
