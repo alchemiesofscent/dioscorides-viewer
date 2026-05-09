@@ -5,11 +5,38 @@ This repo treats `beck.xml` as private OCR/XML source evidence. The generated TE
 Generate the private TEI and manifest:
 
 ```bash
+python3 scripts/ocr_beck_pages.py \
+  --pages 14,15,16,30,33,45,133 \
+  --source beck.xml \
+  --images editions/beck2020/page_images \
+  --outdir output/beck_text_cleaning/pilot
+```
+
+This writes ignored hOCR/TSV/text evidence under `ocr/beck2020/` and text
+cleanup sidecars under `output/beck_text_cleaning/`. The builder consumes
+`line_roles.csv` and `token_corrections.csv` automatically when they are
+present, so `beck.xml` remains unchanged.
+
+```bash
 python3 scripts/build_beck_epidoc.py \
   --source beck.xml \
   --output output/beck2020_epidoc.xml \
   --manifest editions/beck2020/manifest.json
 ```
+
+Run the text clarity gate after each OCR cleanup rebuild:
+
+```bash
+python3 scripts/qc_beck_text_clarity.py \
+  --source beck.xml \
+  --tei output/beck2020_epidoc.xml \
+  --audit output/beck_text_cleaning
+```
+
+The clarity QC counts non-furniture body tokens, checks unresolved suspect
+tokens against the 99.9% threshold, verifies that accepted page furniture is
+not rendered as body text, and spot-checks the high-confidence mixed Greek
+correction on page 30.
 
 Run the footnote completion QC after each rebuild:
 

@@ -32,6 +32,8 @@ BAD_XML_ID_CHARS_RE = re.compile(r"[^A-Za-z0-9_.-]+")
 SPACE_BEFORE_RE = re.compile(r"^[,.;:!?%)\]\u2019\u201d]$")
 NO_SPACE_AFTER_RE = re.compile(r"[(\[\u2018\u201c]$")
 GREEK_RE = re.compile(r"[\u0370-\u03ff\u1f00-\u1fff]")
+ACCEPTED_STATUSES = {"accepted", "approved", "auto", "auto-accepted"}
+FURNITURE_ROLES = {"header", "pageNum", "omit"}
 
 
 @dataclass
@@ -86,8 +88,34 @@ class NoteInfo:
     evidence_status: str = ""
 
 
+@dataclass(frozen=True)
+class TokenCorrection:
+    source_id: str
+    corrected_text: str
+    xml_lang: str = ""
+    status: str = ""
+    confidence: str = ""
+    evidence: str = ""
+
+
+@dataclass(frozen=True)
+class LineRole:
+    source_id: str
+    role: str
+    place: str = ""
+    text: str = ""
+    status: str = ""
+    confidence: str = ""
+    evidence: str = ""
+
+
 class BeckBuilder:
-    def __init__(self, ocr_candidates_by_note: dict[str, list[dict[str, str]]] | None = None) -> None:
+    def __init__(
+        self,
+        ocr_candidates_by_note: dict[str, list[dict[str, str]]] | None = None,
+        token_corrections: dict[str, TokenCorrection] | None = None,
+        line_roles: dict[str, LineRole] | None = None,
+    ) -> None:
         self.id_counts: Counter[str] = Counter()
         self.raw_id_counts: Counter[str] = Counter()
         self.tuid_counts: Counter[str] = Counter()
@@ -103,6 +131,10 @@ class BeckBuilder:
         self.anchor_candidates_by_page: defaultdict[int, list[AnchorCandidate]] = defaultdict(list)
         self.ocr_refs_by_token_id: defaultdict[str, list[NoteInfo]] = defaultdict(list)
         self.ocr_candidates_by_note = ocr_candidates_by_note or {}
+        self.token_corrections = token_corrections or {}
+        self.line_roles = line_roles or {}
+        self.line_text_by_id: dict[str, str] = {}
+        self.token_line_id: dict[str, str] = {}
 
     def build(self, source: Path) -> ET.ElementTree:
         src_root = ET.parse(source).getroot()
@@ -146,7 +178,7 @@ class BeckBuilder:
             for child in list(parent):
                 self.parent_by_obj[id(child)] = parent
 
-        state = {"page": 0, "book": "", "chapter": "", "section": "front"}
+        state = {"page": 0, "book": "", "chapter": "", "section": "front", "line_id": ""}
         note_order = 0
 
         def walk(el: ET.Element, in_note: bool = False) -> None:
@@ -156,6 +188,9 @@ class BeckBuilder:
 
             if tag == "pb":
                 state["page"] = int(el.get("seq") or state["page"] or 0)
+                state["line_id"] = ""
+            elif tag == "lb":
+                state["line_id"] = el.get("id", "")
             elif tag == "div":
                 tuid = el.get("tuid", "")
                 book_match = BOOK_TUID_RE.match(tuid)
@@ -175,6 +210,10 @@ class BeckBuilder:
                 token_id = el.get("id", "")
                 token_text = token_full_text(el)
                 if token_id and token_text:
+                    if state.get("line_id"):
+                        self.token_line_id[token_id] = str(state["line_id"])
+                        current = self.line_text_by_id.get(str(state["line_id"]), "")
+                        self.line_text_by_id[str(state["line_id"])] = normalize_ws(f"{current} {token_text}")
                     page = int(state["page"] or 0)
                     tokens = self.page_tokens[page]
                     tokens.append(
@@ -541,10 +580,19 @@ class BeckBuilder:
             assert isinstance(line_ref, list)
             line_ref[0] += 1
             return self.convert_lb(src, count_line=False, n=line_ref[0])
+        if tag == "lb":
+            line_id = src.get("id", "")
+            context["_current_line_id"] = line_id
+            role = self.line_roles.get(line_id)
+            context["_current_line_role"] = role.role if role else "body"
+            if role and role.role in FURNITURE_ROLES:
+                return self.convert_line_furniture(src, role)
         if tag == "note":
             return self.convert_note(src, context)
         if tag == "tok":
-            text = (src.text or "").strip()
+            if self.should_skip_token(src, context):
+                return None
+            text = self.token_text(src)
             has_note_child = any(local_name(child.tag) == "note" for child in list(src))
             has_ocr_ref = bool(src.get("id") and src.get("id") in self.ocr_refs_by_token_id)
             if text and GREEK_RE.search(text):
@@ -557,10 +605,12 @@ class BeckBuilder:
         return self.convert_element(src, context)  # type: ignore[arg-type]
 
     def convert_token_element(self, src: ET.Element, context: dict[str, object] | None = None) -> ET.Element | None:
-        text = (src.text or "").strip()
+        if context is not None and self.should_skip_token(src, context):
+            return None
+        text = self.token_text(src)
         if not text and not list(src):
             return None
-        if GREEK_RE.search(token_full_text(src)):
+        if GREEK_RE.search(self.token_full_text(src)):
             out = ET.Element(NS + "foreign")
             out.set(XML_LANG, "grc")
         else:
@@ -580,6 +630,38 @@ class BeckBuilder:
         for info in self.ocr_refs_by_token_id.get(src.get("id", ""), []):
             out.append(self.make_ref(info, info.note_xml_id))
         return out
+
+    def token_text(self, src: ET.Element) -> str:
+        token_id = src.get("id", "")
+        correction = self.token_corrections.get(token_id)
+        if correction:
+            return correction.corrected_text.strip()
+        return (src.text or "").strip()
+
+    def token_full_text(self, src: ET.Element) -> str:
+        token_id = src.get("id", "")
+        correction = self.token_corrections.get(token_id)
+        if correction:
+            return correction.corrected_text.strip()
+        return token_full_text(src)
+
+    def should_skip_token(self, src: ET.Element, context: dict[str, object]) -> bool:
+        token_id = src.get("id", "")
+        line_id = self.token_line_id.get(token_id) or str(context.get("_current_line_id") or "")
+        role = self.line_roles.get(line_id)
+        return bool(role and role.role in FURNITURE_ROLES)
+
+    def convert_line_furniture(self, src: ET.Element, role: LineRole) -> ET.Element | None:
+        if role.role == "omit":
+            return None
+        fw = ET.Element(NS + "fw")
+        fw.set("type", "pageNum" if role.role == "pageNum" else "header")
+        fw.set("place", role.place or ("top-outer" if role.role == "pageNum" else "top"))
+        fw.set(XML_ID, self.xml_id(f"fw-{src.get('id') or role.source_id}"))
+        text = role.text or self.line_text_by_id.get(src.get("id", ""), "")
+        if text:
+            fw.text = text
+        return fw
 
     def convert_note(self, src: ET.Element, context: dict[str, object]) -> ET.Element | None:
         info = self.note_info_by_obj.get(id(src))
@@ -1125,6 +1207,53 @@ def read_ocr_candidates(path: Path) -> dict[str, list[dict[str, str]]]:
     return dict(by_note)
 
 
+def read_token_corrections(path: Path) -> dict[str, TokenCorrection]:
+    if not path.exists():
+        return {}
+    with path.open(encoding="utf-8", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+    corrections: dict[str, TokenCorrection] = {}
+    for row in rows:
+        source_id = row.get("source_token_id") or row.get("source_id") or row.get("token_id") or ""
+        corrected = row.get("corrected_text") or row.get("replacement") or ""
+        status = (row.get("status") or "").strip()
+        if not source_id or not corrected or status not in ACCEPTED_STATUSES:
+            continue
+        corrections[source_id] = TokenCorrection(
+            source_id=source_id,
+            corrected_text=corrected,
+            xml_lang=row.get("xml_lang") or "",
+            status=status,
+            confidence=row.get("confidence") or "",
+            evidence=row.get("evidence") or row.get("evidence_note") or "",
+        )
+    return corrections
+
+
+def read_line_roles(path: Path) -> dict[str, LineRole]:
+    if not path.exists():
+        return {}
+    with path.open(encoding="utf-8", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+    roles: dict[str, LineRole] = {}
+    for row in rows:
+        source_id = row.get("source_line_id") or row.get("source_id") or row.get("line_id") or ""
+        role = row.get("role") or ""
+        status = (row.get("status") or "").strip()
+        if not source_id or role not in FURNITURE_ROLES or status not in ACCEPTED_STATUSES:
+            continue
+        roles[source_id] = LineRole(
+            source_id=source_id,
+            role=role,
+            place=row.get("place") or "",
+            text=row.get("text") or "",
+            status=status,
+            confidence=row.get("confidence") or "",
+            evidence=row.get("evidence") or row.get("evidence_note") or "",
+        )
+    return roles
+
+
 def write_footnote_audit(path: Path, builder: BeckBuilder, validation: list[str]) -> None:
     path.mkdir(parents=True, exist_ok=True)
     rows = builder.footnote_audit_rows()
@@ -1173,6 +1302,13 @@ def main() -> int:
         default="",
         help="Optional OCR sidecar from scripts/ocr_beck_footnote_anchors.py",
     )
+    parser.add_argument(
+        "--cleaning-dir",
+        default="output/beck_text_cleaning",
+        help="Directory containing ignored Beck text-cleaning sidecars",
+    )
+    parser.add_argument("--token-corrections", default="", help="Optional token correction CSV sidecar")
+    parser.add_argument("--line-roles", default="", help="Optional line role CSV sidecar")
     args = parser.parse_args()
 
     source = Path(args.source)
@@ -1183,8 +1319,15 @@ def main() -> int:
     if not source.exists():
         raise SystemExit(f"Beck source XML not found: {source}")
 
+    cleaning_dir = Path(args.cleaning_dir)
     ocr_candidates_path = Path(args.ocr_candidates) if args.ocr_candidates else footnote_audit_dir / "ocr_candidates.csv"
-    builder = BeckBuilder(read_ocr_candidates(ocr_candidates_path))
+    token_corrections_path = Path(args.token_corrections) if args.token_corrections else cleaning_dir / "token_corrections.csv"
+    line_roles_path = Path(args.line_roles) if args.line_roles else cleaning_dir / "line_roles.csv"
+    builder = BeckBuilder(
+        read_ocr_candidates(ocr_candidates_path),
+        token_corrections=read_token_corrections(token_corrections_path),
+        line_roles=read_line_roles(line_roles_path),
+    )
     tree = builder.build(source)
     output.parent.mkdir(parents=True, exist_ok=True)
     ET.indent(tree, space="  ")
