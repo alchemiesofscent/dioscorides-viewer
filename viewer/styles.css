@@ -175,6 +175,11 @@ select {
   border-right: 0;
 }
 
+.text-pane {
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr);
+}
+
 .sidebar {
   display: grid;
   grid-template-rows: auto 1fr;
@@ -193,6 +198,15 @@ select {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
+}
+
+.page-meta-strip {
+  border-bottom: 1px solid var(--line);
+  background: #fffdf8;
+  overflow: hidden;
+  padding: 6px 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .section-list {
@@ -268,7 +282,7 @@ select {
 }
 
 .tei-text {
-  height: calc(100% - 58px);
+  height: auto;
   overflow: auto;
   padding: 18px 22px 48px;
   font-family: Georgia, "Times New Roman", serif;
@@ -607,6 +621,10 @@ select {
   .tei-text,
   .image-stage {
     height: calc(70vh - 58px);
+  }
+
+  .text-pane .tei-text {
+    height: auto;
   }
 }
 
