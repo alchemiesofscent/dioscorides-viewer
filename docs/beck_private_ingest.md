@@ -44,4 +44,18 @@ python3 scripts/extract_beck_images.py /path/to/beck.pdf
 
 The extractor writes ignored files under `editions/beck2020/page_images/` as `beck-1.jpg` through `beck-710.jpg`. If the PDF path is wrong, it stops with a filename error.
 
-For local viewer review, use `editions/beck2020/private_registry.json` as the Beck registry source instead of adding Beck to the public `editions.json`. Do not promote the Beck entry to `editions.json` until a publication-safe policy exists.
+For local viewer review, serve the repository root and open the normal viewer URL:
+
+```bash
+python3 -m http.server 8000
+```
+
+```text
+http://localhost:8000/viewer/
+```
+
+On localhost, the viewer automatically appends
+`editions/beck2020/private_registry.json` to the public edition registry when
+the private registry is present. Beck will appear in the edition dropdown with
+Berendes and Sprengel, but Berendes remains the default. Do not promote the Beck
+entry to `editions.json` until a publication-safe policy exists.

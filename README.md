@@ -31,6 +31,11 @@ Then open:
 http://localhost:8000/viewer/
 ```
 
+On localhost, the viewer also looks for the private Beck registry at
+`editions/beck2020/private_registry.json` and appends Beck to the edition menu
+when the private generated files are present. This local overlay does not change
+the public `editions.json` registry used by GitHub Pages.
+
 ## Repository Contents
 
 - `viewer/` - static browser viewer.

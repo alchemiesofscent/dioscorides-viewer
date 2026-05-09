@@ -3,6 +3,7 @@
 
   const REPO_ROOT = new URL("../", window.location.href);
   const EDITIONS_PATH = "editions.json";
+  const LOCAL_PRIVATE_REGISTRY_PATH = "editions/beck2020/private_registry.json";
   const XML_NS = "http://www.w3.org/XML/1998/namespace";
   const FALLBACK_EDITION = {
     id: "berendes1902",
@@ -70,6 +71,39 @@
     if (!path) return "";
     if (/^(?:https?:|data:|blob:)/i.test(path)) return path;
     return new URL(path.replace(/^\.?\//, ""), REPO_ROOT).href;
+  }
+
+  function registryPath() {
+    const requested = new URLSearchParams(window.location.search).get("registry");
+    if (!requested) return EDITIONS_PATH;
+    if (/^(?:https?:|data:|blob:)/i.test(requested) || requested.startsWith("/") || requested.includes("..")) {
+      console.warn("Ignoring unsupported edition registry path", requested);
+      return EDITIONS_PATH;
+    }
+    return requested;
+  }
+
+  function hasExplicitRegistryPath() {
+    return new URLSearchParams(window.location.search).has("registry");
+  }
+
+  function isLocalViewerHost() {
+    const host = window.location.hostname;
+    return host === "localhost" || host === "0.0.0.0" || host === "::1" || /^127(?:\.\d{1,3}){3}$/.test(host);
+  }
+
+  function mergeEditionRegistries(primary, overlay) {
+    if (!overlay || !Array.isArray(overlay.editions) || !overlay.editions.length) return primary;
+    const merged = [];
+    const seen = new Set();
+    for (const registry of [primary, overlay]) {
+      for (const edition of Array.isArray(registry.editions) ? registry.editions : []) {
+        if (!edition || !edition.id || seen.has(edition.id)) continue;
+        seen.add(edition.id);
+        merged.push(edition);
+      }
+    }
+    return { ...primary, editions: merged };
   }
 
   function localName(node) {
@@ -1095,9 +1129,22 @@
     return response.json();
   }
 
+  async function loadOptionalJson(path) {
+    try {
+      return await loadJson(path);
+    } catch (error) {
+      console.warn("Optional edition registry unavailable", path, error);
+      return null;
+    }
+  }
+
   async function loadEditionRegistry() {
     try {
-      const registry = await loadJson(resolveRepoPath(EDITIONS_PATH));
+      let registry = await loadJson(resolveRepoPath(registryPath()));
+      if (!hasExplicitRegistryPath() && isLocalViewerHost()) {
+        const privateRegistry = await loadOptionalJson(resolveRepoPath(LOCAL_PRIVATE_REGISTRY_PATH));
+        registry = mergeEditionRegistries(registry, privateRegistry);
+      }
       const editions = Array.isArray(registry.editions) ? registry.editions : [];
       state.editions = editions.length ? editions : [FALLBACK_EDITION];
       const requested = new URLSearchParams(window.location.hash.replace(/^#/, "")).get("edition");
