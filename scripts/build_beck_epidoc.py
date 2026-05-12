@@ -86,6 +86,8 @@ class NoteInfo:
     candidate_count: int = 0
     candidate_summary: str = ""
     evidence_status: str = ""
+    body_override: str = ""
+    split_parent_source_id: str = ""
 
 
 @dataclass(frozen=True)
@@ -135,6 +137,7 @@ class BeckBuilder:
         self.line_roles = line_roles or {}
         self.line_text_by_id: dict[str, str] = {}
         self.token_line_id: dict[str, str] = {}
+        self.split_notes_by_source_id: dict[str, list[NoteInfo]] = {}
 
     def build(self, source: Path) -> ET.ElementTree:
         src_root = ET.parse(source).getroot()
@@ -318,6 +321,7 @@ class BeckBuilder:
             info.confidence = "0.00"
 
         self.resolve_unambiguous_page_sequences(used_anchor_tokens)
+        self.resolve_composite_bottom_notes()
         for info in self.note_infos:
             if info.status == "unresolved-anchor":
                 self.record_candidate_evidence(info, used_anchor_tokens)
@@ -331,12 +335,96 @@ class BeckBuilder:
                 info.confidence = "1.00"
                 info.anchor_snippet = self.source_context_for_parent(info.parent_id)
             elif info.role == "inline-marker" and not info.target_note_id:
-                info.target_note_id = info.note_xml_id
-                info.corresp_ref_ids.append(info.ref_xml_id)
                 info.match_method = "inline-marker-without-source-body"
                 info.status = "missing-source-note-body"
-                info.confidence = "1.00"
+                info.confidence = "0.00"
                 info.anchor_snippet = self.source_context_for_parent(info.parent_id)
+                info.evidence_status = "no-body-candidate-found"
+
+    def resolve_composite_bottom_notes(self) -> None:
+        new_infos: list[NoteInfo] = []
+        for body in list(self.note_infos):
+            if body.role not in {"bottom", "empty-bottom"} or body.status != "unresolved-anchor" or not body.text or body.n:
+                continue
+            markers = [
+                marker
+                for marker in self.note_infos
+                if marker.role == "inline-marker"
+                and marker.page == body.page
+                and marker.n
+                and not marker.target_note_id
+                and marker.order < body.order
+            ]
+            markers = self.nearby_inline_markers(markers, body)
+            if len(markers) < 2:
+                continue
+            chunks = split_note_sentences(body.text)
+            if len(chunks) != len(markers):
+                continue
+            if not consecutive_numeric_labels(markers):
+                continue
+
+            emitted: list[NoteInfo] = []
+            for index, (marker, chunk) in enumerate(zip(markers, chunks)):
+                target = body if index == 0 else clone_split_note(body, index + 1)
+                target.n = marker.n
+                target.text = chunk
+                target.body_override = chunk
+                target.note_xml_id = stable_xml_id("beck-fn", f"{body.source_id}-{marker.n}")
+                target.ref_xml_id = stable_xml_id("beck-ref", marker.source_id)
+                target.target_note_id = target.note_xml_id
+                target.corresp_ref_ids = [marker.ref_xml_id]
+                target.paired_note_source_id = marker.source_id
+                target.anchor_snippet = self.source_context_for_parent(marker.parent_id)
+                target.anchor_token_id = marker.parent_id
+                target.match_method = "composite-bottom-sentence-split"
+                target.status = "resolved"
+                target.confidence = "0.95"
+                target.candidate_count = len(markers)
+                target.candidate_summary = f"split {index + 1}/{len(markers)} from {body.source_id}: {target.anchor_snippet[:100]}"
+                target.evidence_status = "sentence-sequence-split"
+                target.split_parent_source_id = body.source_id
+
+                marker.target_note_id = target.note_xml_id
+                marker.paired_note_source_id = target.source_id
+                marker.match_method = "composite-bottom-sentence-split"
+                marker.status = "resolved"
+                marker.confidence = "0.95"
+                marker.anchor_snippet = target.anchor_snippet
+                marker.candidate_count = 1
+                marker.candidate_summary = chunk[:180]
+                marker.evidence_status = "sentence-sequence-split"
+
+                emitted.append(target)
+                if index > 0:
+                    new_infos.append(target)
+                    self.note_infos_by_id[target.source_id] = target
+            self.split_notes_by_source_id[body.source_id] = emitted
+        if new_infos:
+            self.note_infos.extend(new_infos)
+            self.note_infos.sort(key=lambda item: (item.order, item.source_id))
+
+    def nearby_inline_markers(self, markers: list[NoteInfo], body: NoteInfo) -> list[NoteInfo]:
+        if not markers:
+            return []
+        markers = sorted(markers, key=lambda item: item.order)
+        numeric_labels = [int(marker.n) for marker in markers if marker.n.isdigit()]
+        if not numeric_labels:
+            return markers[-3:]
+        start = 0
+        best: list[NoteInfo] = []
+        while start < len(markers):
+            current: list[NoteInfo] = [markers[start]]
+            previous = int(markers[start].n) if markers[start].n.isdigit() else None
+            for marker in markers[start + 1 :]:
+                if previous is None or not marker.n.isdigit() or int(marker.n) != previous + 1:
+                    break
+                current.append(marker)
+                previous = int(marker.n)
+            if len(current) > len(best):
+                best = current
+            start += max(1, len(current))
+        return best or markers[-3:]
 
     def inventory_anchor_candidates(self) -> None:
         for page, tokens in self.page_tokens.items():
@@ -668,17 +756,20 @@ class BeckBuilder:
         if info is None:
             return None
         if info.role == "inline-marker":
-            ref = self.make_ref(info, info.target_note_id or info.note_xml_id)
-            if info.status == "missing-source-note-body":
-                pending_note = self.make_footnote_note(info, subtype="missing-source-note-body")
-                context.setdefault("_pending_elements", []).append(pending_note)  # type: ignore[union-attr]
-            return ref
+            if info.target_note_id:
+                return self.make_ref(info, info.target_note_id)
+            return self.make_unresolved_anchor(info)
         if info.role == "inline-text":
             ref = self.make_ref(info, info.note_xml_id)
             pending_note = self.make_footnote_note(info, source=src)
             context.setdefault("_pending_elements", []).append(pending_note)  # type: ignore[union-attr]
             return ref
         if info.role in {"bottom", "empty-bottom"}:
+            if info.source_id in self.split_notes_by_source_id:
+                notes = self.split_notes_by_source_id[info.source_id]
+                for pending_info in notes[1:]:
+                    context.setdefault("_pending_elements", []).append(self.make_footnote_note(pending_info))  # type: ignore[union-attr]
+                return self.make_footnote_note(notes[0])
             subtype = "unresolved-anchor" if info.status.startswith("unresolved") else ""
             return self.make_footnote_note(info, source=src, subtype=subtype)
         return None
@@ -701,9 +792,21 @@ class BeckBuilder:
             note.set("subtype", subtype)
         if info.corresp_ref_ids:
             note.set("corresp", " ".join(f"#{ref_id}" for ref_id in info.corresp_ref_ids))
-        if source is not None:
+        if info.body_override:
+            append_mixed_source_text(note, info.body_override)
+        elif source is not None:
             self.convert_note_body(source, note, info)
         return note
+
+    def make_unresolved_anchor(self, info: NoteInfo) -> ET.Element:
+        anchor = ET.Element(NS + "seg")
+        anchor.set("type", "footnote-anchor")
+        anchor.set("subtype", "unresolved-source-note-body")
+        anchor.set(XML_ID, info.ref_xml_id)
+        if info.n:
+            anchor.set("n", info.n)
+            anchor.text = info.n
+        return anchor
 
     def convert_note_body(self, src: ET.Element, dst: ET.Element, info: NoteInfo) -> None:
         text_buffer: list[str] = []
@@ -1090,6 +1193,43 @@ def is_note_label_token(text: str, label: str) -> bool:
     return normalize_marker(text).lstrip("^") == normalize_marker(label).lstrip("^")
 
 
+def split_note_sentences(text: str) -> list[str]:
+    normalized = normalize_ws(text)
+    if not normalized:
+        return []
+    chunks = re.split(r"(?<=[.!?])\s+(?=[A-ZΑ-ΩἈ-Ὦ])", normalized)
+    return [chunk.strip() for chunk in chunks if chunk.strip()]
+
+
+def consecutive_numeric_labels(markers: list[NoteInfo]) -> bool:
+    if len(markers) < 2:
+        return False
+    labels: list[int] = []
+    for marker in markers:
+        if not marker.n.isdigit():
+            return False
+        labels.append(int(marker.n))
+    return labels == list(range(labels[0], labels[0] + len(labels)))
+
+
+def clone_split_note(info: NoteInfo, part: int) -> NoteInfo:
+    return NoteInfo(
+        source_id=f"{info.source_id}-part-{part}",
+        n=info.n,
+        page=info.page,
+        parent_tag=info.parent_tag,
+        parent_id=info.parent_id,
+        role=info.role,
+        text=info.text,
+        y=info.y,
+        chapter=info.chapter,
+        order=info.order,
+        note_xml_id=info.note_xml_id,
+        ref_xml_id=info.ref_xml_id,
+        split_parent_source_id=info.source_id,
+    )
+
+
 def strip_note_label_from_text(text: str, label: str) -> str:
     if not label:
         return text
@@ -1150,6 +1290,27 @@ def append_source_text(parent: ET.Element, text: str) -> None:
     foreign.set(XML_LANG, "grc")
     foreign.text = text
     parent.append(foreign)
+
+
+def append_mixed_source_text(parent: ET.Element, text: str) -> None:
+    for token in re.findall(r"\S+", text):
+        if GREEK_RE.search(token):
+            foreign = ET.Element(NS + "foreign")
+            foreign.set(XML_LANG, "grc")
+            foreign.text = token
+            append_inline_element(parent, foreign)
+        else:
+            append_text(parent, token)
+
+
+def append_inline_element(parent: ET.Element, child: ET.Element) -> None:
+    if len(parent):
+        last = parent[-1]
+        if not (last.tail or "").endswith(" ") and local_name(last.tag) not in {"lb", "pb", "milestone"}:
+            last.tail = (last.tail or "") + " "
+    elif parent.text and not parent.text.endswith(" "):
+        parent.text += " "
+    parent.append(child)
 
 
 def validate_output(xml_path: Path, manifest_path: Path) -> list[str]:

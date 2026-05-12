@@ -3,7 +3,10 @@
 
   const REPO_ROOT = new URL("../", window.location.href);
   const EDITIONS_PATH = "editions.json";
-  const LOCAL_PRIVATE_REGISTRY_PATH = "editions/beck2020/private_registry.json";
+  const LOCAL_PRIVATE_REGISTRY_PATHS = [
+    "editions/beck2020/private_registry.json",
+    "editions/beck2020_fresh/private_registry.json",
+  ];
   const XML_NS = "http://www.w3.org/XML/1998/namespace";
   const FALLBACK_EDITION = {
     id: "berendes1902",
@@ -284,6 +287,7 @@
   }
 
   function prepareRenderedTextClone(clone) {
+    for (const footnote of clone.querySelectorAll(".tei-footnote")) footnote.remove();
     for (const lineNumber of clone.querySelectorAll(".line-number")) lineNumber.remove();
     for (const furniture of clone.querySelectorAll(".tei-fw")) {
       furniture.appendChild(document.createTextNode(" "));
@@ -306,6 +310,11 @@
     if (!selection.rangeCount) return "";
     const fragment = selection.getRangeAt(0).cloneContents();
     return normalizeText(prepareRenderedTextClone(fragment).textContent || "");
+  }
+
+  function isInsideRenderedFootnote(node) {
+    const element = node && node.nodeType === Node.ELEMENT_NODE ? node : node ? node.parentElement : null;
+    return Boolean(element && element.closest(".tei-footnote"));
   }
 
   function lineFromRenderedPosition(node, fallback = "") {
@@ -769,6 +778,10 @@
     return container instanceof Element && Boolean(container.closest(".tei-place-commentary"));
   }
 
+  function contributesToPageText(container) {
+    return !(container instanceof Element && container.closest(".tei-footnote"));
+  }
+
   function appendCommentaryText(container, page, text) {
     const lines = text
       .replace(/\r\n?/g, "\n")
@@ -778,7 +791,7 @@
     for (const line of lines) {
       if (container.childNodes.length) container.appendChild(document.createElement("br"));
       container.appendChild(document.createTextNode(line));
-      page.plainText += ` ${normalizeText(line)}`;
+      if (contributesToPageText(container)) page.plainText += ` ${normalizeText(line)}`;
     }
   }
 
@@ -790,10 +803,10 @@
     const trimmed = text.replace(/[ \t\r\n]+/g, " ");
     if (trimmed.trim()) {
       container.appendChild(document.createTextNode(trimmed));
-      page.plainText += ` ${normalizeText(trimmed)}`;
+      if (contributesToPageText(container)) page.plainText += ` ${normalizeText(trimmed)}`;
     } else if (preserveWhitespace && !(container.textContent || "").endsWith(" ")) {
       container.appendChild(document.createTextNode(" "));
-      page.plainText += " ";
+      if (contributesToPageText(container)) page.plainText += " ";
     }
   }
 
@@ -1142,8 +1155,10 @@
     try {
       let registry = await loadJson(resolveRepoPath(registryPath()));
       if (!hasExplicitRegistryPath() && isLocalViewerHost()) {
-        const privateRegistry = await loadOptionalJson(resolveRepoPath(LOCAL_PRIVATE_REGISTRY_PATH));
-        registry = mergeEditionRegistries(registry, privateRegistry);
+        for (const registryPath of LOCAL_PRIVATE_REGISTRY_PATHS) {
+          const privateRegistry = await loadOptionalJson(resolveRepoPath(registryPath));
+          registry = mergeEditionRegistries(registry, privateRegistry);
+        }
       }
       const editions = Array.isArray(registry.editions) ? registry.editions : [];
       state.editions = editions.length ? editions : [FALLBACK_EDITION];
@@ -1476,6 +1491,7 @@
   function allTextNodes(root) {
     const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
       acceptNode(node) {
+        if (isInsideRenderedFootnote(node)) return NodeFilter.FILTER_REJECT;
         return node.nodeValue && node.nodeValue.trim() ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
       },
     });

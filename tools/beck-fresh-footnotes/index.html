@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Beck Footnote Review</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <h1>Beck Footnote Review</h1>
+        <div id="status" class="status">Loading review queue...</div>
+      </div>
+      <div class="toolbar">
+        <label class="field">
+          <span>Filter</span>
+          <select id="typeFilter">
+            <option value="">All rows</option>
+            <option value="bottom-note-without-marker">No marker</option>
+            <option value="ambiguous-marker-count">Ambiguous</option>
+            <option value="marker-without-bottom-note">Marker only</option>
+            <option value="linked-low-confidence-marker">Linked low-confidence</option>
+          </select>
+        </label>
+        <label class="field search">
+          <span>Search</span>
+          <input id="searchInput" type="search" autocomplete="off">
+        </label>
+        <label class="field reviewer">
+          <span>Reviewer</span>
+          <input id="reviewerInput" type="text" value="local-review" autocomplete="off">
+        </label>
+      </div>
+    </header>
+
+    <main class="review-layout">
+      <aside class="queue-pane" aria-label="Review queue">
+        <div class="pane-head">
+          <h2>Queue</h2>
+          <div id="queueCount" class="muted">0 rows</div>
+        </div>
+        <div id="queueList" class="queue-list"></div>
+      </aside>
+
+      <section class="image-pane" aria-label="OCR image review">
+        <div class="pane-head image-controls">
+          <div>
+            <h2 id="pageTitle">Page</h2>
+            <div id="pageMeta" class="muted"></div>
+          </div>
+          <div class="toolbar">
+            <label class="check"><input id="bodyToggle" type="checkbox" checked> Body</label>
+            <label class="check"><input id="bottomToggle" type="checkbox" checked> Bottom</label>
+            <label class="check"><input id="lowToggle" type="checkbox" checked> Low conf</label>
+            <label class="check"><input id="markerToggle" type="checkbox" checked> Markers</label>
+            <button id="zoomOut" type="button" title="Zoom out" aria-label="Zoom out">-</button>
+            <button id="zoomReset" type="button" title="Reset zoom" aria-label="Reset zoom">100%</button>
+            <button id="zoomIn" type="button" title="Zoom in" aria-label="Zoom in">+</button>
+          </div>
+        </div>
+        <div id="stageViewport" class="stage-viewport">
+          <div id="stage" class="stage">
+            <img id="pageImage" alt="">
+            <div id="overlay" class="overlay"></div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="evidence-pane" aria-label="Footnote evidence">
+        <div class="pane-head">
+          <h2>Evidence</h2>
+          <div id="rowStatus" class="badge">No row</div>
+        </div>
+
+        <section class="panel">
+          <h3>Footnote Row</h3>
+          <dl id="rowFacts" class="facts"></dl>
+        </section>
+
+        <section class="panel">
+          <h3>Candidates</h3>
+          <div id="candidateList" class="candidate-list"></div>
+        </section>
+
+        <section class="panel">
+          <h3>OCR Lines</h3>
+          <div id="lineEvidence" class="line-evidence"></div>
+        </section>
+
+        <section class="panel">
+          <h3>Current TEI</h3>
+          <div id="teiState" class="tei-state"></div>
+        </section>
+
+        <section class="panel decisions">
+          <h3>Decision</h3>
+          <label class="field">
+            <span>Reason</span>
+            <select id="rejectReason">
+              <option value="false-marker">False marker</option>
+              <option value="unresolved-no-marker">Unresolved no marker</option>
+              <option value="ambiguous-layout">Ambiguous layout</option>
+            </select>
+          </label>
+          <div class="decision-buttons">
+            <button id="acceptButton" type="button">Accept Link</button>
+            <button id="rejectButton" type="button">Reject</button>
+            <button id="unresolvedButton" type="button">Keep Unresolved</button>
+          </div>
+          <div class="export-buttons">
+            <button id="exportAccepted" type="button">Accepted CSV</button>
+            <button id="exportRejected" type="button">Rejected CSV</button>
+          </div>
+          <textarea id="csvPreview" spellcheck="false" readonly></textarea>
+        </section>
+      </aside>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

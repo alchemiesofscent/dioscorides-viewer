@@ -1,0 +1,17 @@
+{
+  "defaultEdition": "beck2020_fresh",
+  "private": true,
+  "editions": [
+    {
+      "id": "beck2020_fresh",
+      "label": "Beck 2020 fresh OCR (private local review)",
+      "tei": "output/beck2020_fresh_epidoc.xml",
+      "manifest": "editions/beck2020_fresh/manifest.json",
+      "imageMode": "local",
+      "localImageRoot": "ocr/beck2020_fresh/images/",
+      "imageLabelRoot": "ocr/beck2020_fresh/images/",
+      "sourceLabel": "Local private Beck PDF fresh OCR",
+      "licenseNote": "Private local review only. Generated from a local Beck PDF and not suitable for public registry promotion without a publication-safe policy."
+    }
+  ]
+}

@@ -32,9 +32,26 @@ http://localhost:8000/viewer/
 ```
 
 On localhost, the viewer also looks for the private Beck registry at
-`editions/beck2020/private_registry.json` and appends Beck to the edition menu
-when the private generated files are present. This local overlay does not change
-the public `editions.json` registry used by GitHub Pages.
+`editions/beck2020/private_registry.json` and the fresh-PDF registry at
+`editions/beck2020_fresh/private_registry.json`, then appends those private
+review streams to the edition menu when their generated files are present. This
+local overlay does not change the public `editions.json` registry used by GitHub
+Pages.
+
+The fresh Beck footnote ambiguity workflow is image-first. Generate zoom panels
+and model proposals with:
+
+```bash
+python3 scripts/run_beck_fresh_footnote_visual_pass.py \
+  --run-codex \
+  --apply-high-confidence
+```
+
+The separate fresh Beck footnote zoom surface is available for diagnostics at:
+
+```text
+http://localhost:8000/tools/beck-fresh-footnotes/
+```
 
 ## Repository Contents
 

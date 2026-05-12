@@ -20,6 +20,10 @@ def local_name(tag: str) -> str:
     return tag.rsplit("}", 1)[-1]
 
 
+def normalize_ws(text: str) -> str:
+    return " ".join(text.split())
+
+
 def source_note_ids(source: Path) -> list[str]:
     root = ET.parse(source).getroot()
     ids: list[str] = []
@@ -37,6 +41,49 @@ def read_audit_rows(audit_dir: Path) -> list[dict[str, str]]:
         raise SystemExit(f"Missing footnote audit CSV: {path}")
     with path.open(encoding="utf-8", newline="") as handle:
         return list(csv.DictReader(handle))
+
+
+def page_body_text_without_footnotes(root: ET.Element, page: str) -> str:
+    pieces: list[str] = []
+    state = {"in_page": False, "stop": False}
+
+    def walk(element: ET.Element, excluded: bool = False) -> None:
+        if state["stop"]:
+            return
+        tag = local_name(element.tag)
+        if tag == "pb":
+            if state["in_page"] and element.get("n") != page:
+                state["stop"] = True
+                return
+            state["in_page"] = element.get("n") == page
+            return
+
+        excluded_here = excluded or tag == "fw" or (tag == "note" and element.get("type") == "footnote")
+        if state["in_page"] and not excluded_here and element.text and element.text.strip():
+            pieces.append(element.text)
+        for child in list(element):
+            walk(child, excluded_here)
+            if state["stop"]:
+                return
+            if state["in_page"] and not excluded_here and child.tail and child.tail.strip():
+                pieces.append(child.tail)
+
+    walk(root)
+    return normalize_ws(" ".join(pieces))
+
+
+def footnote_pages(root: ET.Element) -> dict[str, str]:
+    current_page = ""
+    pages: dict[str, str] = {}
+    for element in root.iter():
+        tag = local_name(element.tag)
+        if tag == "pb":
+            current_page = element.get("n") or current_page
+        elif tag == "note" and element.get("type") == "footnote":
+            note_id = element.get(XML_ID) or ""
+            if note_id:
+                pages[note_id] = current_page
+    return pages
 
 
 def check_tei(tei: Path) -> tuple[list[str], dict[str, ET.Element], list[tuple[str, str]]]:
@@ -60,12 +107,18 @@ def check_tei(tei: Path) -> tuple[list[str], dict[str, ET.Element], list[tuple[s
     footnote_notes: dict[str, ET.Element] = {}
     footnote_refs: list[tuple[str, str]] = []
     refs_missing_id = 0
+    empty_footnotes = []
+    missing_body_placeholders = []
     for element in root.iter():
         name = local_name(element.tag)
         if name == "note" and element.get("type") == "footnote":
             note_id = element.get(XML_ID) or ""
             if note_id:
                 footnote_notes[note_id] = element
+            if element.get("subtype") == "missing-source-note-body":
+                missing_body_placeholders.append(note_id or element.get("n") or "(no id)")
+            if not normalize_ws("".join(element.itertext())):
+                empty_footnotes.append(note_id or element.get("n") or "(no id)")
         elif name == "ref" and element.get("type") == "footnote-ref":
             ref_id = element.get(XML_ID) or ""
             target = (element.get("target") or "").lstrip("#")
@@ -76,6 +129,12 @@ def check_tei(tei: Path) -> tuple[list[str], dict[str, ET.Element], list[tuple[s
 
     if refs_missing_id:
         issues.append(f"FOOTNOTE_REF_NO_XML_ID: {refs_missing_id} refs lack xml:id")
+    if empty_footnotes:
+        issues.append(f"FOOTNOTE_NOTE_EMPTY: {len(empty_footnotes)} generated footnote notes are empty")
+    if missing_body_placeholders:
+        issues.append(
+            f"MISSING_SOURCE_NOTE_BODY_IN_TEI: {len(missing_body_placeholders)} placeholder footnote notes remain"
+        )
 
     refs_by_target: dict[str, list[str]] = {}
     for target, ref_id in footnote_refs:
@@ -102,6 +161,20 @@ def check_tei(tei: Path) -> tuple[list[str], dict[str, ET.Element], list[tuple[s
         issues.append(f"FOOTNOTE_NOTE_INCOMPLETE: {len(incomplete)} targeted notes missing required metadata")
     if bad_corresp:
         issues.append(f"FOOTNOTE_CORRESP_MISMATCH: {len(bad_corresp)} targeted notes have bad corresp")
+
+    note_pages = footnote_pages(root)
+    body_text_cache: dict[str, str] = {}
+    body_leaks = []
+    for note_id, note in footnote_notes.items():
+        note_text = normalize_ws("".join(note.itertext()))
+        page = note_pages.get(note_id, "")
+        if not page or len(note_text) < 30:
+            continue
+        body_text = body_text_cache.setdefault(page, page_body_text_without_footnotes(root, page))
+        if note_text in body_text:
+            body_leaks.append(note_id)
+    if body_leaks:
+        issues.append(f"FOOTNOTE_BODY_SELECTION_LEAK: {len(body_leaks)} footnote bodies appear in page body text")
 
     return issues, footnote_notes, footnote_refs
 
@@ -214,6 +287,26 @@ def main() -> int:
         unresolved_without_evidence.append(row.get("source_id") or "")
     if unresolved_without_evidence:
         issues.append(f"UNRESOLVED_WITHOUT_EVIDENCE: {len(unresolved_without_evidence)} unresolved notes lack candidate/no-candidate evidence")
+
+    review_by_source = {row.get("source_id", ""): row for row in review_rows}
+    unqueued_unresolved = []
+    review_rows_missing_fields = []
+    for row in rows:
+        status = row.get("status") or ""
+        if not (status.startswith("unresolved") or status == "missing-source-note-body"):
+            continue
+        source_id = row.get("source_id") or ""
+        queued = review_by_source.get(source_id)
+        if not queued:
+            unqueued_unresolved.append(source_id)
+            continue
+        evidence = queued.get("candidate_summary") or queued.get("evidence_status") or queued.get("note_excerpt") or ""
+        if not (queued.get("page") and queued.get("source_id") and evidence):
+            review_rows_missing_fields.append(source_id)
+    if unqueued_unresolved:
+        issues.append(f"UNRESOLVED_NOT_IN_REVIEW_QUEUE: {len(unqueued_unresolved)} unresolved notes missing review rows")
+    if review_rows_missing_fields:
+        issues.append(f"REVIEW_QUEUE_ROW_INCOMPLETE: {len(review_rows_missing_fields)} review rows lack page/source/evidence")
 
     print(f"Source notes: {len(source_ids)}")
     print(f"Audit rows: {len(rows)}")

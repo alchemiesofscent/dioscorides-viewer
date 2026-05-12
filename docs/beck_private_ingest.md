@@ -86,3 +86,122 @@ On localhost, the viewer automatically appends
 the private registry is present. Beck will appear in the edition dropdown with
 Berendes and Sprengel, but Berendes remains the default. Do not promote the Beck
 entry to `editions.json` until a publication-safe policy exists.
+
+## Fresh PDF-Based Beck Stream
+
+The fresh stream ignores `beck.xml` and the older generated Beck output as
+generation baselines. It renders `beck.pdf` at 300 dpi, runs Tesseract
+`eng+lat+grc`, preserves hOCR coordinates, writes a page-first draft TEI, and
+generates a separate private viewer manifest.
+
+Run the representative pilot gate:
+
+```bash
+python3 scripts/ocr_beck_fresh_pilot.py \
+  --pdf beck.pdf \
+  --pages 14,15,16,30,33,45,58,59,133
+```
+
+This writes raw evidence under `ocr/beck2020_fresh/`, the local draft TEI at
+`output/beck2020_fresh_epidoc.xml`, and the viewer manifest at
+`editions/beck2020_fresh/manifest.json`.
+
+After the pilot passes, run the full PDF:
+
+```bash
+python3 scripts/ocr_beck_fresh_pilot.py \
+  --pdf beck.pdf \
+  --all-pages
+```
+
+Validate the fresh TEI/manifest pair:
+
+```bash
+python3 scripts/validate_beck_fresh.py \
+  output/beck2020_fresh_epidoc.xml \
+  --manifest editions/beck2020_fresh/manifest.json \
+  --expected-pdf-pages 711
+```
+
+Generate the footnote ambiguity queue from the fresh QA, hOCR, TEI, and
+manifest:
+
+```bash
+python3 scripts/build_beck_fresh_footnote_review.py
+```
+
+This writes:
+
+- `ocr/beck2020_fresh/review/footnote_review_queue.json`
+- `ocr/beck2020_fresh/review/accepted_footnote_links.csv`
+- `ocr/beck2020_fresh/review/rejected_footnote_candidates.csv`
+
+The accepted CSV is the only source for reviewed overrides. The fresh builder
+reads it automatically, applies approved links before heuristics, skips
+rejected candidates, and otherwise links only high-confidence marker evidence.
+Ambiguous pages remain explicit unresolved rows until a deterministic or model
+visual pass writes accepted/rejected sidecar decisions.
+
+Run the Berendes-style autonomous visual pass on unresolved footnotes. This
+creates zoom panels from the 300dpi page image, hOCR marker boxes, bottom-note
+boxes, and separator rules, attaches those images to `codex exec`, and writes
+structured proposals. High-confidence proposals can be applied directly to the
+accepted/rejected sidecars:
+
+```bash
+python3 scripts/run_beck_fresh_footnote_visual_pass.py \
+  --pages 20 \
+  --run-codex \
+  --apply-high-confidence
+```
+
+For a dry preparation pass, omit `--run-codex`; prompts and image panels are
+written under `ocr/beck2020_fresh/review/visual_pass/`.
+
+The browser zoom surface is diagnostic only. It is useful for inspecting the
+same evidence files, but the intended ambiguity workflow is the autonomous
+visual pass above:
+
+```bash
+python3 -m http.server 8000
+```
+
+```text
+http://localhost:8000/tools/beck-fresh-footnotes/
+```
+
+After the visual pass writes sidecar decisions, rebuild and revalidate:
+
+```bash
+python3 scripts/ocr_beck_fresh_pilot.py --pdf beck.pdf --all-pages
+
+python3 scripts/build_beck_fresh_footnote_review.py
+
+python3 scripts/validate_beck_fresh.py \
+  output/beck2020_fresh_epidoc.xml \
+  --manifest editions/beck2020_fresh/manifest.json \
+  --expected-pdf-pages 711
+```
+
+Prepare Berendes-style model-correction prompts from the fresh OCR evidence:
+
+```bash
+python3 scripts/run_beck_fresh_correction.py \
+  --pages 14,15,16,30,33,45,58,59,133 \
+  --dry-run
+```
+
+Remove `--dry-run` only after reviewing the prompts. Correction chunks are kept
+under `ocr/beck2020_fresh/correction/chunks/` and can be merged back into the
+fresh stream with:
+
+```bash
+python3 scripts/merge_beck_fresh_chunks.py \
+  --chunks-dir ocr/beck2020_fresh/correction/chunks \
+  --manifest editions/beck2020_fresh/manifest.json \
+  --output output/beck2020_fresh_epidoc.xml
+```
+
+On localhost, the viewer also checks
+`editions/beck2020_fresh/private_registry.json`, so the fresh stream appears as
+a separate private review edition without changing public `editions.json`.

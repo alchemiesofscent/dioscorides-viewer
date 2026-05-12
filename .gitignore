@@ -9,6 +9,7 @@ images/raw/
 images/enhanced/
 editions/beck2020/page_images/
 output/beck2020_epidoc.xml
+output/beck2020_fresh_epidoc.xml
 output/beck_private_ingest_audit.md
 output/beck_footnote_audit/
 output/beck_text_cleaning/
