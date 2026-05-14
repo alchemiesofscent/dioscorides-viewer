@@ -31,6 +31,7 @@ DEFAULT_OCR_DIR = "ocr/beck2020_fresh"
 DEFAULT_OUT_DIR = "ocr/beck2020_fresh/review/visual_pass"
 DEFAULT_ACCEPTED = "ocr/beck2020_fresh/review/accepted_footnote_links.csv"
 DEFAULT_ACCEPTED_BLOCKS = "ocr/beck2020_fresh/review/accepted_footnote_blocks.csv"
+DEFAULT_ACCEPTED_TRANSCRIPTIONS = "ocr/beck2020_fresh/review/accepted_footnote_transcriptions.csv"
 DEFAULT_REJECTED = "ocr/beck2020_fresh/review/rejected_footnote_candidates.csv"
 DEFAULT_MODEL = "gpt-5.5"
 ACCEPTED_FIELDS = [
@@ -66,11 +67,22 @@ ACCEPTED_BLOCK_FIELDS = [
     "method",
     "reviewer",
 ]
+ACCEPTED_TRANSCRIPTION_FIELDS = [
+    "page",
+    "note_xml_id",
+    "n",
+    "transcription",
+    "confidence",
+    "method",
+    "reviewer",
+    "evidence",
+]
 DEFAULT_PROBLEM_TYPES = (
     "bottom-note-without-marker",
     "ambiguous-marker-count",
     "marker-without-bottom-note",
     "linked-low-confidence-marker",
+    "possible-bottom-note-block-missing",
 )
 
 
@@ -93,7 +105,9 @@ def require_command(name: str) -> None:
 
 
 def run(cmd: list[str], timeout: int | None = None) -> subprocess.CompletedProcess[str]:
-    return subprocess.run(cmd, check=False, capture_output=True, text=True, timeout=timeout)
+    env = os.environ.copy()
+    env.setdefault("MAGICK_TIME_LIMIT", "1800")
+    return subprocess.run(cmd, check=False, capture_output=True, text=True, timeout=timeout, env=env)
 
 
 def parse_bbox(value: str | None) -> tuple[int, int, int, int] | None:
@@ -385,14 +399,17 @@ def assemble_prompt(row: dict, panel: Path, page_image: Path, previous_page_imag
             '  "note_bbox": "",',
             '  "first_line": "",',
             '  "last_line": "",',
+            '  "transcription": "",',
             '  "confidence": 0.0,',
             '  "evidence": ""',
             "}",
             "",
             "Decision rules:",
             "- Use accept_link only if the image clearly shows the inline marker and the bottom note label/body belong together.",
+            "- For accept_link, transcription must contain the visible bottom note body, omitting the printed note label because n carries it.",
             "- For accept_link, if the marker is not in marker_candidates, use suggested_ref_xml_id and provide marker_bbox.",
             "- Use propose_note_block if the image clearly shows a bottom footnote block that hOCR did not detect as a note block.",
+            "- For propose_note_block, transcription must contain the visible bottom note body, omitting the printed note label because n carries it.",
             "- For propose_note_block, use suggested_note_xml_id unless a note_xml_id already exists in the case evidence.",
             "- For propose_note_block, first_line and last_line must be numeric hOCR line indexes, not line text; otherwise leave them blank and include note_bbox.",
             "- If propose_note_block also clearly corresponds to the selected marker, include ref_xml_id, marker_bbox, note_xml_id, and n so the block can be linked after rebuild.",
@@ -516,17 +533,25 @@ def apply_proposals(
     results: list[dict],
     accepted_path: Path,
     accepted_blocks_path: Path,
+    accepted_transcriptions_path: Path,
     rejected_path: Path,
     min_confidence: float,
 ) -> dict:
     accepted = read_csv(accepted_path)
     accepted_blocks = read_csv(accepted_blocks_path)
+    accepted_transcriptions = read_csv(accepted_transcriptions_path)
     rejected = read_csv(rejected_path)
     accepted_seen = {proposal_key(row, ["page", "ref_xml_id", "note_xml_id"]) for row in accepted}
     accepted_block_seen = {proposal_key(row, ["page", "note_xml_id"]) for row in accepted_blocks}
+    accepted_transcription_seen = {proposal_key(row, ["page", "note_xml_id"]) for row in accepted_transcriptions}
+    accepted_transcription_index = {
+        proposal_key(row, ["page", "note_xml_id"]): index
+        for index, row in enumerate(accepted_transcriptions)
+    }
     rejected_seen = {proposal_key(row, ["page", "ref_xml_id", "reason"]) for row in rejected}
     accepted_added = 0
     accepted_blocks_added = 0
+    accepted_transcriptions_added = 0
     rejected_added = 0
     for result in results:
         proposal = result.get("proposal") or {}
@@ -536,6 +561,20 @@ def apply_proposals(
             confidence = 0
         decision = proposal.get("decision")
         if decision in {"accept_link", "propose_note_block"} and confidence >= min_confidence:
+            transcription = " ".join(str(proposal.get("transcription") or "").split())
+            if not transcription:
+                continue
+            transcription_row = {
+                "page": str(proposal.get("page") or ""),
+                "note_xml_id": str(proposal.get("note_xml_id") or ""),
+                "n": str(proposal.get("n") or ""),
+                "transcription": transcription,
+                "confidence": str(confidence),
+                "method": "model-visual-pass",
+                "reviewer": "codex-visual-footnote-pass",
+                "evidence": str(proposal.get("evidence") or ""),
+            }
+            transcription_key = proposal_key(transcription_row, ["page", "note_xml_id"])
             if decision == "propose_note_block":
                 block_row = {
                     "page": str(proposal.get("page") or ""),
@@ -558,7 +597,20 @@ def apply_proposals(
                     accepted_blocks.append(block_row)
                     accepted_block_seen.add(key)
                     accepted_blocks_added += 1
+                    if transcription_key not in accepted_transcription_seen:
+                        accepted_transcriptions.append(transcription_row)
+                        accepted_transcription_index[transcription_key] = len(accepted_transcriptions) - 1
+                        accepted_transcription_seen.add(transcription_key)
+                        accepted_transcriptions_added += 1
             if decision == "propose_note_block" and not proposal.get("ref_xml_id"):
+                if (
+                    all(transcription_row[field] for field in ("page", "note_xml_id", "n", "transcription"))
+                    and transcription_key not in accepted_transcription_seen
+                ):
+                    accepted_transcriptions.append(transcription_row)
+                    accepted_transcription_index[transcription_key] = len(accepted_transcriptions) - 1
+                    accepted_transcription_seen.add(transcription_key)
+                    accepted_transcriptions_added += 1
                 continue
             row = {
                 "page": str(proposal.get("page") or ""),
@@ -576,6 +628,21 @@ def apply_proposals(
                 accepted.append(row)
                 accepted_seen.add(key)
                 accepted_added += 1
+            if (
+                all(transcription_row[field] for field in ("page", "note_xml_id", "n", "transcription"))
+                and transcription_key not in accepted_transcription_seen
+            ):
+                accepted_transcriptions.append(transcription_row)
+                accepted_transcription_index[transcription_key] = len(accepted_transcriptions) - 1
+                accepted_transcription_seen.add(transcription_key)
+                accepted_transcriptions_added += 1
+            elif (
+                all(transcription_row[field] for field in ("page", "note_xml_id", "n", "transcription"))
+                and accepted_transcriptions[accepted_transcription_index[transcription_key]].get("method")
+                == "hocr-seed-for-accepted-link"
+            ):
+                accepted_transcriptions[accepted_transcription_index[transcription_key]] = transcription_row
+                accepted_transcriptions_added += 1
         elif decision == "reject_marker" and confidence >= min_confidence:
             row = {
                 "page": str(proposal.get("page") or ""),
@@ -597,11 +664,14 @@ def apply_proposals(
         write_csv(accepted_path, ACCEPTED_FIELDS, accepted)
     if accepted_blocks_added:
         write_csv(accepted_blocks_path, ACCEPTED_BLOCK_FIELDS, accepted_blocks)
+    if accepted_transcriptions_added:
+        write_csv(accepted_transcriptions_path, ACCEPTED_TRANSCRIPTION_FIELDS, accepted_transcriptions)
     if rejected_added:
         write_csv(rejected_path, REJECTED_FIELDS, rejected)
     return {
         "accepted_added": accepted_added,
         "accepted_blocks_added": accepted_blocks_added,
+        "accepted_transcriptions_added": accepted_transcriptions_added,
         "rejected_added": rejected_added,
     }
 
@@ -623,6 +693,7 @@ def main() -> int:
     parser.add_argument("--min-confidence", type=float, default=0.85)
     parser.add_argument("--accepted", default=DEFAULT_ACCEPTED)
     parser.add_argument("--accepted-blocks", default=DEFAULT_ACCEPTED_BLOCKS)
+    parser.add_argument("--accepted-transcriptions", default=DEFAULT_ACCEPTED_TRANSCRIPTIONS)
     parser.add_argument("--rejected", default=DEFAULT_REJECTED)
     args = parser.parse_args()
 
@@ -695,6 +766,7 @@ def main() -> int:
                 results,
                 Path(args.accepted),
                 Path(args.accepted_blocks),
+                Path(args.accepted_transcriptions),
                 Path(args.rejected),
                 args.min_confidence,
             )
@@ -702,6 +774,7 @@ def main() -> int:
                 "applied proposals: "
                 f"{applied['accepted_added']} accepted links, "
                 f"{applied['accepted_blocks_added']} accepted blocks, "
+                f"{applied['accepted_transcriptions_added']} accepted transcriptions, "
                 f"{applied['rejected_added']} rejected"
             )
 

@@ -134,13 +134,16 @@ This writes:
 
 - `ocr/beck2020_fresh/review/footnote_review_queue.json`
 - `ocr/beck2020_fresh/review/accepted_footnote_links.csv`
+- `ocr/beck2020_fresh/review/accepted_footnote_transcriptions.csv`
+- `ocr/beck2020_fresh/review/accepted_footnote_blocks.csv`
 - `ocr/beck2020_fresh/review/rejected_footnote_candidates.csv`
 
-The accepted CSV is the only source for reviewed overrides. The fresh builder
-reads it automatically, applies approved links before heuristics, skips
-rejected candidates, and otherwise links only high-confidence marker evidence.
-Ambiguous pages remain explicit unresolved rows until a deterministic or model
-visual pass writes accepted/rejected sidecar decisions.
+The accepted link, block, and transcription CSVs are the only sources for
+reviewed overrides. The fresh builder reads them automatically, applies approved
+links and corrected note text before heuristics, skips rejected candidates, and
+otherwise links only high-confidence marker evidence. Ambiguous pages remain
+explicit unresolved rows until a deterministic or model visual pass writes
+accepted/rejected sidecar decisions.
 
 Run the Berendes-style autonomous visual pass on unresolved footnotes. This
 creates zoom panels from the 300dpi page image, hOCR marker boxes, bottom-note

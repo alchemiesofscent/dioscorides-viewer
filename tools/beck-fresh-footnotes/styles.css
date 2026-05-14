@@ -103,6 +103,16 @@ button:hover {
   padding: 0 8px;
 }
 
+.field textarea {
+  min-height: 86px;
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--line);
+  background: white;
+  color: var(--ink);
+  resize: vertical;
+}
+
 .search input {
   width: 190px;
 }

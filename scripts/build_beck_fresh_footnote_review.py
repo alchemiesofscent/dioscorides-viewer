@@ -56,6 +56,16 @@ ACCEPTED_BLOCK_FIELDS = [
     "method",
     "reviewer",
 ]
+ACCEPTED_TRANSCRIPTION_FIELDS = [
+    "page",
+    "note_xml_id",
+    "n",
+    "transcription",
+    "confidence",
+    "method",
+    "reviewer",
+    "evidence",
+]
 REJECTED_FIELDS = [
     "page",
     "ref_xml_id",
@@ -291,6 +301,120 @@ def seed_accept_rows(
     return seeds
 
 
+def strip_note_label(text: str, n: str) -> str:
+    text = " ".join((text or "").split())
+    if not text:
+        return ""
+    if n:
+        text = re.sub(rf"^\s*{re.escape(n)}\b\s*", "", text)
+    return text.strip()
+
+
+def seed_transcription_rows(
+    accepted_rows: list[dict[str, str]],
+    contexts: dict[int, dict],
+) -> list[dict[str, str]]:
+    rows = []
+    for accepted in accepted_rows:
+        try:
+            page = int(accepted.get("page", "0"))
+        except ValueError:
+            continue
+        note_xml_id = accepted.get("note_xml_id", "")
+        n = accepted.get("n", "")
+        if not (page and note_xml_id):
+            continue
+        context = contexts.get(page, {})
+        block = next(
+            (
+                candidate
+                for candidate in context.get("footnote_blocks", [])
+                if candidate.get("xml_id") == note_xml_id or (n and candidate.get("n") == n)
+            ),
+            {},
+        )
+        transcription = strip_note_label(block.get("text", ""), n)
+        if not transcription:
+            continue
+        rows.append(
+            {
+                "page": str(page),
+                "note_xml_id": note_xml_id,
+                "n": n,
+                "transcription": transcription,
+                "confidence": accepted.get("confidence", ""),
+                "method": "hocr-seed-for-accepted-link",
+                "reviewer": accepted.get("reviewer", "") or "beck-fresh-footnote-plan",
+                "evidence": "seeded from hOCR note block for existing accepted link",
+            }
+        )
+    return rows
+
+
+def has_lower_page_evidence(context: dict) -> bool:
+    if context.get("separators"):
+        return True
+    for line in context.get("lines") or []:
+        if not line.get("bottom_zone"):
+            continue
+        text = (line.get("text") or "").strip()
+        if re.match(r"^(?:\d{1,3}|[!|][.,]?)\b", text):
+            return True
+    return False
+
+
+def completeness_sweep_rows(
+    contexts: dict[int, dict],
+    qa_rows: list[dict[str, str]],
+    accepted_block_rows: list[dict[str, str]],
+    tei_state: dict[int, dict[str, list[dict[str, str]]]],
+    start_index: int,
+) -> list[dict]:
+    qa_pages_with_blocks = {
+        int(row["page"])
+        for row in qa_rows
+        if row.get("page", "").isdigit() and row.get("note_xml_id")
+    }
+    accepted_block_pages = {
+        int(row["page"])
+        for row in accepted_block_rows
+        if row.get("page", "").isdigit() and row.get("note_xml_id")
+    }
+    rows = []
+    row_index = start_index
+    for page, context in sorted(contexts.items()):
+        if page in qa_pages_with_blocks or page in accepted_block_pages:
+            continue
+        if context.get("footnote_blocks"):
+            continue
+        if not has_lower_page_evidence(context):
+            continue
+        row_index += 1
+        bottom_lines = [line for line in context.get("lines") or [] if line.get("bottom_zone")]
+        rows.append(
+            {
+                "id": f"beck-fresh-review-{row_index:04d}",
+                "page": page,
+                "status": "unresolved-possible-note-block",
+                "method": "page-level-completeness-sweep",
+                "raw_n": "",
+                "problem_type": "possible-bottom-note-block-missing",
+                "qa": {
+                    "page": str(page),
+                    "status": "unresolved-possible-note-block",
+                    "method": "page-level-completeness-sweep",
+                    "evidence": "lower-page separator or bottom-zone note-like evidence but no detected or accepted note block",
+                    "note_excerpt": " | ".join(line.get("text", "") for line in bottom_lines[:6]),
+                },
+                "note": {},
+                "marker_candidates": context.get("marker_candidates", []),
+                "page_context": context,
+                "current_tei": tei_state.get(page, {"refs": [], "notes": []}),
+            }
+        )
+    return rows
+
+
 def build_review_queue(
     qa_path: Path,
     hocr_dir: Path,
@@ -299,6 +423,7 @@ def build_review_queue(
     out_path: Path,
     accepted_path: Path,
     accepted_blocks_path: Path,
+    accepted_transcriptions_path: Path,
     rejected_path: Path,
 ) -> dict:
     qa_rows = read_csv(qa_path)
@@ -306,7 +431,14 @@ def build_review_queue(
     manifest_pages = page_manifest(manifest)
     tei_state = parse_tei_state(tei_path)
     review_rows = [row for row in qa_rows if needs_review(row)]
-    needed_pages = sorted({int(row["page"]) for row in qa_rows if row.get("page", "").isdigit()})
+    needed_pages = sorted(
+        {
+            int(page)
+            for page in manifest_pages
+            if isinstance(page, int)
+        }
+        | {int(row["page"]) for row in qa_rows if row.get("page", "").isdigit()}
+    )
     contexts: dict[int, dict] = {}
 
     for page_number in needed_pages:
@@ -326,10 +458,18 @@ def build_review_queue(
         seed_rows,
         ["page", "ref_xml_id", "note_xml_id"],
     )
+    accepted_rows = read_csv(accepted_path) if accepted_path.exists() else []
+    transcription_added = append_missing_csv_rows(
+        accepted_transcriptions_path,
+        ACCEPTED_TRANSCRIPTION_FIELDS,
+        seed_transcription_rows(accepted_rows, contexts),
+        ["page", "note_xml_id"],
+    )
     if not rejected_path.exists():
         write_csv(rejected_path, REJECTED_FIELDS, [])
     if not accepted_blocks_path.exists():
         write_csv(accepted_blocks_path, ACCEPTED_BLOCK_FIELDS, [])
+    accepted_block_rows = read_csv(accepted_blocks_path) if accepted_blocks_path.exists() else []
 
     rows = []
     row_index = 0
@@ -359,6 +499,7 @@ def build_review_queue(
                     "current_tei": tei_state.get(page, {"refs": [], "notes": []}),
                 }
             )
+    rows.extend(completeness_sweep_rows(contexts, qa_rows, accepted_block_rows, tei_state, row_index))
 
     payload = {
         "schema": "beck-fresh-footnote-review-v1",
@@ -370,6 +511,7 @@ def build_review_queue(
         "decision_files": {
             "accepted": accepted_path.as_posix(),
             "accepted_blocks": accepted_blocks_path.as_posix(),
+            "accepted_transcriptions": accepted_transcriptions_path.as_posix(),
             "rejected": rejected_path.as_posix(),
         },
         "summary": {
@@ -377,6 +519,7 @@ def build_review_queue(
             "review_rows": len(rows),
             "problem_pages": len({row["page"] for row in rows}),
             "accepted_seed_rows_added": accepted_added,
+            "accepted_transcription_rows_added": transcription_added,
         },
         "rows": rows,
     }
@@ -407,6 +550,10 @@ def main() -> int:
     parser.add_argument("--out", default="ocr/beck2020_fresh/review/footnote_review_queue.json")
     parser.add_argument("--accepted", default="ocr/beck2020_fresh/review/accepted_footnote_links.csv")
     parser.add_argument("--accepted-blocks", default="ocr/beck2020_fresh/review/accepted_footnote_blocks.csv")
+    parser.add_argument(
+        "--accepted-transcriptions",
+        default="ocr/beck2020_fresh/review/accepted_footnote_transcriptions.csv",
+    )
     parser.add_argument("--rejected", default="ocr/beck2020_fresh/review/rejected_footnote_candidates.csv")
     args = parser.parse_args()
 
@@ -419,6 +566,7 @@ def main() -> int:
             Path(args.out),
             Path(args.accepted),
             Path(args.accepted_blocks),
+            Path(args.accepted_transcriptions),
             Path(args.rejected),
         )
     except (FileNotFoundError, ET.ParseError, json.JSONDecodeError, KeyError, ValueError) as exc:
@@ -431,6 +579,7 @@ def main() -> int:
     )
     print(f"Wrote/updated {args.accepted}")
     print(f"Wrote/updated {args.accepted_blocks}")
+    print(f"Wrote/updated {args.accepted_transcriptions}")
     print(f"Wrote/updated {args.rejected}")
     return 0
 

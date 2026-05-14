@@ -93,8 +93,17 @@
           <div id="teiState" class="tei-state"></div>
         </section>
 
+        <section class="panel">
+          <h3>Page Decisions</h3>
+          <div id="decisionState" class="tei-state"></div>
+        </section>
+
         <section class="panel decisions">
           <h3>Decision</h3>
+          <label class="field">
+            <span>Transcription</span>
+            <textarea id="transcriptionInput" spellcheck="false"></textarea>
+          </label>
           <label class="field">
             <span>Reason</span>
             <select id="rejectReason">
@@ -110,6 +119,7 @@
           </div>
           <div class="export-buttons">
             <button id="exportAccepted" type="button">Accepted CSV</button>
+            <button id="exportTranscriptions" type="button">Transcriptions CSV</button>
             <button id="exportRejected" type="button">Rejected CSV</button>
           </div>
           <textarea id="csvPreview" spellcheck="false" readonly></textarea>

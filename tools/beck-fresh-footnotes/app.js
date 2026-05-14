@@ -1,5 +1,7 @@
 const QUEUE_URL = "../../ocr/beck2020_fresh/review/footnote_review_queue.json";
 const ACCEPTED_URL = "../../ocr/beck2020_fresh/review/accepted_footnote_links.csv";
+const ACCEPTED_BLOCKS_URL = "../../ocr/beck2020_fresh/review/accepted_footnote_blocks.csv";
+const ACCEPTED_TRANSCRIPTIONS_URL = "../../ocr/beck2020_fresh/review/accepted_footnote_transcriptions.csv";
 const REJECTED_URL = "../../ocr/beck2020_fresh/review/rejected_footnote_candidates.csv";
 
 const acceptedFields = [
@@ -23,6 +25,27 @@ const rejectedFields = [
   "reason",
   "method",
   "reviewer",
+];
+const acceptedBlockFields = [
+  "page",
+  "note_xml_id",
+  "n",
+  "note_bbox",
+  "first_line",
+  "last_line",
+  "confidence",
+  "method",
+  "reviewer",
+];
+const acceptedTranscriptionFields = [
+  "page",
+  "note_xml_id",
+  "n",
+  "transcription",
+  "confidence",
+  "method",
+  "reviewer",
+  "evidence",
 ];
 
 const els = {
@@ -50,11 +73,14 @@ const els = {
   candidateList: document.getElementById("candidateList"),
   lineEvidence: document.getElementById("lineEvidence"),
   teiState: document.getElementById("teiState"),
+  decisionState: document.getElementById("decisionState"),
+  transcriptionInput: document.getElementById("transcriptionInput"),
   rejectReason: document.getElementById("rejectReason"),
   acceptButton: document.getElementById("acceptButton"),
   rejectButton: document.getElementById("rejectButton"),
   unresolvedButton: document.getElementById("unresolvedButton"),
   exportAccepted: document.getElementById("exportAccepted"),
+  exportTranscriptions: document.getElementById("exportTranscriptions"),
   exportRejected: document.getElementById("exportRejected"),
   csvPreview: document.getElementById("csvPreview"),
 };
@@ -67,6 +93,8 @@ const state = {
   selectedCandidate: "",
   zoom: 0.56,
   accepted: [],
+  acceptedBlocks: [],
+  acceptedTranscriptions: [],
   rejected: [],
 };
 
@@ -133,17 +161,23 @@ async function loadCsv(url) {
 function saveLocal() {
   localStorage.setItem("beckFreshFootnoteAccepted", JSON.stringify(state.accepted));
   localStorage.setItem("beckFreshFootnoteRejected", JSON.stringify(state.rejected));
+  localStorage.setItem("beckFreshFootnoteTranscriptions", JSON.stringify(state.acceptedTranscriptions));
 }
 
 function loadLocal() {
   try {
     const accepted = JSON.parse(localStorage.getItem("beckFreshFootnoteAccepted") || "[]");
     const rejected = JSON.parse(localStorage.getItem("beckFreshFootnoteRejected") || "[]");
+    const transcriptions = JSON.parse(localStorage.getItem("beckFreshFootnoteTranscriptions") || "[]");
     if (Array.isArray(accepted)) state.accepted = mergeRows(state.accepted, accepted, ["page", "ref_xml_id", "note_xml_id"]);
     if (Array.isArray(rejected)) state.rejected = mergeRows(state.rejected, rejected, ["page", "ref_xml_id", "note_xml_id", "reason"]);
+    if (Array.isArray(transcriptions)) {
+      state.acceptedTranscriptions = mergeRows(state.acceptedTranscriptions, transcriptions, ["page", "note_xml_id"]);
+    }
   } catch (_error) {
     localStorage.removeItem("beckFreshFootnoteAccepted");
     localStorage.removeItem("beckFreshFootnoteRejected");
+    localStorage.removeItem("beckFreshFootnoteTranscriptions");
   }
 }
 
@@ -388,6 +422,31 @@ function renderTei(row) {
   els.teiState.replaceChildren(fragment);
 }
 
+function rowsForPage(rows, page) {
+  return rows.filter((row) => String(row.page || "") === String(page || ""));
+}
+
+function renderDecisionState(row) {
+  const page = row?.page || "";
+  const fragment = document.createDocumentFragment();
+  const groups = [
+    ["accepted link", rowsForPage(state.accepted, page), (item) => `${item.ref_xml_id} -> ${item.note_xml_id} n=${item.n}`],
+    ["accepted block", rowsForPage(state.acceptedBlocks, page), (item) => `${item.note_xml_id} n=${item.n} lines ${item.first_line || "?"}-${item.last_line || "?"}`],
+    ["transcription", rowsForPage(state.acceptedTranscriptions, page), (item) => `${item.note_xml_id} n=${item.n}: ${item.transcription}`],
+    ["rejected", rowsForPage(state.rejected, page), (item) => `${item.ref_xml_id || "(no ref)"} ${item.reason || ""}`],
+  ];
+  for (const [label, rows, describe] of groups) {
+    for (const item of rows) {
+      const div = document.createElement("div");
+      div.className = "tei-item";
+      div.append(metaLine(label, describe(item)), metaLine("", `${item.method || ""} ${item.reviewer || ""}`.trim()));
+      fragment.append(div);
+    }
+  }
+  if (!fragment.childNodes.length) fragment.append(metaLine("", "No accepted, rejected, or transcription rows on this page."));
+  els.decisionState.replaceChildren(fragment);
+}
+
 function metaLine(label, text) {
   const small = document.createElement("small");
   small.textContent = label ? `${label}: ${text}` : text;
@@ -410,19 +469,52 @@ function decisionBase(row, candidate) {
   };
 }
 
+function stripNoteLabel(text, n) {
+  const normalized = (text || "").replace(/\s+/g, " ").trim();
+  if (!normalized || !n) return normalized;
+  return normalized.replace(new RegExp(`^${n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b\\s*`), "").trim();
+}
+
+function defaultTranscription(row) {
+  return stripNoteLabel(row?.note?.text || row?.qa?.note_excerpt || "", row?.raw_n || row?.note?.n || row?.qa?.raw_n || "");
+}
+
+function syncTranscriptionInput(row) {
+  const base = decisionBase(row || {}, selectedCandidate(row));
+  const existing = state.acceptedTranscriptions.find(
+    (item) => String(item.page || "") === String(base.page || "") && item.note_xml_id === base.note_xml_id,
+  );
+  els.transcriptionInput.value = existing?.transcription || defaultTranscription(row);
+}
+
 function acceptCurrent() {
   const row = activeRow();
   const candidate = selectedCandidate(row);
   if (!row || !candidate || !(row.note?.xml_id || row.qa?.note_xml_id)) return;
+  const transcription = els.transcriptionInput.value.replace(/\s+/g, " ").trim();
+  if (!transcription) return;
+  const base = decisionBase(row, candidate);
   const next = {
-    ...decisionBase(row, candidate),
+    ...base,
     confidence: candidate.high_confidence ? "1.0" : "0.8",
     method: "manual-review",
     reviewer: els.reviewerInput.value.trim() || "local-review",
   };
+  const transcriptionRow = {
+    page: base.page,
+    note_xml_id: base.note_xml_id,
+    n: base.n,
+    transcription,
+    confidence: next.confidence,
+    method: "manual-review",
+    reviewer: next.reviewer,
+    evidence: "local visual review",
+  };
   state.accepted = mergeRows(state.accepted, [next], ["page", "ref_xml_id", "note_xml_id"]);
+  state.acceptedTranscriptions = mergeRows(state.acceptedTranscriptions, [transcriptionRow], ["page", "note_xml_id"]);
   saveLocal();
   previewAccepted();
+  renderDecisionState(row);
 }
 
 function rejectCurrent(reason) {
@@ -442,6 +534,10 @@ function rejectCurrent(reason) {
 
 function previewAccepted() {
   els.csvPreview.value = toCsv(acceptedFields, state.accepted);
+}
+
+function previewTranscriptions() {
+  els.csvPreview.value = toCsv(acceptedTranscriptionFields, state.acceptedTranscriptions);
 }
 
 function previewRejected() {
@@ -481,21 +577,27 @@ function render() {
   renderCandidates(row);
   renderLines(row);
   renderTei(row);
+  renderDecisionState(row);
+  syncTranscriptionInput(row);
   renderImage(row);
 }
 
 async function boot() {
-  const [payload, accepted, rejected] = await Promise.all([
+  const [payload, accepted, acceptedBlocks, acceptedTranscriptions, rejected] = await Promise.all([
     fetch(QUEUE_URL, { cache: "no-store" }).then((response) => {
       if (!response.ok) throw new Error(`${QUEUE_URL}: ${response.status}`);
       return response.json();
     }),
     loadCsv(ACCEPTED_URL),
+    loadCsv(ACCEPTED_BLOCKS_URL),
+    loadCsv(ACCEPTED_TRANSCRIPTIONS_URL),
     loadCsv(REJECTED_URL),
   ]);
   state.payload = payload;
   state.rows = payload.rows || [];
   state.accepted = accepted;
+  state.acceptedBlocks = acceptedBlocks;
+  state.acceptedTranscriptions = acceptedTranscriptions;
   state.rejected = rejected;
   loadLocal();
   els.status.textContent = `${state.rows.length} review rows from ${payload.source_files?.footnote_links || ""}`;
@@ -539,6 +641,11 @@ els.exportAccepted.addEventListener("click", () => {
   const text = toCsv(acceptedFields, state.accepted);
   els.csvPreview.value = text;
   downloadCsv("accepted_footnote_links.csv", text);
+});
+els.exportTranscriptions.addEventListener("click", () => {
+  const text = toCsv(acceptedTranscriptionFields, state.acceptedTranscriptions);
+  els.csvPreview.value = text;
+  downloadCsv("accepted_footnote_transcriptions.csv", text);
 });
 els.exportRejected.addEventListener("click", () => {
   const text = toCsv(rejectedFields, state.rejected);

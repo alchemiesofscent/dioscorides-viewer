@@ -45,6 +45,7 @@ DEFAULT_PRIVATE_REGISTRY = "editions/beck2020_fresh/private_registry.json"
 DEFAULT_REVIEW_DIR = "ocr/beck2020_fresh/review"
 DEFAULT_ACCEPTED_FOOTNOTES = f"{DEFAULT_REVIEW_DIR}/accepted_footnote_links.csv"
 DEFAULT_ACCEPTED_FOOTNOTE_BLOCKS = f"{DEFAULT_REVIEW_DIR}/accepted_footnote_blocks.csv"
+DEFAULT_ACCEPTED_FOOTNOTE_TRANSCRIPTIONS = f"{DEFAULT_REVIEW_DIR}/accepted_footnote_transcriptions.csv"
 DEFAULT_REJECTED_FOOTNOTES = f"{DEFAULT_REVIEW_DIR}/rejected_footnote_candidates.csv"
 DEFAULT_EDITION_ID = "beck2020_fresh"
 DEFAULT_EDITION_LABEL = "Beck 2020 fresh OCR (private local review)"
@@ -128,6 +129,7 @@ class FootnoteBlock:
     status: str = "unlinked"
     method: str = "none"
     evidence: str = ""
+    accepted_transcription: str = ""
 
     @property
     def first_line(self) -> Line:
@@ -147,6 +149,8 @@ class FootnoteBlock:
 
     @property
     def text(self) -> str:
+        if self.accepted_transcription:
+            return self.accepted_transcription
         return normalize_ws(" ".join(line.text for line in self.lines))
 
 
@@ -187,6 +191,18 @@ class AcceptedFootnoteBlock:
     confidence: str = ""
     method: str = ""
     reviewer: str = ""
+
+
+@dataclass(frozen=True)
+class AcceptedFootnoteTranscription:
+    page: int
+    note_xml_id: str
+    n: str
+    transcription: str
+    confidence: str = ""
+    method: str = ""
+    reviewer: str = ""
+    evidence: str = ""
 
 
 def local_name(tag: str) -> str:
@@ -643,6 +659,31 @@ def load_accepted_footnote_blocks(path: Path) -> list[AcceptedFootnoteBlock]:
     return blocks
 
 
+def load_accepted_footnote_transcriptions(path: Path) -> dict[str, AcceptedFootnoteTranscription]:
+    transcriptions: dict[str, AcceptedFootnoteTranscription] = {}
+    for row in read_dict_rows(path):
+        page = row.get("page", "").strip()
+        note_xml_id = row.get("note_xml_id", "").strip()
+        transcription = row.get("transcription", "").strip()
+        if not (page and note_xml_id and transcription):
+            continue
+        try:
+            page_number = int(page)
+        except ValueError:
+            continue
+        transcriptions[note_xml_id] = AcceptedFootnoteTranscription(
+            page=page_number,
+            note_xml_id=note_xml_id,
+            n=row.get("n", "").strip(),
+            transcription=transcription,
+            confidence=row.get("confidence", "").strip(),
+            method=row.get("method", "").strip(),
+            reviewer=row.get("reviewer", "").strip(),
+            evidence=row.get("evidence", "").strip(),
+        )
+    return transcriptions
+
+
 def load_rejected_footnote_refs(path: Path) -> set[str]:
     rejected: set[str] = set()
     for row in read_dict_rows(path):
@@ -670,12 +711,41 @@ def line_overlaps_bbox(line: Line, bbox: tuple[int, int, int, int]) -> bool:
         return False
     left, top, right, bottom = line.bbox
     box_left, box_top, box_right, box_bottom = bbox
-    return left < box_right and right > box_left and top < box_bottom and bottom > box_top
+    horizontal_overlap = min(right, box_right) - max(left, box_left)
+    vertical_overlap = min(bottom, box_bottom) - max(top, box_top)
+    if horizontal_overlap <= 0 or vertical_overlap <= 0:
+        return False
+    line_height = bottom - top
+    box_height = box_bottom - box_top
+    required_vertical = max(4, min(line_height, box_height) * 0.5)
+    return vertical_overlap >= required_vertical
 
 
 def find_anchor_word_for_bbox(page: HocrPage, bbox: tuple[int, int, int, int]) -> Word | None:
     box_left, box_top, box_right, box_bottom = bbox
     box_center_y = (box_top + box_bottom) / 2
+    overlapping_words: list[tuple[int, float, Word]] = []
+    box_center_x = (box_left + box_right) / 2
+    for line in page.lines:
+        if line.bbox is None or not line.words:
+            continue
+        for word in line.words:
+            if word.bbox is None:
+                continue
+            left, top, right, bottom = word.bbox
+            horizontal_overlap = min(right, box_right) - max(left, box_left)
+            vertical_overlap = min(bottom, box_bottom) - max(top, box_top)
+            if horizontal_overlap <= 0 or vertical_overlap <= 0:
+                continue
+            area = horizontal_overlap * vertical_overlap
+            word_center_x = (left + right) / 2
+            word_center_y = (top + bottom) / 2
+            distance = abs(word_center_x - box_center_x) + abs(word_center_y - box_center_y)
+            overlapping_words.append((-area, distance, word))
+    if overlapping_words:
+        _area, _distance, word = min(overlapping_words, key=lambda item: (item[0], item[1]))
+        return word
+
     line_scores: list[tuple[float, Line]] = []
     for line in page.lines:
         if line.bbox is None or not line.words:
@@ -727,19 +797,19 @@ def accepted_blocks_for_page(page: HocrPage, accepted_blocks: list[AcceptedFootn
         if accepted.page != page.page:
             continue
         selected_lines: list[Line] = []
+        if accepted.note_bbox:
+            bbox = parse_bbox_str(accepted.note_bbox)
+            if bbox:
+                selected_lines = [line for line in page.lines if line_overlaps_bbox(line, bbox)]
         try:
             first_line = int(accepted.first_line) if accepted.first_line else 0
             last_line = int(accepted.last_line) if accepted.last_line else first_line
         except ValueError:
             first_line = 0
             last_line = 0
-        if first_line and last_line:
+        if not selected_lines and first_line and last_line:
             low, high = sorted((first_line, last_line))
             selected_lines = [line for line in page.lines if low <= line.index <= high]
-        if not selected_lines and accepted.note_bbox:
-            bbox = parse_bbox_str(accepted.note_bbox)
-            if bbox:
-                selected_lines = [line for line in page.lines if line_overlaps_bbox(line, bbox)]
         if not selected_lines:
             continue
         block = FootnoteBlock(
@@ -781,6 +851,7 @@ def link_footnotes(
     image_sizes: dict[int, tuple[int, int]],
     accepted_links: list[AcceptedFootnoteLink] | None = None,
     accepted_blocks: list[AcceptedFootnoteBlock] | None = None,
+    accepted_transcriptions: dict[str, AcceptedFootnoteTranscription] | None = None,
     rejected_ref_ids: set[str] | None = None,
 ) -> tuple[dict[int, list[FootnoteBlock]], dict[str, FootnoteBlock], list[dict[str, str]]]:
     blocks_by_page: dict[int, list[FootnoteBlock]] = {}
@@ -793,6 +864,7 @@ def link_footnotes(
     accepted_blocks_by_page: defaultdict[int, list[AcceptedFootnoteBlock]] = defaultdict(list)
     for block in accepted_blocks or []:
         accepted_blocks_by_page[block.page].append(block)
+    accepted_transcriptions = accepted_transcriptions or {}
     rejected_ref_ids = rejected_ref_ids or set()
 
     for page in pages:
@@ -803,6 +875,15 @@ def link_footnotes(
         )
         blocks_by_page[page.page] = blocks
         for block in blocks:
+            transcription = accepted_transcriptions.get(block.xml_id)
+            if transcription and transcription.page == page.page:
+                if transcription.n:
+                    block.raw_n = transcription.n
+                block.accepted_transcription = transcription.transcription
+                reviewer = f" reviewer={transcription.reviewer}" if transcription.reviewer else ""
+                block.evidence = (
+                    f"{block.evidence}; " if block.evidence else ""
+                ) + f"accepted sidecar transcription {block.xml_id}{reviewer}"
             for line in block.lines:
                 note_by_line[id(line)] = block
 
@@ -826,6 +907,16 @@ def link_footnotes(
                 marker = virtual_marker_from_accepted_link(page, accepted)
             if marker is None or block is None or marker.ref_id in rejected_ref_ids:
                 continue
+            marker_line = next((line for line in page.lines if line.index == marker.line_index), None)
+            if marker_line is None:
+                continue
+            marker_role, _marker_place = line_type(marker_line, height)
+            if id(marker_line) in note_by_line or marker_role in {"header", "pageNum", "note"}:
+                continue
+            if marker.word_xml_id in note_by_marker_word:
+                continue
+            if accepted.n:
+                block.raw_n = accepted.n
             block.marker = marker
             block.ref_id = accepted.ref_xml_id
             block.status = "linked"
@@ -837,7 +928,11 @@ def link_footnotes(
             linked_marker_ids.add(marker.ref_id)
 
         remaining_blocks = [block for block in blocks if block.xml_id not in linked_block_ids]
-        remaining_auto_markers = [marker for marker in auto_markers if marker.ref_id not in linked_marker_ids]
+        remaining_auto_markers = [
+            marker
+            for marker in auto_markers
+            if marker.ref_id not in linked_marker_ids and marker.word_xml_id not in note_by_marker_word
+        ]
         linked = 0
         method = "no-markers-or-notes"
         if remaining_auto_markers and remaining_blocks and len(remaining_auto_markers) == len(remaining_blocks):
@@ -910,6 +1005,7 @@ def link_footnotes(
                     "marker_candidates": marker_summary,
                     "auto_marker_candidates": auto_marker_summary,
                     "note_excerpt": block.text[:220],
+                    "accepted_transcription": block.accepted_transcription,
                 }
             )
         if not blocks and markers:
@@ -937,6 +1033,7 @@ def link_footnotes(
                     "marker_candidates": marker_summary,
                     "auto_marker_candidates": auto_marker_summary,
                     "note_excerpt": "",
+                    "accepted_transcription": "",
                 }
             )
 
@@ -1011,6 +1108,17 @@ def add_line_content(
     add_text_with_words(parent, line.words, linked_notes_by_word or {})
 
 
+def add_transcription_content(
+    parent: ET.Element,
+    block: FootnoteBlock,
+) -> None:
+    lb = ET.SubElement(parent, NS + "lb")
+    lb.set("n", str(block.first_line.index))
+    if block.first_line.bbox:
+        lb.set("bbox", bbox_str(block.first_line.bbox))
+    lb.tail = block.accepted_transcription
+
+
 def add_text_with_words(
     parent: ET.Element,
     words: list[Word],
@@ -1069,6 +1177,7 @@ def build_tei(
     facs_prefix: str,
     accepted_links: list[AcceptedFootnoteLink] | None = None,
     accepted_blocks: list[AcceptedFootnoteBlock] | None = None,
+    accepted_transcriptions: dict[str, AcceptedFootnoteTranscription] | None = None,
     rejected_ref_ids: set[str] | None = None,
 ) -> tuple[ET.ElementTree, list[dict[str, str]]]:
     footnotes_by_page, linked_notes_by_word, footnote_qa_rows = link_footnotes(
@@ -1076,6 +1185,7 @@ def build_tei(
         image_sizes,
         accepted_links,
         accepted_blocks,
+        accepted_transcriptions,
         rejected_ref_ids,
     )
     note_line_ids = {
@@ -1141,8 +1251,12 @@ def build_tei(
                     line_el.set("corresp", f"#{block.ref_id}")
                 if block.bbox:
                     line_el.set("bbox", bbox_str(block.bbox))
-                for note_line in block.lines:
-                    add_line_content(line_el, note_line)
+                if block.accepted_transcription:
+                    line_el.set("source", DEFAULT_ACCEPTED_FOOTNOTE_TRANSCRIPTIONS)
+                    add_transcription_content(line_el, block)
+                else:
+                    for note_line in block.lines:
+                        add_line_content(line_el, note_line)
                 continue
 
             top_parts = top_furniture_parts(line, width, height)
@@ -1301,6 +1415,7 @@ def write_footnote_report(outdir: Path, footnote_rows: list[dict[str, str]]) -> 
         "marker_candidates",
         "auto_marker_candidates",
         "note_excerpt",
+        "accepted_transcription",
     ]
     write_csv(qa_dir / "footnote_links.csv", fields, footnote_rows)
 
@@ -1618,6 +1733,11 @@ def main() -> int:
     parser.add_argument("--private-registry", default=DEFAULT_PRIVATE_REGISTRY, help="Fresh stream private viewer registry path")
     parser.add_argument("--accepted-footnotes", default=DEFAULT_ACCEPTED_FOOTNOTES, help="Approved fresh footnote link sidecar CSV")
     parser.add_argument("--accepted-footnote-blocks", default=DEFAULT_ACCEPTED_FOOTNOTE_BLOCKS, help="Approved fresh footnote note-block sidecar CSV")
+    parser.add_argument(
+        "--accepted-footnote-transcriptions",
+        default=DEFAULT_ACCEPTED_FOOTNOTE_TRANSCRIPTIONS,
+        help="Approved fresh footnote transcription sidecar CSV",
+    )
     parser.add_argument("--rejected-footnotes", default=DEFAULT_REJECTED_FOOTNOTES, help="Rejected fresh footnote candidate sidecar CSV")
     parser.add_argument("--edition-id", default=DEFAULT_EDITION_ID, help="Viewer edition id for the fresh stream")
     parser.add_argument("--edition-label", default=DEFAULT_EDITION_LABEL, help="Viewer edition label for the fresh stream")
@@ -1635,6 +1755,7 @@ def main() -> int:
     private_registry_path = Path(args.private_registry)
     accepted_footnotes_path = Path(args.accepted_footnotes)
     accepted_footnote_blocks_path = Path(args.accepted_footnote_blocks)
+    accepted_footnote_transcriptions_path = Path(args.accepted_footnote_transcriptions)
     rejected_footnotes_path = Path(args.rejected_footnotes)
     baseline = Path(args.baseline)
     if not pdf.exists():
@@ -1651,6 +1772,7 @@ def main() -> int:
     baseline_pages = read_baseline_pages(baseline)
     accepted_links = load_accepted_footnote_links(accepted_footnotes_path)
     accepted_blocks = load_accepted_footnote_blocks(accepted_footnote_blocks_path)
+    accepted_transcriptions = load_accepted_footnote_transcriptions(accepted_footnote_transcriptions_path)
     rejected_ref_ids = load_rejected_footnote_refs(rejected_footnotes_path)
     outdir.mkdir(parents=True, exist_ok=True)
 
@@ -1689,6 +1811,7 @@ def main() -> int:
         facs_prefix,
         accepted_links,
         accepted_blocks,
+        accepted_transcriptions,
         rejected_ref_ids,
     )
     ET.indent(tree, space="  ")

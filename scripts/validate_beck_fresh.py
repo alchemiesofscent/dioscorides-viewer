@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import csv
 import json
 import re
 import sys
@@ -102,7 +103,23 @@ def is_review_accepted(note: ET.Element) -> bool:
     return (note.get("resp") or "").startswith("accepted-sidecar:")
 
 
-def validate(xml_path: Path, manifest_path: Path, expected_pdf_pages: int | None = None) -> list[str]:
+def read_transcriptions(path: Path) -> dict[str, dict[str, str]]:
+    if not path.exists():
+        return {}
+    with path.open("r", encoding="utf-8", newline="") as handle:
+        return {
+            row.get("note_xml_id", ""): row
+            for row in csv.DictReader(handle)
+            if row.get("note_xml_id") and normalize_ws(row.get("transcription", ""))
+        }
+
+
+def validate(
+    xml_path: Path,
+    manifest_path: Path,
+    expected_pdf_pages: int | None = None,
+    accepted_transcriptions_path: Path | None = None,
+) -> list[str]:
     issues: list[str] = []
     try:
         tree = ET.parse(xml_path)
@@ -209,6 +226,31 @@ def validate(xml_path: Path, manifest_path: Path, expected_pdf_pages: int | None
     if empty_linked_notes:
         issues.append(f"FOOTNOTE_NOTE_EMPTY: {len(empty_linked_notes)} linked notes are empty")
 
+    accepted_transcriptions = read_transcriptions(accepted_transcriptions_path) if accepted_transcriptions_path else {}
+    accepted_linked_without_transcription = []
+    accepted_linked_transcription_mismatch = []
+    for note_id, note in footnote_notes.items():
+        if not note.get("corresp") or not is_review_accepted(note):
+            continue
+        row = accepted_transcriptions.get(note_id)
+        if row is None:
+            accepted_linked_without_transcription.append(note_id)
+            continue
+        note_text = normalize_ws("".join(note.itertext()))
+        transcription = normalize_ws(row.get("transcription", ""))
+        if transcription and transcription not in note_text:
+            accepted_linked_transcription_mismatch.append(note_id)
+    if accepted_linked_without_transcription:
+        issues.append(
+            "FOOTNOTE_ACCEPTED_LINK_NO_TRANSCRIPTION: "
+            f"{len(accepted_linked_without_transcription)} accepted linked notes lack transcription sidecar rows"
+        )
+    if accepted_linked_transcription_mismatch:
+        issues.append(
+            "FOOTNOTE_ACCEPTED_TRANSCRIPTION_NOT_IN_TEI: "
+            f"{len(accepted_linked_transcription_mismatch)} accepted transcriptions do not appear in TEI notes"
+        )
+
     page_body_texts, note_pages = page_body_texts_and_note_pages(root)
     body_leaks = []
     for note_id, note in footnote_notes.items():
@@ -258,9 +300,18 @@ def main() -> int:
     parser.add_argument("xml_file")
     parser.add_argument("--manifest", default="editions/beck2020_fresh/manifest.json")
     parser.add_argument("--expected-pdf-pages", type=int, default=None)
+    parser.add_argument(
+        "--accepted-transcriptions",
+        default="ocr/beck2020_fresh/review/accepted_footnote_transcriptions.csv",
+    )
     args = parser.parse_args()
 
-    issues = validate(Path(args.xml_file), Path(args.manifest), args.expected_pdf_pages)
+    issues = validate(
+        Path(args.xml_file),
+        Path(args.manifest),
+        args.expected_pdf_pages,
+        Path(args.accepted_transcriptions),
+    )
     return 1 if issues else 0
 
 
