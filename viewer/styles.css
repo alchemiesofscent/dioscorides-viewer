@@ -510,6 +510,13 @@ select {
   font-family: "Noto Serif", "Times New Roman", serif;
 }
 
+.tei-foreign[lang="lat"],
+.tei-foreign[xml\:lang="lat"],
+.tei-w[lang="lat"],
+.tei-w[xml\:lang="lat"] {
+  font-style: italic;
+}
+
 .tei-hi-italic {
   font-style: italic;
 }

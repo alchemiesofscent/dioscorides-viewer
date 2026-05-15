@@ -47,6 +47,7 @@ DEFAULT_ACCEPTED_FOOTNOTES = f"{DEFAULT_REVIEW_DIR}/accepted_footnote_links.csv"
 DEFAULT_ACCEPTED_FOOTNOTE_BLOCKS = f"{DEFAULT_REVIEW_DIR}/accepted_footnote_blocks.csv"
 DEFAULT_ACCEPTED_FOOTNOTE_TRANSCRIPTIONS = f"{DEFAULT_REVIEW_DIR}/accepted_footnote_transcriptions.csv"
 DEFAULT_REJECTED_FOOTNOTES = f"{DEFAULT_REVIEW_DIR}/rejected_footnote_candidates.csv"
+DEFAULT_TEXT_CORRECTION_LEDGER = "ocr/beck2020_fresh/diplomatic/text_correction_ledger.csv"
 DEFAULT_EDITION_ID = "beck2020_fresh"
 DEFAULT_EDITION_LABEL = "Beck 2020 fresh OCR (private local review)"
 BASELINE_XML = "beck.xml"
@@ -61,6 +62,13 @@ FOOTNOTE_MARKER_RE = re.compile(r"^(.+?)([\^*†‡'’\"”]+(?:\d{1,3})?|\d{1,
 FOOTNOTE_SIGNAL_RE = re.compile(r"[\^*†‡]|\d")
 QUOTE_ONLY_MARKER_RE = re.compile(r"^[\"'‘’“”«»„‚]+$")
 PAGE_NUMBER_TOKEN_RE = re.compile(r"^(?:\d{1,4}|[ivxlcdmIVXLCDM]+|\[[ivxlcdmIVXLCDM\d-]+\])$")
+MARKER_ONLY_WORD_RE = re.compile(r"^[^\w\u0370-\u03ff\u1f00-\u1fff]+$", re.UNICODE)
+LATIN_NAME_RE = re.compile(r"^[A-Z][a-z]+[.,;:]?$")
+LATIN_ABBR_GENUS_RE = re.compile(r"^[A-Z]\.?[,]?$")
+LATIN_SPECIES_RE = re.compile(r"^[A-Za-z][A-Za-z-]+[.,;:]?$")
+LATIN_AUTHORITY_RE = re.compile(
+    r"^(?:[A-Z]\.|L|Lam|DC|Forsk|Roxb|Dryand|Jacq|Fisch|Stokes|Asch|Pall|Pers|Spach|Nees|Blume|Pell|Maxim|Mill|Desf|Willd|Bieb)\.?[,]?$"
+)
 PHRASE_CHECK_TRANSLATION = str.maketrans({"Α": "A"})
 PAGE_58_EXPECTED = (
     "This dirt is a mixture",
@@ -203,6 +211,23 @@ class AcceptedFootnoteTranscription:
     method: str = ""
     reviewer: str = ""
     evidence: str = ""
+
+
+@dataclass(frozen=True)
+class WordCorrection:
+    correction_id: str
+    corrected_surface: str
+    certainty: str = ""
+    decision: str = ""
+    evidence: str = ""
+
+
+@dataclass(frozen=True)
+class NoteSequencePoint:
+    page: int
+    y: int
+    n: int
+    note_xml_id: str = ""
 
 
 def local_name(tag: str) -> str:
@@ -693,6 +718,29 @@ def load_rejected_footnote_refs(path: Path) -> set[str]:
     return rejected
 
 
+def load_word_corrections(path: Path) -> dict[str, WordCorrection]:
+    corrections: dict[str, WordCorrection] = {}
+    accepted = {"apply", "accepted", "unclear"}
+    for row in read_dict_rows(path):
+        decision = (row.get("decision") or "").strip().casefold()
+        if decision not in accepted:
+            continue
+        word_ids = [part for part in re.split(r"[\s,;]+", row.get("word_ids", "")) if part]
+        if len(word_ids) != 1:
+            continue
+        surface = (row.get("corrected_surface") or "").strip()
+        if not surface and decision != "unclear":
+            continue
+        corrections[word_ids[0]] = WordCorrection(
+            correction_id=row.get("correction_id", "").strip(),
+            corrected_surface=surface,
+            certainty=row.get("certainty", "").strip(),
+            decision=decision,
+            evidence=row.get("evidence", "").strip(),
+        )
+    return corrections
+
+
 def parse_bbox_str(value: str) -> tuple[int, int, int, int] | None:
     parts = [part for part in value.strip().split() if part]
     if len(parts) != 4:
@@ -846,6 +894,112 @@ def merge_accepted_and_detected_blocks(
     return merged
 
 
+def int_or_none(value: str) -> int | None:
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return None
+
+
+def accepted_note_sequence(accepted_blocks: list[AcceptedFootnoteBlock] | None) -> list[NoteSequencePoint]:
+    sequence: list[NoteSequencePoint] = []
+    for block in accepted_blocks or []:
+        note_n = int_or_none(block.n)
+        if note_n is None:
+            continue
+        bbox = parse_bbox_str(block.note_bbox)
+        y = bbox[1] if bbox else 0
+        if not y and block.first_line.isdigit():
+            y = int(block.first_line) * 100
+        sequence.append(NoteSequencePoint(block.page, y, note_n, block.note_xml_id))
+    return sorted(sequence, key=lambda point: (point.page, point.y, point.n))
+
+
+def block_y(block: FootnoteBlock) -> int:
+    if block.bbox:
+        return block.bbox[1]
+    if block.first_line.bbox:
+        return block.first_line.bbox[1]
+    return block.first_line.index * 100
+
+
+def sequence_neighbors(
+    block: FootnoteBlock,
+    sequence: list[NoteSequencePoint],
+) -> tuple[NoteSequencePoint | None, NoteSequencePoint | None]:
+    key = (block.page, block_y(block))
+    previous: NoteSequencePoint | None = None
+    for point in sequence:
+        point_key = (point.page, point.y)
+        if point_key < key:
+            previous = point
+            continue
+        if point_key > key:
+            return previous, point
+    return previous, None
+
+
+def is_accepted_block(block: FootnoteBlock) -> bool:
+    return block.method.startswith("accepted-block-sidecar:")
+
+
+def is_sequence_regression_body_block(
+    block: FootnoteBlock,
+    sequence: list[NoteSequencePoint],
+    accepted_link_note_ids: set[str],
+) -> tuple[bool, str]:
+    if is_accepted_block(block) or block.xml_id in accepted_link_note_ids:
+        return False, ""
+    note_n = int_or_none(block.raw_n)
+    if note_n is None:
+        return False, ""
+    previous, next_point = sequence_neighbors(block, sequence)
+    if previous is None:
+        return False, ""
+    if block.page - previous.page > 3:
+        return False, ""
+    if next_point is not None and next_point.page - block.page > 3:
+        return False, ""
+    if next_point is not None and next_point.n < previous.n:
+        return False, ""
+    if note_n + 5 >= previous.n:
+        return False, ""
+    if next_point is None:
+        evidence = (
+            f"candidate note {note_n} falls after accepted note "
+            f"{previous.n} ({previous.note_xml_id})"
+        )
+    else:
+        evidence = (
+            f"candidate note {note_n} falls between accepted notes "
+            f"{previous.n} ({previous.note_xml_id}) and {next_point.n} ({next_point.note_xml_id})"
+        )
+    return True, evidence
+
+
+def suppress_sequence_regressions(
+    blocks: list[FootnoteBlock],
+    sequence: list[NoteSequencePoint],
+    accepted_link_note_ids: set[str],
+) -> tuple[list[FootnoteBlock], list[FootnoteBlock]]:
+    kept: list[FootnoteBlock] = []
+    suppressed: list[FootnoteBlock] = []
+    for block in blocks:
+        suppress, evidence = is_sequence_regression_body_block(block, sequence, accepted_link_note_ids)
+        if suppress:
+            block.status = "rejected-sequence-body-text"
+            block.method = "sequence-regression-filter"
+            block.evidence = evidence
+            suppressed.append(block)
+            continue
+        kept.append(block)
+    return kept, suppressed
+
+
+def is_continuation_link(accepted: AcceptedFootnoteLink) -> bool:
+    return "continuation" in accepted.method.casefold()
+
+
 def link_footnotes(
     pages: list[HocrPage],
     image_sizes: dict[int, tuple[int, int]],
@@ -866,12 +1020,18 @@ def link_footnotes(
         accepted_blocks_by_page[block.page].append(block)
     accepted_transcriptions = accepted_transcriptions or {}
     rejected_ref_ids = rejected_ref_ids or set()
+    accepted_sequence = accepted_note_sequence(accepted_blocks)
+    accepted_link_note_ids = {link.note_xml_id for link in accepted_links or [] if link.note_xml_id}
 
     for page in pages:
         _width, height = image_sizes[page.page]
-        blocks = merge_accepted_and_detected_blocks(
-            accepted_blocks_for_page(page, accepted_blocks_by_page.get(page.page, [])),
-            footnote_blocks_for_page(page, height),
+        blocks, suppressed_blocks = suppress_sequence_regressions(
+            merge_accepted_and_detected_blocks(
+                accepted_blocks_for_page(page, accepted_blocks_by_page.get(page.page, [])),
+                footnote_blocks_for_page(page, height),
+            ),
+            accepted_sequence,
+            accepted_link_note_ids,
         )
         blocks_by_page[page.page] = blocks
         for block in blocks:
@@ -905,8 +1065,32 @@ def link_footnotes(
                 block = next((candidate for candidate in blocks if candidate.raw_n == accepted.n), None)
             if marker is None and accepted.marker_bbox:
                 marker = virtual_marker_from_accepted_link(page, accepted)
+            if marker is None and block is not None and is_continuation_link(accepted):
+                if accepted.n:
+                    block.raw_n = accepted.n
+                block.ref_id = accepted.ref_xml_id
+                block.status = "continuation"
+                block.method = f"accepted-sidecar:{accepted.method or 'continuation'}"
+                reviewer = f" reviewer={accepted.reviewer}" if accepted.reviewer else ""
+                block.evidence = (
+                    f"accepted continuation {accepted.ref_xml_id}->{accepted.note_xml_id}{reviewer}"
+                )
+                linked_block_ids.add(block.xml_id)
+                continue
             if marker is None or block is None or marker.ref_id in rejected_ref_ids:
                 continue
+            if accepted.n and marker.marker_text != accepted.n:
+                marker = MarkerCandidate(
+                    page=marker.page,
+                    line_index=marker.line_index,
+                    word_index=marker.word_index,
+                    word_xml_id=marker.word_xml_id,
+                    ref_id=marker.ref_id,
+                    base_text=marker.base_text,
+                    marker_text=accepted.n,
+                    line_text=marker.line_text,
+                    bbox=marker.bbox,
+                )
             marker_line = next((line for line in page.lines if line.index == marker.line_index), None)
             if marker_line is None:
                 continue
@@ -980,7 +1164,7 @@ def link_footnotes(
             f"l{marker.line_index}w{marker.word_index}:{marker.base_text}[{marker.marker_text}]"
             for marker in auto_markers[:12]
         )
-        for block in blocks:
+        for block in [*blocks, *suppressed_blocks]:
             qa_rows.append(
                 {
                     "page": str(page.page),
@@ -1098,6 +1282,7 @@ def add_line_content(
     parent: ET.Element,
     line: Line,
     linked_notes_by_word: dict[str, FootnoteBlock] | None = None,
+    word_corrections: dict[str, WordCorrection] | None = None,
 ) -> None:
     lb = ET.SubElement(parent, NS + "lb")
     lb.set("n", str(line.index))
@@ -1105,7 +1290,7 @@ def add_line_content(
         lb.set("bbox", bbox_str(line.bbox))
     if line.words:
         lb.tail = ""
-    add_text_with_words(parent, line.words, linked_notes_by_word or {})
+    add_text_with_words(parent, line.words, linked_notes_by_word or {}, word_corrections or {})
 
 
 def add_transcription_content(
@@ -1123,11 +1308,14 @@ def add_text_with_words(
     parent: ET.Element,
     words: list[Word],
     linked_notes_by_word: dict[str, FootnoteBlock] | None = None,
+    word_corrections: dict[str, WordCorrection] | None = None,
 ) -> None:
     linked_notes_by_word = linked_notes_by_word or {}
+    word_corrections = word_corrections or {}
+    latin_word_ids = latin_name_word_ids(words)
     for index, word in enumerate(words):
-        element_name = NS + ("foreign" if GREEK_RE.search(word.text) else "w")
         word_id = word_xml_id(word)
+        correction = word_corrections.get(word_id)
         linked_note = linked_notes_by_word.get(word_id)
         marker = marker_from_word(word) if linked_note is not None else None
         virtual_marker = (
@@ -1135,17 +1323,34 @@ def add_text_with_words(
             if linked_note is not None and linked_note.marker is not None and linked_note.marker.word_xml_id == word_id
             else None
         )
-        word_text = marker[0] if marker else word.text
-        marker_text = marker[1] if marker else (virtual_marker.marker_text if virtual_marker else "")
-        word_el = ET.SubElement(parent, element_name)
-        word_el.set(XML_ID, word_id)
-        if word.bbox:
-            word_el.set("bbox", bbox_str(word.bbox))
-        if word.confidence is not None:
-            word_el.set("cert", f"{word.confidence / 100:.3f}")
-        if GREEK_RE.search(word_text):
-            word_el.set(XML_LANG, "grc")
-        word_el.text = word_text
+        base_text = marker[0] if marker else word.text
+        word_text = correction.corrected_surface if correction and correction.corrected_surface else base_text
+        marker_text = virtual_marker.marker_text if virtual_marker else (marker[1] if marker else "")
+        marker_only_virtual = bool(virtual_marker and marker is None and is_marker_only_word(word.text))
+        if marker_only_virtual and list(parent):
+            list(parent)[-1].tail = ""
+        if not marker_only_virtual:
+            is_greek = bool(GREEK_RE.search(word_text))
+            is_latin_name = word_id in latin_word_ids
+            element_name = NS + ("unclear" if correction and correction.decision == "unclear" else ("foreign" if is_greek or is_latin_name else "w"))
+            word_el = ET.SubElement(parent, element_name)
+            word_el.set(XML_ID, word_id)
+            if word.bbox:
+                word_el.set("bbox", bbox_str(word.bbox))
+            if word.confidence is not None:
+                word_el.set("cert", f"{word.confidence / 100:.3f}")
+            if correction:
+                word_el.set("resp", f"text-correction-ledger:{correction.correction_id or 'unidentified'}")
+                if correction.certainty:
+                    word_el.set("cert", correction.certainty)
+            if element_name == NS + "unclear":
+                pass
+            elif is_greek:
+                word_el.set(XML_LANG, "grc")
+            elif is_latin_name:
+                word_el.set(XML_LANG, "lat")
+                word_el.set("rend", "italic")
+            word_el.text = word_text
         if linked_note is not None and marker_text:
             ref = ET.SubElement(parent, NS + "ref")
             ref.set("type", "footnote-ref")
@@ -1155,10 +1360,57 @@ def add_text_with_words(
                 ref.set("n", linked_note.raw_n)
             ref.text = marker_text
         if index < len(words) - 1:
-            tail_target = word_el
+            tail_target = list(parent)[-1] if marker_only_virtual else word_el
             if linked_note is not None and marker_text:
                 tail_target = list(parent)[-1]
             tail_target.tail = "" if SPACE_BEFORE_RE.match(words[index + 1].text) else " "
+
+
+def clean_latin_token(text: str) -> str:
+    return text.strip().strip("~()[]{}^*†‡'’\"“”")
+
+
+def is_marker_only_word(text: str) -> bool:
+    text = text.strip()
+    return bool(text and MARKER_ONLY_WORD_RE.fullmatch(text))
+
+
+def is_latin_genus(text: str) -> bool:
+    return bool(LATIN_NAME_RE.fullmatch(clean_latin_token(text)))
+
+
+def is_latin_abbreviated_genus(text: str) -> bool:
+    return bool(LATIN_ABBR_GENUS_RE.fullmatch(clean_latin_token(text)))
+
+
+def is_latin_species(text: str) -> bool:
+    return bool(LATIN_SPECIES_RE.fullmatch(clean_latin_token(text)))
+
+
+def is_latin_authority(text: str) -> bool:
+    return bool(LATIN_AUTHORITY_RE.fullmatch(clean_latin_token(text)))
+
+
+def latin_name_word_ids(words: list[Word]) -> set[str]:
+    ids: set[str] = set()
+    for index, word in enumerate(words):
+        first = clean_latin_token(word.text)
+        if index == 0 and len(words) > 1 and is_latin_authority(first) and clean_latin_token(words[1].text) == "~":
+            ids.add(word_xml_id(word))
+            continue
+        if index + 1 >= len(words):
+            continue
+        second = clean_latin_token(words[index + 1].text)
+        third = clean_latin_token(words[index + 2].text) if index + 2 < len(words) else ""
+        if is_latin_abbreviated_genus(first) and second and not second[0].islower():
+            continue
+        if not ((is_latin_genus(first) or is_latin_abbreviated_genus(first)) and is_latin_species(second)):
+            continue
+        if third and is_latin_authority(third):
+            ids.update({word_xml_id(word), word_xml_id(words[index + 1]), word_xml_id(words[index + 2])})
+        elif is_latin_abbreviated_genus(first) and index + 2 >= len(words):
+            ids.update({word_xml_id(word), word_xml_id(words[index + 1])})
+    return ids
 
 
 def bbox_str(bbox: tuple[int, int, int, int]) -> str:
@@ -1179,6 +1431,7 @@ def build_tei(
     accepted_blocks: list[AcceptedFootnoteBlock] | None = None,
     accepted_transcriptions: dict[str, AcceptedFootnoteTranscription] | None = None,
     rejected_ref_ids: set[str] | None = None,
+    word_corrections: dict[str, WordCorrection] | None = None,
 ) -> tuple[ET.ElementTree, list[dict[str, str]]]:
     footnotes_by_page, linked_notes_by_word, footnote_qa_rows = link_footnotes(
         pages,
@@ -1199,6 +1452,7 @@ def build_tei(
         for blocks in footnotes_by_page.values()
         for block in blocks
     }
+    word_corrections = word_corrections or {}
 
     root = ET.Element(NS + "TEI")
     root.set(XML_ID, edition_id)
@@ -1256,7 +1510,7 @@ def build_tei(
                     add_transcription_content(line_el, block)
                 else:
                     for note_line in block.lines:
-                        add_line_content(line_el, note_line)
+                        add_line_content(line_el, note_line, word_corrections=word_corrections)
                 continue
 
             top_parts = top_furniture_parts(line, width, height)
@@ -1274,7 +1528,7 @@ def build_tei(
                         lb.set("bbox", bbox_str(part_bbox))
                     if part_words:
                         lb.tail = ""
-                    add_text_with_words(line_el, part_words)
+                    add_text_with_words(line_el, part_words, word_corrections=word_corrections)
                 continue
             role, place = line_type(line, height)
             if role in {"header", "pageNum"}:
@@ -1296,7 +1550,7 @@ def build_tei(
                 line_el.set("subtype", role)
             if line.bbox:
                 line_el.set("bbox", bbox_str(line.bbox))
-            add_line_content(line_el, line, linked_notes_by_word)
+            add_line_content(line_el, line, linked_notes_by_word, word_corrections)
     return ET.ElementTree(root), footnote_qa_rows
 
 
@@ -1739,6 +1993,7 @@ def main() -> int:
         help="Approved fresh footnote transcription sidecar CSV",
     )
     parser.add_argument("--rejected-footnotes", default=DEFAULT_REJECTED_FOOTNOTES, help="Rejected fresh footnote candidate sidecar CSV")
+    parser.add_argument("--text-correction-ledger", default=DEFAULT_TEXT_CORRECTION_LEDGER, help="Accepted word-level correction ledger CSV")
     parser.add_argument("--edition-id", default=DEFAULT_EDITION_ID, help="Viewer edition id for the fresh stream")
     parser.add_argument("--edition-label", default=DEFAULT_EDITION_LABEL, help="Viewer edition label for the fresh stream")
     parser.add_argument("--resolution", type=int, default=300, help="PDF render resolution in dpi")
@@ -1757,6 +2012,7 @@ def main() -> int:
     accepted_footnote_blocks_path = Path(args.accepted_footnote_blocks)
     accepted_footnote_transcriptions_path = Path(args.accepted_footnote_transcriptions)
     rejected_footnotes_path = Path(args.rejected_footnotes)
+    text_correction_ledger_path = Path(args.text_correction_ledger)
     baseline = Path(args.baseline)
     if not pdf.exists():
         raise SystemExit(f"Missing PDF: {pdf}")
@@ -1774,6 +2030,7 @@ def main() -> int:
     accepted_blocks = load_accepted_footnote_blocks(accepted_footnote_blocks_path)
     accepted_transcriptions = load_accepted_footnote_transcriptions(accepted_footnote_transcriptions_path)
     rejected_ref_ids = load_rejected_footnote_refs(rejected_footnotes_path)
+    word_corrections = load_word_corrections(text_correction_ledger_path)
     outdir.mkdir(parents=True, exist_ok=True)
 
     parsed_pages: list[HocrPage] = []
@@ -1813,6 +2070,7 @@ def main() -> int:
         accepted_blocks,
         accepted_transcriptions,
         rejected_ref_ids,
+        word_corrections,
     )
     ET.indent(tree, space="  ")
     tree.write(tei_path, encoding="utf-8", xml_declaration=True)

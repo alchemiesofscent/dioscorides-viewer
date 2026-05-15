@@ -114,11 +114,85 @@ def read_transcriptions(path: Path) -> dict[str, dict[str, str]]:
         }
 
 
+def int_or_none(value: str | None) -> int | None:
+    try:
+        return int(value or "")
+    except ValueError:
+        return None
+
+
+def bbox_top(value: str | None) -> int:
+    if not value:
+        return 0
+    parts = re.findall(r"-?\d+", value)
+    if len(parts) < 2:
+        return 0
+    return int(parts[1])
+
+
+def accepted_note_sequence(path: Path) -> list[tuple[int, int, int, str]]:
+    if not path.exists():
+        return []
+    points: list[tuple[int, int, int, str]] = []
+    with path.open("r", encoding="utf-8", newline="") as handle:
+        for row in csv.DictReader(handle):
+            page = int_or_none(row.get("page"))
+            note_n = int_or_none(row.get("n"))
+            if page is None or note_n is None:
+                continue
+            points.append((page, bbox_top(row.get("note_bbox")), note_n, row.get("note_xml_id", "")))
+    return sorted(points)
+
+
+def footnote_sequence_regressions(root: ET.Element, accepted_blocks_path: Path) -> list[str]:
+    accepted = accepted_note_sequence(accepted_blocks_path)
+    if not accepted:
+        return []
+    regressions: list[str] = []
+    current_page = 0
+    for element in root.iter():
+        tag = local_name(element.tag)
+        if tag == "pb":
+            current_page = int_or_none(element.get("n")) or current_page
+            continue
+        if tag != "note" or element.get("type") != "footnote":
+            continue
+        subtype = element.get("subtype") or ""
+        if not subtype.startswith("unresolved"):
+            continue
+        note_n = int_or_none(element.get("n"))
+        if note_n is None:
+            continue
+        y = bbox_top(element.get("bbox"))
+        previous = None
+        next_point = None
+        for point in accepted:
+            point_key = (point[0], point[1])
+            note_key = (current_page, y)
+            if point_key < note_key:
+                previous = point
+            elif point_key > note_key:
+                next_point = point
+                break
+        if previous is None or next_point is None:
+            continue
+        if current_page - previous[0] > 3 or next_point[0] - current_page > 3:
+            continue
+        if next_point[2] < previous[2]:
+            continue
+        if note_n + 5 >= previous[2]:
+            continue
+        note_id = xml_id(element) or f"page-{current_page}-note-{note_n}"
+        regressions.append(f"{note_id}: {note_n} between accepted {previous[2]} and {next_point[2]}")
+    return regressions
+
+
 def validate(
     xml_path: Path,
     manifest_path: Path,
     expected_pdf_pages: int | None = None,
     accepted_transcriptions_path: Path | None = None,
+    accepted_blocks_path: Path | None = None,
 ) -> list[str]:
     issues: list[str] = []
     try:
@@ -283,6 +357,14 @@ def validate(
     if ambiguous_auto_links:
         issues.append(f"FOOTNOTE_AMBIGUOUS_PAGE_AUTO_LINK: {len(ambiguous_auto_links)} notes on pages 23/24/33 linked without accepted sidecar")
 
+    if accepted_blocks_path:
+        regressions = footnote_sequence_regressions(root, accepted_blocks_path)
+        if regressions:
+            issues.append(
+                "FOOTNOTE_SEQUENCE_REGRESSION: "
+                f"{len(regressions)} unresolved note candidates regress against accepted numbering"
+            )
+
     print(f"  Manifest pages: {len(manifest_pages)}")
     print(f"  Page breaks: {len(pbs)}")
     print(f"  Main-text line breaks: {len(body_lbs)}")
@@ -304,6 +386,10 @@ def main() -> int:
         "--accepted-transcriptions",
         default="ocr/beck2020_fresh/review/accepted_footnote_transcriptions.csv",
     )
+    parser.add_argument(
+        "--accepted-footnote-blocks",
+        default="ocr/beck2020_fresh/review/accepted_footnote_blocks.csv",
+    )
     args = parser.parse_args()
 
     issues = validate(
@@ -311,6 +397,7 @@ def main() -> int:
         Path(args.manifest),
         args.expected_pdf_pages,
         Path(args.accepted_transcriptions),
+        Path(args.accepted_footnote_blocks),
     )
     return 1 if issues else 0
 

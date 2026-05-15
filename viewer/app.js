@@ -4,8 +4,7 @@
   const REPO_ROOT = new URL("../", window.location.href);
   const EDITIONS_PATH = "editions.json";
   const LOCAL_PRIVATE_REGISTRY_PATHS = [
-    "editions/beck2020/private_registry.json",
-    "editions/beck2020_fresh/private_registry.json",
+    "editions/beck2020_fresh_diplomatic/private_registry.json",
   ];
   const XML_NS = "http://www.w3.org/XML/1998/namespace";
   const FALLBACK_EDITION = {
@@ -133,6 +132,12 @@
     return section.navTitle || section.title || section.n || section.id || section.subtype || section.type || "Section";
   }
 
+  function cleanChapterTitleForDisplay(title) {
+    return normalizeText(title || "")
+      .replace(/\s+\d+\.\s+(?=[A-ZΑ-Ω])/u, " ")
+      .trim();
+  }
+
   function compactSectionLabel(section) {
     if (!section) return "";
     if (section.kind === "book") return `Book ${section.n || "?"}`;
@@ -141,8 +146,9 @@
 
   function chapterLabel(chapter) {
     if (!chapter) return "";
-    if (chapter.subtype === "proem") return chapter.navTitle || chapter.title || chapter.n || "Proem";
-    return [chapter.n, chapter.navTitle || chapter.title].filter(Boolean).join(" ");
+    const title = cleanChapterTitleForDisplay(chapter.navTitle || chapter.title || "");
+    if (chapter.subtype === "proem") return title || chapter.n || "Proem";
+    return [chapter.n, title].filter(Boolean).join(" ");
   }
 
   function pageChapterLabels(page) {
@@ -289,6 +295,15 @@
   function prepareRenderedTextClone(clone) {
     for (const footnote of clone.querySelectorAll(".tei-footnote")) footnote.remove();
     for (const lineNumber of clone.querySelectorAll(".line-number")) lineNumber.remove();
+    for (const lineBreak of clone.querySelectorAll("br")) {
+      lineBreak.replaceWith(document.createTextNode(" "));
+    }
+    for (const lineAnchor of clone.querySelectorAll(".tei-line")) {
+      lineAnchor.appendChild(document.createTextNode(" "));
+    }
+    for (const block of clone.querySelectorAll(".tei-block")) {
+      block.appendChild(document.createTextNode(" "));
+    }
     for (const furniture of clone.querySelectorAll(".tei-fw")) {
       furniture.appendChild(document.createTextNode(" "));
     }
@@ -838,8 +853,8 @@
       }
     }
 
-    if (name === "hi") {
-      const rend = (source.getAttribute("rend") || "").toLowerCase();
+    const rend = (source.getAttribute("rend") || "").toLowerCase();
+    if (rend) {
       for (const token of rend.split(/\s+/).map(classToken).filter(Boolean)) {
         element.classList.add(`tei-hi-${token}`);
       }
