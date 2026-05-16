@@ -1,0 +1,919 @@
+n	xml_id	label_la	label_grc
+1.1	spr-ch-1.1-la	De Iride	Περὶ Ἴριδος
+1.2	spr-ch-1.2-la	De Acoro	Περὶ Ἀκόρου
+1.3	spr-ch-1.3-la	De Meo	Περὶ Μήου
+1.4	spr-ch-1.4-la	De Cypero	Περὶ Κυπείρου
+1.5	spr-ch-1.5-la	De Cardamomo	Περὶ Καρδαμώμου
+1.6	spr-ch-1.6-la	De Nardo	Περὶ Νάρδου
+1.7	spr-ch-1.7-la	De celtica Nardo	Περὶ κελτικῆς Νάρδου
+1.8	spr-ch-1.8-la	De Nardo montana	Περὶ ὀρεινῆς Νάρδου
+1.9	spr-ch-1.9-la	De Asaro	Περὶ Ἀσάρου
+1.10	spr-ch-1.10-la	De Phu	Περὶ Φοῦ
+1.11	spr-ch-1.11-la	De Malabathro	Περὶ Μαλαβάθρου
+1.12	spr-ch-1.12-la	De Cassia	Περὶ Κασσίας
+1.13	spr-ch-1.13-la	De Cinnamomo	Περὶ Κινναμώμου
+1.14	spr-ch-1.14-la	De Amomo	Περὶ Ἀμώμου
+1.15	spr-ch-1.15-la	De Costo	Περὶ Κόστου
+1.16	spr-ch-1.16-la	De Schoeno	Περὶ Σχοίνου
+1.17	spr-ch-1.17-la	De Calamo aromatico	Περὶ Καλάμου
+1.18	spr-ch-1.18-la	De Balsamo	Περὶ Βαλσάμου
+1.19	spr-ch-1.19-la	De Aspalatho	Περὶ Ἀσπαλάθου
+1.20	spr-ch-1.20-la	De Bryo	Περὶ Βρύου
+1.21	spr-ch-1.21-la	De Agallocho	Περὶ Ἀγαλλόχου
+1.22	spr-ch-1.22-la	De Nascaphtho	Περὶ Νασκάφθου
+1.23	spr-ch-1.23-la	De Cancamo	Περὶ Καγκάμου
+1.24	spr-ch-1.24-la	De Cyphi	Περὶ Κύφεως
+1.25	spr-ch-1.25-la	De Croco	Περὶ Κρόκου
+1.26	spr-ch-1.26-la	De Crocomagmate	Περὶ Κροκομάγματος
+1.27	spr-ch-1.27-la	De Helenio	Περὶ Ἑλενίου
+1.28	spr-ch-1.28-la	De Hellenio aegyptio	Περὶ Ἐλενίου αἰγυπτίου
+1.29	spr-ch-1.29-la	De oleo ex immaturis olivis	Περὶ ἐλαίου ὠμοτριβοῦς
+1.30	spr-ch-1.30-la	De oleo communi	Περὶ ἐλαίου κοινοῦ
+1.31	spr-ch-1.31-la	De oleo sylvestris olivae	Περὶ ἐλαίου ἐκ τῆς ἀγρίας ἐλαίας
+1.32	spr-ch-1.32-la	Oleum candidum	Ἔλαιον λευκόν
+1.33	spr-ch-1.33-la	De Sicyonio oleo	Περὶ σικυωνίου ἐλαίου
+1.34	spr-ch-1.34-la	De sordibus balneorum	Ῥύπος βαλανείων
+1.35	spr-ch-1.35-la	De sordibus palaestrae	Ῥύπος ἐκ τῆς παλαίστρας
+1.36	spr-ch-1.36-la	De sordibus gymnasiorum	Ῥύπος γυμνασίων
+1.37	spr-ch-1.37-la	De elaeomelite	Περὶ Ἐλαιομέλιτος
+1.38	spr-ch-1.38-la	De oleo ricini	Περὶ κικίνου ἐλαίου
+1.39	spr-ch-1.39-la	De oleo amygdalino	Περὶ ἀμυγδαλίνου ἐλαίου
+1.40	spr-ch-1.40-la	De balanino oleo	Περὶ βαλανίνου ἐλαίου
+1.41	spr-ch-1.41-la	Olea sesaminum et iuglandinum	Ἔλαιον σησάμινον καὶ καρύϊνον
+1.42	spr-ch-1.42-la	Oleum hyoscyami	Περὶ ὑοσκυαμίνου ἐλαίου
+1.43	spr-ch-1.43-la	De cnidio oleo	Περὶ Κνιδελαίου
+1.44	spr-ch-1.44-la	De oleo carthami	Περὶ Κνικελαίου
+1.45	spr-ch-1.45-la	De raphanino oleo	Περὶ Ῥαφανελαίου
+1.46	spr-ch-1.46-la	De oleo melanthii	Περὶ Μελανθελαίου
+1.47	spr-ch-1.47-la	De sinapino oleo	Περὶ Σιναπελαίου
+1.48	spr-ch-1.48-la	De oleo myrteo	Περὶ Μυρσινελαίου
+1.49	spr-ch-1.49-la	De oleo laurino	Περὶ Δαφνελαίου
+1.50	spr-ch-1.50-la	De oleo lentiscino	Περὶ Σχινελαίου
+1.51	spr-ch-1.51-la	De mastichino oleo	Περὶ Μαστιχελαίου
+1.52	spr-ch-1.52-la	De unguentorum compositione	Περὶ συνθέσεως μύρων
+1.53	spr-ch-1.53-la	De rosacei praeparatione	Περὶ ῥοδίνου σκευασίας
+1.54	spr-ch-1.54-la	De oleo palmarum parando	Περὶ ἐλατίνου σκευασίας
+1.55	spr-ch-1.55-la	De oleo cydoniorum	Περὶ μηλίνου σκευασίας
+1.56	spr-ch-1.56-la	De oleo florum vitis	Περὶ οἰνανθίνου σκευασίας
+1.57	spr-ch-1.57-la	De oleo foeni graeci	Περὶ τηλίνου σκευασίας
+1.58	spr-ch-1.58-la	De oleo maioranae componendo	Περὶ σαμψυχίνου σκευασίας
+1.59	spr-ch-1.59-la	De ocimini praeparatione	Περὶ ὠκιμίνου σκευασίας
+1.60	spr-ch-1.60-la	De abrotanini confectione	Περὶ ἀβροτονίνου σκευασίας
+1.61	spr-ch-1.61-la	De anethini confectione	Περὶ ἀνηθίνου σκευασίας
+1.62	spr-ch-1.62-la	De susini confectione	Περὶ σουσίνου σκευασίας
+1.63	spr-ch-1.63-la	De narcissini paratione	Περὶ ναρκισσίνου σκευασίας
+1.64	spr-ch-1.64-la	De crocini praeparatione	Περὶ κροκίνου σκευασίας
+1.65	spr-ch-1.65-la	De cyprini olei spissamento et praepara- tione	Περὶ κυπρίνου στύψεως καὶ σκευασίας ἐλαίου
+1.66	spr-ch-1.66-la	De irini spissamento	Περὶ στύψεως ἰρίνου
+1.67	spr-ch-1.67-la	De defrutarii compositione	Περὶ γλείκινου σκευασίας
+1.68	spr-ch-1.68-la	De amaracino	Περὶ ἀμαρακίνου
+1.69	spr-ch-1.69-la	De Megalio	Περὶ μεγαλείου
+1.70	spr-ch-1.70-la	De Hedychroo	Περὶ ἡδύχροου
+1.71	spr-ch-1.71-la	De Metopio	Περὶ μετωπίου
+1.72	spr-ch-1.72-la	De Mendesio	Περὶ Μενδησίου
+1.73	spr-ch-1.73-la	De Stacte	Περὶ στακτῆς
+1.74	spr-ch-1.74-la	De Cinnamomino	Περὶ κινναμωμίνου
+1.75	spr-ch-1.75-la	De nardino unguento	Περὶ ναρδίνου μύρου
+1.76	spr-ch-1.76-la	De Malabathrino	Περὶ Μαλαβαθρίνου
+1.77	spr-ch-1.77-la	De Myrrha	Περὶ Σμύρνης
+1.78	spr-ch-1.78-la	De boeotica myrrha	Περὶ βοιωτικῆς σμύρνης
+1.79	spr-ch-1.79-la	De Styrace	Περὶ Στύρακος
+1.80	spr-ch-1.80-la	De Bdellio	Περὶ Βδελλίου
+1.81	spr-ch-1.81-la	De ture	Περὶ λιβάνου
+1.82	spr-ch-1.82-la	De cortice turis	Περὶ φλοιοῦ λιβάνου
+1.83	spr-ch-1.83-la	De manna turis	Περὶ μάννης λιβάνου
+1.84	spr-ch-1.84-la	De turis fuligine	Περὶ αἰθάλης λιβανωτοῦ
+1.85	spr-ch-1.85-la	De fuliginis confectione	Περὶ λιγνύος σκευασίας
+1.86	spr-ch-1.86-la	De Pinu (Pinea.)	Περὶ πίτυος
+1.87	spr-ch-1.87-la	De Pityidibus	Περὶ πιτυΐδων
+1.88	spr-ch-1.88-la	De strobilis	Περὶ στροβίλων
+1.89	spr-ch-1.89-la	De Lentisco	Περὶ Σχίνου
+1.90	spr-ch-1.90-la	De resina lentiscina	Περὶ ῥητίνης σχινίνης
+1.91	spr-ch-1.91-la	De Terebintho	Περὶ Τερεμίνθου
+1.92	spr-ch-1.92-la	De resinis aliis	Περὶ ῥητινῶν ἄλλων
+1.93	spr-ch-1.93-la	De modo, quo urenda est resina	Περὶ τοῦ πῶς δεῖ καίειν τὴν ῥητίνην
+1.94	spr-ch-1.94-la	De pice liquida	Περὶ πίσσης ὑγρᾶς
+1.95	spr-ch-1.95-la	De oleo picino	Περὶ Πισσελαίου
+1.96	spr-ch-1.96-la	De fuligine picis liquidae	Περὶ λιγνύος τῆς ἐξ ὑγρᾶς πίσσης
+1.97	spr-ch-1.97-la	De pice sicca	Περὶ ξηρᾶς πίσσης
+1.98	spr-ch-1.98-la	De zopissa	Περὶ ζωπίσσης
+1.99	spr-ch-1.99-la	De bitumine	Περὶ ἀσφάλτου
+1.100	spr-ch-1.100-la	De pissasphalto	Περὶ Πιττασφάλτου
+1.101	spr-ch-1.101-la	De naphtha	Περὶ νάφθας
+1.102	spr-ch-1.102-la	De Cupresso	Περὶ Κυπαρίσσου
+1.103	spr-ch-1.103-la	De Iunipero	Περὶ Ἀρκεύθου
+1.104	spr-ch-1.104-la	De Sabina	Περὶ Βράθυος
+1.105	spr-ch-1.105-la	De Cedro	Περὶ Κέδρου
+1.106	spr-ch-1.106-la	De Lauro	Περὶ Δάφνης
+1.107	spr-ch-1.107-la	De Platano	Περὶ Πλατάνου
+1.108	spr-ch-1.108-la	De Fraxino	Περὶ Μελίας
+1.109	spr-ch-1.109-la	De Populo alba	Περὶ Λεύκης
+1.110	spr-ch-1.110-la	De Populo nigra	Περὶ Αἰγείρου
+1.111	spr-ch-1.111-la	De Macere	Περὶ Μάκερος
+1.112	spr-ch-1.112-la	De Ulmo	Περὶ Πτελέας
+1.113	spr-ch-1.113-la	De carie lignorum	Περὶ σαπρότητος ξύλων
+1.114	spr-ch-1.114-la	De arundinibus	Περὶ Καλάμων
+1.115	spr-ch-1.115-la	De Papyro	Περὶ Παπύρου
+1.116	spr-ch-1.116-la	De Tamarice	Περὶ Μυρίκης
+1.117	spr-ch-1.117-la	De Erica	Περὶ Ἐρείκης
+1.118	spr-ch-1.118-la	De Acacalide	Περὶ Ἀκακαλίδος
+1.119	spr-ch-1.119-la	De Rhamno	Περὶ Ῥάμνου
+1.120	spr-ch-1.120-la	De Halimo	Περὶ Ἁλίμου
+1.121	spr-ch-1.121-la	De Paliuro	Περὶ Παλιούρου
+1.122	spr-ch-1.122-la	De Oxyacantha	Περὶ Ὀξυακάνθης
+1.123	spr-ch-1.123-la	De Cynosbato	Περὶ Κυνοσβάτου
+1.124	spr-ch-1.124-la	De Cypro	Περὶ Κύπρου
+1.125	spr-ch-1.125-la	De Phillyrea	Περὶ Φιλλυρέας
+1.126	spr-ch-1.126-la	De Cisto	Περὶ Κίστου
+1.127	spr-ch-1.127-la	De Hypocistide	Περὶ Ὑποκιστίδος
+1.128	spr-ch-1.128-la	De Ladano	Περὶ Λαδάνου
+1.129	spr-ch-1.129-la	De Ebeno	Περὶ Ἐβένου
+1.130	spr-ch-1.130-la	De Rosis	Περὶ Ῥόδων
+1.131	spr-ch-1.131-la	De roseis pastillis	Περὶ Ῥοδίδων
+1.132	spr-ch-1.132-la	De Lycio	Περὶ Λυκίου
+1.133	spr-ch-1.133-la	De Acacia	Περὶ Ἀκακίας
+1.134	spr-ch-1.134-la	De Vitice	Περὶ Ἄγνου
+1.135	spr-ch-1.135-la	De Salice	Περὶ Ἰτέας
+1.136	spr-ch-1.136-la	De Oleastro	Περὶ Ἀγριελαίας
+1.137	spr-ch-1.137-la	De Olea	Περὶ Ἐλαίας
+1.138	spr-ch-1.138-la	De olivis muria con- ditis	Περὶ κολυμβάδων ἐλαιῶν
+1.139	spr-ch-1.139-la	De oleo sylvestris oleae	Περὶ ἐλαίου ἀγρίας ἐλαίας
+1.140	spr-ch-1.140-la	De amurca	Περὶ ἀμόργης
+1.141	spr-ch-1.141-la	De lacrima oleae aethiopicae	Περὶ δακρύου ἐλαίας αἰθιοπικῆς
+1.142	spr-ch-1.142-la	De Quercu	Περὶ Δρυός
+1.143	spr-ch-1.143-la	De Glandibus	Περὶ βαλάνων
+1.144	spr-ch-1.144-la	De Esculo et Ilice	Περὶ Φηγοῦ καὶ Πρίνου
+1.145	spr-ch-1.145-la	De Castaneis	Περὶ Καστάνων
+1.146	spr-ch-1.146-la	De Gallis	Περὶ Κηκίδων
+1.147	spr-ch-1.147-la	De Rho	Περὶ Ῥοῦ
+1.148	spr-ch-1.148-la	De Phoenice	Περὶ Φοίνικος
+1.149	spr-ch-1.149-la	De Thebaicis palmis	Περὶ θηβαϊκῶν φοινίκων
+1.150	spr-ch-1.150-la	De palmae spatha	Περὶ σπάθης φοίνικος
+1.151	spr-ch-1.151-la	De malo punico	Περὶ Ῥόας
+1.152	spr-ch-1.152-la	De cytinis	Περὶ κυτίνων
+1.153	spr-ch-1.153-la	De Malicorio	Περὶ σιδίων
+1.154	spr-ch-1.154-la	De Balaustiis	Περὶ βαλαυστίων
+1.155	spr-ch-1.155-la	De Myrto	Περὶ Μυρσίνης
+1.156	spr-ch-1.156-la	De Myrtidano	Περὶ Μυρτιδάνου
+1.157	spr-ch-1.157-la	De Cerasis	Περὶ Κερασίων
+1.158	spr-ch-1.158-la	De siliquis	Περὶ Κερατίων
+1.159	spr-ch-1.159-la	De Malo	Περὶ Μηλέας
+1.160	spr-ch-1.160-la	De Cydoniis malis	Περὶ Κυδωνίων μήλων
+1.161	spr-ch-1.161-la	De Melimelis	Περὶ Μελιμήλων
+1.162	spr-ch-1.162-la	De epiroticis malis	Περὶ Ἠπειρωτικῶν μήλων
+1.163	spr-ch-1.163-la	De sylvestribus malis	Περὶ Ἀγριομήλων
+1.164	spr-ch-1.164-la	De persicis malis	Περὶ Περσικῶν μήλων
+1.165	spr-ch-1.165-la	De Armeniacis	Περὶ Ἀρμενιακῶν
+1.166	spr-ch-1.166-la	De Medicis	Περὶ Μηδικῶν
+1.167	spr-ch-1.167-la	De Pyro	Περὶ Ἀπίου
+1.168	spr-ch-1.168-la	De Pyro sylvestri	Περὶ Ἀχράδος
+1.169	spr-ch-1.169-la	De Mespilis	Περὶ Μεσπίλων
+1.170	spr-ch-1.170-la	De altera Mespilo	Περὶ ἑτέρου Μεσπίλου
+1.171	spr-ch-1.171-la	De Loto	Περὶ Λωτοῦ
+1.172	spr-ch-1.172-la	De Corno	Περὶ Κρανίας
+1.173	spr-ch-1.173-la	De Sorbis	Περὶ Οὔων
+1.174	spr-ch-1.174-la	De Pruno	Περὶ Κοκκυμηλέας
+1.175	spr-ch-1.175-la	De Arbuto	Περὶ Κομάρου
+1.176	spr-ch-1.176-la	De Amygdalo	Περὶ Ἀμυγδαλῆς
+1.177	spr-ch-1.177-la	De Pistaciis	Περὶ Πιστακίων
+1.178	spr-ch-1.178-la	De Nucibus Iuglandis	Περὶ Καρύων βασιλικῶν
+1.179	spr-ch-1.179-la	De Nucibus avellanis	Περὶ Καρύων ποντικῶν
+1.180	spr-ch-1.180-la	De Moro	Περὶ Μορέας
+1.181	spr-ch-1.181-la	De Sycomoro	Περὶ Συκομόρου
+1.182	spr-ch-1.182-la	De ficu cypria	Περὶ σύκου ἐν Κύπρῳ
+1.183	spr-ch-1.183-la	De Ficubus	Περὶ σύκων
+1.184	spr-ch-1.184-la	De Ficu sylvestri:	Περὶ ἀγρίας συκῆς
+1.185	spr-ch-1.185-la	De Grossis	Περὶ Ὀλύνθων
+1.186	spr-ch-1.186-la	De Lixivio ficus	Περὶ κονίας τῆς συκῆς
+1.187	spr-ch-1.187-la	De Persea	Περὶ Περσέας
+2.1	spr-ch-2.1-la	De Echino marino	Περὶ Ἐχίνου θαλασσίου
+2.2	spr-ch-2.2-la	De Erinaceo	Περὶ τοῦ χερσαίου Ἐχίνου
+2.3	spr-ch-2.3-la	De Hippocampo	Περὶ Ἱπποκάμπου
+2.4	spr-ch-2.4-la	De Purpura	Περὶ Πορφύρας
+2.5	spr-ch-2.5-la	De Buccinis	Περὶ Κηρύκων
+2.6	spr-ch-2.6-la	De Columellis	Περὶ Κονίων
+2.7	spr-ch-2.7-la	De Mytilis	Περὶ Μυάκων
+2.8	spr-ch-2.8-la	De Tellinis	Περὶ Τελλινῶν
+2.9	spr-ch-2.9-la	De Chamis	Περὶ Χημῶν
+2.10	spr-ch-2.10-la	De Ungue	Περὶ Ὄνυχος
+2.11	spr-ch-2.11-la	De Cochleis	Περὶ Κοχλίων
+2.12	spr-ch-2.12-la	De Cancris	Περὶ Καρκίνων
+2.13	spr-ch-2.13-la	De Scorpione terrestri	Περὶ Σκορπίου χερσαίου
+2.14	spr-ch-2.14-la	De Scorpione marino	Περὶ Σκορπίου θαλασσίου
+2.15	spr-ch-2.15-la	De Dracone marino	Περὶ Δράκοντος θαλασσίου
+2.16	spr-ch-2.16-la	De Scolopendra	Περὶ Σκολοπένδρας
+2.17	spr-ch-2.17-la	De Torpedine	Περὶ Νάρκης
+2.18	spr-ch-2.18-la	De Vipera	Περὶ Ἐχίδης
+2.19	spr-ch-2.19-la	De anguium senecta	Περὶ Ὄφεως γήρως
+2.20	spr-ch-2.20-la	De lepore marino	Περὶ Λαγωοῦ θαλαττίου
+2.21	spr-ch-2.21-la	De lepore terrestri	Περὶ Λαγωοῦ χερσαίου
+2.22	spr-ch-2.22-la	De Pastinaca marina	Περὶ Τουγόνος θαλασσίας
+2.23	spr-ch-2.23-la	De Sepia	Περὶ Σηπίας
+2.24	spr-ch-2.24-la	De Mullo	Περὶ Τρίγλης
+2.25	spr-ch-2.25-la	De testiculo Hippopotami	Περὶ Ὄρχεως ἱπποποτάμου
+2.26	spr-ch-2.26-la	De testibus Fibri	Περὶ τῶν τοῦ κάστορος ὄρχεων
+2.27	spr-ch-2.27-la	De Mustela domestica	Περὶ Γαλῆς κατοικιδίου
+2.28	spr-ch-2.28-la	De Ranis	Περὶ Βατράχων
+2.29	spr-ch-2.29-la	De Siluro	Περὶ Σιλούρου
+2.30	spr-ch-2.30-la	De Smaride	Περὶ Σμαρίδος
+2.31	spr-ch-2.31-la	De Maena	Περὶ Μαινίδος
+2.32	spr-ch-2.32-la	De Gobio	Περὶ Κωβιοῦ
+2.33	spr-ch-2.33-la	De Salsamento crudo	Περὶ Ὠμοταρίχου
+2.34	spr-ch-2.34-la	De Garo	Περὶ Γάρου
+2.35	spr-ch-2.35-la	De recentium piscium iusculo	Περὶ Ζωμοῦ τῶν νεαρῶν ἰχθύων
+2.36	spr-ch-2.36-la	De Cimicibus	Περὶ Κορέως
+2.37	spr-ch-2.37-la	De Millepedis	Περὶ Κουβαρίδων
+2.38	spr-ch-2.38-la	De Blatta	Περὶ Σίλφης
+2.39	spr-ch-2.39-la	De Pulmone marino	Περὶ Πνεύμονος θαλασσίου
+2.40	spr-ch-2.40-la	De Pulmone suillo	Περὶ Χοιρίου πνεύμονος
+2.41	spr-ch-2.41-la	De Pulmone vulpino	Περὶ Πνεύμονος ἀλώπεκος
+2.42	spr-ch-2.42-la	De Hepate asinino	Περὶ Ἥπατος ὀνείου
+2.43	spr-ch-2.43-la	De genitali Cervi	Περὶ Αἰδοίου ἄρρενος ἐλάφου
+2.44	spr-ch-2.44-la	De Ungulis asinorum	Περὶ Ὀνύχων ὄνων
+2.45	spr-ch-2.45-la	De Lichenibus equorum	Περὶ Λειχήνων ἵππων
+2.46	spr-ch-2.46-la	De Ungulis caprarum	Περὶ Αἰγῶν ὀνύχων
+2.47	spr-ch-2.47-la	De Iecinore caprae	Περὶ Ἥπατος αἰγός
+2.48	spr-ch-2.48-la	De Hepate apri	Περὶ Ἥπατος κάπρου
+2.49	spr-ch-2.49-la	De iecore canis rabidi	Περὶ Ἥπατος κυνός λυσσῶντος
+2.50	spr-ch-2.50-la	De Iecore mergi	Περὶ Ἥπατος αἰθυίας
+2.51	spr-ch-2.51-la	De veteribus Soleis	Περὶ Καττυμάτων
+2.52	spr-ch-2.52-la	De Gallinis	Περὶ Ἀλεκτορίδων
+2.53	spr-ch-2.53-la	De Gallinarum cerebro	Περὶ Ἐγκεφάλου ἀλεκτορίδος
+2.54	spr-ch-2.54-la	De Ovo	Περὶ Ὠοῦ
+2.55	spr-ch-2.55-la	De Albumine ovi	Περὶ Λευκοῦ τοῦ ὠοῦ
+2.56	spr-ch-2.56-la	De Cicadis	Περὶ Τεττίγων
+2.57	spr-ch-2.57-la	De Locustis	Περὶ Ἀκρίδων
+2.58	spr-ch-2.58-la	De Phinide	Περὶ Φίνιδος
+2.59	spr-ch-2.59-la	Galerita	Περὶ Κορυδαλλοῦ
+2.60	spr-ch-2.60-la	De Hirundine	Περὶ Χελιδόνος
+2.61	spr-ch-2.61-la	De Ebore	Περὶ Ἐλέφαντος
+2.62	spr-ch-2.62-la	De Talo suillo	Περὶ Ἀστραγάλου ὑός
+2.63	spr-ch-2.63-la	De Cornu cervino	Περὶ Ἐλάφου κέρατος
+2.64	spr-ch-2.64-la	De Erucis	Περὶ Καμπῶν
+2.65	spr-ch-2.65-la	De Cantharidibus	Περὶ Κανθαρίδων
+2.76	spr-ch-2.76-la	De Sero lactis	Περὶ ὀῤῥοῦ γάλακτος
+2.77	spr-ch-2.77-la	De lacte schisto	Περὶ σχιστοῦ γάλακτος
+2.78	spr-ch-2.78-la	De lacte muliebri	Περὶ γυναικείου γάλακτος
+2.79	spr-ch-2.79-la	De caseo recenti	Περὶ τυροῦ νεαροῦ
+2.80	spr-ch-2.80-la	De Hippace	Περὶ Ἱππάκης
+2.81	spr-ch-2.81-la	De Butyro et eius fuligine	Περὶ Βουτύρου καὶ τῆς ἐξ αὐτοῦ λιγνύος
+2.82	spr-ch-2.82-la	De Lanis	Περὶ Ἐρίων
+2.83	spr-ch-2.83-la	De Lanis ustis	Περὶ Ἐρίων κεκαυμένων
+2.84	spr-ch-2.84-la	De Oesypo	Περὶ Οἰσύπου
+2.85	spr-ch-2.85-la	De coagulo	Περὶ Πιτύας
+2.86	spr-ch-2.86-la	De Adipe	Περὶ Στέατος
+2.87	spr-ch-2.87-la	De suillo et ursino adipe	Περὶ στέατος ὑείου καὶ ἀρκείου
+2.88	spr-ch-2.88-la	De sebo hircino, ovillo et cer- vino	Περὶ στέατος τραγείου καὶ προβατείου καὶ ἐλαφείου
+2.89	spr-ch-2.89-la	De sebo bubulo	Περὶ στέατος βοείου
+2.90	spr-ch-2.90-la	De adipe taurino, pantherino et leonino	Περὶ στέατος ταυρείου, παρδαλείου καὶ λεον- τείου
+2.91	spr-ch-2.91-la	Quomodo adeps aromatis sit imbuendus	Πῶς τὸ στέαρ ἀρωματιστεῖον
+2.92	spr-ch-2.92-la	Quomodo adeps maioranae odore im- buatur	Πῶς σαμψυχίζεται τὸ στέαρ
+2.93	spr-ch-2.93-la	De adipe anserino et gallinaceo	Περὶ στέατος χηνείου καὶ ὀρνιθείου
+2.94	spr-ch-2.94-la	De adipum vis	Στεάτων δύναμις
+2.95	spr-ch-2.95-la	De Medullis	Περὶ Μυελῶν
+2.96	spr-ch-2.96-la	De omni felle	Περὶ χολῆς πάσης
+2.97	spr-ch-2.97-la	De sanguinis variis generibus	Περὶ Αἱμάτων
+2.98	spr-ch-2.98-la	De Stercore	Περὶ Ἀποπάτου
+2.99	spr-ch-2.99-la	De Urinis	Περὶ Οὔρων
+2.100	spr-ch-2.100-la	De Lyncurio	Περὶ Λυγγουρίου
+2.101	spr-ch-2.101-la	De Melle	Περὶ Μέλιτος
+2.102	spr-ch-2.102-la	De melle sardoo	Περὶ Μέλιτος ἐν Σαρδονίᾳ
+2.103	spr-ch-2.103-la	De melle pontico	Περὶ Μέλιτος ποντικοῦ
+2.104	spr-ch-2.104-la	De Saccharo mellis	Περὶ Σακχάρου μέλιτος
+2.105	spr-ch-2.105-la	De Cera	Περὶ Κηροῦ
+2.106	spr-ch-2.106-la	De Propoli	Περὶ Προπόλεως
+2.107	spr-ch-2.107-la	De Tritico	Περὶ Πυρῶν
+2.108	spr-ch-2.108-la	De Hordeo	Περὶ Κριθῆς
+2.109	spr-ch-2.109-la	De Zytho	Περὶ Ζύθου
+2.110	spr-ch-2.110-la	De Curmi	Περὶ Κούρμιθος
+2.111	spr-ch-2.111-la	De Zea	Περὶ Ζειᾶς
+2.112	spr-ch-2.112-la	De Farina crassiore	Περὶ Κρίμνου
+2.113	spr-ch-2.113-la	De Olyra	Περὶ Ὀλύρας
+2.114	spr-ch-2.114-la	De Athera	Περὶ Ἀθήρας
+2.115	spr-ch-2.115-la	De Trago	Περὶ Τράγου
+2.116	spr-ch-2.116-la	De Avena	Περὶ Βρώμου
+2.117	spr-ch-2.117-la	De Oryza	Περὶ Ὀρύζης
+2.118	spr-ch-2.118-la	De Alica	Περὶ Χόνδρου
+2.119	spr-ch-2.119-la	De Milio	Περὶ Κέγχρου
+2.120	spr-ch-2.120-la	De Panico	Περὶ Ἐλύμου
+2.121	spr-ch-2.121-la	De Sesamo	Περὶ Σησάμου
+2.122	spr-ch-2.122-la	De Lolio	Περὶ Αἴρας
+2.123	spr-ch-2.123-la	De Amylo	Περὶ Ἀμύλου
+2.124	spr-ch-2.124-la	De Foeni graeci farina	Περὶ Τήλεως ἀλεύρου
+2.125	spr-ch-2.125-la	De Lino	Περὶ Λίνου
+2.126	spr-ch-2.126-la	De Cicere	Περὶ Ἐρεβίνθου
+2.127	spr-ch-2.127-la	De Faba graeca	Περὶ Κυάμου ἑλληνικοῦ
+2.128	spr-ch-2.128-la	De Faba aegyptia	Περὶ Κυάμου αἰγυπτίου
+2.129	spr-ch-2.129-la	De Lente	Περὶ Φακοῦ
+2.130	spr-ch-2.130-la	De Phaseolo	Περὶ Φασιόλου
+2.131	spr-ch-2.131-la	De Ervo	Περὶ Ὀρόβου
+2.132	spr-ch-2.132-la	De Lupino	Περὶ Θέρμου
+2.133	spr-ch-2.133-la	De Lupino sylvestri	Περὶ Θέρμου ἀγρίου
+2.134	spr-ch-2.134-la	De Rapo	Περὶ Γογγύλης
+2.135	spr-ch-2.135-la	De Rapo sylvestri	Περὶ Γογγύλης ἀγρίας
+2.136	spr-ch-2.136-la	De Buniade	Περὶ Βουνιάδος
+2.137	spr-ch-2.137-la	De Raphano	Περὶ Ῥαφανίδος
+2.138	spr-ch-2.138-la	De Radicula sylvestri	Περὶ Ῥαφανίδος ἀγρίας
+2.139	spr-ch-2.139-la	De Sisere	Περὶ Σισάρου
+2.140	spr-ch-2.140-la	De Lapatho	Περὶ Λαπάθου
+2.141	spr-ch-2.141-la	De Hippolapatho	Περὶ Ἱππολαπάθου
+2.142	spr-ch-2.142-la	De Lampsana	Περὶ Λαμψάνης
+2.143	spr-ch-2.143-la	De Blito	Περὶ Βλήτου
+2.144	spr-ch-2.144-la	De Malva	Περὶ Μαλάχης
+2.145	spr-ch-2.145-la	De atriplice	Περὶ Ἀτραφάξεως
+2.146	spr-ch-2.146-la	De Brassica	Περὶ Κράμβης
+2.147	spr-ch-2.147-la	De Brassica sylvestri	Περὶ Κράμβης ἀγρίας
+2.148	spr-ch-2.148-la	De Brassica marina	Περὶ Κράμβης θαλασσίας
+2.149	spr-ch-2.149-la	De Beta	Περὶ Τεύτλου
+2.150	spr-ch-2.150-la	De Portulaca	Περὶ Ἀνδράχνης
+2.151	spr-ch-2.151-la	De Asparago	Περὶ Ἀσπαράγου
+2.152	spr-ch-2.152-la	De Plantagine	Περὶ Ἀρνογλώσσου
+2.153	spr-ch-2.153-la	De Sio	Περὶ Σίου
+2.154	spr-ch-2.154-la	De Sisymbrio	Περὶ Σισυμβρίου
+2.155	spr-ch-2.155-la	De altero Sisymbrio	Περὶ ἑτέρου Σισυμβρίου
+2.156	spr-ch-2.156-la	DeCrithmo	Περὶ Κριθμοῦ
+2.157	spr-ch-2.157-la	De Coronopode	Περὶ Κορωνόποδος
+2.158	spr-ch-2.158-la	De Soncho	Περὶ Σόγχου
+2.159	spr-ch-2.159-la	De Seride	Περὶ Σέρεως
+2.160	spr-ch-2.160-la	De Condrilla	Περὶ Κονδρίλλης
+2.161	spr-ch-2.161-la	De Cucumere	Περὶ Κολοκύνθας
+2.162	spr-ch-2.162-la	De Melone	Περὶ ἡμέρου σίκυος
+2.163	spr-ch-2.163-la	De Pepone	Περὶ Πέπονος
+2.164	spr-ch-2.164-la	De Lactuca sativa	Περὶ Θρίδακος ἡμέρου
+2.165	spr-ch-2.165-la	De Lactuca sylvestri	Περὶ ἀγρίας θρίδακος
+2.166	spr-ch-2.166-la	De Gingidio	Περὶ Γιγγιδίου
+2.167	spr-ch-2.167-la	De Scandice	Περὶ Σκάνδυκος
+2.168	spr-ch-2.168-la	De Caucalide	Περὶ Καυκαλίδος
+2.169	spr-ch-2.169-la	De Eruca	Περὶ Εὐζώμου
+2.170	spr-ch-2.170-la	De Ocimo	Περὶ Ὠκίμου
+2.171	spr-ch-2.171-la	De Orobanche	Περὶ Ὀροβάγχης
+2.172	spr-ch-2.172-la	De Tragopogone	Περὶ Τραγοπώγωνος
+2.173	spr-ch-2.173-la	De Ornithogalo	Περὶ Ὀρνιθογάλου
+2.174	spr-ch-2.174-la	De Tubere	Περὶ Ὕδνου
+2.175	spr-ch-2.175-la	De Smilace, Pha- seolo	Περὶ Σμίλακος
+2.176	spr-ch-2.176-la	De Medicagine	Περὶ Μηδικῆς
+2.177	spr-ch-2.177-la	De Aphaca	Περὶ Ἀφάκης
+2.178	spr-ch-2.178-la	De Porro	Περὶ Πράσου
+2.179	spr-ch-2.179-la	De Ampelopraso	Περὶ Ἀμπελοπράσου
+2.180	spr-ch-2.180-la	De Cepis	Περὶ Κρομμύου
+2.181	spr-ch-2.181-la	De Allio	Περὶ Σκορόδου
+2.182	spr-ch-2.182-la	De Scorodopraso	Περὶ Σκοροδοπράσου
+2.183	spr-ch-2.183-la	De Sinapi	Περὶ Σινήπεως
+2.184	spr-ch-2.184-la	De Nasturtio	Περὶ Καρδάμου
+2.185	spr-ch-2.185-la	De Thlaspi	Περὶ Θλάσπεως
+2.186	spr-ch-2.186-la	De Draba	Περὶ Δράβης
+2.187	spr-ch-2.187-la	De Erysimo	Περὶ Ἐρυσίμου
+2.188	spr-ch-2.188-la	De Pipere	Περὶ Πεπέρεως
+2.189	spr-ch-2.189-la	De Zingibere	Περὶ Ζιγγιβέρεως
+2.190	spr-ch-2.190-la	De Hydropipere	Περὶ Ὑδροπεπέρεως
+2.191	spr-ch-2.191-la	De Ptarmica	Περὶ Πταρμικῆς
+2.192	spr-ch-2.192-la	De Struthio	Περὶ Στρουθίου
+2.193	spr-ch-2.193-la	De Cyclamine	Περὶ Κυκλαμίνου
+2.194	spr-ch-2.194-la	De Cyclamine altero	Περὶ ἑτέρας Κυκλαμίνου
+2.195	spr-ch-2.195-la	De Dracontia grandi	Περὶ Δρακοντίας μεγάλης
+2.196	spr-ch-2.196-la	De Dracontia minore	Περὶ Δρακοντίας μικρᾶς
+2.197	spr-ch-2.197-la	De Aro	Περὶ Ἄρου
+2.198	spr-ch-2.198-la	De Arisaro	Περὶ Ἀρισάρου
+2.199	spr-ch-2.199-la	De Asphodelo	Περὶ Ἀσφοδέλου
+2.200	spr-ch-2.200-la	De Bulbo esculento	Περὶ Βολβοῦ ἐδωδίμου
+2.201	spr-ch-2.201-la	De Bulbo vomitorio	Περὶ Βολβοῦ ἐμετικοῦ
+2.202	spr-ch-2.202-la	De Scilla	Περὶ Σκίλλης
+2.203	spr-ch-2.203-la	De Pancratio	Περὶ Παγκρατίου
+2.204	spr-ch-2.204-la	De Cappari	Περὶ Καππάρεως
+2.205	spr-ch-2.205-la	De Lepidio	Περὶ Λεπιδίου
+2.206	spr-ch-2.206-la	De Ranunculo	Περὶ Βατραχίου
+2.207	spr-ch-2.207-la	De Anemone	Περὶ Ἀνεμώνης
+2.208	spr-ch-2.208-la	De Argemone	Περὶ Ἀργεμώνης
+2.209	spr-ch-2.209-la	De Anagallide	Περὶ Ἀναγαλλίδος
+2.210	spr-ch-2.210-la	De Hedera	Περὶ Κισσοῦ
+2.211	spr-ch-2.211-la	De Chelidonio maiori	Περὶ Χελιδονίου τοῦ μεγάλου
+2.212	spr-ch-2.212-la	De Chelidonio minori	Περὶ Χελιδονίου τοῦ μικροῦ
+2.213	spr-ch-2.213-la	De Othonna	Περὶ Ὀθόννης
+2.214	spr-ch-2.214-la	De Myosotidis speciebus	Περὶ Μυὸς ὤτων
+2.215	spr-ch-2.215-la	De Isatide	Περὶ Ἰσάτιδος
+2.216	spr-ch-2.216-la	De Isatide sylvestri	Περὶ Ἰσάτιδος ἀγρίας
+2.217	spr-ch-2.217-la	De Telephio	Περὶ Τηλεφίου
+3.1	spr-ch-3.1-la	De Agarico	Περὶ Ἀγαρικοῦ
+3.2	spr-ch-3.2-la	De Rha	Περὶ Ῥᾶ
+3.3	spr-ch-3.3-la	De Gentiana	Περὶ Γεντιανῆς
+3.4	spr-ch-3.4-la	De Aristolochia	Περὶ Ἀριστολοχίας
+3.5	spr-ch-3.5-la	De Glycyrrhiza	Περὶ Γλυκυρρίζης
+3.6	spr-ch-3.6-la	De Centaurio magno	Περὶ Κενταυρίου τοῦ μεγάλου
+3.7	spr-ch-3.7-la	De Centaurio minore	Περὶ Κενταυρίου τοῦ μικροῦ
+3.8	spr-ch-3.8-la	De Chamaeleone albo	Περὶ Χαμαιλέοντος λευκοῦ
+3.9	spr-ch-3.9-la	De Chamaeleone nigro	Περὶ Χαμαιλέοντος μέλανος
+3.10	spr-ch-3.10-la	De Crocodilio	Περὶ Κροκοδειλίου
+3.11	spr-ch-3.11-la	De Dipsaco	Περὶ Διψάκου
+3.12	spr-ch-3.12-la	De Spina alba	Περὶ Ἀκάνθης λευκῆς
+3.13	spr-ch-3.13-la	De Spina arabica	Περὶ Ἀκάνθης ἀραβικῆς
+3.14	spr-ch-3.14-la	De Scolymo	Περὶ Σκολύμου
+3.15	spr-ch-3.15-la	De Poterio	Περὶ Ποτηρίου
+3.16	spr-ch-3.16-la	De Acanthio	Περὶ Ἀκανθίου
+3.17	spr-ch-3.17-la	De Acantho	Περὶ Ἀκάνθης
+3.18	spr-ch-3.18-la	De Anonide	Περὶ Ἀνωνίδος
+3.19	spr-ch-3.19-la	De Leucacantha	Περὶ Λευκακάνθης
+3.20	spr-ch-3.20-la	De Tragacantha	Περὶ Τραγακανθῆς
+3.21	spr-ch-3.21-la	De Eryngio	Περὶ Ἠρυγγίου
+3.22	spr-ch-3.22-la	De Aloë	Περὶ Ἀλόης
+3.23	spr-ch-3.23-la	De Absinthio	Περὶ Ἀψινθίου
+3.24	spr-ch-3.24-la	De Absinthio marino	Περὶ Ἀψινθίου θαλασσίου
+3.25	spr-ch-3.25-la	De Absinthio Santonico	Περὶ Ἀψινθίου Σαντονίου
+3.26	spr-ch-3.26-la	De Abrotano	Περὶ Ἀβροτόνου
+3.27	spr-ch-3.27-la	De Hyssopo	Περὶ Ὑσσώπου
+3.28	spr-ch-3.28-la	De Stoechade	Περὶ Στοιχάδος
+3.29	spr-ch-3.29-la	De Origano	Περὶ Ὀριγάνου
+3.30	spr-ch-3.30-la	De Onitide	Περὶ Ὀνήτιδος
+3.31	spr-ch-3.31-la	De Origano sylvestri	Περὶ Ἀγριοριγάνου
+3.32	spr-ch-3.32-la	De Tragorigano	Περὶ Τραγοριγάνου
+3.33	spr-ch-3.33-la	De Pulegio	Περὶ Γλήχωνος
+3.34	spr-ch-3.34-la	De Dictamno	Περὶ Δικτάμνου
+3.35	spr-ch-3.35-la	De Salvia	Περὶ Ἐλελισφάκου
+3.36	spr-ch-3.36-la	De Mentha sativa	Περὶ Ἡδύοσμου ἡμέρου
+3.37	spr-ch-3.37-la	De Calamintha	Περὶ Καλαμίνθης
+3.38	spr-ch-3.38-la	De Thymo	Περὶ Θύμου
+3.39	spr-ch-3.39-la	De Thymbra	Περὶ Θύμβρας
+3.40	spr-ch-3.40-la	De Serpyllo	Περὶ Ἑρπύλλου
+3.41	spr-ch-3.41-la	De Maiorana	Περὶ Σαμψύχου
+3.42	spr-ch-3.42-la	De Maro	Περὶ Μάρου
+3.43	spr-ch-3.43-la	De Acino	Περὶ Ἀκίνου
+3.44	spr-ch-3.44-la	De Bacchare	Περὶ Βακχάρεως
+3.45	spr-ch-3.45-la	De Ruta	Περὶ Πηγάνου
+3.46	spr-ch-3.46-la	De ruta sylvestri	Περὶ Πηγάνου ἀγρίου
+3.47	spr-ch-3.47-la	De Moly	Περὶ Μώλυος
+3.48	spr-ch-3.48-la	De Panace Heracleo	Περὶ Πάνακος
+3.49	spr-ch-3.49-la	De Panace Asclepio	Περὶ Πάνακος Ἀσκληπιοῦ
+3.50	spr-ch-3.50-la	De Panace Chironio	Περὶ Πάνακος Χειρωνίου
+3.51	spr-ch-3.51-la	De Ligustico	Περὶ Λιγυστικοῦ
+3.52	spr-ch-3.52-la	De Dauco sylvestri	Περὶ Σταφυλίνου
+3.53	spr-ch-3.53-la	De Seseli massiliensi	Περὶ Σεσελέως μασσαλεωτικοῦ
+3.54	spr-ch-3.54-la	De Seseli aethiopico	Περὶ σεσέλεως αἰθιοπικοῦ
+3.55	spr-ch-3.55-la	De Seseli peloponnesiaco	Περὶ σεσέλεως πελοποννησιακοῦ
+3.56	spr-ch-3.56-la	De Tordylio	Περὶ Τορδυλείου
+3.57	spr-ch-3.57-la	De Sisone	Περὶ Σίσωνος
+3.58	spr-ch-3.58-la	De Aniso	Περὶ Ἀνίσου
+3.59	spr-ch-3.59-la	De Caro	Περὶ Κάρου
+3.60	spr-ch-3.60-la	De Anetho	Περὶ Ἀνήθου
+3.61	spr-ch-3.61-la	De Cymino	Περὶ Κυμίνου
+3.62	spr-ch-3.62-la	De Cymino sylvatico	Περὶ Κυμίνου ἀγρίου
+3.63	spr-ch-3.63-la	De Ammi	Περὶ Ἄμμιος
+3.64	spr-ch-3.64-la	De Coriandro	Περὶ Κορίου
+3.65	spr-ch-3.65-la	De Hieracio magno	Περὶ Ἱερακίου τοῦ μεγάλου
+3.66	spr-ch-3.66-la	De Hieracio minori	Περὶ Ἱερακίου τοῦ μικροῦ
+3.67	spr-ch-3.67-la	De Apio	Περὶ Σελίνου
+3.68	spr-ch-3.68-la	De Apio palustri	Περὶ Ἐλειοσελίνου
+3.69	spr-ch-3.69-la	De Apio montano	Περὶ Ὀρεοσελίνου
+3.70	spr-ch-3.70-la	De Petroselino	Περὶ Πετροσελίνου
+3.71	spr-ch-3.71-la	De Hipposelino	Περὶ Ἱπποσελίνου
+3.72	spr-ch-3.72-la	De Smyrnio	Περὶ Σμυρνίου
+3.73	spr-ch-3.73-la	De Pastinaca	Περὶ Ἐλαφοβόσκου
+3.74	spr-ch-3.74-la	De Foeniculo	Περὶ Μαράθρου
+3.75	spr-ch-3.75-la	De Hippomarathro	Περὶ Ἱππομαράθρου
+3.76	spr-ch-3.76-la	De Dauco triplici	Περὶ Δαύκου
+3.77	spr-ch-3.77-la	De Delphinio	Περὶ Δελφινίου
+3.78	spr-ch-3.78-la	De Pyrethro	Περὶ Πυρέθρου
+3.79	spr-ch-3.79-la	De Libanotide	Περὶ Λιβανωτίδος
+3.80	spr-ch-3.80-la	De Sphondylio	Περὶ Σφονδυλίου
+3.81	spr-ch-3.81-la	De Ferula	Περὶ Νάρθηκος
+3.82	spr-ch-3.82-la	De Peucedano	Περὶ Πευκεδάνου
+3.83	spr-ch-3.83-la	De Nigella	Περὶ Μελανθίου
+3.84	spr-ch-3.84-la	De Silphio	Περὶ Σιλφίου
+3.85	spr-ch-3.85-la	De Sagapeno	Περὶ Σαγαπηνοῦ
+3.86	spr-ch-3.86-la	De Euphorbio	Περὶ Εὐφορβίου
+3.87	spr-ch-3.87-la	De Galbano	Περὶ Χαλβάνης
+3.88	spr-ch-3.88-la	De Ammoniaco	Περὶ Ἀμμωνιακοῦ
+3.89	spr-ch-3.89-la	De Sarcocolla	Περὶ Σαρκοκόλλας
+3.90	spr-ch-3.90-la	De Glaucio	Περὶ Γλαυκίου
+3.91	spr-ch-3.91-la	De Glutine	Περὶ Κόλλης
+3.92	spr-ch-3.92-la	De Ichthyocolla	Περὶ Ἰχθυοκόλλης
+3.93	spr-ch-3.93-la	De Visco	Περὶ Ἰξοῦ
+3.94	spr-ch-3.94-la	De Aparine	Περὶ Ἀπαρίνης
+3.95	spr-ch-3.95-la	De Alysso	Περὶ Ἀλύσσου
+3.96	spr-ch-3.96-la	De Asclepiade	Περὶ Ἀσκληπιάδος
+3.97	spr-ch-3.97-la	De Atractylide	Περὶ Ἀτρακτυλίδος
+3.98	spr-ch-3.98-la	De Polycnemo	Περὶ Πολυκνήμου
+3.99	spr-ch-3.99-la	De Clinopodio	Περὶ Κλινοποδίου
+3.100	spr-ch-3.100-la	De Leontopetalo	Περὶ Λεοντοπετάλου·
+3.101	spr-ch-3.101-la	De Teucrio	Περὶ Τευκρίου
+3.102	spr-ch-3.102-la	De Chamaedrye	Περὶ Χαμαιδρύος
+3.103	spr-ch-3.103-la	De Leucade	Περὶ Λευκάδος
+3.104	spr-ch-3.104-la	De Lychnide coronaria	Περὶ Λυχνίδος στεφανωματικῆς
+3.105	spr-ch-3.105-la	De Lychnide sylvestri	Περὶ Λυχνίδος ἀγρίας
+3.106	spr-ch-3.106-la	De Lilio	Περὶ Κρίνου
+3.107	spr-ch-3.107-la	De Ballota	Περὶ Βαλλωτῆς
+3.108	spr-ch-3.108-la	De Melissa	Περὶ Μελισσοφύλλου
+3.109	spr-ch-3.109-la	De Marrubio	Περὶ Πρασίου
+3.110	spr-ch-3.110-la	De Stachy	Περὶ Στάχυος
+3.111	spr-ch-3.111-la	De Phyllitide	Περὶ Φυλλίτιδος
+3.112	spr-ch-3.112-la	De Phalangio	Περὶ Φαλαγγίου
+3.113	spr-ch-3.113-la	De Trifolio	Περὶ Τριφύλλου
+3.114	spr-ch-3.114-la	De Polio	Περὶ Πολίου
+3.115	spr-ch-3.115-la	De Scordio	Περὶ Σκορδίου
+3.116	spr-ch-3.116-la	De Tussilagine	Περὶ Βηχίου
+3.117	spr-ch-3.117-la	De Artemisia	Περὶ Ἀρτεμισίας
+3.118	spr-ch-3.118-la	De Artemisia tenuifo- lia	Περὶ Ἀρτεμισίας λεπτοφύλλου
+3.119	spr-ch-3.119-la	De Ambrosia	Περὶ Ἀμβροσίας
+3.120	spr-ch-3.120-la	De Botry	Περὶ Βότρυος
+3.121	spr-ch-3.121-la	De Geranio	Περὶ Γερανίου
+3.122	spr-ch-3.122-la	De Gnaphalio	Περὶ Γναφαλίου
+3.123	spr-ch-3.123-la	De Typha	Περὶ Τύφης
+3.124	spr-ch-3.124-la	De Circaea	Περὶ Κιρκαίας
+3.125	spr-ch-3.125-la	De Oenanthe	Περὶ Οἰνάνθης
+3.126	spr-ch-3.126-la	De Conyza	Περὶ Κονύζης
+3.127	spr-ch-3.127-la	De Hemerocallide	Περὶ Ἡμεροκαλλίδος
+3.128	spr-ch-3.128-la	De Leucoio	Περὶ Λευκοΐου
+3.129	spr-ch-3.129-la	De Crataeogono	Περὶ Κραταιογόνου
+3.130	spr-ch-3.130-la	De Phyllo	Περὶ Φύλλου
+3.131	spr-ch-3.131-la	De Orchi	Περὶ Ὄρχεως
+3.132	spr-ch-3.132-la	De Orchi altero	Περὶ Ὄρχεως ἑτέρου
+3.133	spr-ch-3.133-la	De Satyrio	Περὶ Σατυρίου
+3.134	spr-ch-3.134-la	De Satyrio erythronio	Περὶ Σατυρίου ἐρυθρονίου
+3.135	spr-ch-3.135-la	De Hormino	Περὶ Ὁρμίνου
+3.136	spr-ch-3.136-la	De Hedysaro	Περὶ Ἡδυσάρου
+3.137	spr-ch-3.137-la	De Onosmate	Περὶ Ὀνόσματος
+3.138	spr-ch-3.138-la	De Nymphaea	Περὶ Νυμφαίας
+3.139	spr-ch-3.139-la	De Nymphaea altera	Περὶ Νυμφαίας ἄλλης
+3.140	spr-ch-3.140-la	De Androsace	Περὶ Ἀνδροσάκους
+3.141	spr-ch-3.141-la	De Aspleno	Περὶ Ἀσπλήνου
+3.142	spr-ch-3.142-la	De Hemionitide	Περὶ Ἡμιονίτιδος
+3.143	spr-ch-3.143-la	De Anthyllide	Περὶ Ἀνθυλλίδος
+3.144	spr-ch-3.144-la	De Anthemide	Περὶ Ἀνθεμίδος
+3.145	spr-ch-3.145-la	De Parthenio	Περὶ Παρθενίου
+3.146	spr-ch-3.146-la	De Buphthalmo	Περὶ Βουφθάλμου
+3.147	spr-ch-3.147-la	De Paeonia	Περὶ Παιονίας
+3.148	spr-ch-3.148-la	De Lithospermo	Περὶ Λιθοσπέρμου
+3.149	spr-ch-3.149-la	De Phalaride	Περὶ Φαλαρίδος
+3.150	spr-ch-3.150-la	De Rubia	Περὶ Ἐρυθροδάνου
+3.151	spr-ch-3.151-la	De Lonchitide	Περὶ Λογχίτιδος
+3.152	spr-ch-3.152-la	De Lonchitide altera	Περὶ ἑτέρας Λογχίτιδος
+3.153	spr-ch-3.153-la	De Althaea	Περὶ Ἀλθαίας
+3.154	spr-ch-3.154-la	De Alcea	Περὶ Ἀλκέας
+3.155	spr-ch-3.155-la	De Cannabi sativa	Περὶ Καννάβεως ἡμέρου
+3.156	spr-ch-3.156-la	De Cannabi sylvestri	Περὶ Καννάβεως ἀγρίας
+3.157	spr-ch-3.157-la	De Anagyri	Περὶ Ἀναγύριδος
+3.158	spr-ch-3.158-la	De Cepaea	Περὶ Κηπαίας
+3.159	spr-ch-3.159-la	De Alismate	Περὶ Ἀλίσματος
+3.160	spr-ch-3.160-la	De Onobrychide	Περὶ Ὀνοβρυχίδος
+3.161	spr-ch-3.161-la	De Hyperico	Περὶ Ὑπερικοῦ
+3.162	spr-ch-3.162-la	De Ascyro	Περὶ Ἀσκύρου
+3.163	spr-ch-3.163-la	De Androsaemo	Περὶ Ἀνδροσαίμου
+3.164	spr-ch-3.164-la	De Cori	Περὶ Κόρεως
+3.165	spr-ch-3.165-la	De Chamaepity	Περὶ Χαμαιπίτυος
+3.166	spr-ch-3.166-la	De altera Chamaepity	Περὶ ἑτέρας Χαμαιπίτυος
+4.1	spr-ch-4.1-la	De Cestro	Περὶ Κέστρου
+4.2	spr-ch-4.2-la	De Britannica	Περὶ Βρεττανικῆς
+4.3	spr-ch-4.3-la	De Lysimachio	Περὶ Λυσιμαχίου
+4.4	spr-ch-4.4-la	De Polygono masculo	Περὶ Πολυγόνου ἄρσενος
+4.5	spr-ch-4.5-la	De Polygono femina	Περὶ Πολυγόνου θήλεως
+4.6	spr-ch-4.6-la	De Polygonalo	Περὶ Πολυγονάτου
+4.7	spr-ch-4.7-la	De Clematide	Περὶ Κληματίδος
+4.8	spr-ch-4.8-la	De Polemonio	Περὶ Πολεμωνίου
+4.9	spr-ch-4.9-la	De Symphyto petraeo	Περὶ Συμφύτου πετραίου
+4.10	spr-ch-4.10-la	De Symphyto alio	Περὶ Συμφύτου ἄλλου
+4.11	spr-ch-4.11-la	De Holosteo	Περὶ Ὁλοστέου
+4.12	spr-ch-4.12-la	De Stoebe	Περὶ Στοιβῆς
+4.13	spr-ch-4.13-la	De Clymeno	Περὶ Κλυμένου
+4.14	spr-ch-4.14-la	De Periclymeno	Περὶ Περικλυμένου
+4.15	spr-ch-4.15-la	De Tribulo	Περὶ Τριβόλου
+4.16	spr-ch-4.16-la	De Limonio	Περὶ Λειμωνίου
+4.17	spr-ch-4.17-la	De Lagopode	Περὶ Λαγωπόδος
+4.18	spr-ch-4.18-la	De Medio	Περὶ Μηδίου
+4.19	spr-ch-4.19-la	De Epimedio	Περὶ Ἐπιμηδίου
+4.20	spr-ch-4.20-la	De Gladiolo	Περὶ Ξιφίου
+4.21	spr-ch-4.21-la	De Sparganio	Περὶ Σπαργανίου
+4.22	spr-ch-4.22-la	De Xyride	Περὶ Ξυρίδος
+4.23	spr-ch-4.23-la	De Anchusa	Περὶ Ἀγχούσης
+4.24	spr-ch-4.24-la	De Anchusa altera	Περὶ Ἀγχούσης ἑτέρας:
+4.25	spr-ch-4.25-la	De tertia Anchusa	Περὶ ἑτέρας Ἀγχούσης
+4.26	spr-ch-4.26-la	De Lycopsi	Περὶ Λυκόψεως
+4.27	spr-ch-4.27-la	De Echio	Περὶ Ἐχίου
+4.28	spr-ch-4.28-la	De Ocimoide	Περὶ Ὠκιμοειδοῦς
+4.29	spr-ch-4.29-la	De Erino	Περὶ Ἐρίνου
+4.30	spr-ch-4.30-la	De Gramine	Περὶ Ἀγρώστεως
+4.31	spr-ch-4.31-la	De gramine arundinaceo	Περὶ Καλαμαγρώστεως
+4.32	spr-ch-4.32-la	De gramine in Parnasso	Περὶ τῆς ἐν Παρνασσῷ ἀγρώστεως
+4.33	spr-ch-4.33-la	De Sideritide	Περὶ Σιδηρίτιδος
+4.34	spr-ch-4.34-la	De Sideritide altera	Περὶ ἑτέρας Σιδηρίτιδος
+4.35	spr-ch-4.35-la	De Sideritide tertia	Περὶ ἑτέρας Σιδηρίτιδος
+4.36	spr-ch-4.36-la	De Achillea	Περὶ Ἀχιλλείου
+4.37	spr-ch-4.37-la	De Rubo	Περὶ Βάτου
+4.38	spr-ch-4.38-la	De Rubo idaeo	Περὶ ἰδαίας Βάτου
+4.39	spr-ch-4.39-la	De Helxine	Περὶ Ἑλξίνης
+4.40	spr-ch-4.40-la	De Elatine	Περὶ Ἐλατίνης
+4.41	spr-ch-4.41-la	De Eupatorio	Περὶ Εὐπατορίου
+4.42	spr-ch-4.42-la	De Quinquefolio	Περὶ Πενταφύλλου
+4.43	spr-ch-4.43-la	De Phoenice	Περὶ Φοίνικος
+4.44	spr-ch-4.44-la	De Idaeae radice	Περὶ Ἰδαίας ῥίζης
+4.45	spr-ch-4.45-la	De Rhodia radice	Περὶ Ῥοδίας ῥίζης
+4.46	spr-ch-4.46-la	De Equiseto	Περὶ Ἱππουρίδος
+4.47	spr-ch-4.47-la	De Equiseto altero	Περὶ ἑτέρας Ἱππουρίδος
+4.48	spr-ch-4.48-la	De Cocco tinctili	Περὶ Κόκκου βαφικῆς,
+4.49	spr-ch-4.49-la	De Tragio	Περὶ Τραγίου
+4.50	spr-ch-4.50-la	De Tragio altero	Περὶ ἄλλου Τραγίου
+4.51	spr-ch-4.51-la	De Trago	Περὶ Τράγου
+4.52	spr-ch-4.52-la	De Schoeno palustri	Περὶ Σχοίνου ἐλείας
+4.53	spr-ch-4.53-la	De Lichene	Περὶ Λειχῆνος
+4.54	spr-ch-4.54-la	De Paronychia	Περὶ Παρωνυχίας
+4.55	spr-ch-4.55-la	De Chrysocome	Περὶ Χρυσοκόμης
+4.56	spr-ch-4.56-la	De Chrysogono	Περὶ Χρυσογόνου
+4.57	spr-ch-4.57-la	De Elichryso	Περὶ Ἐλιχρύσου
+4.58	spr-ch-4.58-la	De Chrysanthemo	Περὶ Χρυσανθέμου
+4.59	spr-ch-4.59-la	De Agerato	Περὶ Ἀγήρατου
+4.60	spr-ch-4.60-la	De Verbena	Περὶ Περιστερεῶνος
+4.61	spr-ch-4.61-la	De Verbena supina	Περὶ Περιστερεῶνος ὑπτίου
+4.62	spr-ch-4.62-la	De Astragalo	Περὶ Ἀστραγάλου
+4.63	spr-ch-4.63-la	De Hyacintho	Περὶ Ὑακίνθου
+4.64	spr-ch-4.64-la	De Papavere Rhoeade	Περὶ Μήκωνος ῥοιάδος
+4.65	spr-ch-4.65-la	De Papavere sativo	Περὶ Μήκωνος ἡμέρου
+4.66	spr-ch-4.66-la	De Papavere cornuto	Περὶ Μήκωνος κερατίτιδος
+4.67	spr-ch-4.67-la	De Papavere spumeo	Περὶ Μήκωνος ἀφρώδους
+4.68	spr-ch-4.68-la	De Hypecoo	Περὶ Ὑπηκόου
+4.69	spr-ch-4.69-la	De Hyoscyamo	Περὶ Ὑοσκυάμου
+4.70	spr-ch-4.70-la	De Psyllio	Περὶ Ψυλλίου
+4.71	spr-ch-4.71-la	De Strychno	Περὶ Στρύχνου
+4.72	spr-ch-4.72-la	De Strychno halicacabo	Περὶ Στρύχνου ἀλικακάβου
+4.73	spr-ch-4.73-la	De Strychno somnifero	Περὶ Στρύχνου ὑπνωτικοῦ
+4.74	spr-ch-4.74-la	De Strychno furiali	Περὶ Στρύχνου μανικοῦ
+4.75	spr-ch-4.75-la	De Dorycnio	Περὶ Δορυκνίου
+4.76	spr-ch-4.76-la	De Mandragora	Περὶ Μανδραγόρου
+4.77	spr-ch-4.77-la	De Aconito	Περὶ Ἀκονίτου
+4.78	spr-ch-4.78-la	De altero Aconito	Περὶ ἑτέρου Ἀκονίτου
+4.79	spr-ch-4.79-la	De Conio	Περὶ Κωνείου
+4.80	spr-ch-4.80-la	De Taxo	Περὶ Σμίλακος
+4.81	spr-ch-4.81-la	De Apocyno	Περὶ Ἀποκύνου
+4.82	spr-ch-4.82-la	De Nerio	Περὶ Νηρίου
+4.83	spr-ch-4.83-la	De Fungis	Περὶ Μυκήτων
+4.84	spr-ch-4.84-la	De Colchico	Περὶ Κολχικοῦ
+4.85	spr-ch-4.85-la	De Ephemero	Περὶ Ἐφημέρου
+4.86	spr-ch-4.86-la	De Parietaria	Περὶ Ἐξίνης
+4.87	spr-ch-4.87-la	De Lenticula sta- gnina	Περὶ Φακοῦ τοῦ ἐπὶ τῶν τελμά- των
+4.88	spr-ch-4.88-la	De Sempervivo ma- gno	Περὶ Ἀειζώου τοῦ μεγάλου
+4.89	spr-ch-4.89-la	De Sempervivo parvo	Περὶ Ἀειζώου μικροῦ
+4.90	spr-ch-4.90-la	De Cotyledone	Περὶ Κοτυληδόνος
+4.91	spr-ch-4.91-la	De Cotyledone altera	Περὶ ἑτέρας Κοτυληδόνος
+4.92	spr-ch-4.92-la	De Urtica	Περὶ Ἀκαλύφης
+4.93	spr-ch-4.93-la	De Galiopsi	Περὶ Γαλιόψεως
+4.94	spr-ch-4.94-la	De Galio	Περὶ Γαλίου
+4.95	spr-ch-4.95-la	De Senecione	Περὶ Ἠριγέροντος
+4.96	spr-ch-4.96-la	De Thalictro	Περὶ Θαλίκτρου
+4.97	spr-ch-4.97-la	De Musco marino	Περὶ Βρύου θαλασσίου
+4.98	spr-ch-4.98-la	De Fuco marino	Περὶ Φύκου θαλασσίου
+4.99	spr-ch-4.99-la	De Potamogetone	Περὶ Ποταμογείτονος
+4.100	spr-ch-4.100-la	De Stratiote	Περὶ Στρατιώτου
+4.101	spr-ch-4.101-la	De Stratiote millefolio	Περὶ Στρατιώτου χιλιοφύλλου
+4.102	spr-ch-4.102-la	De Verbasco	Περὶ φλόμου
+4.103	spr-ch-4.103-la	De Aethiopide	Περὶ Αἰθιοπίδος
+4.104	spr-ch-4.104-la	De Arctio	Περὶ Ἀρκτίου
+4.105	spr-ch-4.105-la	De Personata	Περὶ Ἀρκείου
+4.106	spr-ch-4.106-la	De Petasite	Περὶ Πετασίτου
+4.107	spr-ch-4.107-la	De Epipactide	Περὶ Ἐπιπακτίδος
+4.108	spr-ch-4.108-la	De Fumaria	Περὶ Καπνοῦ
+4.109	spr-ch-4.109-la	De Loto sativa	Περὶ Λωτοῦ ἡμέρου
+4.110	spr-ch-4.110-la	De Loto sylvestri	Περὶ Λωτοῦ ἀγρίου
+4.111	spr-ch-4.111-la	De Cytiso	Περὶ Κυτίσου
+4.112	spr-ch-4.112-la	De Loto aegyptio	Περὶ Λωτοῦ αἰγυπτίου
+4.113	spr-ch-4.113-la	De Myriophyllo	Περὶ Μυριοφύλλου
+4.114	spr-ch-4.114-la	De Myrrhide	Περὶ Μυῤῥίδος
+4.115	spr-ch-4.115-la	De Myagro	Περὶ Μυάγρου
+4.116	spr-ch-4.116-la	De Onagra	Περὶ Ὀνάγρας
+4.117	spr-ch-4.117-la	De Cirsio	Περὶ Κιρσίου
+4.118	spr-ch-4.118-la	De Astere attico	Περὶ Ἀστέρος ἀττικοῦ
+4.119	spr-ch-4.119-la	De Isopyro	Περὶ Ἰσοπύρου
+4.120	spr-ch-4.120-la	De Viola	Περὶ Ἴου
+4.121	spr-ch-4.121-la	De Cacalia	Περὶ Κακαλίας
+4.122	spr-ch-4.122-la	De Bunio	Περὶ Βουνίου
+4.123	spr-ch-4.123-la	De Pseudobunio	Περὶ Ψευδοβουνίου
+4.124	spr-ch-4.124-la	De Chamaecisso	Περὶ Χαμαικίσσου
+4.125	spr-ch-4.125-la	De Chamaepeuce	Περὶ Χαμαιπεύκης
+4.126	spr-ch-4.126-la	De Buglosso	Περὶ Βουγλώσσου
+4.127	spr-ch-4.127-la	De Cynoglosso	Περὶ Κυνογλώσσου
+4.128	spr-ch-4.128-la	De Phyteumate	Περὶ Φυτεύματος
+4.129	spr-ch-4.129-la	De Leontopodio	Περὶ Λεοντοποδίου
+4.130	spr-ch-4.130-la	De Hypoglosso	Περὶ Ἱπογλώσσου
+4.131	spr-ch-4.131-la	De Antirrhino	Περὶ Ἀντιῤῥίνου
+4.132	spr-ch-4.132-la	De Catanance	Περὶ Κατανάγχης
+4.133	spr-ch-4.133-la	De Tripolio	Περὶ Τριπολίου
+4.134	spr-ch-4.134-la	De Adianto	Περὶ Ἀδιάντου
+4.135	spr-ch-4.135-la	De Trichomane	Περὶ Τριχομανοῦς
+4.136	spr-ch-4.136-la	De Xanthio	Περὶ Ξανθίου
+4.137	spr-ch-4.137-la	De Aegilope	Περὶ Αἰγίλωπος
+4.138	spr-ch-4.138-la	De Avena	Περὶ Βρώμου
+4.139	spr-ch-4.139-la	De Glauce	Περὶ Γλαυκός
+4.140	spr-ch-4.140-la	De Polygalo	Περὶ Πολυγάλου
+4.141	spr-ch-4.141-la	De Osyride	Περὶ Ὀσύριδος
+4.142	spr-ch-4.142-la	De Smilace aspera	Περὶ Σμίλακος τραχείας
+4.143	spr-ch-4.143-la	De Smilace laevi	Περὶ Σμίλακος λείας
+4.144	spr-ch-4.144-la	De Myrto sylvestri	Περὶ Μυρσίνης ἀγρίας
+4.145	spr-ch-4.145-la	De Lauro alexandrina	Περὶ Δάφνης ἀλεξανδρείας
+4.146	spr-ch-4.146-la	De Daphnoide	Περὶ Δαφνοειδοῦς
+4.147	spr-ch-4.147-la	De Chamaedaphne	Περὶ Χαμαιδάφνης
+4.148	spr-ch-4.148-la	De Elleboro albo	Περὶ Ἐλλεβόρου λευκοῦ
+4.149	spr-ch-4.149-la	De Elleboro nigro	Περὶ Ἐλλεβόρου μέλανος
+4.150	spr-ch-4.150-la	De Sesamoide magna	Περὶ Σησαμοειδοῦς τοῦ μεγάλου
+4.151	spr-ch-4.151-la	De Sesamoide parvo	Περὶ Σησαμοειδοῦς τοῦ μικροῦ
+4.152	spr-ch-4.152-la	De Cucumere sylvestri	Περὶ Σίκυος ἀγρίου
+4.153	spr-ch-4.153-la	De Staphide agria	Περὶ Σταφίδος ἀγρίας
+4.154	spr-ch-4.154-la	De Thapsia	Περὶ Θαψίας
+4.155	spr-ch-4.155-la	De Spartio	Περὶ Σπαρτίου
+4.156	spr-ch-4.156-la	De Silybo	Περὶ Σιλύβου
+4.157	spr-ch-4.157-la	De Glande unguentaria	Περὶ Βαλάνου μυρεψικῆς
+4.158	spr-ch-4.158-la	De Narcisso	Περὶ Ναρκίσσου
+4.159	spr-ch-4.159-la	De Hippophaë	Περὶ Ἱπποφαοῦς
+4.160	spr-ch-4.160-la	De Hippophaesto	Περὶ Ἱπποφαίστου
+4.161	spr-ch-4.161-la	De Ricino	Περὶ Κίκεως
+4.162	spr-ch-4.162-la	De Tithymalis	Περὶ Τιθυμάλων
+4.163	spr-ch-4.163-la	De Pityusa	Περὶ Πιτυούσης
+4.164	spr-ch-4.164-la	De Lathyride	Περὶ Λαθυρίδος
+4.165	spr-ch-4.165-la	De Peplo	Περὶ Πέπλου
+4.166	spr-ch-4.166-la	De Peplide	Περὶ Πεπλίδος
+4.167	spr-ch-4.167-la	De Chamaesyce	Περὶ Χαμαισυκῆς
+4.168	spr-ch-4.168-la	De Scammonia	Περὶ Σκαμμωνίας
+4.169	spr-ch-4.169-la	De Chamelaea	Περὶ Χαμελαίας
+4.170	spr-ch-4.170-la	De Thymeleaea	Περὶ Θυμελαίας
+4.171	spr-ch-4.171-la	De Sambuco	Περὶ Ἀκτῆς
+4.172	spr-ch-4.172-la	(CLXXV.) De Chamaeacte seu Ebulo	Περὶ Χαμαιάκτης
+4.173	spr-ch-4.173-la	De Pycnocomo	Περὶ Πυκνοκόμου
+4.174	spr-ch-4.174-la	De Apio	Περὶ Ἀπίου
+4.175	spr-ch-4.175-la	De Colocynthide	Περὶ Κολοκυνθίδος
+4.176	spr-ch-4.176-la	De Epithymo	Περὶ Ἐπιθύμου
+4.177	spr-ch-4.177-la	De Alypo	Περὶ Ἀλύπου
+4.178	spr-ch-4.178-la	De Empetro	Περὶ Ἐμπέτρου
+4.179	spr-ch-4.179-la	De Clematitide	Περὶ Κληματίτιδος
+4.180	spr-ch-4.180-la	De Vite sylvestri	Περὶ Ἀμπέλου ἀγρίας
+4.181	spr-ch-4.181-la	De Vite alba	Περὶ Ἀμπέλου λευκῆς
+4.182	spr-ch-4.182-la	De Vite nigra	Περὶ Ἀμπέλου μελαίνης
+4.183	spr-ch-4.183-la	De Filice	Περὶ Πτερίδος
+4.184	spr-ch-4.184-la	De Thelypteride	Περὶ Θηλυπτερίδος
+4.185	spr-ch-4.185-la	De Polypodio	Περὶ Πολυποδίου
+4.186	spr-ch-4.186-la	De Dryopteride	Περὶ Δρυοπτερίδος
+4.187	spr-ch-4.187-la	De Carthamo	Περὶ Κνίκου
+4.188	spr-ch-4.188-la	De Mercuriali	Περὶ Λινοζώστεως
+4.189	spr-ch-4.189-la	De Cynocrambe	Περὶ Κυνοκράμβης
+4.190	spr-ch-4.190-la	De Heliotropio magno	Περὶ Ἡλιοτροπίου τοῦ μεγάλου
+4.191	spr-ch-4.191-la	De Heliotropio parvo	Περὶ Ἡλιοτροπίου τοῦ μικροῦ
+4.192	spr-ch-4.192-la	De Scorpiotide	Περὶ Σκορπιοειδοῦς
+5.1	spr-ch-5.1-la	De Vite vinifera	Περὶ Ἀμπέλου οἰνοφόρου
+5.2	spr-ch-5.2-la	De Vite sylvestri	Περὶ Ἀμπέλου ἀγρίας
+5.3	spr-ch-5.3-la	De Uva	Περὶ Σταφυλῆς
+5.4	spr-ch-5.4-la	De Uva passa	Περὶ Σταφίδος
+5.5	spr-ch-5.5-la	De Oenanthe	Περὶ Οἰνάνθης
+5.6	spr-ch-5.6-la	De Omphacio	Περὶ Ὀμφακίου
+5.7	spr-ch-5.7-la	De vini indole pro aetatis ratione	Περὶ ποιότητος τῶν οἴνων ἐκ τῆς ἡλικίας
+5.8	spr-ch-5.8-la	Pro ratione coloris	Ἐκ τῆς χροᾶς
+5.9	spr-ch-5.9-la	Pro saporum eorumque, quae iis miscen- tur, differentia	Ἐκ τῆς γεύσεως καὶ τῶν μεμιγμένων
+5.10	spr-ch-5.10-la	Pro locorum differentia	Περὶ διαφορᾶς ἐκ τῶν τόπων
+5.11	spr-ch-5.11-la	De efficacia vinorum	Περὶ δυνάμεως τῶν οἴνων
+5.12	spr-ch-5.12-la	De vino omphacite	Περὶ ὀμφακίτου οἴνου
+5.13	spr-ch-5.13-la	De vino secundario et imbecillo	Περὶ δευτερίου καὶ ἀδυνάμου
+5.14	spr-ch-5.14-la	De vino e vite sylvestri	Περὶ οἴνου ἐκ τῆς ἀγρίας σταφυλῆς
+5.15	spr-ch-5.15-la	De vino melitite	Περὶ μελιτίτου οἴνου
+5.16	spr-ch-5.16-la	De mulso	Περὶ οἰνομέλιτος
+5.17	spr-ch-5.17-la	De aqua mulsa	Περὶ μελικράτου
+5.18	spr-ch-5.18-la	De Aqua	Περὶ ὕδατος
+5.19	spr-ch-5.19-la	De aqua marina	Περὶ θαλασσίου ὕδατος
+5.20	spr-ch-5.20-la	De Thalassomelite	Περὶ θαλασσομέλιτος
+5.21	spr-ch-5.21-la	De Aceto	Περὶ ὄξους
+5.22	spr-ch-5.22-la	De Oxymelite	Περὶ ὀξυμέλιτος
+5.23	spr-ch-5.23-la	De Aceto salso	Περὶ Ὀξάλμης
+5.24	spr-ch-5.24-la	De Thymoxalmite	Περὶ Θυμοξάλμης
+5.25	spr-ch-5.25-la	De Aceto scillitico	Περὶ σκιλλητικοῦ ὄξους
+5.26	spr-ch-5.26-la	De scillitico vino	Περὶ σκιλλητικοῦ οἴνου
+5.27	spr-ch-5.27-la	De vinis aqua marina confectis	Περὶ θαλαττίων οἴνων
+5.28	spr-ch-5.28-la	De vinis aliis factitiis	Περὶ οἴνων σκευαστῶν ἄλλων
+5.29	spr-ch-5.29-la	De Melomelite	Περὶ μηλομέλιτος
+5.30	spr-ch-5.30-la	De Hydromelo	Περὶ ὑδρομήλου
+5.31	spr-ch-5.31-la	De Omphacomelite	Περὶ ὀμφακομέλιτος
+5.32	spr-ch-5.32-la	De vino e pyris	Περὶ ἀπίτου οἴνου
+5.33	spr-ch-5.33-la	De Oenanthino	Περὶ οἰνανθίνου
+5.34	spr-ch-5.34-la	De rhoïte vino	Περὶ ῥοΐτου οἴνου
+5.35	spr-ch-5.35-la	De vino rosato	Περὶ ῥοδίτου οἴνου
+5.36	spr-ch-5.36-la	De vino myrtite	Περὶ μυρτίτου οἴνου
+5.37	spr-ch-5.37-la	De vino myrsinite	Περὶ μυρσινίτου οἴνου
+5.38	spr-ch-5.38-la	De lentiscino vino	Περὶ σχινίνου οἴνου
+5.39	spr-ch-5.39-la	De terebinthino vino	Περὶ τερεμινθίνου οἴνου
+5.40	spr-ch-5.40-la	De vino palmeo	Περὶ φοινικίτου οἴνου
+5.41	spr-ch-5.41-la	De vino catorchite	Περὶ κατορχίτου οἴνου
+5.42	spr-ch-5.42-la	De vino e sycomoris factitio	Περὶ συκομορίτου οἴνου
+5.43	spr-ch-5.43-la	De vino resinato	Περὶ ῥητινίτου οἴνου
+5.44	spr-ch-5.44-la	De vino strobilite	Περὶ στροβιλίτου οἴνου
+5.45	spr-ch-5.45-la	De vino cedrino	Περὶ κεδρίνου
+5.46	spr-ch-5.46-la	De iuniperino vino	Περὶ ἀρκευθιδίου οἴνου
+5.47	spr-ch-5.47-la	De cedrite	Περὶ κεδρίτου
+5.48	spr-ch-5.48-la	De vino picato	Περὶ πισσίτου οἴνου
+5.49	spr-ch-5.49-la	De absinthite vino	Περὶ ἀψινθίτου οἴνου
+5.50	spr-ch-5.50-la	De hyssopite vino	Περὶ ὑσσωπίτου οἴνου
+5.51	spr-ch-5.51-la	De chamaedryite	Περὶ χαμαιδουίτου οἴνου
+5.52	spr-ch-5.52-la	De stoechadite	Περὶ στοιχαδίτου οἴνου
+5.53	spr-ch-5.53-la	De aceto stoechadico	Περὶ ὄξους στοιχαδικοῦ
+5.54	spr-ch-5.54-la	De vino e betonica	Περὶ κεστρίτου οἴνου
+5.55	spr-ch-5.55-la	De tragoriganite vino	Περὶ τραγοριγανίτου οἴνου
+5.56	spr-ch-5.56-la	De bunite vino	Περὶ βουνίτου οἴνου
+5.57	spr-ch-5.57-la	De dictamnite vino	Περὶ δικταμνίτου οἴνου
+5.58	spr-ch-5.58-la	De praside vino	Περὶ πρασίτου οἴνου
+5.59	spr-ch-5.59-la	De thymite vino	Περὶ θυμίτου οἴνου
+5.60	spr-ch-5.60-la	De vino thymbrite	Περὶ θυμβρίτου οἴνου
+5.61	spr-ch-5.61-la	De origanis vino	Περὶ ὀριγανίτου οἴνου
+5.62	spr-ch-5.62-la	De vinis e calamintha, pulegio et abrotano	Περὶ καλαμινθίτου, γληχωνίτου καὶ ἀβρο- τονίτου οἴνου
+5.63	spr-ch-5.63-la	De vino conyzite	Περὶ κονυζίτου οἴνου
+5.64	spr-ch-5.64-la	De vino aromatico	Περὶ ἀρωματίτου οἴνου
+5.65	spr-ch-5.65-la	De vino ex myrrha, pipere et iride	Περὶ οἴνου τοῦ ἐκ σμύρνης, πεπέρεως καὶ ἴριδος
+5.66	spr-ch-5.66-la	De vino nectarite	Περὶ νεκταρίτου οἴνου
+5.67	spr-ch-5.67-la	De vino e nardo syriaca, celtica et malabathro	Περὶ τοῦ διὰ συριακῆς νάρδου καὶ κελτι- κῆς καὶ μαλαβάθρου οἴνου
+5.68	spr-ch-5.68-la	De vino asarite	Περὶ ἀσαρίτου οἴνου
+5.69	spr-ch-5.69-la	De vino e sylvestri nardo	Περὶ τοῦ διὰ τῆς ἀγρίας νάρδου οἴνου
+5.70	spr-ch-5.70-la	De vino daucite	Περὶ δαυκίτου οἴνου
+5.71	spr-ch-5.71-la	De vino e salvia	Περὶ ἐλελισφακίτου οἴνου
+5.72	spr-ch-5.72-la	De vino panacile	Περὶ πανακίτου οἴνου
+5.73	spr-ch-5.73-la	De vino acorite	Περὶ ἀκορίτου οἴνου
+5.74	spr-ch-5.74-la	De vino selinite	Περὶ σελινίτου οἴνου
+5.75	spr-ch-5.75-la	De vinis marathrite et anethino	Περὶ μαραθρίτου καὶ ἀνηθίνου οἴνου
+5.76	spr-ch-5.76-la	De vino e salis flore	Περὶ ἁλοσανθίνου οἴνου
+5.77	spr-ch-5.77-la	De vino abortivo	Περὶ φθορίου ἐμβρύων οἴνου
+5.78	spr-ch-5.78-la	De vino thymelaïte	Περὶ θυμελαΐτου οἴνου
+5.79	spr-ch-5.79-la	De chamaelaïte vino	Περὶ χαμαιλαΐτου οἴνου
+5.80	spr-ch-5.80-la	De chamaepityino vino	Περὶ χαμαιπιτυΐνου οἴνου
+5.81	spr-ch-5.81-la	De mandragorite	Περὶ μανδραγορίτου
+5.82	spr-ch-5.82-la	De elleborite	Περὶ ἐλλεβορίτου
+5.83	spr-ch-5.83-la	De vino scammonite	Περὶ σκαμμωνίτου
+5.84	spr-ch-5.84-la	De Cadmia	Περὶ Καδμείας
+5.85	spr-ch-5.85-la	De Pompholyge	Περὶ Πομφόλυγος
+5.86	spr-ch-5.86-la	De succedaneis cineris metallici	Περὶ ἀντισπόδων
+5.87	spr-ch-5.87-la	De aere usto	Περὶ κεκαυμένου χαλκοῦ
+5.88	spr-ch-5.88-la	De flore aeris	Περὶ ἄνθους χαλκοῦ
+5.89	spr-ch-5.89-la	De squama aeris	Περὶ λεπίδος
+5.90	spr-ch-5.90-la	De squama chalybis	Περὶ λεπίδος στομώματος
+5.91	spr-ch-5.91-la	De aerugine rasili	Περὶ ἰοῦ ξυστοῦ
+5.92	spr-ch-5.92-la	De aerugine vermiculari	Περὶ ἰοῦ σκώληκος
+5.93	spr-ch-5.93-la	De rubigine ferri	Περὶ ἰοῦ σιδήρου
+5.94	spr-ch-5.94-la	De scoria ferri	Περὶ σκωρίας σιδήρου
+5.95	spr-ch-5.95-la	De plumbo loto	Περὶ μολύβδου πεπλυμένου
+5.96	spr-ch-5.96-la	De plumbo usto	Περὶ μολύβδου κεκαυμένου
+5.97	spr-ch-5.97-la	De scoria plumbi	Περὶ σκωρίας μολύβδου
+5.98	spr-ch-5.98-la	De lapide plumbario	Περὶ τοῦ μολυβδοειδοῦς λίθου
+5.99	spr-ch-5.99-la	De Stibio	Περὶ στίμμεως
+5.100	spr-ch-5.100-la	De Galena	Περὶ μολυβδαίνης
+5.101	spr-ch-5.101-la	De scoria argenti	Περὶ σκωρίας ἀργύρου
+5.102	spr-ch-5.102-la	De lithargyro	Περὶ λιθαγύρου
+5.103	spr-ch-5.103-la	De Cerussa	Περὶ ψιμυθίου
+5.104	spr-ch-5.104-la	De chrysocolla	Περὶ Χρυσοκόλλης
+5.105	spr-ch-5.105-la	De Armenio	Περὶ ἀρμενίου
+5.106	spr-ch-5.106-la	De cyano s. coeruleo	Περὶ κυανοῦ
+5.107	spr-ch-5.107-la	De Indico	Περὶ ἰνδικοῦ
+5.108	spr-ch-5.108-la	De ochra	Περὶ ὤχρας
+5.109	spr-ch-5.109-la	De Cinnabari	Περὶ κινναβάρεως
+5.110	spr-ch-5.110-la	De hydrargyro	Περὶ ὑδραργύρου
+5.111	spr-ch-5.111-la	De rubrica sinopica	Περὶ μίλτου σινωπικῆς
+5.112	spr-ch-5.112-la	De rubrica fabrili	Περὶ τεκτονικῆς
+5.113	spr-ch-5.113-la	De lemnia terra	Περὶ λημνίας γῆς
+5.114	spr-ch-5.114-la	De chalcantho	Περὶ χαλκάνθου
+5.115	spr-ch-5.115-la	De chalcitide	Περὶ χαλκίτεως
+5.116	spr-ch-5.116-la	De psorico	Περὶ ψωρικοῦ
+5.117	spr-ch-5.117-la	De Misy	Περὶ μίσυος
+5.118	spr-ch-5.118-la	De Melanteria	Περὶ μελαντηρίας
+5.119	spr-ch-5.119-la	De Sory	Περὶ σώρεως
+5.120	spr-ch-5.120-la	De diphryge	Περὶ διφρυγοῦς
+5.121	spr-ch-5.121-la	De Arsenico	Περὶ ἀρσενικοῦ
+5.122	spr-ch-5.122-la	De Sandaracha	Περὶ σανδαράχης
+5.123	spr-ch-5.123-la	De alumine	Περὶ στυπτηρίας
+5.124	spr-ch-5.124-la	De sulfure	Περὶ θείου
+5.125	spr-ch-5.125-la	De pumice	Περὶ κισσήρεως
+5.126	spr-ch-5.126-la	De salibus	Περὶ ἁλῶν
+5.127	spr-ch-5.127-la	De lanugine salis	Περὶ ἄχνης ἁλός
+5.128	spr-ch-5.128-la	De salsugine s. muria	Περὶ ἅλμης
+5.129	spr-ch-5.129-la	De flore salis	Περὶ ἄνθους ἁλός
+5.130	spr-ch-5.130-la	De soda s. nitro veterum	Περὶ νίτρου
+5.131	spr-ch-5.131-la	De spuma nitri	Περὶ ἀφροῦ νίτρου
+5.132	spr-ch-5.132-la	De faece	Περὶ τρυγός
+5.133	spr-ch-5.133-la	De calce viva	Περὶ ἀσβέστου
+5.134	spr-ch-5.134-la	De gypso	Περὶ γύψου
+5.135	spr-ch-5.135-la	De cinere sarmentorum	Περὶ τέφρας κληματίνης
+5.136	spr-ch-5.136-la	De alcyonio	Περὶ ἀλκυονίου
+5.137	spr-ch-5.137-la	De adarce	Περὶ ἀδάρκου
+5.138	spr-ch-5.138-la	De spongiis	Περὶ σπόγγων
+5.139	spr-ch-5.139-la	De corallio	Περὶ κοραλλίου
+5.144	spr-ch-5.144-la	De schisto lapide	Περὶ σχιστοῦ λίθου
+5.145	spr-ch-5.145-la	De gagate lapide	Περὶ γαγάτου λίθου
+5.146	spr-ch-5.146-la	De thracio lapide	Περὶ θρακίου λίθου
+5.147	spr-ch-5.147-la	De magnete	Περὶ μαγνήτου
+5.148	spr-ch-5.148-la	De arabico lapide	Περὶ ἀραβικοῦ λίθου
+5.149	spr-ch-5.149-la	De galactite lapide	Περὶ γαλακτίτου λίθου
+5.150	spr-ch-5.150-la	De melitite lapide	Περὶ μελιτίτου λίθου
+5.151	spr-ch-5.151-la	De morochtho lapide	Περὶ μορόχθου λίθου
+5.152	spr-ch-5.152-la	De alabastrite	Περὶ ἀλαβαστρίτου λίθου
+5.153	spr-ch-5.153-la	De thyite lapide	Περὶ θυίτου λίθου
+5.154	spr-ch-5.154-la	De iudaico lapide	Περὶ ἰουδαϊκοῦ λίθου
+5.155	spr-ch-5.155-la	De lapide amianto	Περὶ ἀμιάντου λίθου
+5.156	spr-ch-5.156-la	De sapphiro	Περὶ σαπφείρου
+5.157	spr-ch-5.157-la	De memphite lapide	Περὶ μεμφίτου λίθου
+5.158	spr-ch-5.158-la	De selenite lapide	Περὶ σεληνίτου λίθου
+5.159	spr-ch-5.159-la	De iaspide lapide	Περὶ ἰάσπιδος λίθου
+5.160	spr-ch-5.160-la	De aëtite lapide	Περὶ ἀετίτου λίθου
+5.161	spr-ch-5.161-la	De ophite lapide	Περὶ ὀφίτου λίθου
+5.162	spr-ch-5.162-la	De spongiarum lapidibus	Περὶ τῶν ἐν τοῖς σπόγγοις λίθων
+5.163	spr-ch-5.163-la	De lithocolla	Περὶ λιθοκόλλης
+5.164	spr-ch-5.164-la	De ostracite lapide	Περὶ ὀστρακίτου λίθου
+5.165	spr-ch-5.165-la	De smyrite	Περὶ σμύριδος
+5.166	spr-ch-5.166-la	De arena	Περὶ ἄμμου
+5.167	spr-ch-5.167-la	De cote	Περὶ ἀκόνης
+5.180	spr-ch-5.180-la	De ampelitide terra	Περὶ ἀμπελίτιδος γῆς
+5.181	spr-ch-5.181-la	De fuligine	Περὶ ἀσβόλης
+5.182	spr-ch-5.182-la	De atramento	Περὶ μέλανος

@@ -123,3 +123,36 @@ python3 scripts/ocr_sprengel_jp2_zip.py --workers 4
 
 If language packs are not installed yet, a non-final script smoke test can use
 `--allow-missing-langs`; do not treat that output as the multilingual baseline.
+
+## Sprengel Commentarius Viewer XML
+
+The Commentarius stream is built from the Gemini OCR merge at
+`sprengel_comm/outputs/sprengel_comm_merged.xml`. That merged OCR is derived
+from committed page fragments in `sprengel_comm/ocr_fragments/`; ignored source
+facsimiles and extracted page images stay outside the public data boundary.
+
+Chapter matching uses `sprengel_comm/sprengel_chapter_table.tsv` as the
+authority for chapter ids and Greek/Latin labels. The table links Commentarius
+chapter detections back to the corresponding generated Sprengel text XML ids in
+`output/sprengel1829_epidoc.xml` where the base-text chapter exists.
+
+Rebuild the viewer-facing Commentarius XML with:
+
+```bash
+python3 scripts/build_sprengel_comm_epidoc.py \
+  --source sprengel_comm/outputs/sprengel_comm_merged.xml \
+  --chapter-table sprengel_comm/sprengel_chapter_table.tsv \
+  --output output/sprengel1829_epidoc.xml
+```
+
+Then validate the generated XML:
+
+```bash
+xmllint --noout output/sprengel1829_epidoc.xml
+```
+
+The current known table gaps are chapters present in the Commentarius heading
+stream but absent from `sprengel_chapter_table.tsv`, chiefly skipped or
+combined chapter numbers around Book 4 and Book 5. The builder reports these as
+unmatched headings during rebuild; they remain encoded with numeric display
+labels until the base-text chapter authority is extended.
