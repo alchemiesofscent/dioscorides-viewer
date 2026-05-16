@@ -5,11 +5,12 @@ from __future__ import annotations
 
 import argparse
 import base64
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import ThreadPoolExecutor
 import csv
 import io
 import json
 import os
+import queue
 import re
 import shutil
 import sys
@@ -95,6 +96,7 @@ class ProjectPaths:
 
 LOG_LOCK = threading.Lock()
 COST_LOCK = threading.Lock()
+PROGRESS_LOCK = threading.Lock()
 
 
 class GeminiAPIError(RuntimeError):
@@ -410,9 +412,6 @@ def merge_fragments(project: ProjectPaths) -> Path:
 
 def ocr_and_write_page(project: ProjectPaths, image_path: Path, api_key: str, timeout: int) -> PageResult:
     output_path = fragment_path(project, image_path)
-    if output_path.exists():
-        return PageResult(image_path.name, output_path.name, "skipped", Usage())
-
     try:
         result = ocr_image_with_retries(image_path, api_key, timeout)
     except Exception as exc:
@@ -422,6 +421,42 @@ def ocr_and_write_page(project: ProjectPaths, image_path: Path, api_key: str, ti
     output_path.write_text(result.text + "\n", encoding="utf-8")
     append_cost_row(project.costs, image_path.name, result.usage, "ok")
     return PageResult(image_path.name, output_path.name, "ok", result.usage)
+
+
+def ocr_queue_worker(
+    work_queue: queue.Queue[Path],
+    project: ProjectPaths,
+    api_key: str,
+    timeout: int,
+    total: int,
+    progress: dict[str, int],
+) -> Usage:
+    worker_usage = Usage()
+    while True:
+        try:
+            image_path = work_queue.get_nowait()
+        except queue.Empty:
+            return worker_usage
+
+        try:
+            result = ocr_and_write_page(project, image_path, api_key, timeout)
+            if result.status == "ok":
+                worker_usage.prompt_tokens += result.usage.prompt_tokens
+                worker_usage.candidates_tokens += result.usage.candidates_tokens
+                status_message = (
+                    f"OK {result.image_name}: wrote {result.output_name}; "
+                    f"prompt_tokens={result.usage.prompt_tokens}; "
+                    f"candidates_tokens={result.usage.candidates_tokens}"
+                )
+            else:
+                status_message = f"ERROR {result.image_name}: {result.error}"
+
+            with PROGRESS_LOCK:
+                progress["completed"] += 1
+                completed = progress["completed"]
+            log(f"{status_message}; progress={completed}/{total}")
+        finally:
+            work_queue.task_done()
 
 
 def parse_args(argv: list[str]) -> argparse.Namespace:
@@ -504,37 +539,31 @@ def main(argv: list[str] | None = None) -> int:
     if args.limit is not None:
         images = images[: args.limit]
 
-    skipped_images = [image_path for image_path in images if fragment_path(project, image_path).exists()]
     target_images = unprocessed_images(project, images)
+    skipped_count = len(images) - len(target_images)
+    work_queue: queue.Queue[Path] = queue.Queue()
+    for image_path in target_images:
+        work_queue.put(image_path)
+
     log(
         f"OCR target window: {len(images)} JP2 image(s); "
-        f"skipping {len(skipped_images)} existing fragment(s); "
-        f"submitting {len(target_images)} request(s) with concurrency={args.concurrency}"
+        f"skipping {skipped_count} existing fragment(s); "
+        f"queueing {work_queue.qsize()} request(s) with concurrency={args.concurrency}"
     )
     total_prompt_tokens = 0
     total_candidates_tokens = 0
 
     if target_images:
+        progress = {"completed": 0}
         with ThreadPoolExecutor(max_workers=args.concurrency) as executor:
             futures = [
-                executor.submit(ocr_and_write_page, project, image_path, api_key, args.timeout)
-                for image_path in target_images
+                executor.submit(ocr_queue_worker, work_queue, project, api_key, args.timeout, len(target_images), progress)
+                for _ in range(min(args.concurrency, len(target_images)))
             ]
-            for completed, future in enumerate(as_completed(futures), start=1):
-                result = future.result()
-                if result.status == "ok":
-                    total_prompt_tokens += result.usage.prompt_tokens
-                    total_candidates_tokens += result.usage.candidates_tokens
-                    log(
-                        f"OK {result.image_name}: wrote {result.output_name}; "
-                        f"prompt_tokens={result.usage.prompt_tokens}; "
-                        f"candidates_tokens={result.usage.candidates_tokens}; "
-                        f"progress={completed}/{len(target_images)}"
-                    )
-                elif result.status == "skipped":
-                    log(f"SKIP {result.image_name}: {result.output_name} already exists; progress={completed}/{len(target_images)}")
-                else:
-                    log(f"ERROR {result.image_name}: {result.error}; progress={completed}/{len(target_images)}")
+            for future in futures:
+                usage = future.result()
+                total_prompt_tokens += usage.prompt_tokens
+                total_candidates_tokens += usage.candidates_tokens
 
     log(
         "Summary: "
