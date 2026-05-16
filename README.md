@@ -2,8 +2,8 @@
 
 Static TEI/EpiDoc viewer for Dioscorides editions, beginning with Julius
 Berendes' 1902 German translation, *Des Pedanios Dioskurides aus Anazarbos
-Arzneimittellehre in fünf Büchern*, and an initial diplomatic import of
-Sprengel's 1829/1830 Greek/Latin edition.
+Arzneimittellehre in fünf Büchern*, plus Sprengel review streams for the
+1829/1830 Greek/Latin edition and its 1830 Commentarius.
 
 The repository is designed to run on GitHub Pages. The text, page map, and
 viewer assets are committed; bulky facsimile images are not. The viewer loads
@@ -55,17 +55,43 @@ http://localhost:8000/tools/beck-fresh-footnotes/
 
 ## Repository Contents
 
-- `viewer/` - static browser viewer.
-- `editions.json` - edition registry consumed by the viewer.
-- `editions/sprengel1829/` - imported Sprengel TEI and generated page manifest.
-- `chunks/` - normalized TEI chunk source for Berendes.
-- `output/berendes1902_epidoc.xml` - merged TEI/EpiDoc output.
+- `viewer/` - dependency-free static browser viewer.
+- `tools/` - local review surfaces that are not required by the public viewer.
+- `editions.json` - public edition registry consumed by the viewer.
+- `chunks/` - normalized Berendes TEI chunk source.
 - `manifest.json` - Berendes page/image/chunk manifest.
-- `scripts/` - normalization, merge, and validation tools.
+- `editions/sprengel1829/` - Sprengel base-edition source, sidecars, and
+  generated manifest data.
+- `sprengel_comm/` - committed Commentarius OCR fragments, merged OCR XML,
+  chapter authority table, prompt notes, and workflow metadata.
+- `output/` - committed viewer-facing generated XML and committed audit
+  reports.
+- `scripts/` - normalization, OCR, merge, audit, and validation tools.
 - `prompts/` - TEI header and transcription prompt material.
+- `docs/` - ingest and workflow documentation.
 
-Large local assets such as the source PDF, extracted page images, and OCR/hOCR
+Large local assets such as PDFs, JP2 zips, extracted page images, `.env`,
+`sprengel/`, `ocr/`, `images/raw/`, `images/enhanced/`, and other scratch
 outputs are intentionally ignored. The public site works without them.
+
+## Generated Artifact Policy
+
+Commit generated XML when it is the viewer-facing source of truth or an
+intentional review artifact. Current committed generated outputs include:
+
+- `output/berendes1902_epidoc.xml` - public Berendes viewer XML.
+- `output/sprengel1829_epidoc.xml` - current Sprengel viewer XML slot, generated
+  from the Commentarius OCR stream.
+- `output/beck2020_fresh_diplomatic_epidoc.xml` - private/local diplomatic Beck
+  review XML.
+- `output/*_audit/` - committed audit ledgers and summaries used to review TEI
+  repair decisions.
+
+Do not commit bulky facsimiles, local OCR scratch, private source PDFs/XML, or
+secret-bearing files. Keep workflow-specific source folders distinct: Berendes
+normalization starts from `chunks/`, Sprengel base-edition sidecars live under
+`editions/sprengel1829/`, and Commentarius OCR inputs live under
+`sprengel_comm/`.
 
 ## Validate And Rebuild
 
@@ -95,6 +121,15 @@ Check the viewer JavaScript:
 
 ```bash
 node --check viewer/app.js
+```
+
+Rebuild the Sprengel Commentarius viewer XML:
+
+```bash
+python3 scripts/build_sprengel_comm_epidoc.py \
+  --source sprengel_comm/outputs/sprengel_comm_merged.xml \
+  --chapter-table sprengel_comm/sprengel_chapter_table.tsv \
+  --output output/sprengel1829_epidoc.xml
 ```
 
 ## Source Facsimiles
