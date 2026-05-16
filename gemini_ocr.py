@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import base64
+from concurrent.futures import ThreadPoolExecutor, as_completed
 import csv
 import io
 import json
@@ -12,6 +13,7 @@ import os
 import re
 import shutil
 import sys
+import threading
 import time
 from dataclasses import dataclass
 from datetime import datetime, timezone
@@ -24,7 +26,11 @@ from dotenv import load_dotenv
 
 
 GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent"
-DEFAULT_DELAY_SECONDS = 35.0
+DEFAULT_CONCURRENCY = 5
+DEFAULT_MAX_RETRIES = 3
+DEFAULT_BACKOFF_SECONDS = 10.0
+MAX_BACKOFF_SECONDS = 120.0
+RETRY_STATUS_CODES = {429, 500, 502, 503, 504}
 
 SYSTEM_PROMPT = """Transcribe this page diplomatically as TEI XML.
 
@@ -69,6 +75,15 @@ class OcrResult:
 
 
 @dataclass
+class PageResult:
+    image_name: str
+    output_name: str
+    status: str
+    usage: Usage
+    error: str = ""
+
+
+@dataclass
 class ProjectPaths:
     root: Path
     page_images: Path
@@ -78,8 +93,20 @@ class ProjectPaths:
     images: list[Path]
 
 
+LOG_LOCK = threading.Lock()
+COST_LOCK = threading.Lock()
+
+
+class GeminiAPIError(RuntimeError):
+    def __init__(self, status_code: int, message: str, retry_after: float | None = None) -> None:
+        super().__init__(f"HTTP {status_code}: {message}")
+        self.status_code = status_code
+        self.retry_after = retry_after
+
+
 def log(message: str) -> None:
-    print(message, file=sys.stderr, flush=True)
+    with LOG_LOCK:
+        print(message, file=sys.stderr, flush=True)
 
 
 def default_project_dir(source_path: Path) -> Path:
@@ -180,6 +207,24 @@ def make_payload(encoded_png: str, source_filename: str) -> dict[str, Any]:
     }
 
 
+def retry_after_seconds(value: str | None) -> float | None:
+    if not value:
+        return None
+    try:
+        seconds = float(value)
+    except ValueError:
+        return None
+    if seconds < 0:
+        return None
+    return min(seconds, MAX_BACKOFF_SECONDS)
+
+
+def retry_delay(attempt: int, retry_after: float | None = None) -> float:
+    if retry_after is not None:
+        return retry_after
+    return min(DEFAULT_BACKOFF_SECONDS * (2 ** (attempt - 1)), MAX_BACKOFF_SECONDS)
+
+
 def post_gemini_request(api_key: str, encoded_png: str, source_filename: str, timeout: int) -> dict[str, Any]:
     response = requests.post(
         GEMINI_URL,
@@ -197,7 +242,7 @@ def post_gemini_request(api_key: str, encoded_png: str, source_filename: str, ti
             error = body.get("error") if isinstance(body, dict) else None
             if isinstance(error, dict) and error.get("message"):
                 message = str(error["message"])
-        raise RuntimeError(f"HTTP {response.status_code}: {message}")
+        raise GeminiAPIError(response.status_code, message, retry_after_seconds(response.headers.get("Retry-After")))
     try:
         return response.json()
     except json.JSONDecodeError as exc:
@@ -273,22 +318,43 @@ def ocr_image(image_path: Path, api_key: str, timeout: int) -> OcrResult:
     )
 
 
+def ocr_image_with_retries(image_path: Path, api_key: str, timeout: int) -> OcrResult:
+    for attempt in range(1, DEFAULT_MAX_RETRIES + 2):
+        try:
+            return ocr_image(image_path, api_key, timeout)
+        except GeminiAPIError as exc:
+            if exc.status_code not in RETRY_STATUS_CODES or attempt > DEFAULT_MAX_RETRIES:
+                raise
+            delay = retry_delay(attempt, exc.retry_after if exc.status_code == 429 else None)
+            log(f"RETRY {image_path.name}: HTTP {exc.status_code}; backing off {delay:.0f}s before attempt {attempt + 1}")
+            time.sleep(delay)
+        except requests.RequestException as exc:
+            if attempt > DEFAULT_MAX_RETRIES:
+                raise RuntimeError(str(exc)) from exc
+            delay = retry_delay(attempt)
+            log(f"RETRY {image_path.name}: request error; backing off {delay:.0f}s before attempt {attempt + 1}: {exc}")
+            time.sleep(delay)
+
+    raise RuntimeError("Retry loop exited unexpectedly")
+
+
 def append_cost_row(costs_path: Path, filename: str, usage: Usage, status: str) -> None:
-    costs_path.parent.mkdir(parents=True, exist_ok=True)
-    write_header = not costs_path.exists()
-    with costs_path.open("a", encoding="utf-8", newline="") as handle:
-        writer = csv.writer(handle)
-        if write_header:
-            writer.writerow(["filename", "prompt_tokens", "candidates_tokens", "status", "timestamp"])
-        writer.writerow(
-            [
-                filename,
-                usage.prompt_tokens,
-                usage.candidates_tokens,
-                status,
-                datetime.now(timezone.utc).isoformat(),
-            ]
-        )
+    with COST_LOCK:
+        costs_path.parent.mkdir(parents=True, exist_ok=True)
+        write_header = not costs_path.exists()
+        with costs_path.open("a", encoding="utf-8", newline="") as handle:
+            writer = csv.writer(handle)
+            if write_header:
+                writer.writerow(["filename", "prompt_tokens", "candidates_tokens", "status", "timestamp"])
+            writer.writerow(
+                [
+                    filename,
+                    usage.prompt_tokens,
+                    usage.candidates_tokens,
+                    status,
+                    datetime.now(timezone.utc).isoformat(),
+                ]
+            )
 
 
 def estimated_cost(prompt_tokens: int, candidates_tokens: int) -> float:
@@ -342,11 +408,20 @@ def merge_fragments(project: ProjectPaths) -> Path:
     return merged_path
 
 
-def wait_between_requests(delay: float) -> None:
-    if delay <= 0:
-        return
-    log(f"Waiting {delay:.0f}s for rate limit")
-    time.sleep(delay)
+def ocr_and_write_page(project: ProjectPaths, image_path: Path, api_key: str, timeout: int) -> PageResult:
+    output_path = fragment_path(project, image_path)
+    if output_path.exists():
+        return PageResult(image_path.name, output_path.name, "skipped", Usage())
+
+    try:
+        result = ocr_image_with_retries(image_path, api_key, timeout)
+    except Exception as exc:
+        append_cost_row(project.costs, image_path.name, Usage(), "error")
+        return PageResult(image_path.name, output_path.name, "error", Usage(), str(exc))
+
+    output_path.write_text(result.text + "\n", encoding="utf-8")
+    append_cost_row(project.costs, image_path.name, result.usage, "ok")
+    return PageResult(image_path.name, output_path.name, "ok", result.usage)
 
 
 def parse_args(argv: list[str]) -> argparse.Namespace:
@@ -357,7 +432,7 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     parser.add_argument("--source-dir", type=Path, default=None, help="Path to a .jp2 file or a directory containing .jp2 files")
     parser.add_argument("--project-dir", type=Path, default=None, help="Project output directory")
     parser.add_argument("--limit", type=int, help="Only inspect the first N sorted JP2 files")
-    parser.add_argument("--delay", type=float, default=DEFAULT_DELAY_SECONDS, help="Seconds to wait between API requests")
+    parser.add_argument("--concurrency", type=int, default=DEFAULT_CONCURRENCY, help="Number of Gemini requests to run in parallel")
     parser.add_argument("--timeout", type=int, default=300, help="HTTP request timeout in seconds")
     parser.add_argument("--costs", type=Path, default=None, help="CSV file for per-page token usage")
     parser.add_argument("--merge", action="store_true", help="Merge existing fragments and exit without OCR")
@@ -372,8 +447,8 @@ def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv or sys.argv[1:])
     if args.limit is not None and args.limit < 1:
         raise SystemExit("--limit must be 1 or greater")
-    if args.delay < 0:
-        raise SystemExit("--delay must be 0 or greater")
+    if args.concurrency < 1:
+        raise SystemExit("--concurrency must be 1 or greater")
 
     source_path = args.source_dir or args.input or Path.cwd()
     project_dir = args.project_dir or default_project_dir(source_path)
@@ -400,7 +475,7 @@ def main(argv: list[str] | None = None) -> int:
 
         output_path = fragment_path(project, image_path)
         try:
-            result = ocr_image(image_path, api_key, args.timeout)
+            result = ocr_image_with_retries(image_path, api_key, args.timeout)
         except Exception as exc:
             append_cost_row(project.costs, image_path.name, Usage(), "error")
             log(f"ERROR {image_path.name}: {exc}")
@@ -429,38 +504,37 @@ def main(argv: list[str] | None = None) -> int:
     if args.limit is not None:
         images = images[: args.limit]
 
-    log(f"OCR target window: {len(images)} JP2 image(s)")
-    requested = False
+    skipped_images = [image_path for image_path in images if fragment_path(project, image_path).exists()]
+    target_images = unprocessed_images(project, images)
+    log(
+        f"OCR target window: {len(images)} JP2 image(s); "
+        f"skipping {len(skipped_images)} existing fragment(s); "
+        f"submitting {len(target_images)} request(s) with concurrency={args.concurrency}"
+    )
     total_prompt_tokens = 0
     total_candidates_tokens = 0
 
-    for image_path in images:
-        output_path = fragment_path(project, image_path)
-        if output_path.exists():
-            log(f"SKIP {image_path.name}: {output_path.name} already exists")
-            continue
-
-        if requested:
-            wait_between_requests(args.delay)
-
-        try:
-            result = ocr_image(image_path, api_key, args.timeout)
-        except Exception as exc:
-            requested = True
-            append_cost_row(project.costs, image_path.name, Usage(), "error")
-            log(f"ERROR {image_path.name}: {exc}")
-            continue
-
-        output_path.write_text(result.text + "\n", encoding="utf-8")
-        append_cost_row(project.costs, image_path.name, result.usage, "ok")
-        total_prompt_tokens += result.usage.prompt_tokens
-        total_candidates_tokens += result.usage.candidates_tokens
-        requested = True
-        log(
-            f"OK {image_path.name}: wrote {output_path.name}; "
-            f"prompt_tokens={result.usage.prompt_tokens}; "
-            f"candidates_tokens={result.usage.candidates_tokens}"
-        )
+    if target_images:
+        with ThreadPoolExecutor(max_workers=args.concurrency) as executor:
+            futures = [
+                executor.submit(ocr_and_write_page, project, image_path, api_key, args.timeout)
+                for image_path in target_images
+            ]
+            for completed, future in enumerate(as_completed(futures), start=1):
+                result = future.result()
+                if result.status == "ok":
+                    total_prompt_tokens += result.usage.prompt_tokens
+                    total_candidates_tokens += result.usage.candidates_tokens
+                    log(
+                        f"OK {result.image_name}: wrote {result.output_name}; "
+                        f"prompt_tokens={result.usage.prompt_tokens}; "
+                        f"candidates_tokens={result.usage.candidates_tokens}; "
+                        f"progress={completed}/{len(target_images)}"
+                    )
+                elif result.status == "skipped":
+                    log(f"SKIP {result.image_name}: {result.output_name} already exists; progress={completed}/{len(target_images)}")
+                else:
+                    log(f"ERROR {result.image_name}: {result.error}; progress={completed}/{len(target_images)}")
 
     log(
         "Summary: "
