@@ -205,6 +205,7 @@ def make_payload(encoded_png: str, source_filename: str) -> dict[str, Any]:
         ],
         "generationConfig": {
             "temperature": 0,
+            "maxOutputTokens": 32768,
         },
     }
 
