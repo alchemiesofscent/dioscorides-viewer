@@ -23,21 +23,21 @@
 
 ## Phase A: Package Skeleton Only, No Behavior Change
 
-- [ ] Add `pyproject.toml` using PEP 621.
-- [ ] Add console entry point `tei-maker`.
-- [ ] Create `tei_maker/__init__.py`.
-- [ ] Create `tei_maker/cli.py` with help text and stub subcommands.
-- [ ] Create `tei_maker/config.py`.
-- [ ] Create `tei_maker/io/paths.py`.
-- [ ] Path resolver supports `TEI_MAKER_DATA`.
-- [ ] Generation commands require `TEI_MAKER_DATA`.
-- [ ] Viewer/static validation commands do not require `TEI_MAKER_DATA`.
-- [ ] Generation output does not silently default to repo root.
-- [ ] Add `.env.example`.
-- [ ] Add minimal import and path-resolution tests.
-- [ ] Add `.github/workflows/test.yml` if appropriate.
-- [ ] Run tests.
-- [ ] Commit.
+- [x] Add `pyproject.toml` using PEP 621.
+- [x] Add console entry point `tei-maker`.
+- [x] Create `tei_maker/__init__.py`.
+- [x] Create `tei_maker/cli.py` with help text and stub subcommands.
+- [x] Create `tei_maker/config.py`.
+- [x] Create `tei_maker/io/paths.py`.
+- [x] Path resolver supports `TEI_MAKER_DATA`.
+- [x] Generation commands require `TEI_MAKER_DATA`.
+- [x] Viewer/static validation commands do not require `TEI_MAKER_DATA`.
+- [x] Generation output does not silently default to repo root.
+- [x] Add `.env.example`.
+- [x] Add minimal import and path-resolution tests.
+- [x] Add `.github/workflows/test.yml` if appropriate.
+- [x] Run tests.
+- [x] Commit.
 
 ## Phase B: Data/Build Boundary and Externalization
 

@@ -80,3 +80,40 @@
 - Verification result: Pending git status and docs commit.
 - Commit hash: pending.
 - Open issues or risks: First docs commit must stage only `docs/refactor/`.
+
+## 2026-05-17 18:17 Europe/Budapest
+
+- Action taken: Committed Phase 0 documentation checkpoint.
+- Commands run, summarized:
+  - `git add docs/refactor`
+  - `git commit -m "docs(refactor): add migration plan and safety checklist"`
+- Files/directories affected: `docs/refactor/`.
+- Verification result: Commit created with only Phase 0 planning, baseline, migration map, checklist, worklog, and baseline artifact docs.
+- Commit hash: `94a9f54`
+- Open issues or risks: Worklog now records this hash in the next docs update because the hash was not known until after the checkpoint commit.
+
+## 2026-05-17 18:20 Europe/Budapest
+
+- Action taken: Added Phase A package skeleton with no pipeline code moves.
+- Commands run, summarized:
+  - Added `pyproject.toml` and `tei-maker` console entry point.
+  - Added `tei_maker/__init__.py`, `tei_maker/__main__.py`, `tei_maker/cli.py`, `tei_maker/config.py`, and `tei_maker/io/paths.py`.
+  - Added `.env.example`, unit tests, and `.github/workflows/test.yml`.
+- Files/directories affected:
+  - `pyproject.toml`
+  - `.env.example`
+  - `.github/workflows/test.yml`
+  - `tei_maker/`
+  - `tests/`
+- Verification result:
+  - `python3 -m compileall tei_maker tests`: pass.
+  - `python3 -m unittest discover -s tests`: 8 tests pass.
+  - `python3 -m tei_maker --help`: pass.
+  - `python3 -m tei_maker run tlg0656.tlg001.berendes1902-ger1`: expected failure with clear `TEI_MAKER_DATA` error.
+  - `TEI_MAKER_DATA=/tmp/tei-maker-data python3 -m tei_maker run tlg0656.tlg001.berendes1902-ger1 --from prepare --to validate`: pass as stub.
+  - `python3 -m tei_maker validate --all`: pass as static-validation stub without `TEI_MAKER_DATA`.
+  - `python3 -m tei_maker data doctor`: pass, reports default root and missing env warning.
+  - `python3 -m tei_maker editions export-json --check`: pass as stub.
+  - `node --check viewer/app.js`: pass.
+- Commit hash: pending.
+- Open issues or risks: CLI commands are intentionally stubs in Phase A; behavior wiring remains for later phases.
