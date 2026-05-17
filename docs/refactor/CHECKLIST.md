@@ -31,15 +31,15 @@ not a competing plan.
 
 ## Phase 3: Preserve Scholarly TEI Outputs
 
-- [ ] Inventory Berendes TEI and manifest.
-- [ ] Inventory Sprengel base TEI, manifest, source-like sidecars, and audits.
-- [ ] Inventory Sprengel Commentarius TEI, manifest, OCR XML/fragments, chapter
+- [x] Inventory Berendes TEI and manifest.
+- [x] Inventory Sprengel base TEI, manifest, source-like sidecars, and audits.
+- [x] Inventory Sprengel Commentarius TEI, manifest, OCR XML/fragments, chapter
   table, and audits.
-- [ ] Inventory Beck generated TEI variants, manifests, accepted ledgers, and
+- [x] Inventory Beck generated TEI variants, manifests, accepted ledgers, and
   review outputs.
-- [ ] Identify pilot TEI not represented in later outputs.
-- [ ] Verify no TEI output is deleted.
-- [ ] Move TEI later with `git mv` only after this inventory is committed.
+- [x] Identify pilot TEI not represented in later outputs.
+- [x] Verify no TEI output is deleted.
+- [x] Move TEI later with `git mv` only after this inventory is committed.
 
 ## Phase 4: External Raw Data Boundary
 
@@ -54,11 +54,11 @@ not a competing plan.
 
 ## Phase 5: Viewer Stability
 
-- [ ] Verify current registry and manifest paths.
-- [ ] Run `node --check viewer/app.js`.
-- [ ] Serve from repo root when paths or registry behavior changes.
-- [ ] Confirm public editions do not require private raw data.
-- [ ] Document private/local registry behavior.
+- [x] Verify current registry and manifest paths.
+- [x] Run `node --check viewer/app.js`.
+- [x] Serve from repo root when paths or registry behavior changes.
+- [x] Confirm public editions do not require private raw data.
+- [x] Document private/local registry behavior.
 
 ## Phase 6: Reusable Pipeline Extraction
 

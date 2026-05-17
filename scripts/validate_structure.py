@@ -3,7 +3,7 @@
 Phase 6c: Structural integrity checks on the final TEI XML.
 
 Usage:
-    python3 scripts/validate_structure.py output/berendes1902_epidoc.xml
+    python3 scripts/validate_structure.py editions/berendes1902/tei/edition.xml
 """
 
 import argparse

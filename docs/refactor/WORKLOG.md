@@ -4,6 +4,76 @@ Supporting record for `docs/refactor/PLAN.md`. Every work session should add an
 entry with objective, touched files/directories, commands, verification, docs
 updated, commit hash when known, and open risks.
 
+## 2026-05-17 20:38 Europe/Budapest
+
+- Objective: Implement the next autonomous checkpoint after the docs reset:
+  preserve committed TEI outputs in canonical edition folders, update
+  manifests/registries, keep the viewer working, and avoid raw-data cleanup or
+  semantic TEI rewrites.
+- Files/directories touched:
+  - `editions/berendes1902/`
+  - `editions/sprengel1829/`
+  - `editions/sprengel1830-comm/`
+  - `editions/beck2020_fresh_diplomatic/`
+  - `editions/editions.toml`
+  - `editions/editions.json`
+  - `viewer/app.js`
+  - affected script defaults/docs pointing at moved outputs
+  - `tei_maker/cli.py`
+  - `tests/test_cli.py`
+  - `README.md`
+  - `docs/`
+- Commands run:
+  - `git status --short`
+  - `git status --ignored --short`
+  - `find editions -maxdepth 3 -type f | sort`
+  - `rg` path-reference searches for moved TEI/manifests/registry
+  - `git mv` for committed TEI outputs, Berendes manifest, Commentarius
+    manifest, and public registry
+  - `python3 -m tei_maker editions export-json`
+  - `python3 -m tei_maker editions export-json --check`
+  - `python3 scripts/validate_structure.py editions/berendes1902/tei/edition.xml`
+  - `python3 scripts/validate_beck_fresh_diplomatic.py editions/beck2020_fresh_diplomatic/tei/edition.xml --manifest editions/beck2020_fresh_diplomatic/manifest.json --expected-pdf-pages 711`
+  - `python3 scripts/build_sprengel_comm_epidoc.py --source sprengel_comm/outputs/sprengel_comm_merged.xml --chapter-table sprengel_comm/sprengel_chapter_table.tsv --output /tmp/tei-maker-sprengel-comm-baseline.xml`
+  - `node --check viewer/app.js`
+  - custom Python registry path check for public and private registries
+  - `python3 -m compileall tei_maker tests`
+  - `python3 -m unittest discover -s tests`
+  - `python3 -m tei_maker data doctor`
+  - `git diff --check`
+  - `python3 -m http.server 8000 --bind 127.0.0.1`
+  - `curl -fsS` smoke checks for `/viewer/`, `/editions/editions.json`,
+    `/editions/berendes1902/tei/edition.xml`, and
+    `/editions/berendes1902/manifest.json`
+  - `git add README.md docs editions output manifest.json editions.json sprengel_comm/manifest.json scripts tei_maker tests viewer`
+- Command failure and response:
+  - The first staging command failed because moved paths such as `manifest.json`
+    and `editions.json` no longer exist as working-tree paths after `git mv`.
+    Response: use `git add -A` for the already-reviewed worktree.
+- Verification result:
+  - Public registry is fresh from `editions/editions.toml`.
+  - Registered public/private TEI and manifest paths exist.
+  - Berendes structure validation: 0 issues.
+  - Beck diplomatic validation: 0 errors, 1 known warning
+    `FOOTNOTE_QA_OPEN_BODY_ROWS`.
+  - Sprengel Commentarius rebuild to `/tmp`: pass, with known unmatched chapter
+    headings.
+  - Viewer JS syntax: pass.
+  - `compileall`: pass.
+  - `unittest`: 10 tests pass.
+  - `tei_maker data doctor`: pass with expected unset `TEI_MAKER_DATA` warning.
+  - Local HTTP smoke: viewer, public registry, Berendes TEI, and Berendes
+    manifest all returned HTTP 200.
+- Docs updated: README, ingest docs, refactor plan/checklist/migration map/repo
+  audit/worklog.
+- Commit hash: pending at time of entry.
+- Open risks or deferred decisions:
+  - Source-like sidecars such as `chunks/`, Commentarius OCR fragments, and Beck
+    correction ledgers were not moved in this checkpoint.
+  - Raw/source cleanup remains deferred.
+  - Some historical baseline/worklog entries intentionally retain old paths as
+    historical records.
+
 ## 2026-05-17 20:21 Europe/Budapest
 
 - Objective: Perform the docs-only reset requested by the autonomous refactor

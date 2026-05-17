@@ -6,7 +6,7 @@ Usage:
     python3 scripts/diff_ocr_xml.py \
         --ocr-dir ocr/raw \
         --xml-baseline ocr/xml_baseline.json \
-        --manifest manifest.json \
+        --manifest editions/berendes1902/manifest.json \
         --output ocr/alignment_report.json
 """
 

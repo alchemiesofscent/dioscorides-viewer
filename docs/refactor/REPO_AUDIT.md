@@ -48,14 +48,14 @@ git ls-files docs/refactor README.md | sort
 | `README.md` | tracked | 8K before rewrite | audit/provenance | preserve | Project entry point; reset around scholarly TEI outputs. |
 | `docs/refactor/` | tracked | 80K before rewrite | audit/provenance | preserve | Forward plan, audit, path ledger, source manifest, and worklog. |
 | `docs/` outside `refactor/` | tracked | included in docs size | audit/provenance | preserve | Existing ingest/private Beck docs remain supporting docs. |
-| `output/berendes1902_epidoc.xml` | tracked | part of `output/` 63M | scholarly TEI output | preserve | Public viewer XML and regression baseline. |
-| `output/sprengel1829_epidoc.xml` | tracked | part of `output/` 63M | scholarly TEI output | preserve | Sprengel base viewer XML and regression baseline. |
-| `output/sprengel_comm_epidoc.xml` | tracked | part of `output/` 63M | scholarly TEI output | preserve | Commentarius viewer XML and regression baseline. |
-| `output/beck2020_fresh_diplomatic_epidoc.xml` | tracked | part of `output/` 63M | scholarly TEI output | preserve | Private/local diplomatic review XML. |
+| `editions/berendes1902/tei/edition.xml` | tracked | part of `output/` 63M | scholarly TEI output | preserve | Public viewer XML and regression baseline. |
+| `editions/sprengel1829/tei/edition.xml` | tracked | part of `output/` 63M | scholarly TEI output | preserve | Sprengel base viewer XML and regression baseline. |
+| `editions/sprengel1830-comm/tei/edition.xml` | tracked | part of `output/` 63M | scholarly TEI output | preserve | Commentarius viewer XML and regression baseline. |
+| `editions/beck2020_fresh_diplomatic/tei/edition.xml` | tracked | part of `output/` 63M | scholarly TEI output | preserve | Private/local diplomatic review XML. |
 | `output/beck2020_epidoc.xml`, `output/beck2020_fresh_epidoc.xml` | ignored | part of `output/` 63M | scholarly TEI output | preserve pending audit | Older/local Beck outputs; do not delete without replacement. |
-| `output/*_audit/` | tracked/mixed | part of `output/` 63M | audit/provenance | preserve pending classification | Some ledgers support current TEI decisions. |
-| `manifest.json` | tracked | 220K | manifest/registry | preserve | Berendes current manifest. |
-| `editions.json` | tracked | 4K | manifest/registry | preserve | Current public viewer registry. |
+| `output/*_audit/` | tracked/mixed | part of `output/` 63M before TEI move | audit/provenance | preserve pending classification | Some ledgers support current TEI decisions. |
+| `editions/berendes1902/manifest.json` | tracked | 220K | manifest/registry | preserve | Berendes current manifest, moved from root `manifest.json`. |
+| `editions/editions.toml` and `editions/editions.json` | tracked | small | manifest/registry | preserve | TOML source and generated public viewer registry. |
 | `editions/sprengel1829/` | tracked | part of `editions/` 190M | editorial/source-like input, manifest/registry, audit/provenance | preserve | Manifest, diplomatic XML, and page headers support Sprengel output. |
 | `editions/beck2020*/` manifests/registries | tracked | part of `editions/` 190M | manifest/registry, local review UI | preserve pending audit | Private/local Beck streams. |
 | `editions/beck2020/page_images/` | ignored | part of `editions/` 190M | raw source/generated intermediate | externalize/preserve until checksummed | Local page image cache, not public repo data. |

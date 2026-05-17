@@ -4,7 +4,7 @@ Phase 4: Main Codex CLI production loop.
 
 Usage:
     # Dry run (print prompts, don't call codex):
-    python3 scripts/run_codex.py --manifest manifest.json --scaffold scaffold.json \
+    python3 scripts/run_codex.py --manifest editions/berendes1902/manifest.json --scaffold scaffold.json \
         --ocr-dir ocr/raw --xml-baseline ocr/xml_baseline.json \
         --images-dir images/raw --system-prompt prompts/system.md \
         --output-dir chunks --dry-run

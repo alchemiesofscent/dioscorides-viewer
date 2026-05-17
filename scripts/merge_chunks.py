@@ -5,9 +5,9 @@ Phase 5: Merge all chunk XML fragments into a single TEI document.
 Usage:
     python3 scripts/merge_chunks.py \
         --chunks-dir chunks/ \
-        --manifest manifest.json \
+        --manifest editions/berendes1902/manifest.json \
         --header-template prompts/tei_header.xml \
-        --output output/berendes1902_epidoc.xml
+        --output editions/berendes1902/tei/edition.xml
 """
 
 import argparse

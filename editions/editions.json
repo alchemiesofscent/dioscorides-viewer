@@ -4,8 +4,8 @@
     {
       "id": "berendes1902",
       "label": "Berendes 1902",
-      "tei": "output/berendes1902_epidoc.xml",
-      "manifest": "manifest.json",
+      "tei": "editions/berendes1902/tei/edition.xml",
+      "manifest": "editions/berendes1902/manifest.json",
       "imageMode": "remote",
       "localImageRoot": "images/raw/",
       "imageLabelRoot": "images/raw/",
@@ -20,7 +20,7 @@
     {
       "id": "sprengel1829",
       "label": "Sprengel 1829/1830",
-      "tei": "output/sprengel1829_epidoc.xml",
+      "tei": "editions/sprengel1829/tei/edition.xml",
       "manifest": "editions/sprengel1829/manifest.json",
       "imageMode": "remote",
       "localImageRoot": "editions/sprengel1829/page_images/",
@@ -33,8 +33,8 @@
     {
       "id": "sprengel_comm1830",
       "label": "Sprengel Commentarius 1830",
-      "tei": "output/sprengel_comm_epidoc.xml",
-      "manifest": "sprengel_comm/manifest.json",
+      "tei": "editions/sprengel1830-comm/tei/edition.xml",
+      "manifest": "editions/sprengel1830-comm/manifest.json",
       "imageMode": "remote",
       "sourceLabel": "Internet Archive facsimile",
       "sourceUrl": "https://archive.org/details/b23982500_0002/page/n346/mode/2up",

@@ -1,6 +1,6 @@
 # Beck Private Ingest
 
-This repo treats `beck.xml` as private OCR/XML source evidence. The generated TEI and manifest are rebuildable local review artifacts, and Beck is not registered in the public `editions.json` by default.
+This repo treats `beck.xml` as private OCR/XML source evidence. The generated TEI and manifest are rebuildable local review artifacts, and Beck is not registered in the public `editions/editions.json` by default.
 
 Generate the private TEI and manifest:
 
@@ -85,7 +85,7 @@ On localhost, the viewer automatically appends
 `editions/beck2020/private_registry.json` to the public edition registry when
 the private registry is present. Beck will appear in the edition dropdown with
 Berendes and Sprengel, but Berendes remains the default. Do not promote the Beck
-entry to `editions.json` until a publication-safe policy exists.
+entry to `editions/editions.json` until a publication-safe policy exists.
 
 ## Fresh PDF-Based Beck Stream
 
@@ -207,4 +207,4 @@ python3 scripts/merge_beck_fresh_chunks.py \
 
 On localhost, the viewer also checks
 `editions/beck2020_fresh/private_registry.json`, so the fresh stream appears as
-a separate private review edition without changing public `editions.json`.
+a separate private review edition without changing public `editions/editions.json`.

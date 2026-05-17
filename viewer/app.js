@@ -2,7 +2,7 @@
   "use strict";
 
   const REPO_ROOT = new URL("../", window.location.href);
-  const EDITIONS_PATH = "editions.json";
+  const EDITIONS_PATH = "editions/editions.json";
   const LOCAL_PRIVATE_REGISTRY_PATHS = [
     "editions/beck2020_fresh_diplomatic/private_registry.json",
   ];
@@ -10,8 +10,8 @@
   const FALLBACK_EDITION = {
     id: "berendes1902",
     label: "Berendes 1902",
-    tei: "output/berendes1902_epidoc.xml",
-    manifest: "manifest.json",
+    tei: "editions/berendes1902/tei/edition.xml",
+    manifest: "editions/berendes1902/manifest.json",
     imageMode: "remote",
     localImageRoot: "images/raw/",
     imageLabelRoot: "images/raw/",

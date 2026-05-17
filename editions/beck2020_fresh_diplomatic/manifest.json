@@ -5,7 +5,7 @@
   "private": true,
   "image_mode": "local",
   "local_image_root": "ocr/beck2020_fresh/images/",
-  "tei": "output/beck2020_fresh_diplomatic_epidoc.xml",
+  "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml",
   "pdf": "beck.pdf",
   "resolution": 300,
   "tesseract_langs": "eng+lat+grc",
@@ -28,7 +28,7 @@
       "word_count": 1,
       "mean_confidence": 89.0,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 1,
@@ -47,7 +47,7 @@
       "word_count": 346,
       "mean_confidence": 94.98,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 2,
@@ -66,7 +66,7 @@
       "word_count": 0,
       "mean_confidence": null,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 3,
@@ -85,7 +85,7 @@
       "word_count": 0,
       "mean_confidence": null,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 4,
@@ -104,7 +104,7 @@
       "word_count": 9,
       "mean_confidence": 94.67,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 5,
@@ -123,7 +123,7 @@
       "word_count": 27,
       "mean_confidence": 90.07,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 6,
@@ -142,7 +142,7 @@
       "word_count": 23,
       "mean_confidence": 91.7,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 7,
@@ -161,7 +161,7 @@
       "word_count": 144,
       "mean_confidence": 93.98,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 8,
@@ -180,7 +180,7 @@
       "word_count": 6,
       "mean_confidence": 93.67,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 9,
@@ -199,7 +199,7 @@
       "word_count": 0,
       "mean_confidence": null,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 10,
@@ -218,7 +218,7 @@
       "word_count": 147,
       "mean_confidence": 77.43,
       "greek_tokens": 9,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 11,
@@ -237,7 +237,7 @@
       "word_count": 0,
       "mean_confidence": null,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 12,
@@ -256,7 +256,7 @@
       "word_count": 151,
       "mean_confidence": 93.17,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 13,
@@ -275,7 +275,7 @@
       "word_count": 185,
       "mean_confidence": 93.91,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 14,
@@ -294,7 +294,7 @@
       "word_count": 115,
       "mean_confidence": 94.38,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 15,
@@ -313,7 +313,7 @@
       "word_count": 130,
       "mean_confidence": 88.42,
       "greek_tokens": 29,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 16,
@@ -332,7 +332,7 @@
       "word_count": 357,
       "mean_confidence": 95.43,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 17,
@@ -351,7 +351,7 @@
       "word_count": 398,
       "mean_confidence": 95.62,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 18,
@@ -370,7 +370,7 @@
       "word_count": 394,
       "mean_confidence": 95.61,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 19,
@@ -389,7 +389,7 @@
       "word_count": 407,
       "mean_confidence": 95.38,
       "greek_tokens": 22,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 20,
@@ -408,7 +408,7 @@
       "word_count": 435,
       "mean_confidence": 95.41,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 21,
@@ -427,7 +427,7 @@
       "word_count": 380,
       "mean_confidence": 94.58,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 22,
@@ -446,7 +446,7 @@
       "word_count": 361,
       "mean_confidence": 93.97,
       "greek_tokens": 10,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 23,
@@ -465,7 +465,7 @@
       "word_count": 384,
       "mean_confidence": 94.22,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 24,
@@ -484,7 +484,7 @@
       "word_count": 151,
       "mean_confidence": 95.56,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 25,
@@ -503,7 +503,7 @@
       "word_count": 339,
       "mean_confidence": 95.06,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 26,
@@ -522,7 +522,7 @@
       "word_count": 310,
       "mean_confidence": 94.78,
       "greek_tokens": 11,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 27,
@@ -541,7 +541,7 @@
       "word_count": 437,
       "mean_confidence": 94.94,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 28,
@@ -560,7 +560,7 @@
       "word_count": 392,
       "mean_confidence": 94.8,
       "greek_tokens": 13,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 29,
@@ -579,7 +579,7 @@
       "word_count": 378,
       "mean_confidence": 93.61,
       "greek_tokens": 16,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 30,
@@ -598,7 +598,7 @@
       "word_count": 310,
       "mean_confidence": 95.18,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 31,
@@ -617,7 +617,7 @@
       "word_count": 99,
       "mean_confidence": 95.39,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 32,
@@ -636,7 +636,7 @@
       "word_count": 438,
       "mean_confidence": 94.2,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 33,
@@ -655,7 +655,7 @@
       "word_count": 454,
       "mean_confidence": 95.24,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 34,
@@ -674,7 +674,7 @@
       "word_count": 421,
       "mean_confidence": 95.36,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 35,
@@ -693,7 +693,7 @@
       "word_count": 400,
       "mean_confidence": 95.19,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 36,
@@ -712,7 +712,7 @@
       "word_count": 441,
       "mean_confidence": 94.76,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 37,
@@ -731,7 +731,7 @@
       "word_count": 450,
       "mean_confidence": 94.47,
       "greek_tokens": 5,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 38,
@@ -750,7 +750,7 @@
       "word_count": 468,
       "mean_confidence": 94.55,
       "greek_tokens": 9,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 39,
@@ -769,7 +769,7 @@
       "word_count": 376,
       "mean_confidence": 94.5,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 40,
@@ -788,7 +788,7 @@
       "word_count": 382,
       "mean_confidence": 95.17,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 41,
@@ -807,7 +807,7 @@
       "word_count": 409,
       "mean_confidence": 95.07,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 42,
@@ -826,7 +826,7 @@
       "word_count": 372,
       "mean_confidence": 94.86,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 43,
@@ -845,7 +845,7 @@
       "word_count": 381,
       "mean_confidence": 93.77,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 44,
@@ -864,7 +864,7 @@
       "word_count": 407,
       "mean_confidence": 95.16,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 45,
@@ -883,7 +883,7 @@
       "word_count": 400,
       "mean_confidence": 95.17,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 46,
@@ -902,7 +902,7 @@
       "word_count": 379,
       "mean_confidence": 94.72,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 47,
@@ -921,7 +921,7 @@
       "word_count": 466,
       "mean_confidence": 94.91,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 48,
@@ -940,7 +940,7 @@
       "word_count": 362,
       "mean_confidence": 95.1,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 49,
@@ -959,7 +959,7 @@
       "word_count": 364,
       "mean_confidence": 94.54,
       "greek_tokens": 6,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 50,
@@ -978,7 +978,7 @@
       "word_count": 443,
       "mean_confidence": 94.68,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 51,
@@ -997,7 +997,7 @@
       "word_count": 391,
       "mean_confidence": 95.01,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 52,
@@ -1016,7 +1016,7 @@
       "word_count": 376,
       "mean_confidence": 94.73,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 53,
@@ -1035,7 +1035,7 @@
       "word_count": 394,
       "mean_confidence": 94.64,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 54,
@@ -1054,7 +1054,7 @@
       "word_count": 374,
       "mean_confidence": 94.67,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 55,
@@ -1073,7 +1073,7 @@
       "word_count": 384,
       "mean_confidence": 94.2,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 56,
@@ -1092,7 +1092,7 @@
       "word_count": 411,
       "mean_confidence": 95.32,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 57,
@@ -1111,7 +1111,7 @@
       "word_count": 412,
       "mean_confidence": 95.1,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 58,
@@ -1130,7 +1130,7 @@
       "word_count": 384,
       "mean_confidence": 95.23,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 59,
@@ -1149,7 +1149,7 @@
       "word_count": 489,
       "mean_confidence": 94.18,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 60,
@@ -1168,7 +1168,7 @@
       "word_count": 345,
       "mean_confidence": 95.09,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 61,
@@ -1187,7 +1187,7 @@
       "word_count": 342,
       "mean_confidence": 95.12,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 62,
@@ -1206,7 +1206,7 @@
       "word_count": 372,
       "mean_confidence": 94.13,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 63,
@@ -1225,7 +1225,7 @@
       "word_count": 378,
       "mean_confidence": 95.43,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 64,
@@ -1244,7 +1244,7 @@
       "word_count": 352,
       "mean_confidence": 94.69,
       "greek_tokens": 5,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 65,
@@ -1263,7 +1263,7 @@
       "word_count": 375,
       "mean_confidence": 93.25,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 66,
@@ -1282,7 +1282,7 @@
       "word_count": 377,
       "mean_confidence": 94.67,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 67,
@@ -1301,7 +1301,7 @@
       "word_count": 407,
       "mean_confidence": 95.2,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 68,
@@ -1320,7 +1320,7 @@
       "word_count": 374,
       "mean_confidence": 94.69,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 69,
@@ -1339,7 +1339,7 @@
       "word_count": 415,
       "mean_confidence": 91.79,
       "greek_tokens": 20,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 70,
@@ -1358,7 +1358,7 @@
       "word_count": 399,
       "mean_confidence": 94.5,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 71,
@@ -1377,7 +1377,7 @@
       "word_count": 398,
       "mean_confidence": 93.47,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 72,
@@ -1396,7 +1396,7 @@
       "word_count": 377,
       "mean_confidence": 94.24,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 73,
@@ -1415,7 +1415,7 @@
       "word_count": 352,
       "mean_confidence": 94.72,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 74,
@@ -1434,7 +1434,7 @@
       "word_count": 324,
       "mean_confidence": 94.17,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 75,
@@ -1453,7 +1453,7 @@
       "word_count": 333,
       "mean_confidence": 93.59,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 76,
@@ -1472,7 +1472,7 @@
       "word_count": 393,
       "mean_confidence": 95.01,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 77,
@@ -1491,7 +1491,7 @@
       "word_count": 367,
       "mean_confidence": 93.42,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 78,
@@ -1510,7 +1510,7 @@
       "word_count": 373,
       "mean_confidence": 93.84,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 79,
@@ -1529,7 +1529,7 @@
       "word_count": 392,
       "mean_confidence": 94.18,
       "greek_tokens": 6,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 80,
@@ -1548,7 +1548,7 @@
       "word_count": 455,
       "mean_confidence": 94.64,
       "greek_tokens": 9,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 81,
@@ -1567,7 +1567,7 @@
       "word_count": 459,
       "mean_confidence": 94.2,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 82,
@@ -1586,7 +1586,7 @@
       "word_count": 409,
       "mean_confidence": 94.44,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 83,
@@ -1605,7 +1605,7 @@
       "word_count": 401,
       "mean_confidence": 95.56,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 84,
@@ -1624,7 +1624,7 @@
       "word_count": 364,
       "mean_confidence": 94.08,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 85,
@@ -1643,7 +1643,7 @@
       "word_count": 437,
       "mean_confidence": 93.47,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 86,
@@ -1662,7 +1662,7 @@
       "word_count": 387,
       "mean_confidence": 94.6,
       "greek_tokens": 5,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 87,
@@ -1681,7 +1681,7 @@
       "word_count": 378,
       "mean_confidence": 94.99,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 88,
@@ -1700,7 +1700,7 @@
       "word_count": 378,
       "mean_confidence": 94.62,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 89,
@@ -1719,7 +1719,7 @@
       "word_count": 383,
       "mean_confidence": 94.4,
       "greek_tokens": 9,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 90,
@@ -1738,7 +1738,7 @@
       "word_count": 377,
       "mean_confidence": 93.85,
       "greek_tokens": 6,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 91,
@@ -1757,7 +1757,7 @@
       "word_count": 387,
       "mean_confidence": 95.1,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 92,
@@ -1776,7 +1776,7 @@
       "word_count": 363,
       "mean_confidence": 94.09,
       "greek_tokens": 5,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 93,
@@ -1795,7 +1795,7 @@
       "word_count": 337,
       "mean_confidence": 94.03,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 94,
@@ -1814,7 +1814,7 @@
       "word_count": 356,
       "mean_confidence": 93.81,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 95,
@@ -1833,7 +1833,7 @@
       "word_count": 346,
       "mean_confidence": 94.54,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 96,
@@ -1852,7 +1852,7 @@
       "word_count": 368,
       "mean_confidence": 94.81,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 97,
@@ -1871,7 +1871,7 @@
       "word_count": 344,
       "mean_confidence": 95.45,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 98,
@@ -1890,7 +1890,7 @@
       "word_count": 418,
       "mean_confidence": 94.4,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 99,
@@ -1909,7 +1909,7 @@
       "word_count": 393,
       "mean_confidence": 94.67,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 100,
@@ -1928,7 +1928,7 @@
       "word_count": 377,
       "mean_confidence": 93.65,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 101,
@@ -1947,7 +1947,7 @@
       "word_count": 379,
       "mean_confidence": 94.6,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 102,
@@ -1966,7 +1966,7 @@
       "word_count": 388,
       "mean_confidence": 93.11,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 103,
@@ -1985,7 +1985,7 @@
       "word_count": 371,
       "mean_confidence": 94.88,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 104,
@@ -2004,7 +2004,7 @@
       "word_count": 437,
       "mean_confidence": 93.91,
       "greek_tokens": 14,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 105,
@@ -2023,7 +2023,7 @@
       "word_count": 381,
       "mean_confidence": 95.18,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 106,
@@ -2042,7 +2042,7 @@
       "word_count": 435,
       "mean_confidence": 94.46,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 107,
@@ -2061,7 +2061,7 @@
       "word_count": 342,
       "mean_confidence": 93.2,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 108,
@@ -2080,7 +2080,7 @@
       "word_count": 446,
       "mean_confidence": 93.81,
       "greek_tokens": 13,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 109,
@@ -2099,7 +2099,7 @@
       "word_count": 412,
       "mean_confidence": 95.38,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 110,
@@ -2118,7 +2118,7 @@
       "word_count": 378,
       "mean_confidence": 93.44,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 111,
@@ -2137,7 +2137,7 @@
       "word_count": 367,
       "mean_confidence": 94.88,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 112,
@@ -2156,7 +2156,7 @@
       "word_count": 445,
       "mean_confidence": 94.7,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 113,
@@ -2175,7 +2175,7 @@
       "word_count": 363,
       "mean_confidence": 93.69,
       "greek_tokens": 7,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 114,
@@ -2194,7 +2194,7 @@
       "word_count": 363,
       "mean_confidence": 93.46,
       "greek_tokens": 5,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 115,
@@ -2213,7 +2213,7 @@
       "word_count": 307,
       "mean_confidence": 94.49,
       "greek_tokens": 10,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 116,
@@ -2232,7 +2232,7 @@
       "word_count": 351,
       "mean_confidence": 93.65,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 117,
@@ -2251,7 +2251,7 @@
       "word_count": 380,
       "mean_confidence": 95.3,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 118,
@@ -2270,7 +2270,7 @@
       "word_count": 355,
       "mean_confidence": 93.69,
       "greek_tokens": 5,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 119,
@@ -2289,7 +2289,7 @@
       "word_count": 348,
       "mean_confidence": 94.14,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 120,
@@ -2308,7 +2308,7 @@
       "word_count": 406,
       "mean_confidence": 93.75,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 121,
@@ -2327,7 +2327,7 @@
       "word_count": 397,
       "mean_confidence": 94.69,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 122,
@@ -2346,7 +2346,7 @@
       "word_count": 419,
       "mean_confidence": 94.21,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 123,
@@ -2365,7 +2365,7 @@
       "word_count": 162,
       "mean_confidence": 94.96,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 124,
@@ -2384,7 +2384,7 @@
       "word_count": 278,
       "mean_confidence": 94.75,
       "greek_tokens": 6,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 125,
@@ -2403,7 +2403,7 @@
       "word_count": 316,
       "mean_confidence": 94.91,
       "greek_tokens": 5,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 126,
@@ -2422,7 +2422,7 @@
       "word_count": 346,
       "mean_confidence": 94.31,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 127,
@@ -2441,7 +2441,7 @@
       "word_count": 337,
       "mean_confidence": 94.82,
       "greek_tokens": 12,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 128,
@@ -2460,7 +2460,7 @@
       "word_count": 334,
       "mean_confidence": 93.29,
       "greek_tokens": 9,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 129,
@@ -2479,7 +2479,7 @@
       "word_count": 333,
       "mean_confidence": 94.33,
       "greek_tokens": 17,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 130,
@@ -2498,7 +2498,7 @@
       "word_count": 395,
       "mean_confidence": 93.82,
       "greek_tokens": 7,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 131,
@@ -2517,7 +2517,7 @@
       "word_count": 320,
       "mean_confidence": 94.56,
       "greek_tokens": 7,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 132,
@@ -2536,7 +2536,7 @@
       "word_count": 360,
       "mean_confidence": 92.67,
       "greek_tokens": 11,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 133,
@@ -2555,7 +2555,7 @@
       "word_count": 277,
       "mean_confidence": 93.83,
       "greek_tokens": 15,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 134,
@@ -2574,7 +2574,7 @@
       "word_count": 290,
       "mean_confidence": 93.65,
       "greek_tokens": 27,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 135,
@@ -2593,7 +2593,7 @@
       "word_count": 354,
       "mean_confidence": 94.59,
       "greek_tokens": 8,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 136,
@@ -2612,7 +2612,7 @@
       "word_count": 310,
       "mean_confidence": 94.36,
       "greek_tokens": 8,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 137,
@@ -2631,7 +2631,7 @@
       "word_count": 353,
       "mean_confidence": 94.87,
       "greek_tokens": 8,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 138,
@@ -2650,7 +2650,7 @@
       "word_count": 378,
       "mean_confidence": 94.25,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 139,
@@ -2669,7 +2669,7 @@
       "word_count": 317,
       "mean_confidence": 94.52,
       "greek_tokens": 9,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 140,
@@ -2688,7 +2688,7 @@
       "word_count": 355,
       "mean_confidence": 94.35,
       "greek_tokens": 7,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 141,
@@ -2707,7 +2707,7 @@
       "word_count": 404,
       "mean_confidence": 95.16,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 142,
@@ -2726,7 +2726,7 @@
       "word_count": 396,
       "mean_confidence": 95.08,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 143,
@@ -2745,7 +2745,7 @@
       "word_count": 397,
       "mean_confidence": 95.24,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 144,
@@ -2764,7 +2764,7 @@
       "word_count": 447,
       "mean_confidence": 95.43,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 145,
@@ -2783,7 +2783,7 @@
       "word_count": 416,
       "mean_confidence": 95.11,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 146,
@@ -2802,7 +2802,7 @@
       "word_count": 434,
       "mean_confidence": 95.53,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 147,
@@ -2821,7 +2821,7 @@
       "word_count": 474,
       "mean_confidence": 95.64,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 148,
@@ -2840,7 +2840,7 @@
       "word_count": 441,
       "mean_confidence": 95.55,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 149,
@@ -2859,7 +2859,7 @@
       "word_count": 407,
       "mean_confidence": 94.77,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 150,
@@ -2878,7 +2878,7 @@
       "word_count": 435,
       "mean_confidence": 95.47,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 151,
@@ -2897,7 +2897,7 @@
       "word_count": 406,
       "mean_confidence": 95.21,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 152,
@@ -2916,7 +2916,7 @@
       "word_count": 363,
       "mean_confidence": 94.54,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 153,
@@ -2935,7 +2935,7 @@
       "word_count": 451,
       "mean_confidence": 94.31,
       "greek_tokens": 10,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 154,
@@ -2954,7 +2954,7 @@
       "word_count": 403,
       "mean_confidence": 94.59,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 155,
@@ -2973,7 +2973,7 @@
       "word_count": 422,
       "mean_confidence": 94.82,
       "greek_tokens": 9,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 156,
@@ -2992,7 +2992,7 @@
       "word_count": 401,
       "mean_confidence": 94.51,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 157,
@@ -3011,7 +3011,7 @@
       "word_count": 421,
       "mean_confidence": 95.12,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 158,
@@ -3030,7 +3030,7 @@
       "word_count": 413,
       "mean_confidence": 95.35,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 159,
@@ -3049,7 +3049,7 @@
       "word_count": 383,
       "mean_confidence": 94.41,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 160,
@@ -3068,7 +3068,7 @@
       "word_count": 355,
       "mean_confidence": 94.95,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 161,
@@ -3087,7 +3087,7 @@
       "word_count": 305,
       "mean_confidence": 93.76,
       "greek_tokens": 6,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 162,
@@ -3106,7 +3106,7 @@
       "word_count": 306,
       "mean_confidence": 94.32,
       "greek_tokens": 6,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 163,
@@ -3125,7 +3125,7 @@
       "word_count": 348,
       "mean_confidence": 93.67,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 164,
@@ -3144,7 +3144,7 @@
       "word_count": 375,
       "mean_confidence": 94.28,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 165,
@@ -3163,7 +3163,7 @@
       "word_count": 370,
       "mean_confidence": 94.93,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 166,
@@ -3182,7 +3182,7 @@
       "word_count": 364,
       "mean_confidence": 94.26,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 167,
@@ -3201,7 +3201,7 @@
       "word_count": 386,
       "mean_confidence": 95.24,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 168,
@@ -3220,7 +3220,7 @@
       "word_count": 376,
       "mean_confidence": 94.88,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 169,
@@ -3239,7 +3239,7 @@
       "word_count": 365,
       "mean_confidence": 94.99,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 170,
@@ -3258,7 +3258,7 @@
       "word_count": 347,
       "mean_confidence": 94.84,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 171,
@@ -3277,7 +3277,7 @@
       "word_count": 396,
       "mean_confidence": 94.78,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 172,
@@ -3296,7 +3296,7 @@
       "word_count": 364,
       "mean_confidence": 94.81,
       "greek_tokens": 5,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 173,
@@ -3315,7 +3315,7 @@
       "word_count": 371,
       "mean_confidence": 95.0,
       "greek_tokens": 5,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 174,
@@ -3334,7 +3334,7 @@
       "word_count": 347,
       "mean_confidence": 94.24,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 175,
@@ -3353,7 +3353,7 @@
       "word_count": 381,
       "mean_confidence": 94.95,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 176,
@@ -3372,7 +3372,7 @@
       "word_count": 364,
       "mean_confidence": 94.57,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 177,
@@ -3391,7 +3391,7 @@
       "word_count": 328,
       "mean_confidence": 94.8,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 178,
@@ -3410,7 +3410,7 @@
       "word_count": 390,
       "mean_confidence": 94.88,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 179,
@@ -3429,7 +3429,7 @@
       "word_count": 384,
       "mean_confidence": 94.38,
       "greek_tokens": 8,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 180,
@@ -3448,7 +3448,7 @@
       "word_count": 373,
       "mean_confidence": 95.13,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 181,
@@ -3467,7 +3467,7 @@
       "word_count": 386,
       "mean_confidence": 94.26,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 182,
@@ -3486,7 +3486,7 @@
       "word_count": 350,
       "mean_confidence": 93.95,
       "greek_tokens": 9,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 183,
@@ -3505,7 +3505,7 @@
       "word_count": 365,
       "mean_confidence": 94.14,
       "greek_tokens": 6,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 184,
@@ -3524,7 +3524,7 @@
       "word_count": 398,
       "mean_confidence": 94.77,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 185,
@@ -3543,7 +3543,7 @@
       "word_count": 391,
       "mean_confidence": 95.29,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 186,
@@ -3562,7 +3562,7 @@
       "word_count": 361,
       "mean_confidence": 94.57,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 187,
@@ -3581,7 +3581,7 @@
       "word_count": 377,
       "mean_confidence": 95.07,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 188,
@@ -3600,7 +3600,7 @@
       "word_count": 325,
       "mean_confidence": 94.92,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 189,
@@ -3619,7 +3619,7 @@
       "word_count": 416,
       "mean_confidence": 95.32,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 190,
@@ -3638,7 +3638,7 @@
       "word_count": 362,
       "mean_confidence": 95.11,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 191,
@@ -3657,7 +3657,7 @@
       "word_count": 406,
       "mean_confidence": 95.17,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 192,
@@ -3676,7 +3676,7 @@
       "word_count": 388,
       "mean_confidence": 94.83,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 193,
@@ -3695,7 +3695,7 @@
       "word_count": 410,
       "mean_confidence": 95.31,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 194,
@@ -3714,7 +3714,7 @@
       "word_count": 384,
       "mean_confidence": 94.86,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 195,
@@ -3733,7 +3733,7 @@
       "word_count": 367,
       "mean_confidence": 94.97,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 196,
@@ -3752,7 +3752,7 @@
       "word_count": 439,
       "mean_confidence": 95.28,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 197,
@@ -3771,7 +3771,7 @@
       "word_count": 391,
       "mean_confidence": 95.01,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 198,
@@ -3790,7 +3790,7 @@
       "word_count": 382,
       "mean_confidence": 94.04,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 199,
@@ -3809,7 +3809,7 @@
       "word_count": 401,
       "mean_confidence": 94.65,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 200,
@@ -3828,7 +3828,7 @@
       "word_count": 365,
       "mean_confidence": 94.31,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 201,
@@ -3847,7 +3847,7 @@
       "word_count": 411,
       "mean_confidence": 95.27,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 202,
@@ -3866,7 +3866,7 @@
       "word_count": 368,
       "mean_confidence": 94.95,
       "greek_tokens": 5,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 203,
@@ -3885,7 +3885,7 @@
       "word_count": 362,
       "mean_confidence": 94.49,
       "greek_tokens": 5,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 204,
@@ -3904,7 +3904,7 @@
       "word_count": 163,
       "mean_confidence": 94.33,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 205,
@@ -3923,7 +3923,7 @@
       "word_count": 341,
       "mean_confidence": 94.64,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 206,
@@ -3942,7 +3942,7 @@
       "word_count": 401,
       "mean_confidence": 94.36,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 207,
@@ -3961,7 +3961,7 @@
       "word_count": 388,
       "mean_confidence": 94.76,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 208,
@@ -3980,7 +3980,7 @@
       "word_count": 412,
       "mean_confidence": 95.21,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 209,
@@ -3999,7 +3999,7 @@
       "word_count": 416,
       "mean_confidence": 94.95,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 210,
@@ -4018,7 +4018,7 @@
       "word_count": 397,
       "mean_confidence": 94.74,
       "greek_tokens": 6,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 211,
@@ -4037,7 +4037,7 @@
       "word_count": 458,
       "mean_confidence": 94.36,
       "greek_tokens": 8,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 212,
@@ -4056,7 +4056,7 @@
       "word_count": 356,
       "mean_confidence": 94.76,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 213,
@@ -4075,7 +4075,7 @@
       "word_count": 371,
       "mean_confidence": 94.75,
       "greek_tokens": 7,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 214,
@@ -4094,7 +4094,7 @@
       "word_count": 323,
       "mean_confidence": 94.28,
       "greek_tokens": 6,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 215,
@@ -4113,7 +4113,7 @@
       "word_count": 352,
       "mean_confidence": 94.59,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 216,
@@ -4132,7 +4132,7 @@
       "word_count": 369,
       "mean_confidence": 94.61,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 217,
@@ -4151,7 +4151,7 @@
       "word_count": 407,
       "mean_confidence": 94.92,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 218,
@@ -4170,7 +4170,7 @@
       "word_count": 397,
       "mean_confidence": 95.05,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 219,
@@ -4189,7 +4189,7 @@
       "word_count": 379,
       "mean_confidence": 94.45,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 220,
@@ -4208,7 +4208,7 @@
       "word_count": 326,
       "mean_confidence": 94.07,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 221,
@@ -4227,7 +4227,7 @@
       "word_count": 371,
       "mean_confidence": 95.16,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 222,
@@ -4246,7 +4246,7 @@
       "word_count": 309,
       "mean_confidence": 94.14,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 223,
@@ -4265,7 +4265,7 @@
       "word_count": 347,
       "mean_confidence": 94.65,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 224,
@@ -4284,7 +4284,7 @@
       "word_count": 359,
       "mean_confidence": 94.65,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 225,
@@ -4303,7 +4303,7 @@
       "word_count": 352,
       "mean_confidence": 94.84,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 226,
@@ -4322,7 +4322,7 @@
       "word_count": 367,
       "mean_confidence": 94.3,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 227,
@@ -4341,7 +4341,7 @@
       "word_count": 374,
       "mean_confidence": 94.82,
       "greek_tokens": 6,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 228,
@@ -4360,7 +4360,7 @@
       "word_count": 353,
       "mean_confidence": 94.29,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 229,
@@ -4379,7 +4379,7 @@
       "word_count": 301,
       "mean_confidence": 94.19,
       "greek_tokens": 8,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 230,
@@ -4398,7 +4398,7 @@
       "word_count": 399,
       "mean_confidence": 95.08,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 231,
@@ -4417,7 +4417,7 @@
       "word_count": 392,
       "mean_confidence": 94.97,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 232,
@@ -4436,7 +4436,7 @@
       "word_count": 403,
       "mean_confidence": 95.03,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 233,
@@ -4455,7 +4455,7 @@
       "word_count": 354,
       "mean_confidence": 94.41,
       "greek_tokens": 6,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 234,
@@ -4474,7 +4474,7 @@
       "word_count": 426,
       "mean_confidence": 94.73,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 235,
@@ -4493,7 +4493,7 @@
       "word_count": 340,
       "mean_confidence": 94.73,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 236,
@@ -4512,7 +4512,7 @@
       "word_count": 320,
       "mean_confidence": 94.18,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 237,
@@ -4531,7 +4531,7 @@
       "word_count": 366,
       "mean_confidence": 94.67,
       "greek_tokens": 6,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 238,
@@ -4550,7 +4550,7 @@
       "word_count": 338,
       "mean_confidence": 94.79,
       "greek_tokens": 7,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 239,
@@ -4569,7 +4569,7 @@
       "word_count": 302,
       "mean_confidence": 94.94,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 240,
@@ -4588,7 +4588,7 @@
       "word_count": 377,
       "mean_confidence": 94.42,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 241,
@@ -4607,7 +4607,7 @@
       "word_count": 381,
       "mean_confidence": 95.34,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 242,
@@ -4626,7 +4626,7 @@
       "word_count": 403,
       "mean_confidence": 95.05,
       "greek_tokens": 7,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 243,
@@ -4645,7 +4645,7 @@
       "word_count": 376,
       "mean_confidence": 95.16,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 244,
@@ -4664,7 +4664,7 @@
       "word_count": 336,
       "mean_confidence": 95.16,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 245,
@@ -4683,7 +4683,7 @@
       "word_count": 377,
       "mean_confidence": 95.25,
       "greek_tokens": 7,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 246,
@@ -4702,7 +4702,7 @@
       "word_count": 380,
       "mean_confidence": 95.37,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 247,
@@ -4721,7 +4721,7 @@
       "word_count": 388,
       "mean_confidence": 94.79,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 248,
@@ -4740,7 +4740,7 @@
       "word_count": 408,
       "mean_confidence": 94.58,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 249,
@@ -4759,7 +4759,7 @@
       "word_count": 406,
       "mean_confidence": 93.79,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 250,
@@ -4778,7 +4778,7 @@
       "word_count": 388,
       "mean_confidence": 94.37,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 251,
@@ -4797,7 +4797,7 @@
       "word_count": 376,
       "mean_confidence": 94.89,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 252,
@@ -4816,7 +4816,7 @@
       "word_count": 373,
       "mean_confidence": 93.79,
       "greek_tokens": 6,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 253,
@@ -4835,7 +4835,7 @@
       "word_count": 354,
       "mean_confidence": 94.62,
       "greek_tokens": 5,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 254,
@@ -4854,7 +4854,7 @@
       "word_count": 321,
       "mean_confidence": 94.38,
       "greek_tokens": 5,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 255,
@@ -4873,7 +4873,7 @@
       "word_count": 375,
       "mean_confidence": 94.24,
       "greek_tokens": 8,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 256,
@@ -4892,7 +4892,7 @@
       "word_count": 334,
       "mean_confidence": 94.59,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 257,
@@ -4911,7 +4911,7 @@
       "word_count": 322,
       "mean_confidence": 94.47,
       "greek_tokens": 8,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 258,
@@ -4930,7 +4930,7 @@
       "word_count": 345,
       "mean_confidence": 94.28,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 259,
@@ -4949,7 +4949,7 @@
       "word_count": 364,
       "mean_confidence": 95.2,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 260,
@@ -4968,7 +4968,7 @@
       "word_count": 343,
       "mean_confidence": 94.67,
       "greek_tokens": 7,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 261,
@@ -4987,7 +4987,7 @@
       "word_count": 393,
       "mean_confidence": 95.07,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 262,
@@ -5006,7 +5006,7 @@
       "word_count": 395,
       "mean_confidence": 94.49,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 263,
@@ -5025,7 +5025,7 @@
       "word_count": 354,
       "mean_confidence": 94.72,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 264,
@@ -5044,7 +5044,7 @@
       "word_count": 345,
       "mean_confidence": 94.14,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 265,
@@ -5063,7 +5063,7 @@
       "word_count": 373,
       "mean_confidence": 94.67,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 266,
@@ -5082,7 +5082,7 @@
       "word_count": 390,
       "mean_confidence": 94.75,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 267,
@@ -5101,7 +5101,7 @@
       "word_count": 407,
       "mean_confidence": 94.94,
       "greek_tokens": 8,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 268,
@@ -5120,7 +5120,7 @@
       "word_count": 378,
       "mean_confidence": 94.27,
       "greek_tokens": 5,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 269,
@@ -5139,7 +5139,7 @@
       "word_count": 369,
       "mean_confidence": 94.82,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 270,
@@ -5158,7 +5158,7 @@
       "word_count": 367,
       "mean_confidence": 94.61,
       "greek_tokens": 5,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 271,
@@ -5177,7 +5177,7 @@
       "word_count": 352,
       "mean_confidence": 94.38,
       "greek_tokens": 5,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 272,
@@ -5196,7 +5196,7 @@
       "word_count": 350,
       "mean_confidence": 94.31,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 273,
@@ -5215,7 +5215,7 @@
       "word_count": 370,
       "mean_confidence": 94.25,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 274,
@@ -5234,7 +5234,7 @@
       "word_count": 374,
       "mean_confidence": 95.11,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 275,
@@ -5253,7 +5253,7 @@
       "word_count": 344,
       "mean_confidence": 94.41,
       "greek_tokens": 7,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 276,
@@ -5272,7 +5272,7 @@
       "word_count": 368,
       "mean_confidence": 94.7,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 277,
@@ -5291,7 +5291,7 @@
       "word_count": 337,
       "mean_confidence": 94.94,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 278,
@@ -5310,7 +5310,7 @@
       "word_count": 345,
       "mean_confidence": 94.56,
       "greek_tokens": 6,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 279,
@@ -5329,7 +5329,7 @@
       "word_count": 356,
       "mean_confidence": 94.55,
       "greek_tokens": 5,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 280,
@@ -5348,7 +5348,7 @@
       "word_count": 305,
       "mean_confidence": 94.7,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 281,
@@ -5367,7 +5367,7 @@
       "word_count": 338,
       "mean_confidence": 95.2,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 282,
@@ -5386,7 +5386,7 @@
       "word_count": 382,
       "mean_confidence": 94.55,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 283,
@@ -5405,7 +5405,7 @@
       "word_count": 347,
       "mean_confidence": 94.86,
       "greek_tokens": 5,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 284,
@@ -5424,7 +5424,7 @@
       "word_count": 326,
       "mean_confidence": 94.55,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 285,
@@ -5443,7 +5443,7 @@
       "word_count": 364,
       "mean_confidence": 94.82,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 286,
@@ -5462,7 +5462,7 @@
       "word_count": 360,
       "mean_confidence": 94.73,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 287,
@@ -5481,7 +5481,7 @@
       "word_count": 376,
       "mean_confidence": 94.89,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 288,
@@ -5500,7 +5500,7 @@
       "word_count": 370,
       "mean_confidence": 94.27,
       "greek_tokens": 6,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 289,
@@ -5519,7 +5519,7 @@
       "word_count": 375,
       "mean_confidence": 95.06,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 290,
@@ -5538,7 +5538,7 @@
       "word_count": 365,
       "mean_confidence": 94.43,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 291,
@@ -5557,7 +5557,7 @@
       "word_count": 358,
       "mean_confidence": 95.15,
       "greek_tokens": 15,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 292,
@@ -5576,7 +5576,7 @@
       "word_count": 329,
       "mean_confidence": 94.34,
       "greek_tokens": 12,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 293,
@@ -5595,7 +5595,7 @@
       "word_count": 322,
       "mean_confidence": 94.96,
       "greek_tokens": 6,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 294,
@@ -5614,7 +5614,7 @@
       "word_count": 316,
       "mean_confidence": 94.49,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 295,
@@ -5633,7 +5633,7 @@
       "word_count": 396,
       "mean_confidence": 94.77,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 296,
@@ -5652,7 +5652,7 @@
       "word_count": 348,
       "mean_confidence": 94.95,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 297,
@@ -5671,7 +5671,7 @@
       "word_count": 347,
       "mean_confidence": 95.06,
       "greek_tokens": 6,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 298,
@@ -5690,7 +5690,7 @@
       "word_count": 354,
       "mean_confidence": 94.69,
       "greek_tokens": 8,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 299,
@@ -5709,7 +5709,7 @@
       "word_count": 349,
       "mean_confidence": 94.37,
       "greek_tokens": 8,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 300,
@@ -5728,7 +5728,7 @@
       "word_count": 321,
       "mean_confidence": 94.32,
       "greek_tokens": 5,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 301,
@@ -5747,7 +5747,7 @@
       "word_count": 369,
       "mean_confidence": 94.55,
       "greek_tokens": 8,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 302,
@@ -5766,7 +5766,7 @@
       "word_count": 383,
       "mean_confidence": 95.1,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 303,
@@ -5785,7 +5785,7 @@
       "word_count": 390,
       "mean_confidence": 94.86,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 304,
@@ -5804,7 +5804,7 @@
       "word_count": 426,
       "mean_confidence": 95.49,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 305,
@@ -5823,7 +5823,7 @@
       "word_count": 368,
       "mean_confidence": 94.75,
       "greek_tokens": 6,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 306,
@@ -5842,7 +5842,7 @@
       "word_count": 421,
       "mean_confidence": 95.33,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 307,
@@ -5861,7 +5861,7 @@
       "word_count": 386,
       "mean_confidence": 94.86,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 308,
@@ -5880,7 +5880,7 @@
       "word_count": 367,
       "mean_confidence": 94.76,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 309,
@@ -5899,7 +5899,7 @@
       "word_count": 378,
       "mean_confidence": 94.75,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 310,
@@ -5918,7 +5918,7 @@
       "word_count": 430,
       "mean_confidence": 95.31,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 311,
@@ -5937,7 +5937,7 @@
       "word_count": 396,
       "mean_confidence": 95.44,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 312,
@@ -5956,7 +5956,7 @@
       "word_count": 391,
       "mean_confidence": 95.04,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 313,
@@ -5975,7 +5975,7 @@
       "word_count": 359,
       "mean_confidence": 95.11,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 314,
@@ -5994,7 +5994,7 @@
       "word_count": 388,
       "mean_confidence": 94.08,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 315,
@@ -6013,7 +6013,7 @@
       "word_count": 339,
       "mean_confidence": 94.46,
       "greek_tokens": 10,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 316,
@@ -6032,7 +6032,7 @@
       "word_count": 338,
       "mean_confidence": 93.91,
       "greek_tokens": 9,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 317,
@@ -6051,7 +6051,7 @@
       "word_count": 350,
       "mean_confidence": 94.99,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 318,
@@ -6070,7 +6070,7 @@
       "word_count": 348,
       "mean_confidence": 95.06,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 319,
@@ -6089,7 +6089,7 @@
       "word_count": 332,
       "mean_confidence": 94.92,
       "greek_tokens": 6,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 320,
@@ -6108,7 +6108,7 @@
       "word_count": 357,
       "mean_confidence": 94.98,
       "greek_tokens": 11,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 321,
@@ -6127,7 +6127,7 @@
       "word_count": 410,
       "mean_confidence": 95.16,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 322,
@@ -6146,7 +6146,7 @@
       "word_count": 299,
       "mean_confidence": 94.7,
       "greek_tokens": 8,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 323,
@@ -6165,7 +6165,7 @@
       "word_count": 304,
       "mean_confidence": 95.03,
       "greek_tokens": 9,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 324,
@@ -6184,7 +6184,7 @@
       "word_count": 321,
       "mean_confidence": 94.32,
       "greek_tokens": 6,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 325,
@@ -6203,7 +6203,7 @@
       "word_count": 338,
       "mean_confidence": 94.34,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 326,
@@ -6222,7 +6222,7 @@
       "word_count": 328,
       "mean_confidence": 94.33,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 327,
@@ -6241,7 +6241,7 @@
       "word_count": 329,
       "mean_confidence": 94.81,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 328,
@@ -6260,7 +6260,7 @@
       "word_count": 332,
       "mean_confidence": 94.25,
       "greek_tokens": 9,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 329,
@@ -6279,7 +6279,7 @@
       "word_count": 375,
       "mean_confidence": 94.77,
       "greek_tokens": 5,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 330,
@@ -6298,7 +6298,7 @@
       "word_count": 389,
       "mean_confidence": 94.97,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 331,
@@ -6317,7 +6317,7 @@
       "word_count": 325,
       "mean_confidence": 94.58,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 332,
@@ -6336,7 +6336,7 @@
       "word_count": 351,
       "mean_confidence": 94.35,
       "greek_tokens": 6,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 333,
@@ -6355,7 +6355,7 @@
       "word_count": 366,
       "mean_confidence": 95.01,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 334,
@@ -6374,7 +6374,7 @@
       "word_count": 400,
       "mean_confidence": 94.45,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 335,
@@ -6393,7 +6393,7 @@
       "word_count": 370,
       "mean_confidence": 95.15,
       "greek_tokens": 5,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 336,
@@ -6412,7 +6412,7 @@
       "word_count": 425,
       "mean_confidence": 94.77,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 337,
@@ -6431,7 +6431,7 @@
       "word_count": 388,
       "mean_confidence": 94.79,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 338,
@@ -6450,7 +6450,7 @@
       "word_count": 419,
       "mean_confidence": 95.34,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 339,
@@ -6469,7 +6469,7 @@
       "word_count": 430,
       "mean_confidence": 93.99,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 340,
@@ -6488,7 +6488,7 @@
       "word_count": 356,
       "mean_confidence": 94.76,
       "greek_tokens": 6,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 341,
@@ -6507,7 +6507,7 @@
       "word_count": 406,
       "mean_confidence": 94.9,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 342,
@@ -6526,7 +6526,7 @@
       "word_count": 333,
       "mean_confidence": 94.43,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 343,
@@ -6545,7 +6545,7 @@
       "word_count": 406,
       "mean_confidence": 94.1,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 344,
@@ -6564,7 +6564,7 @@
       "word_count": 314,
       "mean_confidence": 94.16,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 345,
@@ -6583,7 +6583,7 @@
       "word_count": 441,
       "mean_confidence": 95.55,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 346,
@@ -6602,7 +6602,7 @@
       "word_count": 404,
       "mean_confidence": 95.12,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 347,
@@ -6621,7 +6621,7 @@
       "word_count": 376,
       "mean_confidence": 94.08,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 348,
@@ -6640,7 +6640,7 @@
       "word_count": 376,
       "mean_confidence": 93.84,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 349,
@@ -6659,7 +6659,7 @@
       "word_count": 397,
       "mean_confidence": 95.11,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 350,
@@ -6678,7 +6678,7 @@
       "word_count": 380,
       "mean_confidence": 94.6,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 351,
@@ -6697,7 +6697,7 @@
       "word_count": 390,
       "mean_confidence": 94.78,
       "greek_tokens": 5,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 352,
@@ -6716,7 +6716,7 @@
       "word_count": 415,
       "mean_confidence": 95.0,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 353,
@@ -6735,7 +6735,7 @@
       "word_count": 387,
       "mean_confidence": 94.97,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 354,
@@ -6754,7 +6754,7 @@
       "word_count": 327,
       "mean_confidence": 93.88,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 355,
@@ -6773,7 +6773,7 @@
       "word_count": 381,
       "mean_confidence": 94.92,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 356,
@@ -6792,7 +6792,7 @@
       "word_count": 390,
       "mean_confidence": 95.25,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 357,
@@ -6811,7 +6811,7 @@
       "word_count": 375,
       "mean_confidence": 94.96,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 358,
@@ -6830,7 +6830,7 @@
       "word_count": 360,
       "mean_confidence": 94.61,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 359,
@@ -6849,7 +6849,7 @@
       "word_count": 332,
       "mean_confidence": 94.95,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 360,
@@ -6868,7 +6868,7 @@
       "word_count": 111,
       "mean_confidence": 94.57,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 361,
@@ -6887,7 +6887,7 @@
       "word_count": 312,
       "mean_confidence": 94.69,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 362,
@@ -6906,7 +6906,7 @@
       "word_count": 371,
       "mean_confidence": 94.87,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 363,
@@ -6925,7 +6925,7 @@
       "word_count": 380,
       "mean_confidence": 94.95,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 364,
@@ -6944,7 +6944,7 @@
       "word_count": 409,
       "mean_confidence": 94.6,
       "greek_tokens": 13,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 365,
@@ -6963,7 +6963,7 @@
       "word_count": 403,
       "mean_confidence": 95.19,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 366,
@@ -6982,7 +6982,7 @@
       "word_count": 360,
       "mean_confidence": 94.49,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 367,
@@ -7001,7 +7001,7 @@
       "word_count": 387,
       "mean_confidence": 95.55,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 368,
@@ -7020,7 +7020,7 @@
       "word_count": 385,
       "mean_confidence": 95.19,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 369,
@@ -7039,7 +7039,7 @@
       "word_count": 385,
       "mean_confidence": 95.09,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 370,
@@ -7058,7 +7058,7 @@
       "word_count": 375,
       "mean_confidence": 94.61,
       "greek_tokens": 5,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 371,
@@ -7077,7 +7077,7 @@
       "word_count": 360,
       "mean_confidence": 95.01,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 372,
@@ -7096,7 +7096,7 @@
       "word_count": 387,
       "mean_confidence": 94.97,
       "greek_tokens": 6,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 373,
@@ -7115,7 +7115,7 @@
       "word_count": 403,
       "mean_confidence": 95.51,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 374,
@@ -7134,7 +7134,7 @@
       "word_count": 382,
       "mean_confidence": 95.19,
       "greek_tokens": 5,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 375,
@@ -7153,7 +7153,7 @@
       "word_count": 322,
       "mean_confidence": 94.88,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 376,
@@ -7172,7 +7172,7 @@
       "word_count": 327,
       "mean_confidence": 94.98,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 377,
@@ -7191,7 +7191,7 @@
       "word_count": 375,
       "mean_confidence": 95.44,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 378,
@@ -7210,7 +7210,7 @@
       "word_count": 383,
       "mean_confidence": 95.15,
       "greek_tokens": 5,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 379,
@@ -7229,7 +7229,7 @@
       "word_count": 409,
       "mean_confidence": 95.37,
       "greek_tokens": 12,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 380,
@@ -7248,7 +7248,7 @@
       "word_count": 350,
       "mean_confidence": 94.4,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 381,
@@ -7267,7 +7267,7 @@
       "word_count": 270,
       "mean_confidence": 94.08,
       "greek_tokens": 8,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 382,
@@ -7286,7 +7286,7 @@
       "word_count": 329,
       "mean_confidence": 94.81,
       "greek_tokens": 10,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 383,
@@ -7305,7 +7305,7 @@
       "word_count": 301,
       "mean_confidence": 94.7,
       "greek_tokens": 12,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 384,
@@ -7324,7 +7324,7 @@
       "word_count": 329,
       "mean_confidence": 94.48,
       "greek_tokens": 11,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 385,
@@ -7343,7 +7343,7 @@
       "word_count": 283,
       "mean_confidence": 94.38,
       "greek_tokens": 9,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 386,
@@ -7362,7 +7362,7 @@
       "word_count": 322,
       "mean_confidence": 94.77,
       "greek_tokens": 18,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 387,
@@ -7381,7 +7381,7 @@
       "word_count": 367,
       "mean_confidence": 94.66,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 388,
@@ -7400,7 +7400,7 @@
       "word_count": 363,
       "mean_confidence": 94.06,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 389,
@@ -7419,7 +7419,7 @@
       "word_count": 405,
       "mean_confidence": 95.01,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 390,
@@ -7438,7 +7438,7 @@
       "word_count": 399,
       "mean_confidence": 95.13,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 391,
@@ -7457,7 +7457,7 @@
       "word_count": 428,
       "mean_confidence": 95.31,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 392,
@@ -7476,7 +7476,7 @@
       "word_count": 390,
       "mean_confidence": 95.12,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 393,
@@ -7495,7 +7495,7 @@
       "word_count": 419,
       "mean_confidence": 95.5,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 394,
@@ -7514,7 +7514,7 @@
       "word_count": 382,
       "mean_confidence": 95.47,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 395,
@@ -7533,7 +7533,7 @@
       "word_count": 440,
       "mean_confidence": 95.74,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 396,
@@ -7552,7 +7552,7 @@
       "word_count": 404,
       "mean_confidence": 95.18,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 397,
@@ -7571,7 +7571,7 @@
       "word_count": 369,
       "mean_confidence": 94.95,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 398,
@@ -7590,7 +7590,7 @@
       "word_count": 434,
       "mean_confidence": 95.67,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 399,
@@ -7609,7 +7609,7 @@
       "word_count": 372,
       "mean_confidence": 95.22,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 400,
@@ -7628,7 +7628,7 @@
       "word_count": 358,
       "mean_confidence": 95.12,
       "greek_tokens": 6,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 401,
@@ -7647,7 +7647,7 @@
       "word_count": 433,
       "mean_confidence": 95.52,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 402,
@@ -7666,7 +7666,7 @@
       "word_count": 429,
       "mean_confidence": 95.38,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 403,
@@ -7685,7 +7685,7 @@
       "word_count": 385,
       "mean_confidence": 95.56,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 404,
@@ -7704,7 +7704,7 @@
       "word_count": 328,
       "mean_confidence": 94.3,
       "greek_tokens": 5,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 405,
@@ -7723,7 +7723,7 @@
       "word_count": 308,
       "mean_confidence": 94.44,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 406,
@@ -7742,7 +7742,7 @@
       "word_count": 379,
       "mean_confidence": 94.66,
       "greek_tokens": 6,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 407,
@@ -7761,7 +7761,7 @@
       "word_count": 344,
       "mean_confidence": 94.35,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 408,
@@ -7780,7 +7780,7 @@
       "word_count": 384,
       "mean_confidence": 95.19,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 409,
@@ -7799,7 +7799,7 @@
       "word_count": 331,
       "mean_confidence": 94.8,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 410,
@@ -7818,7 +7818,7 @@
       "word_count": 398,
       "mean_confidence": 94.91,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 411,
@@ -7837,7 +7837,7 @@
       "word_count": 354,
       "mean_confidence": 95.45,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 412,
@@ -7856,7 +7856,7 @@
       "word_count": 392,
       "mean_confidence": 94.46,
       "greek_tokens": 6,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 413,
@@ -7875,7 +7875,7 @@
       "word_count": 398,
       "mean_confidence": 95.08,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 414,
@@ -7894,7 +7894,7 @@
       "word_count": 378,
       "mean_confidence": 95.48,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 415,
@@ -7913,7 +7913,7 @@
       "word_count": 383,
       "mean_confidence": 95.22,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 416,
@@ -7932,7 +7932,7 @@
       "word_count": 386,
       "mean_confidence": 94.45,
       "greek_tokens": 7,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 417,
@@ -7951,7 +7951,7 @@
       "word_count": 387,
       "mean_confidence": 95.4,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 418,
@@ -7970,7 +7970,7 @@
       "word_count": 346,
       "mean_confidence": 94.93,
       "greek_tokens": 5,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 419,
@@ -7989,7 +7989,7 @@
       "word_count": 392,
       "mean_confidence": 94.99,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 420,
@@ -8008,7 +8008,7 @@
       "word_count": 341,
       "mean_confidence": 94.29,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 421,
@@ -8027,7 +8027,7 @@
       "word_count": 339,
       "mean_confidence": 94.85,
       "greek_tokens": 5,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 422,
@@ -8046,7 +8046,7 @@
       "word_count": 372,
       "mean_confidence": 94.34,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 423,
@@ -8065,7 +8065,7 @@
       "word_count": 368,
       "mean_confidence": 95.2,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 424,
@@ -8084,7 +8084,7 @@
       "word_count": 319,
       "mean_confidence": 94.06,
       "greek_tokens": 5,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 425,
@@ -8103,7 +8103,7 @@
       "word_count": 256,
       "mean_confidence": 94.91,
       "greek_tokens": 8,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 426,
@@ -8122,7 +8122,7 @@
       "word_count": 292,
       "mean_confidence": 93.42,
       "greek_tokens": 10,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 427,
@@ -8141,7 +8141,7 @@
       "word_count": 296,
       "mean_confidence": 94.61,
       "greek_tokens": 12,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 428,
@@ -8160,7 +8160,7 @@
       "word_count": 299,
       "mean_confidence": 94.83,
       "greek_tokens": 8,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 429,
@@ -8179,7 +8179,7 @@
       "word_count": 359,
       "mean_confidence": 94.97,
       "greek_tokens": 8,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 430,
@@ -8198,7 +8198,7 @@
       "word_count": 284,
       "mean_confidence": 94.88,
       "greek_tokens": 6,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 431,
@@ -8217,7 +8217,7 @@
       "word_count": 314,
       "mean_confidence": 94.6,
       "greek_tokens": 6,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 432,
@@ -8236,7 +8236,7 @@
       "word_count": 146,
       "mean_confidence": 95.22,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 433,
@@ -8255,7 +8255,7 @@
       "word_count": 210,
       "mean_confidence": 93.62,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 434,
@@ -8274,7 +8274,7 @@
       "word_count": 241,
       "mean_confidence": 94.35,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 435,
@@ -8293,7 +8293,7 @@
       "word_count": 230,
       "mean_confidence": 93.85,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 436,
@@ -8312,7 +8312,7 @@
       "word_count": 122,
       "mean_confidence": 90.3,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 437,
@@ -8331,7 +8331,7 @@
       "word_count": 189,
       "mean_confidence": 79.33,
       "greek_tokens": 52,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 438,
@@ -8350,7 +8350,7 @@
       "word_count": 234,
       "mean_confidence": 88.33,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 439,
@@ -8369,7 +8369,7 @@
       "word_count": 204,
       "mean_confidence": 88.84,
       "greek_tokens": 63,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 440,
@@ -8388,7 +8388,7 @@
       "word_count": 237,
       "mean_confidence": 88.63,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 441,
@@ -8407,7 +8407,7 @@
       "word_count": 205,
       "mean_confidence": 85.18,
       "greek_tokens": 56,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 442,
@@ -8426,7 +8426,7 @@
       "word_count": 222,
       "mean_confidence": 89.4,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 443,
@@ -8445,7 +8445,7 @@
       "word_count": 200,
       "mean_confidence": 84.87,
       "greek_tokens": 51,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 444,
@@ -8464,7 +8464,7 @@
       "word_count": 210,
       "mean_confidence": 90.0,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 445,
@@ -8483,7 +8483,7 @@
       "word_count": 196,
       "mean_confidence": 83.12,
       "greek_tokens": 58,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 446,
@@ -8502,7 +8502,7 @@
       "word_count": 221,
       "mean_confidence": 89.41,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 447,
@@ -8521,7 +8521,7 @@
       "word_count": 208,
       "mean_confidence": 77.57,
       "greek_tokens": 57,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 448,
@@ -8540,7 +8540,7 @@
       "word_count": 208,
       "mean_confidence": 90.59,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 449,
@@ -8559,7 +8559,7 @@
       "word_count": 232,
       "mean_confidence": 72.31,
       "greek_tokens": 58,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 450,
@@ -8578,7 +8578,7 @@
       "word_count": 236,
       "mean_confidence": 90.24,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 451,
@@ -8597,7 +8597,7 @@
       "word_count": 185,
       "mean_confidence": 83.26,
       "greek_tokens": 58,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 452,
@@ -8616,7 +8616,7 @@
       "word_count": 244,
       "mean_confidence": 91.4,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 453,
@@ -8635,7 +8635,7 @@
       "word_count": 216,
       "mean_confidence": 84.31,
       "greek_tokens": 55,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 454,
@@ -8654,7 +8654,7 @@
       "word_count": 220,
       "mean_confidence": 89.95,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 455,
@@ -8673,7 +8673,7 @@
       "word_count": 204,
       "mean_confidence": 83.57,
       "greek_tokens": 55,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 456,
@@ -8692,7 +8692,7 @@
       "word_count": 282,
       "mean_confidence": 89.73,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 457,
@@ -8711,7 +8711,7 @@
       "word_count": 187,
       "mean_confidence": 78.36,
       "greek_tokens": 58,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 458,
@@ -8730,7 +8730,7 @@
       "word_count": 241,
       "mean_confidence": 87.02,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 459,
@@ -8749,7 +8749,7 @@
       "word_count": 211,
       "mean_confidence": 81.6,
       "greek_tokens": 53,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 460,
@@ -8768,7 +8768,7 @@
       "word_count": 246,
       "mean_confidence": 88.58,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 461,
@@ -8787,7 +8787,7 @@
       "word_count": 207,
       "mean_confidence": 79.93,
       "greek_tokens": 49,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 462,
@@ -8806,7 +8806,7 @@
       "word_count": 237,
       "mean_confidence": 90.76,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 463,
@@ -8825,7 +8825,7 @@
       "word_count": 230,
       "mean_confidence": 74.51,
       "greek_tokens": 67,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 464,
@@ -8844,7 +8844,7 @@
       "word_count": 193,
       "mean_confidence": 86.42,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 465,
@@ -8863,7 +8863,7 @@
       "word_count": 244,
       "mean_confidence": 65.51,
       "greek_tokens": 52,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 466,
@@ -8882,7 +8882,7 @@
       "word_count": 232,
       "mean_confidence": 89.81,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 467,
@@ -8901,7 +8901,7 @@
       "word_count": 198,
       "mean_confidence": 82.68,
       "greek_tokens": 61,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 468,
@@ -8920,7 +8920,7 @@
       "word_count": 273,
       "mean_confidence": 89.97,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 469,
@@ -8939,7 +8939,7 @@
       "word_count": 203,
       "mean_confidence": 74.74,
       "greek_tokens": 66,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 470,
@@ -8958,7 +8958,7 @@
       "word_count": 220,
       "mean_confidence": 89.31,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 471,
@@ -8977,7 +8977,7 @@
       "word_count": 230,
       "mean_confidence": 64.84,
       "greek_tokens": 67,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 472,
@@ -8996,7 +8996,7 @@
       "word_count": 226,
       "mean_confidence": 89.84,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 473,
@@ -9015,7 +9015,7 @@
       "word_count": 201,
       "mean_confidence": 83.59,
       "greek_tokens": 47,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 474,
@@ -9034,7 +9034,7 @@
       "word_count": 221,
       "mean_confidence": 90.16,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 475,
@@ -9053,7 +9053,7 @@
       "word_count": 198,
       "mean_confidence": 86.14,
       "greek_tokens": 57,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 476,
@@ -9072,7 +9072,7 @@
       "word_count": 142,
       "mean_confidence": 89.1,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 477,
@@ -9091,7 +9091,7 @@
       "word_count": 247,
       "mean_confidence": 85.8,
       "greek_tokens": 66,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 478,
@@ -9110,7 +9110,7 @@
       "word_count": 70,
       "mean_confidence": 88.24,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 479,
@@ -9129,7 +9129,7 @@
       "word_count": 193,
       "mean_confidence": 80.92,
       "greek_tokens": 64,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 480,
@@ -9148,7 +9148,7 @@
       "word_count": 217,
       "mean_confidence": 89.99,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 481,
@@ -9167,7 +9167,7 @@
       "word_count": 186,
       "mean_confidence": 84.61,
       "greek_tokens": 54,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 482,
@@ -9186,7 +9186,7 @@
       "word_count": 192,
       "mean_confidence": 90.68,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 483,
@@ -9205,7 +9205,7 @@
       "word_count": 211,
       "mean_confidence": 84.43,
       "greek_tokens": 57,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 484,
@@ -9224,7 +9224,7 @@
       "word_count": 167,
       "mean_confidence": 89.14,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 485,
@@ -9243,7 +9243,7 @@
       "word_count": 222,
       "mean_confidence": 77.02,
       "greek_tokens": 55,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 486,
@@ -9262,7 +9262,7 @@
       "word_count": 137,
       "mean_confidence": 89.03,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 487,
@@ -9281,7 +9281,7 @@
       "word_count": 207,
       "mean_confidence": 81.46,
       "greek_tokens": 55,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 488,
@@ -9300,7 +9300,7 @@
       "word_count": 237,
       "mean_confidence": 90.25,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 489,
@@ -9319,7 +9319,7 @@
       "word_count": 243,
       "mean_confidence": 81.78,
       "greek_tokens": 69,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 490,
@@ -9338,7 +9338,7 @@
       "word_count": 194,
       "mean_confidence": 87.74,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 491,
@@ -9357,7 +9357,7 @@
       "word_count": 209,
       "mean_confidence": 80.06,
       "greek_tokens": 53,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 492,
@@ -9376,7 +9376,7 @@
       "word_count": 212,
       "mean_confidence": 84.22,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 493,
@@ -9395,7 +9395,7 @@
       "word_count": 237,
       "mean_confidence": 86.44,
       "greek_tokens": 54,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 494,
@@ -9414,7 +9414,7 @@
       "word_count": 242,
       "mean_confidence": 88.84,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 495,
@@ -9433,7 +9433,7 @@
       "word_count": 221,
       "mean_confidence": 72.09,
       "greek_tokens": 66,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 496,
@@ -9452,7 +9452,7 @@
       "word_count": 223,
       "mean_confidence": 88.31,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 497,
@@ -9471,7 +9471,7 @@
       "word_count": 209,
       "mean_confidence": 72.36,
       "greek_tokens": 47,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 498,
@@ -9490,7 +9490,7 @@
       "word_count": 245,
       "mean_confidence": 89.01,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 499,
@@ -9509,7 +9509,7 @@
       "word_count": 215,
       "mean_confidence": 88.79,
       "greek_tokens": 49,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 500,
@@ -9528,7 +9528,7 @@
       "word_count": 55,
       "mean_confidence": 89.13,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 501,
@@ -9547,7 +9547,7 @@
       "word_count": 244,
       "mean_confidence": 74.34,
       "greek_tokens": 67,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 502,
@@ -9566,7 +9566,7 @@
       "word_count": 262,
       "mean_confidence": 88.78,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 503,
@@ -9585,7 +9585,7 @@
       "word_count": 253,
       "mean_confidence": 80.54,
       "greek_tokens": 75,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 504,
@@ -9604,7 +9604,7 @@
       "word_count": 154,
       "mean_confidence": 89.41,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 505,
@@ -9623,7 +9623,7 @@
       "word_count": 279,
       "mean_confidence": 83.24,
       "greek_tokens": 96,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 506,
@@ -9642,7 +9642,7 @@
       "word_count": 16,
       "mean_confidence": 71.31,
       "greek_tokens": 5,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 507,
@@ -9661,7 +9661,7 @@
       "word_count": 278,
       "mean_confidence": 82.18,
       "greek_tokens": 86,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 508,
@@ -9680,7 +9680,7 @@
       "word_count": 75,
       "mean_confidence": 87.46,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 509,
@@ -9699,7 +9699,7 @@
       "word_count": 76,
       "mean_confidence": 56.84,
       "greek_tokens": 21,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 510,
@@ -9718,7 +9718,7 @@
       "word_count": 85,
       "mean_confidence": 88.56,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 511,
@@ -9737,7 +9737,7 @@
       "word_count": 219,
       "mean_confidence": 81.68,
       "greek_tokens": 60,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 512,
@@ -9756,7 +9756,7 @@
       "word_count": 212,
       "mean_confidence": 89.71,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 513,
@@ -9775,7 +9775,7 @@
       "word_count": 225,
       "mean_confidence": 87.78,
       "greek_tokens": 55,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 514,
@@ -9794,7 +9794,7 @@
       "word_count": 221,
       "mean_confidence": 88.91,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 515,
@@ -9813,7 +9813,7 @@
       "word_count": 204,
       "mean_confidence": 87.07,
       "greek_tokens": 49,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 516,
@@ -9832,7 +9832,7 @@
       "word_count": 223,
       "mean_confidence": 90.7,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 517,
@@ -9851,7 +9851,7 @@
       "word_count": 231,
       "mean_confidence": 76.11,
       "greek_tokens": 56,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 518,
@@ -9870,7 +9870,7 @@
       "word_count": 193,
       "mean_confidence": 86.47,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 519,
@@ -9889,7 +9889,7 @@
       "word_count": 202,
       "mean_confidence": 83.54,
       "greek_tokens": 58,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 520,
@@ -9908,7 +9908,7 @@
       "word_count": 243,
       "mean_confidence": 89.93,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 521,
@@ -9927,7 +9927,7 @@
       "word_count": 203,
       "mean_confidence": 84.2,
       "greek_tokens": 52,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 522,
@@ -9946,7 +9946,7 @@
       "word_count": 201,
       "mean_confidence": 90.5,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 523,
@@ -9965,7 +9965,7 @@
       "word_count": 199,
       "mean_confidence": 80.52,
       "greek_tokens": 54,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 524,
@@ -9984,7 +9984,7 @@
       "word_count": 220,
       "mean_confidence": 90.37,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 525,
@@ -10003,7 +10003,7 @@
       "word_count": 231,
       "mean_confidence": 80.76,
       "greek_tokens": 59,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 526,
@@ -10022,7 +10022,7 @@
       "word_count": 190,
       "mean_confidence": 89.55,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 527,
@@ -10041,7 +10041,7 @@
       "word_count": 238,
       "mean_confidence": 78.2,
       "greek_tokens": 65,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 528,
@@ -10060,7 +10060,7 @@
       "word_count": 129,
       "mean_confidence": 88.68,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 529,
@@ -10079,7 +10079,7 @@
       "word_count": 210,
       "mean_confidence": 73.93,
       "greek_tokens": 47,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 530,
@@ -10098,7 +10098,7 @@
       "word_count": 231,
       "mean_confidence": 89.8,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 531,
@@ -10117,7 +10117,7 @@
       "word_count": 205,
       "mean_confidence": 87.14,
       "greek_tokens": 52,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 532,
@@ -10136,7 +10136,7 @@
       "word_count": 221,
       "mean_confidence": 89.8,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 533,
@@ -10155,7 +10155,7 @@
       "word_count": 280,
       "mean_confidence": 62.28,
       "greek_tokens": 68,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 534,
@@ -10174,7 +10174,7 @@
       "word_count": 236,
       "mean_confidence": 89.54,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 535,
@@ -10193,7 +10193,7 @@
       "word_count": 206,
       "mean_confidence": 77.59,
       "greek_tokens": 55,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 536,
@@ -10212,7 +10212,7 @@
       "word_count": 229,
       "mean_confidence": 89.92,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 537,
@@ -10231,7 +10231,7 @@
       "word_count": 207,
       "mean_confidence": 83.58,
       "greek_tokens": 47,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 538,
@@ -10250,7 +10250,7 @@
       "word_count": 207,
       "mean_confidence": 90.78,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 539,
@@ -10269,7 +10269,7 @@
       "word_count": 224,
       "mean_confidence": 76.06,
       "greek_tokens": 44,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 540,
@@ -10288,7 +10288,7 @@
       "word_count": 117,
       "mean_confidence": 89.46,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 541,
@@ -10307,7 +10307,7 @@
       "word_count": 216,
       "mean_confidence": 78.08,
       "greek_tokens": 61,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 542,
@@ -10326,7 +10326,7 @@
       "word_count": 205,
       "mean_confidence": 90.53,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 543,
@@ -10345,7 +10345,7 @@
       "word_count": 238,
       "mean_confidence": 68.02,
       "greek_tokens": 59,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 544,
@@ -10364,7 +10364,7 @@
       "word_count": 229,
       "mean_confidence": 89.44,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 545,
@@ -10383,7 +10383,7 @@
       "word_count": 229,
       "mean_confidence": 75.31,
       "greek_tokens": 62,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 546,
@@ -10402,7 +10402,7 @@
       "word_count": 171,
       "mean_confidence": 87.57,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 547,
@@ -10421,7 +10421,7 @@
       "word_count": 215,
       "mean_confidence": 84.78,
       "greek_tokens": 53,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 548,
@@ -10440,7 +10440,7 @@
       "word_count": 227,
       "mean_confidence": 90.18,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 549,
@@ -10459,7 +10459,7 @@
       "word_count": 229,
       "mean_confidence": 71.29,
       "greek_tokens": 52,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 550,
@@ -10478,7 +10478,7 @@
       "word_count": 207,
       "mean_confidence": 78.73,
       "greek_tokens": 8,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 551,
@@ -10497,7 +10497,7 @@
       "word_count": 222,
       "mean_confidence": 64.92,
       "greek_tokens": 54,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 552,
@@ -10516,7 +10516,7 @@
       "word_count": 196,
       "mean_confidence": 91.54,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 553,
@@ -10535,7 +10535,7 @@
       "word_count": 202,
       "mean_confidence": 86.02,
       "greek_tokens": 49,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 554,
@@ -10554,7 +10554,7 @@
       "word_count": 180,
       "mean_confidence": 91.69,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 555,
@@ -10573,7 +10573,7 @@
       "word_count": 306,
       "mean_confidence": 79.55,
       "greek_tokens": 105,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 556,
@@ -10592,7 +10592,7 @@
       "word_count": 10,
       "mean_confidence": 95.0,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 557,
@@ -10611,7 +10611,7 @@
       "word_count": 276,
       "mean_confidence": 78.68,
       "greek_tokens": 86,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 558,
@@ -10630,7 +10630,7 @@
       "word_count": 14,
       "mean_confidence": 67.39,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 559,
@@ -10649,7 +10649,7 @@
       "word_count": 227,
       "mean_confidence": 71.53,
       "greek_tokens": 57,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 560,
@@ -10668,7 +10668,7 @@
       "word_count": 153,
       "mean_confidence": 69.7,
       "greek_tokens": 8,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 561,
@@ -10687,7 +10687,7 @@
       "word_count": 193,
       "mean_confidence": 80.34,
       "greek_tokens": 46,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 562,
@@ -10706,7 +10706,7 @@
       "word_count": 248,
       "mean_confidence": 89.83,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 563,
@@ -10725,7 +10725,7 @@
       "word_count": 190,
       "mean_confidence": 81.36,
       "greek_tokens": 43,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 564,
@@ -10744,7 +10744,7 @@
       "word_count": 226,
       "mean_confidence": 90.55,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 565,
@@ -10763,7 +10763,7 @@
       "word_count": 207,
       "mean_confidence": 73.66,
       "greek_tokens": 51,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 566,
@@ -10782,7 +10782,7 @@
       "word_count": 213,
       "mean_confidence": 82.64,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 567,
@@ -10801,7 +10801,7 @@
       "word_count": 223,
       "mean_confidence": 74.83,
       "greek_tokens": 51,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 568,
@@ -10820,7 +10820,7 @@
       "word_count": 160,
       "mean_confidence": 90.99,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 569,
@@ -10839,7 +10839,7 @@
       "word_count": 227,
       "mean_confidence": 84.42,
       "greek_tokens": 64,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 570,
@@ -10858,7 +10858,7 @@
       "word_count": 191,
       "mean_confidence": 91.55,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 571,
@@ -10877,7 +10877,7 @@
       "word_count": 210,
       "mean_confidence": 81.67,
       "greek_tokens": 42,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 572,
@@ -10896,7 +10896,7 @@
       "word_count": 259,
       "mean_confidence": 91.11,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 573,
@@ -10915,7 +10915,7 @@
       "word_count": 235,
       "mean_confidence": 76.13,
       "greek_tokens": 68,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 574,
@@ -10934,7 +10934,7 @@
       "word_count": 194,
       "mean_confidence": 86.57,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 575,
@@ -10953,7 +10953,7 @@
       "word_count": 220,
       "mean_confidence": 76.84,
       "greek_tokens": 56,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 576,
@@ -10972,7 +10972,7 @@
       "word_count": 200,
       "mean_confidence": 89.4,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 577,
@@ -10991,7 +10991,7 @@
       "word_count": 232,
       "mean_confidence": 64.19,
       "greek_tokens": 71,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 578,
@@ -11010,7 +11010,7 @@
       "word_count": 234,
       "mean_confidence": 88.09,
       "greek_tokens": 2,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 579,
@@ -11029,7 +11029,7 @@
       "word_count": 215,
       "mean_confidence": 89.54,
       "greek_tokens": 56,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 580,
@@ -11048,7 +11048,7 @@
       "word_count": 250,
       "mean_confidence": 90.0,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 581,
@@ -11067,7 +11067,7 @@
       "word_count": 217,
       "mean_confidence": 87.98,
       "greek_tokens": 51,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 582,
@@ -11086,7 +11086,7 @@
       "word_count": 242,
       "mean_confidence": 90.54,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 583,
@@ -11105,7 +11105,7 @@
       "word_count": 58,
       "mean_confidence": 87.18,
       "greek_tokens": 10,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 584,
@@ -11124,7 +11124,7 @@
       "word_count": 73,
       "mean_confidence": 92.91,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 585,
@@ -11143,7 +11143,7 @@
       "word_count": 208,
       "mean_confidence": 90.17,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 586,
@@ -11162,7 +11162,7 @@
       "word_count": 191,
       "mean_confidence": 85.32,
       "greek_tokens": 52,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 587,
@@ -11181,7 +11181,7 @@
       "word_count": 204,
       "mean_confidence": 87.58,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 588,
@@ -11200,7 +11200,7 @@
       "word_count": 179,
       "mean_confidence": 69.32,
       "greek_tokens": 50,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 589,
@@ -11219,7 +11219,7 @@
       "word_count": 204,
       "mean_confidence": 89.96,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 590,
@@ -11238,7 +11238,7 @@
       "word_count": 185,
       "mean_confidence": 77.53,
       "greek_tokens": 58,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 591,
@@ -11257,7 +11257,7 @@
       "word_count": 207,
       "mean_confidence": 87.24,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 592,
@@ -11276,7 +11276,7 @@
       "word_count": 182,
       "mean_confidence": 82.52,
       "greek_tokens": 47,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 593,
@@ -11295,7 +11295,7 @@
       "word_count": 229,
       "mean_confidence": 89.06,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 594,
@@ -11314,7 +11314,7 @@
       "word_count": 178,
       "mean_confidence": 82.86,
       "greek_tokens": 47,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 595,
@@ -11333,7 +11333,7 @@
       "word_count": 213,
       "mean_confidence": 90.05,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 596,
@@ -11352,7 +11352,7 @@
       "word_count": 170,
       "mean_confidence": 80.34,
       "greek_tokens": 45,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 597,
@@ -11371,7 +11371,7 @@
       "word_count": 222,
       "mean_confidence": 92.53,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 598,
@@ -11390,7 +11390,7 @@
       "word_count": 184,
       "mean_confidence": 83.93,
       "greek_tokens": 51,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 599,
@@ -11409,7 +11409,7 @@
       "word_count": 210,
       "mean_confidence": 91.34,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 600,
@@ -11428,7 +11428,7 @@
       "word_count": 186,
       "mean_confidence": 73.89,
       "greek_tokens": 48,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 601,
@@ -11447,7 +11447,7 @@
       "word_count": 240,
       "mean_confidence": 91.46,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 602,
@@ -11466,7 +11466,7 @@
       "word_count": 177,
       "mean_confidence": 85.55,
       "greek_tokens": 41,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 603,
@@ -11485,7 +11485,7 @@
       "word_count": 225,
       "mean_confidence": 92.19,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 604,
@@ -11504,7 +11504,7 @@
       "word_count": 185,
       "mean_confidence": 66.88,
       "greek_tokens": 54,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 605,
@@ -11523,7 +11523,7 @@
       "word_count": 213,
       "mean_confidence": 93.12,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 606,
@@ -11542,7 +11542,7 @@
       "word_count": 189,
       "mean_confidence": 86.45,
       "greek_tokens": 45,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 607,
@@ -11561,7 +11561,7 @@
       "word_count": 226,
       "mean_confidence": 87.9,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 608,
@@ -11580,7 +11580,7 @@
       "word_count": 187,
       "mean_confidence": 84.18,
       "greek_tokens": 42,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 609,
@@ -11599,7 +11599,7 @@
       "word_count": 201,
       "mean_confidence": 91.69,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 610,
@@ -11618,7 +11618,7 @@
       "word_count": 177,
       "mean_confidence": 87.73,
       "greek_tokens": 40,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 611,
@@ -11637,7 +11637,7 @@
       "word_count": 237,
       "mean_confidence": 90.98,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 612,
@@ -11656,7 +11656,7 @@
       "word_count": 185,
       "mean_confidence": 81.81,
       "greek_tokens": 41,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 613,
@@ -11675,7 +11675,7 @@
       "word_count": 219,
       "mean_confidence": 91.12,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 614,
@@ -11694,7 +11694,7 @@
       "word_count": 184,
       "mean_confidence": 70.81,
       "greek_tokens": 45,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 615,
@@ -11713,7 +11713,7 @@
       "word_count": 229,
       "mean_confidence": 89.67,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 616,
@@ -11732,7 +11732,7 @@
       "word_count": 209,
       "mean_confidence": 84.17,
       "greek_tokens": 44,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 617,
@@ -11751,7 +11751,7 @@
       "word_count": 203,
       "mean_confidence": 91.0,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 618,
@@ -11770,7 +11770,7 @@
       "word_count": 177,
       "mean_confidence": 87.89,
       "greek_tokens": 44,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 619,
@@ -11789,7 +11789,7 @@
       "word_count": 204,
       "mean_confidence": 92.86,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 620,
@@ -11808,7 +11808,7 @@
       "word_count": 178,
       "mean_confidence": 80.68,
       "greek_tokens": 39,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 621,
@@ -11827,7 +11827,7 @@
       "word_count": 194,
       "mean_confidence": 92.58,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 622,
@@ -11846,7 +11846,7 @@
       "word_count": 187,
       "mean_confidence": 82.46,
       "greek_tokens": 45,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 623,
@@ -11865,7 +11865,7 @@
       "word_count": 213,
       "mean_confidence": 88.84,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 624,
@@ -11884,7 +11884,7 @@
       "word_count": 190,
       "mean_confidence": 80.97,
       "greek_tokens": 49,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 625,
@@ -11903,7 +11903,7 @@
       "word_count": 233,
       "mean_confidence": 90.83,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 626,
@@ -11922,7 +11922,7 @@
       "word_count": 209,
       "mean_confidence": 74.6,
       "greek_tokens": 55,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 627,
@@ -11941,7 +11941,7 @@
       "word_count": 218,
       "mean_confidence": 91.8,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 628,
@@ -11960,7 +11960,7 @@
       "word_count": 173,
       "mean_confidence": 84.81,
       "greek_tokens": 44,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 629,
@@ -11979,7 +11979,7 @@
       "word_count": 197,
       "mean_confidence": 91.82,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 630,
@@ -11998,7 +11998,7 @@
       "word_count": 194,
       "mean_confidence": 85.06,
       "greek_tokens": 50,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 631,
@@ -12017,7 +12017,7 @@
       "word_count": 218,
       "mean_confidence": 91.19,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 632,
@@ -12036,7 +12036,7 @@
       "word_count": 178,
       "mean_confidence": 85.76,
       "greek_tokens": 45,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 633,
@@ -12055,7 +12055,7 @@
       "word_count": 220,
       "mean_confidence": 93.03,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 634,
@@ -12074,7 +12074,7 @@
       "word_count": 180,
       "mean_confidence": 88.01,
       "greek_tokens": 39,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 635,
@@ -12093,7 +12093,7 @@
       "word_count": 182,
       "mean_confidence": 89.44,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 636,
@@ -12112,7 +12112,7 @@
       "word_count": 194,
       "mean_confidence": 64.76,
       "greek_tokens": 59,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 637,
@@ -12131,7 +12131,7 @@
       "word_count": 177,
       "mean_confidence": 90.39,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 638,
@@ -12150,7 +12150,7 @@
       "word_count": 186,
       "mean_confidence": 78.03,
       "greek_tokens": 47,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 639,
@@ -12169,7 +12169,7 @@
       "word_count": 211,
       "mean_confidence": 91.12,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 640,
@@ -12188,7 +12188,7 @@
       "word_count": 178,
       "mean_confidence": 83.59,
       "greek_tokens": 50,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 641,
@@ -12207,7 +12207,7 @@
       "word_count": 234,
       "mean_confidence": 92.57,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 642,
@@ -12226,7 +12226,7 @@
       "word_count": 185,
       "mean_confidence": 85.76,
       "greek_tokens": 52,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 643,
@@ -12245,7 +12245,7 @@
       "word_count": 193,
       "mean_confidence": 91.06,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 644,
@@ -12264,7 +12264,7 @@
       "word_count": 187,
       "mean_confidence": 81.9,
       "greek_tokens": 39,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 645,
@@ -12283,7 +12283,7 @@
       "word_count": 237,
       "mean_confidence": 91.98,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 646,
@@ -12302,7 +12302,7 @@
       "word_count": 191,
       "mean_confidence": 69.18,
       "greek_tokens": 47,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 647,
@@ -12321,7 +12321,7 @@
       "word_count": 186,
       "mean_confidence": 88.82,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 648,
@@ -12340,7 +12340,7 @@
       "word_count": 147,
       "mean_confidence": 60.89,
       "greek_tokens": 53,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 649,
@@ -12359,7 +12359,7 @@
       "word_count": 199,
       "mean_confidence": 91.57,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 650,
@@ -12378,7 +12378,7 @@
       "word_count": 189,
       "mean_confidence": 85.63,
       "greek_tokens": 45,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 651,
@@ -12397,7 +12397,7 @@
       "word_count": 32,
       "mean_confidence": 87.81,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 652,
@@ -12416,7 +12416,7 @@
       "word_count": 29,
       "mean_confidence": 76.94,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 653,
@@ -12435,7 +12435,7 @@
       "word_count": 177,
       "mean_confidence": 87.17,
       "greek_tokens": 44,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 654,
@@ -12454,7 +12454,7 @@
       "word_count": 185,
       "mean_confidence": 86.39,
       "greek_tokens": 44,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 655,
@@ -12473,7 +12473,7 @@
       "word_count": 181,
       "mean_confidence": 87.65,
       "greek_tokens": 48,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 656,
@@ -12492,7 +12492,7 @@
       "word_count": 115,
       "mean_confidence": 86.82,
       "greek_tokens": 35,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 657,
@@ -12511,7 +12511,7 @@
       "word_count": 190,
       "mean_confidence": 71.42,
       "greek_tokens": 53,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 658,
@@ -12530,7 +12530,7 @@
       "word_count": 172,
       "mean_confidence": 59.25,
       "greek_tokens": 39,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 659,
@@ -12549,7 +12549,7 @@
       "word_count": 195,
       "mean_confidence": 82.97,
       "greek_tokens": 41,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 660,
@@ -12568,7 +12568,7 @@
       "word_count": 125,
       "mean_confidence": 80.62,
       "greek_tokens": 32,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 661,
@@ -12587,7 +12587,7 @@
       "word_count": 192,
       "mean_confidence": 84.78,
       "greek_tokens": 49,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 662,
@@ -12606,7 +12606,7 @@
       "word_count": 203,
       "mean_confidence": 84.19,
       "greek_tokens": 58,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 663,
@@ -12625,7 +12625,7 @@
       "word_count": 221,
       "mean_confidence": 84.32,
       "greek_tokens": 57,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 664,
@@ -12644,7 +12644,7 @@
       "word_count": 117,
       "mean_confidence": 82.02,
       "greek_tokens": 29,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 665,
@@ -12663,7 +12663,7 @@
       "word_count": 179,
       "mean_confidence": 68.04,
       "greek_tokens": 53,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 666,
@@ -12682,7 +12682,7 @@
       "word_count": 216,
       "mean_confidence": 59.75,
       "greek_tokens": 67,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 667,
@@ -12701,7 +12701,7 @@
       "word_count": 210,
       "mean_confidence": 86.67,
       "greek_tokens": 59,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 668,
@@ -12720,7 +12720,7 @@
       "word_count": 120,
       "mean_confidence": 81.42,
       "greek_tokens": 30,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 669,
@@ -12739,7 +12739,7 @@
       "word_count": 17,
       "mean_confidence": 63.67,
       "greek_tokens": 3,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 670,
@@ -12758,7 +12758,7 @@
       "word_count": 30,
       "mean_confidence": 52.77,
       "greek_tokens": 5,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 671,
@@ -12777,7 +12777,7 @@
       "word_count": 0,
       "mean_confidence": null,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 672,
@@ -12796,7 +12796,7 @@
       "word_count": 0,
       "mean_confidence": null,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 673,
@@ -12815,7 +12815,7 @@
       "word_count": 53,
       "mean_confidence": 50.62,
       "greek_tokens": 10,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 674,
@@ -12834,7 +12834,7 @@
       "word_count": 0,
       "mean_confidence": null,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 675,
@@ -12853,7 +12853,7 @@
       "word_count": 0,
       "mean_confidence": null,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 676,
@@ -12872,7 +12872,7 @@
       "word_count": 0,
       "mean_confidence": null,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 677,
@@ -12891,7 +12891,7 @@
       "word_count": 49,
       "mean_confidence": 61.75,
       "greek_tokens": 8,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 678,
@@ -12910,7 +12910,7 @@
       "word_count": 0,
       "mean_confidence": null,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 679,
@@ -12929,7 +12929,7 @@
       "word_count": 57,
       "mean_confidence": 60.18,
       "greek_tokens": 9,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 680,
@@ -12948,7 +12948,7 @@
       "word_count": 0,
       "mean_confidence": null,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 681,
@@ -12967,7 +12967,7 @@
       "word_count": 52,
       "mean_confidence": 66.83,
       "greek_tokens": 10,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 682,
@@ -12986,7 +12986,7 @@
       "word_count": 0,
       "mean_confidence": null,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 683,
@@ -13005,7 +13005,7 @@
       "word_count": 0,
       "mean_confidence": null,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 684,
@@ -13024,7 +13024,7 @@
       "word_count": 0,
       "mean_confidence": null,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 685,
@@ -13043,7 +13043,7 @@
       "word_count": 129,
       "mean_confidence": 58.02,
       "greek_tokens": 15,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 686,
@@ -13062,7 +13062,7 @@
       "word_count": 107,
       "mean_confidence": 60.71,
       "greek_tokens": 16,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 687,
@@ -13081,7 +13081,7 @@
       "word_count": 296,
       "mean_confidence": 53.7,
       "greek_tokens": 61,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 688,
@@ -13100,7 +13100,7 @@
       "word_count": 0,
       "mean_confidence": null,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 689,
@@ -13119,7 +13119,7 @@
       "word_count": 0,
       "mean_confidence": null,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 690,
@@ -13138,7 +13138,7 @@
       "word_count": 21,
       "mean_confidence": 50.58,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 691,
@@ -13157,7 +13157,7 @@
       "word_count": 0,
       "mean_confidence": null,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 692,
@@ -13176,7 +13176,7 @@
       "word_count": 0,
       "mean_confidence": null,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 693,
@@ -13195,7 +13195,7 @@
       "word_count": 0,
       "mean_confidence": null,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 694,
@@ -13214,7 +13214,7 @@
       "word_count": 0,
       "mean_confidence": null,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 695,
@@ -13233,7 +13233,7 @@
       "word_count": 0,
       "mean_confidence": null,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 696,
@@ -13252,7 +13252,7 @@
       "word_count": 177,
       "mean_confidence": 53.57,
       "greek_tokens": 45,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 697,
@@ -13271,7 +13271,7 @@
       "word_count": 0,
       "mean_confidence": null,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 698,
@@ -13290,7 +13290,7 @@
       "word_count": 137,
       "mean_confidence": 43.89,
       "greek_tokens": 38,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 699,
@@ -13309,7 +13309,7 @@
       "word_count": 60,
       "mean_confidence": 58.38,
       "greek_tokens": 9,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 700,
@@ -13328,7 +13328,7 @@
       "word_count": 94,
       "mean_confidence": 51.12,
       "greek_tokens": 11,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 701,
@@ -13347,7 +13347,7 @@
       "word_count": 0,
       "mean_confidence": null,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 702,
@@ -13366,7 +13366,7 @@
       "word_count": 14,
       "mean_confidence": 58.36,
       "greek_tokens": 4,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 703,
@@ -13385,7 +13385,7 @@
       "word_count": 1,
       "mean_confidence": 84.0,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 704,
@@ -13404,7 +13404,7 @@
       "word_count": 0,
       "mean_confidence": null,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 705,
@@ -13423,7 +13423,7 @@
       "word_count": 0,
       "mean_confidence": null,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 706,
@@ -13442,7 +13442,7 @@
       "word_count": 0,
       "mean_confidence": null,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 707,
@@ -13461,7 +13461,7 @@
       "word_count": 0,
       "mean_confidence": null,
       "greek_tokens": 0,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 708,
@@ -13480,7 +13480,7 @@
       "word_count": 212,
       "mean_confidence": 54.94,
       "greek_tokens": 35,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 709,
@@ -13499,7 +13499,7 @@
       "word_count": 51,
       "mean_confidence": 62.64,
       "greek_tokens": 12,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     },
     {
       "page_index": 710,
@@ -13518,7 +13518,7 @@
       "word_count": 10,
       "mean_confidence": 73.38,
       "greek_tokens": 1,
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml"
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml"
     }
   ],
   "sections": [

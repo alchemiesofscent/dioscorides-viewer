@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import argparse
+import json
 import sys
+import tomllib
 from collections.abc import Sequence
 
 from tei_maker.config import ENV_DATA_ROOT, MissingDataRootError, configured_data_root, data_root, default_data_root
@@ -119,8 +121,32 @@ def cmd_editions_export_json(args: argparse.Namespace) -> int:
     root = repo_root()
     toml_path = root / "editions" / "editions.toml"
     json_path = root / "editions" / "editions.json"
-    mode = "check" if args.check else "write"
-    print(f"editions export-json stub: mode={mode} source={toml_path} target={json_path}")
+    if not toml_path.exists():
+        print(f"error: missing edition registry source: {toml_path}", file=sys.stderr)
+        return 1
+
+    with toml_path.open("rb") as handle:
+        registry = tomllib.load(handle)
+
+    payload = {
+        "defaultEdition": registry.get("defaultEdition", ""),
+        "editions": registry.get("editions", []),
+    }
+    text = json.dumps(payload, indent=2, ensure_ascii=False) + "\n"
+
+    if args.check:
+        if not json_path.exists():
+            print(f"error: missing generated edition registry: {json_path}", file=sys.stderr)
+            return 1
+        current = json_path.read_text(encoding="utf-8")
+        if current != text:
+            print(f"error: generated registry is stale: {json_path}", file=sys.stderr)
+            return 1
+        print(f"editions registry fresh: {json_path}")
+        return 0
+
+    json_path.write_text(text, encoding="utf-8")
+    print(f"wrote {json_path}")
     return 0
 
 

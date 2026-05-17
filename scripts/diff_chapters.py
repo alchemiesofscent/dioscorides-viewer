@@ -3,7 +3,7 @@
 Phase 6d: Compare new edition against existing XML for chapter coverage.
 
 Usage:
-    python3 scripts/diff_chapters.py "berendes (1).xml" output/berendes1902_epidoc.xml
+    python3 scripts/diff_chapters.py "berendes (1).xml" editions/berendes1902/tei/edition.xml
 """
 
 import argparse

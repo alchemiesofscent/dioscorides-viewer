@@ -1002,7 +1002,7 @@ def write_summary(
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--source", default="editions/sprengel1829/sprengel_diplomatic.xml")
-    parser.add_argument("--generated", default="output/sprengel1829_epidoc.xml")
+    parser.add_argument("--generated", default="editions/sprengel1829/tei/edition.xml")
     parser.add_argument("--manifest", default="editions/sprengel1829/manifest.json")
     parser.add_argument("--outdir", default="output/sprengel_heading_audit")
     args = parser.parse_args()

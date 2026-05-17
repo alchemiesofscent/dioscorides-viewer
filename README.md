@@ -23,10 +23,10 @@ redistributable files.
 Preserve these generated TEI outputs unless a validated replacement exists and
 the retirement is explicitly recorded in `docs/refactor/WORKLOG.md`:
 
-- `output/berendes1902_epidoc.xml` - Berendes 1902 German translation.
-- `output/sprengel1829_epidoc.xml` - Sprengel 1829/1830 Greek/Latin base text.
-- `output/sprengel_comm_epidoc.xml` - Sprengel 1830 Commentarius.
-- `output/beck2020_fresh_diplomatic_epidoc.xml` - Beck 2020 private/local
+- `editions/berendes1902/tei/edition.xml` - Berendes 1902 German translation.
+- `editions/sprengel1829/tei/edition.xml` - Sprengel 1829/1830 Greek/Latin base text.
+- `editions/sprengel1830-comm/tei/edition.xml` - Sprengel 1830 Commentarius.
+- `editions/beck2020_fresh_diplomatic/tei/edition.xml` - Beck 2020 private/local
   diplomatic review output.
 
 Related manifests, registries, source-like sidecars, accepted review decisions,
@@ -47,7 +47,7 @@ Then open:
 http://localhost:8000/viewer/
 ```
 
-The public viewer reads `editions.json` and committed TEI/manifests. On
+The public viewer reads `editions/editions.json` and committed TEI/manifests. On
 localhost it can also load documented private registries, such as Beck review
 registries, when the corresponding local files are present. Public editions must
 not require private raw data.
@@ -62,12 +62,12 @@ http://localhost:8000/tools/beck-fresh-footnotes/
 
 - `viewer/` - static TEI/image inspection viewer.
 - `tools/` - local review surfaces.
-- `editions.json` - current viewer registry.
+- `editions/editions.json` - generated public viewer registry.
 - `editions/` - edition manifests and committed source-like sidecars.
-- `output/` - current committed viewer-facing TEI and audit outputs.
+- `output/` - committed audit outputs and legacy local generated outputs.
 - `chunks/` - normalized Berendes TEI chunk source.
-- `sprengel_comm/` - Commentarius OCR fragments, merged XML, manifest, and
-  authority tables.
+- `sprengel_comm/` - Commentarius OCR fragments, merged XML, and authority
+  tables.
 - `scripts/` - current edition builders, OCR helpers, audits, and wrappers.
 - `tei_maker/` - reusable package skeleton and shared helpers being expanded.
 - `prompts/` - TEI header and model prompt material.
@@ -103,9 +103,9 @@ node --check viewer/app.js
 Current TEI/viewer validation examples:
 
 ```bash
-python3 scripts/validate_structure.py output/berendes1902_epidoc.xml
+python3 scripts/validate_structure.py editions/berendes1902/tei/edition.xml
 python3 scripts/validate_beck_fresh_diplomatic.py \
-  output/beck2020_fresh_diplomatic_epidoc.xml \
+  editions/beck2020_fresh_diplomatic/tei/edition.xml \
   --manifest editions/beck2020_fresh_diplomatic/manifest.json \
   --expected-pdf-pages 711
 python3 scripts/build_sprengel_comm_epidoc.py \

@@ -55,6 +55,13 @@ class CliTests(unittest.TestCase):
         self.assertIn("source ok:", stdout)
         self.assertIn("warning: generated missing:", stderr)
 
+    def test_editions_export_json_check_does_not_require_data_root(self) -> None:
+        with patch.dict(os.environ, {}, clear=True):
+            code, stdout, stderr = self.run_cli("editions", "export-json", "--check")
+        self.assertEqual(code, 0)
+        self.assertIn("editions registry fresh:", stdout)
+        self.assertEqual(stderr, "")
+
 
 if __name__ == "__main__":
     unittest.main()

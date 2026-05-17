@@ -1042,7 +1042,7 @@ def write_private_registry(path: Path, output_path: Path, manifest_path: Path, f
                 "localImageRoot": local_image_root,
                 "imageLabelRoot": local_image_root,
                 "sourceLabel": "Local private Beck PDF fresh diplomatic build",
-                "licenseNote": "Private local review only. Do not add to public editions.json without a publication-safe policy.",
+                "licenseNote": "Private local review only. Do not add to the public registry without a publication-safe policy.",
             }
         ],
     }

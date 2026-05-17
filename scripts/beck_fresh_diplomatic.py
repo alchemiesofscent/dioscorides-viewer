@@ -32,7 +32,7 @@ DEFAULT_STRUCTURE_LEDGER = DEFAULT_DIPLOMATIC_DIR / "structure_ledger.csv"
 DEFAULT_TEXT_CORRECTION_LEDGER = DEFAULT_DIPLOMATIC_DIR / "text_correction_ledger.csv"
 DEFAULT_BACK_MATTER_TRIAGE_LEDGER = DEFAULT_DIPLOMATIC_DIR / "back_matter_triage_ledger.csv"
 DEFAULT_AUDIT_SUMMARY = Path("output/beck2020_fresh_diplomatic_audit/structure_summary.md")
-DEFAULT_DIPLOMATIC_OUTPUT = Path("output/beck2020_fresh_diplomatic_epidoc.xml")
+DEFAULT_DIPLOMATIC_OUTPUT = Path("editions/beck2020_fresh_diplomatic/tei/edition.xml")
 DEFAULT_DIPLOMATIC_MANIFEST = Path("editions/beck2020_fresh_diplomatic/manifest.json")
 DEFAULT_DIPLOMATIC_REGISTRY = Path("editions/beck2020_fresh_diplomatic/private_registry.json")
 

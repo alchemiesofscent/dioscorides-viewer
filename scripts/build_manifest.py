@@ -3,9 +3,9 @@
 Phase 2a: Build page manifest with section assignments and chunk definitions.
 
 Usage:
-    python3 scripts/build_manifest.py --chunk-size 5 --output manifest.json
+    python3 scripts/build_manifest.py --chunk-size 5 --output editions/berendes1902/manifest.json
 
-Outputs manifest.json with:
+Outputs editions/berendes1902/manifest.json with:
   - pages: list of all text pages with metadata
   - chunks: list of chunk definitions (groups of N pages) with section/id
 """
@@ -54,7 +54,7 @@ def build_chunks(pages: list[dict], chunk_size: int) -> list[dict]:
 def main():
     parser = argparse.ArgumentParser(description="Build page manifest and chunk definitions")
     parser.add_argument("--chunk-size", type=int, default=5, help="Pages per chunk (default: 5)")
-    parser.add_argument("--output", default="manifest.json", help="Output file path")
+    parser.add_argument("--output", default="editions/berendes1902/manifest.json", help="Output file path")
     args = parser.parse_args()
 
     pages = all_text_pages()

@@ -336,7 +336,7 @@ def expected_multi_page_gaps(pages: list[PageNavigation], expected_pages: set[st
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("xml_file", nargs="?", default="output/berendes1902_epidoc.xml")
+    parser.add_argument("xml_file", nargs="?", default="editions/berendes1902/tei/edition.xml")
     parser.add_argument(
         "--expect",
         action="append",

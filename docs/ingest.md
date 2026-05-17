@@ -41,7 +41,7 @@ The normalized TEI should match the Berendes conventions where applicable:
    local image names if used, and remote facsimile URLs.
 4. Merge chunks to `output/<edition>_epidoc.xml`.
 5. Validate the merged TEI.
-6. Add the edition to `editions.json`.
+6. Add the edition to `editions/editions.json`.
 7. Spot-check in the viewer against page images.
 
 ## Current Sprengel State
@@ -134,10 +134,10 @@ facsimiles and extracted page images stay outside the public data boundary.
 Chapter matching uses `sprengel_comm/sprengel_chapter_table.tsv` as the
 authority for chapter ids and Greek/Latin labels. The table links Commentarius
 chapter detections back to the corresponding generated Sprengel text XML ids in
-`output/sprengel1829_epidoc.xml` where the base-text chapter exists.
+`editions/sprengel1829/tei/edition.xml` where the base-text chapter exists.
 
 The generated Commentarius output must stay separate from
-`output/sprengel1829_epidoc.xml`; the latter is the Dioscorides base text, not
+`editions/sprengel1829/tei/edition.xml`; the latter is the Dioscorides base text, not
 Sprengel's commentary.
 
 Rebuild the viewer-facing Commentarius XML with:
@@ -146,7 +146,7 @@ Rebuild the viewer-facing Commentarius XML with:
 python3 scripts/build_sprengel_comm_epidoc.py \
   --source sprengel_comm/outputs/sprengel_comm_merged.xml \
   --chapter-table sprengel_comm/sprengel_chapter_table.tsv \
-  --output output/sprengel_comm_epidoc.xml
+  --output editions/sprengel1830-comm/tei/edition.xml
 ```
 
 The implementation lives at `scripts/sprengel/build_sprengel_comm_epidoc.py`;
@@ -156,7 +156,7 @@ wrapper.
 Then validate the generated XML:
 
 ```bash
-xmllint --noout output/sprengel_comm_epidoc.xml
+xmllint --noout editions/sprengel1830-comm/tei/edition.xml
 ```
 
 The current known table gaps are chapters present in the Commentarius heading

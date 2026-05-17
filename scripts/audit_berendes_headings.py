@@ -526,7 +526,7 @@ def write_summary(path: Path, rows: list[ChapterRow], xml_path: Path, chunks_dir
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("xml_file", nargs="?", default="output/berendes1902_epidoc.xml")
+    parser.add_argument("xml_file", nargs="?", default="editions/berendes1902/tei/edition.xml")
     parser.add_argument("--chunks-dir", default="chunks")
     parser.add_argument("--outdir", default="output/berendes_heading_audit")
     args = parser.parse_args()

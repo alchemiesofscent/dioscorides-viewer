@@ -5,13 +5,13 @@
     {
       "id": "beck2020_fresh_diplomatic",
       "label": "Beck 2020 fresh diplomatic EpiDoc (private)",
-      "tei": "output/beck2020_fresh_diplomatic_epidoc.xml",
+      "tei": "editions/beck2020_fresh_diplomatic/tei/edition.xml",
       "manifest": "editions/beck2020_fresh_diplomatic/manifest.json",
       "imageMode": "local",
       "localImageRoot": "ocr/beck2020_fresh/images/",
       "imageLabelRoot": "ocr/beck2020_fresh/images/",
       "sourceLabel": "Local private Beck PDF fresh diplomatic build",
-      "licenseNote": "Private local review only. Do not add to public editions.json without a publication-safe policy."
+      "licenseNote": "Private local review only. Do not add to the public registry without a publication-safe policy."
     }
   ]
 }

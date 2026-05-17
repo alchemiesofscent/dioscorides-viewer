@@ -21,15 +21,15 @@ needed to explain current TEI.
 
 ### Berendes 1902
 
-- Current TEI: `output/berendes1902_epidoc.xml`.
-- Current manifest: `manifest.json`.
+- Current TEI: `editions/berendes1902/tei/edition.xml`.
+- Current manifest: `editions/berendes1902/manifest.json`.
 - Source-like/editorial material: `chunks/`, `berendes (1).xml`, prompts, and
   Berendes audit ledgers.
 - Status: preserve as current public viewer output and regression baseline.
 
 ### Sprengel 1829/1830 Base Text
 
-- Current TEI: `output/sprengel1829_epidoc.xml`.
+- Current TEI: `editions/sprengel1829/tei/edition.xml`.
 - Current manifest: `editions/sprengel1829/manifest.json`.
 - Source-like/editorial material:
   `editions/sprengel1829/sprengel_diplomatic.xml`,
@@ -39,8 +39,8 @@ needed to explain current TEI.
 
 ### Sprengel 1830 Commentarius
 
-- Current TEI: `output/sprengel_comm_epidoc.xml`.
-- Current manifest: `sprengel_comm/manifest.json`.
+- Current TEI: `editions/sprengel1830-comm/tei/edition.xml`.
+- Current manifest: `editions/sprengel1830-comm/manifest.json`.
 - Source-like/editorial material: `sprengel_comm/outputs/sprengel_comm_merged.xml`,
   `sprengel_comm/sprengel_chapter_table.tsv`, OCR fragments, prompt notes, and
   workflow metadata.
@@ -50,7 +50,7 @@ needed to explain current TEI.
 ### Beck 2020
 
 - Current diplomatic TEI:
-  `output/beck2020_fresh_diplomatic_epidoc.xml`.
+  `editions/beck2020_fresh_diplomatic/tei/edition.xml`.
 - Current manifest:
   `editions/beck2020_fresh_diplomatic/manifest.json`.
 - Related older/local streams:
@@ -74,7 +74,8 @@ preservation candidate. Classify it before moving, archiving, or deleting it.
   - `editions/<slug>/audit/` for committed review/audit material that remains
     useful
 - Viewer registry:
-  - committed public registry for public editions;
+  - committed public registry generated from `editions/editions.toml` to
+    `editions/editions.json`;
   - documented local/private registry overlay for private editions;
   - registered paths must resolve from a clean checkout for public editions.
 - External raw data root:
@@ -219,9 +220,9 @@ python3 -m tei_maker data doctor
 Core checks after TEI/viewer path changes:
 
 ```bash
-python3 scripts/validate_structure.py output/berendes1902_epidoc.xml
+python3 scripts/validate_structure.py editions/berendes1902/tei/edition.xml
 python3 scripts/validate_beck_fresh_diplomatic.py \
-  output/beck2020_fresh_diplomatic_epidoc.xml \
+  editions/beck2020_fresh_diplomatic/tei/edition.xml \
   --manifest editions/beck2020_fresh_diplomatic/manifest.json \
   --expected-pdf-pages 711
 python3 scripts/build_sprengel_comm_epidoc.py \

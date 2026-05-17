@@ -18,20 +18,20 @@ unlogged path migration. `docs/refactor/PLAN.md` is the forward plan.
 
 | Current path | Candidate path | Classification | Status | Notes |
 | --- | --- | --- | --- | --- |
-| `output/berendes1902_epidoc.xml` | `editions/berendes1902/tei/edition.xml` | scholarly TEI output | pending | Preserve current output until replacement path is validated. |
-| `manifest.json` | `editions/berendes1902/manifest.json` | manifest/registry | pending | Viewer path must be updated in same checkpoint as move. |
+| `editions/berendes1902/tei/edition.xml` | `editions/berendes1902/tei/edition.xml` | scholarly TEI output | done | Moved from `output/berendes1902_epidoc.xml`; no TEI semantics changed. |
+| `editions/berendes1902/manifest.json` | `editions/berendes1902/manifest.json` | manifest/registry | done | Moved from root `manifest.json`; viewer registry updated. |
 | `chunks/` | `editions/berendes1902/source/chunks/` or keep | editorial/source-like input | undecided | Treat as committed editorial source for now. |
-| `output/sprengel1829_epidoc.xml` | `editions/sprengel1829/tei/edition.xml` | scholarly TEI output | pending | No semantic rewrite during move. |
-| `editions/sprengel1829/manifest.json` | `editions/sprengel1829/manifest.json` | manifest/registry | already near canonical | Path may stay if slug is accepted. |
+| `editions/sprengel1829/tei/edition.xml` | `editions/sprengel1829/tei/edition.xml` | scholarly TEI output | done | Moved from `output/sprengel1829_epidoc.xml`; no TEI semantics changed. |
+| `editions/sprengel1829/manifest.json` | `editions/sprengel1829/manifest.json` | manifest/registry | done | Already near canonical; retained in place. |
 | `editions/sprengel1829/sprengel_diplomatic.xml` | `editions/sprengel1829/source/sprengel_diplomatic.xml` | editorial/source-like input | pending | Preserve as source-like evidence. |
 | `editions/sprengel1829/page_headers.csv` | `editions/sprengel1829/source/page_headers.csv` or `audit/` | audit/provenance | undecided | Contains accepted page-furniture evidence. |
-| `output/sprengel_comm_epidoc.xml` | `editions/sprengel1830-comm/tei/edition.xml` | scholarly TEI output | pending | Preserve current output and builder input. |
-| `sprengel_comm/manifest.json` | `editions/sprengel1830-comm/manifest.json` | manifest/registry | pending | Move only with registry/viewer update. |
+| `editions/sprengel1830-comm/tei/edition.xml` | `editions/sprengel1830-comm/tei/edition.xml` | scholarly TEI output | done | Moved from `output/sprengel_comm_epidoc.xml`; builder input stayed in `sprengel_comm/`. |
+| `editions/sprengel1830-comm/manifest.json` | `editions/sprengel1830-comm/manifest.json` | manifest/registry | done | Moved from `sprengel_comm/manifest.json`; viewer registry updated. |
 | `sprengel_comm/outputs/sprengel_comm_merged.xml` | `editions/sprengel1830-comm/source/sprengel_comm_merged.xml` or keep | editorial/source-like input | undecided | Builder input; do not externalize until reproducibility is proven. |
 | `sprengel_comm/ocr_fragments/` | `editions/sprengel1830-comm/source/ocr_fragments/` or keep | editorial/source-like input | undecided | Tracked fragments may contain hard-to-reproduce OCR/editorial decisions. |
 | `sprengel_comm/sprengel_chapter_table.tsv` | `editions/sprengel1830-comm/source/sprengel_chapter_table.tsv` | editorial/source-like input | pending | Curated chapter authority table. |
-| `output/beck2020_fresh_diplomatic_epidoc.xml` | `editions/beck2020-fresh-diplomatic/tei/edition.xml` | scholarly TEI output | pending | Private/local review output; preserve. |
-| `editions/beck2020_fresh_diplomatic/manifest.json` | `editions/beck2020-fresh-diplomatic/manifest.json` | manifest/registry | pending | Keep private registry behavior documented. |
+| `editions/beck2020_fresh_diplomatic/tei/edition.xml` | `editions/beck2020_fresh_diplomatic/tei/edition.xml` | scholarly TEI output | done | Moved from `output/beck2020_fresh_diplomatic_epidoc.xml`; private registry updated. |
+| `editions/beck2020_fresh_diplomatic/manifest.json` | `editions/beck2020_fresh_diplomatic/manifest.json` | manifest/registry | done | Retained existing directory to avoid breaking private registry conventions. |
 | `editions/beck2020/` | archive or keep | local review UI / manifest / raw-like images | undecided | Audit before retirement; page images are ignored raw/generated assets. |
 | `editions/beck2020_fresh/` | archive or keep | local review UI / manifest | undecided | Older fresh stream; preserve until superseded. |
 
