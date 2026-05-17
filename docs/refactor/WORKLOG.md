@@ -78,7 +78,7 @@
   - Created `docs/refactor/BASELINE_ARTIFACTS.md`.
 - Files/directories affected: `docs/refactor/`.
 - Verification result: Pending git status and docs commit.
-- Commit hash: `52253c3`
+- Commit hash: pending.
 - Open issues or risks: First docs commit must stage only `docs/refactor/`.
 
 ## 2026-05-17 18:17 Europe/Budapest
@@ -115,5 +115,28 @@
   - `python3 -m tei_maker data doctor`: pass, reports default root and missing env warning.
   - `python3 -m tei_maker editions export-json --check`: pass as stub.
   - `node --check viewer/app.js`: pass.
-- Commit hash: pending.
+- Commit hash: `52253c3`
 - Open issues or risks: CLI commands are intentionally stubs in Phase A; behavior wiring remains for later phases.
+
+## 2026-05-17 18:31 Europe/Budapest
+
+- Action taken: Completed first non-destructive Phase B source externalization batch.
+- Commands run, summarized:
+  - Measured candidate sizes with `du -sh`.
+  - Copied source PDFs/XML/JP2 zip into `/home/seancoughlin/Projects/tei-maker-data/sources/<slug>/`.
+  - Generated `/home/seancoughlin/Projects/tei-maker-data/sources/SOURCES_SHA256SUMS.txt`.
+  - Re-ran repo-side `sha256sum` for copied sources and matched every digest.
+  - Added `docs/refactor/SOURCE_MANIFEST_DRAFT.md`.
+  - Added `build/audits/` to `.gitignore`.
+  - Enhanced `tei-maker data doctor` to report expected external source files.
+- Files/directories affected:
+  - External: `/home/seancoughlin/Projects/tei-maker-data/sources/`.
+  - Repo: `.gitignore`, `tei_maker/cli.py`, `docs/refactor/SOURCE_MANIFEST_DRAFT.md`, `docs/refactor/CHECKLIST.md`, `docs/refactor/WORKLOG.md`.
+- Verification result:
+  - Source checksums matched between repo and external copies.
+  - `python3 -m unittest discover -s tests`: 8 tests pass.
+  - `python3 -m compileall tei_maker tests`: pass.
+  - `python3 -m tei_maker data doctor`: pass and reports all expected source files present under the default external root.
+  - `python3 -m tei_maker run tlg0656.tlg001.berendes1902-ger1`: expected failure without `TEI_MAKER_DATA`.
+- Commit hash: pending.
+- Open issues or risks: No repo assets were removed or archived. Full generated tree externalization is deferred because `ocr/` is about 4.0G, `images/` about 660M, and several tracked chunk/OCR fragment trees may contain editorial decisions.

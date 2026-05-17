@@ -23,13 +23,13 @@
 | `images/raw/` | `$TEI_MAKER_DATA/images/tlg0656.tlg001.berendes1902-ger1/raw/` | copy-external | Local extracted Berendes images are bulky generated assets. | ignored | no | pending |
 | `images/enhanced/` | `$TEI_MAKER_DATA/images/tlg0656.tlg001.berendes1902-ger1/enhanced/` | copy-external | Local enhanced images are generated assets. | ignored | no | pending |
 | `editions/beck2020/page_images/` | `$TEI_MAKER_DATA/images/tlg0656.tlg001.beck2020-eng1/page_images/` | copy-external | Beck page images are bulky local assets. | ignored | no | pending |
-| `b23982500_0002_jp2.zip` | `$TEI_MAKER_DATA/sources/tlg0656.tlg001.sprengel1830-comm/b23982500_0002_jp2.zip` | copy-external | Source JP2 zip belongs outside repo. | ignored | no | pending |
+| `b23982500_0002_jp2.zip` | `$TEI_MAKER_DATA/sources/tlg0656.tlg001.sprengel1830-comm/b23982500_0002_jp2.zip` | copy-external | Source JP2 zip belongs outside repo. | ignored | yes, source copy | pending |
 | `sprengel/` | `$TEI_MAKER_DATA/sources/tlg0656.tlg001.sprengel1830-comm/sprengel/` | copy-external | Extracted JP2 source tree belongs outside repo. | ignored | no | pending |
-| `beck.pdf` | `$TEI_MAKER_DATA/sources/tlg0656.tlg001.beck2020-eng1/beck.pdf` | copy-external | Source PDF belongs outside repo. | ignored | no | pending |
-| `beck.xml` | `$TEI_MAKER_DATA/sources/tlg0656.tlg001.beck2020-eng1/beck.xml` | copy-external | Private/source XML belongs outside repo. | ignored | no | pending |
-| `berendes1902__z3.pdf` | `$TEI_MAKER_DATA/sources/tlg0656.tlg001.berendes1902-ger1/berendes1902__z3.pdf` | copy-external | Source PDF belongs outside repo. | ignored | no | pending |
+| `beck.pdf` | `$TEI_MAKER_DATA/sources/tlg0656.tlg001.beck2020-eng1/beck.pdf` | copy-external | Source PDF belongs outside repo. | ignored | yes, source copy | pending |
+| `beck.xml` | `$TEI_MAKER_DATA/sources/tlg0656.tlg001.beck2020-eng1/beck.xml` | copy-external | Private/source XML belongs outside repo. | ignored | yes, source copy | pending |
+| `berendes1902__z3.pdf` | `$TEI_MAKER_DATA/sources/tlg0656.tlg001.berendes1902-ger1/berendes1902__z3.pdf` | copy-external | Source PDF belongs outside repo. | ignored | yes, source copy | pending |
 | `berendes (1).xml` | `$TEI_MAKER_DATA/sources/tlg0656.tlg001.berendes1902-ger1/berendes (1).xml` | copy-external | Source XML belongs outside repo if still required. | tracked | yes, baseline snapshot | pending |
-| `tlg065600*.xml` | `$TEI_MAKER_DATA/sources/tlg0656.tlg001.sprengel1829-grclat1/` | copy-external | Source XML files belong outside repo unless selected as committed source artifacts. | ignored | no | pending |
+| `tlg065600*.xml` | `$TEI_MAKER_DATA/sources/tlg0656.tlg001.sprengel1829-grclat1/` | copy-external | Source XML files belong outside repo unless selected as committed source artifacts. | ignored | yes, source copy | pending |
 | `chunks/` | `editions/tlg0656.tlg001.berendes1902-ger1/chunks/` or `$TEI_MAKER_DATA/chunks/tlg0656.tlg001.berendes1902-ger1/` | keep | Likely editorial normalized TEI chunks; do not unversion until reviewed. | tracked | partial | pending |
 | `scripts/` | `tei_maker/...` with wrappers | git-mv | Package pipeline logic in small groups. | tracked plus ignored caches | not applicable | pending |
 | `viewer/` | `viewer/` | keep | Static viewer should continue to work from committed TEI. | tracked | yes, baseline snapshot | pending |

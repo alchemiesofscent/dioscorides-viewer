@@ -20,6 +20,7 @@ chunks/run_log.json
 chunks/**/*_prompt.txt
 *_prompt.txt
 /sprengel_comm/page_images/
+build/audits/
 
 # Python/runtime caches
 __pycache__/

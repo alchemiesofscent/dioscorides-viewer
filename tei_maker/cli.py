@@ -7,6 +7,26 @@ from collections.abc import Sequence
 from tei_maker.config import ENV_DATA_ROOT, MissingDataRootError, configured_data_root, data_root, default_data_root
 from tei_maker.io.paths import PIPELINE_STAGES, external_root, repo_root
 
+KNOWN_SOURCE_FILES = {
+    "tlg0656.tlg001.berendes1902-ger1": (
+        "berendes1902__z3.pdf",
+        "berendes (1).xml",
+    ),
+    "tlg0656.tlg001.beck2020-eng1": (
+        "beck.pdf",
+        "beck.xml",
+    ),
+    "tlg0656.tlg001.sprengel1829-grclat1": (
+        "tlg0656001.xml",
+        "tlg0656002.xml",
+        "tlg0656003.xml",
+        "tlg0656004.xml",
+    ),
+    "tlg0656.tlg001.sprengel1830-comm": (
+        "b23982500_0002_jp2.zip",
+    ),
+}
+
 
 def _require_data_root() -> int:
     try:
@@ -73,8 +93,20 @@ def cmd_data_doctor(_args: argparse.Namespace) -> int:
     print(f"data root ({source}): {root}")
     print(f"exists: {root.exists()}")
     print(f"repo root: {repo_root()}")
+    missing: list[str] = []
+    for slug, filenames in KNOWN_SOURCE_FILES.items():
+        for filename in filenames:
+            path = root / "sources" / slug / filename
+            if path.exists():
+                print(f"source ok: {path}")
+            else:
+                print(f"source missing: {path}")
+                missing.append(str(path))
     if configured is None:
         print(f"warning: {ENV_DATA_ROOT} is not set; generation commands will fail", file=sys.stderr)
+    if missing:
+        print(f"missing source files: {len(missing)}", file=sys.stderr)
+        return 1
     return 0
 
 
