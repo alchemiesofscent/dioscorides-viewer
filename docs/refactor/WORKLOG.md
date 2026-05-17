@@ -78,7 +78,7 @@
   - Created `docs/refactor/BASELINE_ARTIFACTS.md`.
 - Files/directories affected: `docs/refactor/`.
 - Verification result: Pending git status and docs commit.
-- Commit hash: pending.
+- Commit hash: `52253c3`
 - Open issues or risks: First docs commit must stage only `docs/refactor/`.
 
 ## 2026-05-17 18:17 Europe/Budapest
