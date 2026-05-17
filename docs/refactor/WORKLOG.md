@@ -4,6 +4,39 @@ Supporting record for `docs/refactor/PLAN.md`. Every work session should add an
 entry with objective, touched files/directories, commands, verification, docs
 updated, commit hash when known, and open risks.
 
+## 2026-05-17 20:41 Europe/Budapest
+
+- Objective: Replace the registry/export and validation CLI stubs with reusable
+  package helpers, while keeping validation report-only and non-mutating.
+- Files/directories touched:
+  - `tei_maker/editions.py`
+  - `tei_maker/validation.py`
+  - `tei_maker/cli.py`
+  - `tests/test_cli.py`
+  - `README.md`
+  - `docs/refactor/CHECKLIST.md`
+  - `docs/refactor/WORKLOG.md`
+- Commands run:
+  - `python3 -m tei_maker validate --all`
+  - `python3 -m compileall tei_maker tests`
+  - `python3 -m unittest discover -s tests`
+  - `python3 -m tei_maker editions export-json --check`
+- Verification result:
+  - `tei-maker validate --all`: validates public registry editions plus the
+    available private Beck registry; all registered TEI XML and manifest JSON
+    paths parsed successfully.
+  - `compileall`: pass.
+  - `unittest`: 11 tests pass.
+  - `editions export-json --check`: pass.
+- Docs updated: README, checklist, worklog.
+- Commit hash: pending at time of entry.
+- Open risks or deferred decisions:
+  - Validation is still lightweight: XML well-formedness, manifest JSON parsing,
+    and registry path checks only. Schema-backed EpiDoc validation remains a
+    later phase.
+  - Pipeline builders are still mostly script-level wrappers; only registry and
+    validation helpers moved into `tei_maker/`.
+
 ## 2026-05-17 20:38 Europe/Budapest
 
 - Objective: Implement the next autonomous checkpoint after the docs reset:

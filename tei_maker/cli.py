@@ -1,13 +1,13 @@
 from __future__ import annotations
 
 import argparse
-import json
 import sys
-import tomllib
 from collections.abc import Sequence
 
 from tei_maker.config import ENV_DATA_ROOT, MissingDataRootError, configured_data_root, data_root, default_data_root
+from tei_maker.editions import public_registry_is_fresh, public_registry_json_path, public_registry_source_path, write_public_registry
 from tei_maker.io.paths import PIPELINE_STAGES, external_root, repo_root
+from tei_maker.validation import validate_registered_editions
 
 KNOWN_SOURCE_FILES = {
     "tlg0656.tlg001.berendes1902-ger1": (
@@ -89,12 +89,23 @@ def cmd_run(args: argparse.Namespace) -> int:
 
 
 def cmd_validate(args: argparse.Namespace) -> int:
-    target = "--all" if args.all else args.slug
-    if not target:
+    if not args.all and not args.slug:
         print("error: provide a slug or --all", file=sys.stderr)
         return 2
-    print(f"validate stub: target={target}")
-    return 0
+    results = validate_registered_editions(None if args.all else args.slug)
+    failed = False
+    for result in results:
+        source = result.registry.relative_to(repo_root()) if result.registry.is_relative_to(repo_root()) else result.registry
+        if result.ok:
+            print(f"validation ok: {result.edition_id} ({source})")
+        else:
+            failed = True
+            print(f"validation failed: {result.edition_id} ({source})", file=sys.stderr)
+        for warning in result.warnings:
+            print(f"  warning: {warning}")
+        for error in result.errors:
+            print(f"  error: {error}", file=sys.stderr)
+    return 1 if failed else 0
 
 
 def cmd_audit(args: argparse.Namespace) -> int:
@@ -118,35 +129,21 @@ def cmd_ocr(args: argparse.Namespace) -> int:
 
 
 def cmd_editions_export_json(args: argparse.Namespace) -> int:
-    root = repo_root()
-    toml_path = root / "editions" / "editions.toml"
-    json_path = root / "editions" / "editions.json"
+    toml_path = public_registry_source_path()
+    json_path = public_registry_json_path()
     if not toml_path.exists():
         print(f"error: missing edition registry source: {toml_path}", file=sys.stderr)
         return 1
 
-    with toml_path.open("rb") as handle:
-        registry = tomllib.load(handle)
-
-    payload = {
-        "defaultEdition": registry.get("defaultEdition", ""),
-        "editions": registry.get("editions", []),
-    }
-    text = json.dumps(payload, indent=2, ensure_ascii=False) + "\n"
-
     if args.check:
-        if not json_path.exists():
-            print(f"error: missing generated edition registry: {json_path}", file=sys.stderr)
-            return 1
-        current = json_path.read_text(encoding="utf-8")
-        if current != text:
+        if not public_registry_is_fresh():
             print(f"error: generated registry is stale: {json_path}", file=sys.stderr)
             return 1
         print(f"editions registry fresh: {json_path}")
         return 0
 
-    json_path.write_text(text, encoding="utf-8")
-    print(f"wrote {json_path}")
+    target = write_public_registry()
+    print(f"wrote {target}")
     return 0
 
 

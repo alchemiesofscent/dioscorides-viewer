@@ -63,12 +63,12 @@ not a competing plan.
 ## Phase 6: Reusable Pipeline Extraction
 
 - [ ] Identify shared path/config logic.
-- [ ] Identify edition registry helpers.
+- [x] Identify edition registry helpers.
 - [ ] Identify page/image inventory logic.
 - [ ] Identify OCR evidence readers.
 - [ ] Identify TEI writer utilities.
 - [ ] Identify manifest writer logic.
-- [ ] Identify validation/report helpers.
+- [x] Identify validation/report helpers.
 - [ ] Move code in small groups with wrappers preserved until replacement CLI
   commands pass equivalent checks.
 

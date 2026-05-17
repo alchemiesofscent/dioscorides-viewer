@@ -29,8 +29,14 @@ class CliTests(unittest.TestCase):
         with patch.dict(os.environ, {}, clear=True):
             code, stdout, stderr = self.run_cli("validate", "--all")
         self.assertEqual(code, 0)
-        self.assertIn("validate stub", stdout)
+        self.assertIn("validation ok: berendes1902", stdout)
         self.assertEqual(stderr, "")
+
+    def test_validate_unknown_slug_fails(self) -> None:
+        code, stdout, stderr = self.run_cli("validate", "missing-edition")
+        self.assertEqual(code, 1)
+        self.assertEqual(stdout, "")
+        self.assertIn("edition id not found", stderr)
 
     def test_generation_command_requires_data_root(self) -> None:
         with patch.dict(os.environ, {}, clear=True):

@@ -92,6 +92,8 @@ Core package/docs checks:
 python3 -m compileall tei_maker tests
 python3 -m unittest discover -s tests
 python3 -m tei_maker data doctor
+python3 -m tei_maker editions export-json --check
+python3 -m tei_maker validate --all
 ```
 
 Viewer check:
