@@ -145,6 +145,10 @@ python3 scripts/build_sprengel_comm_epidoc.py \
   --output output/sprengel1829_epidoc.xml
 ```
 
+The implementation lives at `scripts/sprengel/build_sprengel_comm_epidoc.py`;
+the old `scripts/build_sprengel_comm_epidoc.py` entrypoint is a compatibility
+wrapper.
+
 Then validate the generated XML:
 
 ```bash

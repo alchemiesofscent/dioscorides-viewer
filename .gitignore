@@ -5,7 +5,7 @@ beck*.pdf
 beck.xml
 tlg065600*.xml
 *_jp2.zip
-sprengel/
+/sprengel/
 images/raw/
 images/enhanced/
 editions/beck2020/page_images/
@@ -19,7 +19,7 @@ chunks_pilot_gate/
 chunks/run_log.json
 chunks/**/*_prompt.txt
 *_prompt.txt
-sprengel_comm/page_images/
+/sprengel_comm/page_images/
 
 # Python/runtime caches
 __pycache__/

@@ -66,7 +66,9 @@ http://localhost:8000/tools/beck-fresh-footnotes/
   chapter authority table, prompt notes, and workflow metadata.
 - `output/` - committed viewer-facing generated XML and committed audit
   reports.
-- `scripts/` - normalization, OCR, merge, audit, and validation tools.
+- `scripts/` - normalization, OCR, merge, audit, and validation tools;
+  Sprengel-specific implementations live under `scripts/sprengel/` with
+  compatibility wrappers at their old paths.
 - `prompts/` - TEI header and transcription prompt material.
 - `docs/` - ingest and workflow documentation.
 
