@@ -82,8 +82,10 @@ Commit generated XML when it is the viewer-facing source of truth or an
 intentional review artifact. Current committed generated outputs include:
 
 - `output/berendes1902_epidoc.xml` - public Berendes viewer XML.
-- `output/sprengel1829_epidoc.xml` - current Sprengel viewer XML slot, generated
-  from the Commentarius OCR stream.
+- `output/sprengel1829_epidoc.xml` - Sprengel 1829/1830 Dioscorides base-text
+  viewer XML.
+- `output/sprengel_comm_epidoc.xml` - Sprengel 1830 Commentarius viewer XML,
+  generated from the Commentarius OCR stream.
 - `output/beck2020_fresh_diplomatic_epidoc.xml` - private/local diplomatic Beck
   review XML.
 - `output/*_audit/` - committed audit ledgers and summaries used to review TEI
@@ -131,7 +133,7 @@ Rebuild the Sprengel Commentarius viewer XML:
 python3 scripts/build_sprengel_comm_epidoc.py \
   --source sprengel_comm/outputs/sprengel_comm_merged.xml \
   --chapter-table sprengel_comm/sprengel_chapter_table.tsv \
-  --output output/sprengel1829_epidoc.xml
+  --output output/sprengel_comm_epidoc.xml
 ```
 
 ## Source Facsimiles

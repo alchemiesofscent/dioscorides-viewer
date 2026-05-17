@@ -29,6 +29,17 @@
       "sourceUrl": "https://archive.org/details/b23982500_0001/page/n5/mode/2up",
       "iiifManifest3": "https://iiif.archive.org/iiif/b23982500_0001/manifest.json",
       "licenseNote": "Imported diplomatic TEI generated from Wellcome source images and wired to Internet Archive facsimile images. Page images are external and not bundled."
+    },
+    {
+      "id": "sprengel_comm1830",
+      "label": "Sprengel Commentarius 1830",
+      "tei": "output/sprengel_comm_epidoc.xml",
+      "manifest": "sprengel_comm/manifest.json",
+      "imageMode": "remote",
+      "sourceLabel": "Internet Archive facsimile",
+      "sourceUrl": "https://archive.org/details/b23982500_0002/page/n346/mode/2up",
+      "iiifManifest3": "https://iiif.archive.org/iiif/b23982500_0002/manifest.json",
+      "licenseNote": "Commentarius viewer XML generated from committed Gemini OCR fragments. Facsimile images are external and not bundled."
     }
   ]
 }

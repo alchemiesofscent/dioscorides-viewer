@@ -22,11 +22,12 @@ Commentarius stream.
 The viewer-facing generated XML path is:
 
 ```text
-output/sprengel1829_epidoc.xml
+output/sprengel_comm_epidoc.xml
 ```
 
-That path currently contains the Commentarius viewer XML. The builder strips
-running furniture, resolves page-scoped footnote targets, wraps bare Greek in
+Do not write the Commentarius into `output/sprengel1829_epidoc.xml`; that file
+is the separate Dioscorides base text. The Commentarius builder strips running
+furniture, resolves page-scoped footnote targets, wraps bare Greek in
 `foreign xml:lang="grc"`, emits page facsimile URLs, and records chapter
 milestones for viewer navigation.
 
@@ -36,7 +37,7 @@ The canonical implementation lives under `scripts/sprengel/`:
 python3 scripts/sprengel/build_sprengel_comm_epidoc.py \
   --source sprengel_comm/outputs/sprengel_comm_merged.xml \
   --chapter-table sprengel_comm/sprengel_chapter_table.tsv \
-  --output output/sprengel1829_epidoc.xml
+  --output output/sprengel_comm_epidoc.xml
 ```
 
 The old entrypoint remains valid through a compatibility wrapper:
@@ -45,13 +46,13 @@ The old entrypoint remains valid through a compatibility wrapper:
 python3 scripts/build_sprengel_comm_epidoc.py \
   --source sprengel_comm/outputs/sprengel_comm_merged.xml \
   --chapter-table sprengel_comm/sprengel_chapter_table.tsv \
-  --output output/sprengel1829_epidoc.xml
+  --output output/sprengel_comm_epidoc.xml
 ```
 
 Validate after rebuilding:
 
 ```bash
-xmllint --noout output/sprengel1829_epidoc.xml
+xmllint --noout output/sprengel_comm_epidoc.xml
 ```
 
 Known unmatched headings are reported by the builder when a Commentarius

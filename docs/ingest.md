@@ -136,13 +136,17 @@ authority for chapter ids and Greek/Latin labels. The table links Commentarius
 chapter detections back to the corresponding generated Sprengel text XML ids in
 `output/sprengel1829_epidoc.xml` where the base-text chapter exists.
 
+The generated Commentarius output must stay separate from
+`output/sprengel1829_epidoc.xml`; the latter is the Dioscorides base text, not
+Sprengel's commentary.
+
 Rebuild the viewer-facing Commentarius XML with:
 
 ```bash
 python3 scripts/build_sprengel_comm_epidoc.py \
   --source sprengel_comm/outputs/sprengel_comm_merged.xml \
   --chapter-table sprengel_comm/sprengel_chapter_table.tsv \
-  --output output/sprengel1829_epidoc.xml
+  --output output/sprengel_comm_epidoc.xml
 ```
 
 The implementation lives at `scripts/sprengel/build_sprengel_comm_epidoc.py`;
@@ -152,7 +156,7 @@ wrapper.
 Then validate the generated XML:
 
 ```bash
-xmllint --noout output/sprengel1829_epidoc.xml
+xmllint --noout output/sprengel_comm_epidoc.xml
 ```
 
 The current known table gaps are chapters present in the Commentarius heading
