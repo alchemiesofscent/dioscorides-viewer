@@ -133,10 +133,18 @@ def load_chapter_table(path: Path) -> dict[str, ChapterRow]:
 
 
 def facs_url(page: int) -> str:
+    # Pages 436 and 437 are missing from the primary IA scan (b23982500_0002)
+    # and served from a BIU Santé fallback, where they sit at leaves 0437 and
+    # 0438. Because the primary scan has no leaves for those two pages, its
+    # leaf-to-page offset drops from +8 (pages 339–435) to +6 from page 438
+    # onward — verified against running headers in OCR (file _0444 = p.438,
+    # file _0672 = p.666).
     if page == 436:
         return BIU_FACS.format(leaf=437)
     if page == 437:
         return BIU_FACS.format(leaf=438)
+    if page >= 438:
+        return PRIMARY_FACS.format(leaf=page + 6)
     return PRIMARY_FACS.format(leaf=page + 8)
 
 
