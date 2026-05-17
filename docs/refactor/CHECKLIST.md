@@ -42,17 +42,17 @@
 ## Phase B: Data/Build Boundary and Externalization
 
 - [x] Define canonical external data layout.
-- [ ] Decide whether `chunks/` content is generated or editorial.
+- [x] Decide whether `chunks/` content is generated or editorial.
 - [x] Create `docs/refactor/SOURCE_MANIFEST_DRAFT.md` or `editions/sources.manifest.toml`.
 - [x] Record source files, checksums, URLs, licenses, and required status.
 - [x] Copy source PDFs/JP2/XML files to `$TEI_MAKER_DATA/sources/<slug>/`.
 - [x] Verify checksums.
-- [ ] Copy OCR/chunk/image/audit generated trees to `$TEI_MAKER_DATA`.
+- [x] Copy OCR/chunk/image/audit generated trees to `$TEI_MAKER_DATA`.
 - [ ] Archive no-longer-needed generated artifacts.
 - [x] Update `.gitignore`.
 - [ ] Update existing scripts minimally to use `tei_maker.io.paths` where safe.
 - [x] Add `tei-maker data doctor`.
-- [ ] Verify old scripts still run where feasible.
+- [x] Verify old scripts still run where feasible.
 - [ ] Commit.
 
 ## Phase C: Edition Registry and CTS Slugs

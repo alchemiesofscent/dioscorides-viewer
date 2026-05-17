@@ -27,6 +27,44 @@ KNOWN_SOURCE_FILES = {
     ),
 }
 
+KNOWN_GENERATED_PATHS = (
+    (
+        "legacy",
+        "ocr",
+        ("ocr", "legacy"),
+    ),
+    (
+        "tlg0656.tlg001.berendes1902-ger1",
+        "images/raw",
+        ("images", "tlg0656.tlg001.berendes1902-ger1", "raw"),
+    ),
+    (
+        "tlg0656.tlg001.berendes1902-ger1",
+        "images/enhanced",
+        ("images", "tlg0656.tlg001.berendes1902-ger1", "enhanced"),
+    ),
+    (
+        "tlg0656.tlg001.beck2020-eng1",
+        "images/page_images",
+        ("images", "tlg0656.tlg001.beck2020-eng1", "page_images"),
+    ),
+    (
+        "tlg0656.tlg001.berendes1902-ger1",
+        "audits/legacy",
+        ("build", "audits", "tlg0656.tlg001.berendes1902-ger1", "legacy"),
+    ),
+    (
+        "tlg0656.tlg001.beck2020-eng1",
+        "audits/legacy",
+        ("build", "audits", "tlg0656.tlg001.beck2020-eng1", "legacy"),
+    ),
+    (
+        "tlg0656.tlg001.sprengel1829-grclat1",
+        "audits/legacy",
+        ("build", "audits", "tlg0656.tlg001.sprengel1829-grclat1", "legacy"),
+    ),
+)
+
 
 def _require_data_root() -> int:
     try:
@@ -102,6 +140,13 @@ def cmd_data_doctor(_args: argparse.Namespace) -> int:
             else:
                 print(f"source missing: {path}")
                 missing.append(str(path))
+    for slug, category, path_parts in KNOWN_GENERATED_PATHS:
+        path = root.joinpath(*path_parts)
+        label = f"slug={slug} category={category}"
+        if path.exists():
+            print(f"generated ok: {label} path={path}")
+        else:
+            print(f"warning: generated missing: {label} path={path}", file=sys.stderr)
     if configured is None:
         print(f"warning: {ENV_DATA_ROOT} is not set; generation commands will fail", file=sys.stderr)
     if missing:

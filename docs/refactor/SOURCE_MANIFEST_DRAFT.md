@@ -1,13 +1,19 @@
 # Source Manifest Draft
 
-This draft records the first non-destructive Phase B source copy. It is not yet the canonical `editions/sources.manifest.toml`.
+This draft records non-destructive Phase B source and generated-artifact copies. It is not yet the canonical `editions/sources.manifest.toml`.
 
 ## External Root
 
 - `TEI_MAKER_DATA`: `/home/seancoughlin/Projects/tei-maker-data`
 - Source checksum file: `/home/seancoughlin/Projects/tei-maker-data/sources/SOURCES_SHA256SUMS.txt`
-- Copy method: non-destructive copy to `$TEI_MAKER_DATA/sources/<slug>/`
+- Copy method: non-destructive copy to `$TEI_MAKER_DATA/sources/<slug>/`, `$TEI_MAKER_DATA/ocr/legacy/`, `$TEI_MAKER_DATA/images/<slug>/`, and `$TEI_MAKER_DATA/build/audits/<slug>/legacy/`
 - Removal/archive status: no repo files removed or archived in this batch
+
+## Classification Decisions
+
+- `chunks/` is treated as committed editorial source for now, not generated build output.
+- `sprengel_comm/sprengel_chapter_table.tsv` is treated as curated authority data.
+- `sprengel_comm/ocr_fragments/` and `sprengel_comm/outputs/sprengel_comm_merged.xml` are treated as source-like build inputs until reproducibility is proven.
 
 ## Copied Sources
 
@@ -23,20 +29,38 @@ This draft records the first non-destructive Phase B source copy. It is not yet 
 | `tlg0656.tlg001.sprengel1829-grclat1` | `tlg0656004.xml` | `$TEI_MAKER_DATA/sources/tlg0656.tlg001.sprengel1829-grclat1/tlg0656004.xml` | `1c19a7c0068d3514d07e11b9abb2d6446a328c767e88b51908f940b01b970052` | yes | Local source XML. |
 | `tlg0656.tlg001.sprengel1830-comm` | `b23982500_0002_jp2.zip` | `$TEI_MAKER_DATA/sources/tlg0656.tlg001.sprengel1830-comm/b23982500_0002_jp2.zip` | `70b9786efda5f0d70ec0f4402144f18e6ce70cb4b5a878660967b8ac19a06165` | yes | Internet Archive JP2 source zip; extracted `sprengel/` tree not copied in this batch because it duplicates the zip and is 534M. |
 
+## Copied Generated Artifacts
+
+These copies are non-destructive mirrors. Repo copies were not removed or renamed.
+
+| Category | Current path | External path | Files copied | Checksum manifest |
+| --- | --- | --- | --- | --- |
+| OCR legacy | `ocr/` | `$TEI_MAKER_DATA/ocr/legacy/` | 9410 repo files; external tree has 9411 files including its manifest | `$TEI_MAKER_DATA/ocr/legacy/OCR_LEGACY_SHA256SUMS.txt` |
+| Berendes images | `images/raw/`, `images/enhanced/` | `$TEI_MAKER_DATA/images/tlg0656.tlg001.berendes1902-ger1/raw/`, `$TEI_MAKER_DATA/images/tlg0656.tlg001.berendes1902-ger1/enhanced/` | 620 | `$TEI_MAKER_DATA/images/IMAGES_SHA256SUMS.txt` |
+| Beck page images | `editions/beck2020/page_images/` | `$TEI_MAKER_DATA/images/tlg0656.tlg001.beck2020-eng1/page_images/` | 711 | `$TEI_MAKER_DATA/images/IMAGES_SHA256SUMS.txt` |
+| Berendes audit legacy | `output/berendes_heading_audit/` | `$TEI_MAKER_DATA/build/audits/tlg0656.tlg001.berendes1902-ger1/legacy/berendes_heading_audit/` | 4 | `$TEI_MAKER_DATA/build/audits/AUDITS_SHA256SUMS.txt` |
+| Beck audit legacy | `output/beck2020_fresh_diplomatic_audit/`, `output/beck_footnote_audit/`, `output/beck_text_cleaning/`, `output/beck_private_ingest_audit.md` | `$TEI_MAKER_DATA/build/audits/tlg0656.tlg001.beck2020-eng1/legacy/` | 36 | `$TEI_MAKER_DATA/build/audits/AUDITS_SHA256SUMS.txt` |
+| Sprengel audit legacy | `output/sprengel_heading_audit/`, `output/sprengel_page_header_audit/` | `$TEI_MAKER_DATA/build/audits/tlg0656.tlg001.sprengel1829-grclat1/legacy/` | 10 | `$TEI_MAKER_DATA/build/audits/AUDITS_SHA256SUMS.txt` |
+
+Checksum manifest digests:
+
+| Manifest | SHA256 |
+| --- | --- |
+| `$TEI_MAKER_DATA/ocr/legacy/OCR_LEGACY_SHA256SUMS.txt` | `4bce1550cf9303b14e3a0f413c1f39fd4c971b661ae097115c296f5c0a55c8b4` |
+| `$TEI_MAKER_DATA/images/IMAGES_SHA256SUMS.txt` | `b6604025b1f4489d8f7750929a689853f2bbffdb629e353497d392858d78ad7c` |
+| `$TEI_MAKER_DATA/build/audits/AUDITS_SHA256SUMS.txt` | `632be2d80ebe4bfb440cf33b45b747d2060c3deb821f556485a82564627b6bea` |
+
 ## Deferred Phase B Copies
 
 These trees are not copied or archived yet:
 
-- `ocr/` at about 4.0G.
-- `images/` at about 660M.
-- `editions/beck2020/page_images/` at about 185M.
-- `sprengel/` extracted JP2 tree at about 534M.
-- `output/` audit/build trees at about 63M.
-- `chunks/` at about 3.0M. This appears editorial and should remain versioned until explicitly reviewed.
-- `sprengel_comm/ocr_fragments/`. These are tracked OCR fragments and may contain hard-to-reproduce editorial/generation decisions.
+- `sprengel/` extracted JP2 tree at about 534M; source zip is already copied and checksummed under `$TEI_MAKER_DATA/sources/`.
+- `chunks/` at about 3.0M; treated as editorial committed source until explicitly reviewed.
+- `sprengel_comm/ocr_fragments/`; tracked OCR fragments that may contain hard-to-reproduce editorial/generation decisions.
+- `sprengel_comm/outputs/sprengel_comm_merged.xml`; tracked merged OCR XML used as a builder input.
 
 ## Open Questions
 
-- Whether `chunks/` should become committed edition source under the Berendes slug or external generated chunks.
+- Whether `chunks/` should eventually move under the Berendes edition slug as committed editorial source.
 - Whether `sprengel_comm/ocr_fragments/` are reproducible OCR intermediates or should stay committed as source-like evidence.
-- Whether older Beck page image trees should be copied as generated images or archived as obsolete review evidence.
+- Whether copied older Beck page image trees should later be archived or retired as obsolete review evidence.

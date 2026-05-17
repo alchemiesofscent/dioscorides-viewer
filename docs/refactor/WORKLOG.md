@@ -78,7 +78,7 @@
   - Created `docs/refactor/BASELINE_ARTIFACTS.md`.
 - Files/directories affected: `docs/refactor/`.
 - Verification result: Pending git status and docs commit.
-- Commit hash: `8b2c311`
+- Commit hash: pending at time of entry; later committed as `94a9f54`.
 - Open issues or risks: First docs commit must stage only `docs/refactor/`.
 
 ## 2026-05-17 18:17 Europe/Budapest
@@ -138,5 +138,42 @@
   - `python3 -m compileall tei_maker tests`: pass.
   - `python3 -m tei_maker data doctor`: pass and reports all expected source files present under the default external root.
   - `python3 -m tei_maker run tlg0656.tlg001.berendes1902-ger1`: expected failure without `TEI_MAKER_DATA`.
-- Commit hash: pending.
+- Commit hash: `8b2c311`
 - Open issues or risks: No repo assets were removed or archived. Full generated tree externalization is deferred because `ocr/` is about 4.0G, `images/` about 660M, and several tracked chunk/OCR fragment trees may contain editorial decisions.
+
+## 2026-05-17 18:35 Europe/Budapest
+
+- Action taken: Recorded Phase B source externalization checkpoint.
+- Commands run, summarized:
+  - Updated refactor docs after source asset copy.
+  - Committed docs-only follow-up.
+- Files/directories affected: `docs/refactor/`.
+- Verification result: Documentation now points at source checkpoint commit `8b2c311`.
+- Commit hash: `7179f6c`
+- Open issues or risks: Generated artifact copies were still deferred at this checkpoint.
+
+## 2026-05-17 19:37 Europe/Budapest
+
+- Action taken: Completed conservative Phase B generated artifact copy batch.
+- Commands run, summarized:
+  - Copied `ocr/` to `/home/seancoughlin/Projects/tei-maker-data/ocr/legacy/`.
+  - Copied `images/raw/` and `images/enhanced/` to `/home/seancoughlin/Projects/tei-maker-data/images/tlg0656.tlg001.berendes1902-ger1/`.
+  - Copied `editions/beck2020/page_images/` to `/home/seancoughlin/Projects/tei-maker-data/images/tlg0656.tlg001.beck2020-eng1/page_images/`.
+  - Copied generated audit/scratch output directories to `/home/seancoughlin/Projects/tei-maker-data/build/audits/<slug>/legacy/`.
+  - Generated `OCR_LEGACY_SHA256SUMS.txt`, `IMAGES_SHA256SUMS.txt`, and `AUDITS_SHA256SUMS.txt`.
+  - Extended `tei-maker data doctor` to report copied generated paths as warnings if absent.
+- Files/directories affected:
+  - External: `/home/seancoughlin/Projects/tei-maker-data/ocr/legacy/`, `/home/seancoughlin/Projects/tei-maker-data/images/`, `/home/seancoughlin/Projects/tei-maker-data/build/audits/`.
+  - Repo: `tei_maker/cli.py`, `docs/refactor/SOURCE_MANIFEST_DRAFT.md`, `docs/refactor/MIGRATION_MAP.md`, `docs/refactor/CHECKLIST.md`, `docs/refactor/WORKLOG.md`.
+- Verification result:
+  - External image file count matches copied repo image/page-image sources: 1331 files.
+  - External OCR file count is 9411 including the generated checksum manifest; repo OCR source count is 9410 files.
+  - External audit file count is 50 copied files plus the generated audit checksum manifest.
+  - `python3 -m compileall tei_maker tests`: pass.
+  - `python3 -m unittest discover -s tests`: 9 tests pass.
+  - `python3 -m tei_maker data doctor`: pass and reports source files plus generated artifact mirrors.
+  - `python3 scripts/validate_structure.py output/berendes1902_epidoc.xml`: pass, 0 issues.
+  - `node --check viewer/app.js`: pass.
+  - `python3 scripts/validate_beck_fresh_diplomatic.py output/beck2020_fresh_diplomatic_epidoc.xml --manifest editions/beck2020_fresh_diplomatic/manifest.json --expected-pdf-pages 711`: pass with known warning `FOOTNOTE_QA_OPEN_BODY_ROWS`.
+- Commit hash: pending.
+- Open issues or risks: `chunks/`, `sprengel_comm/ocr_fragments/`, and `sprengel_comm/outputs/sprengel_comm_merged.xml` remain committed/source-like until reproducibility and editorial status are proven. No repo copies were removed.
