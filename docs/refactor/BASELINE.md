@@ -1,5 +1,10 @@
 # Refactor Baseline
 
+Historical/supporting record. This file records an earlier baseline snapshot and
+branch-state audit. It is not the forward refactor plan. Use
+`docs/refactor/PLAN.md` for current intent and `docs/refactor/REPO_AUDIT.md`
+for the current repository classification.
+
 ## Branch and Commit
 
 - Initial observed branch: `main`

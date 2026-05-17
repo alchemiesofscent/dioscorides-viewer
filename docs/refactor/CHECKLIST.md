@@ -1,138 +1,92 @@
 # Refactor Checklist
 
-## Phase 0: Baseline and Inventory
+This checklist is derived from `docs/refactor/PLAN.md`. It is an execution aid,
+not a competing plan.
 
-- [x] Confirm working branch.
-- [x] Confirm clean or documented dirty git status.
-- [x] Create `docs/refactor/PLAN.md`.
-- [x] Create `docs/refactor/CHECKLIST.md`.
-- [x] Create `docs/refactor/MIGRATION_MAP.md`.
-- [x] Create `docs/refactor/WORKLOG.md`.
-- [x] Create `docs/refactor/BASELINE.md`.
-- [x] Capture repository tree and file inventory.
-- [x] Identify tracked vs untracked large assets.
-- [x] Identify current final TEI outputs.
-- [x] Identify current manifests.
-- [x] Identify viewer paths.
-- [x] Identify scripts and wrappers.
-- [x] Identify likely generated artifacts.
-- [x] Identify likely hand-curated/editorial artifacts.
-- [x] Capture baseline TEI/manifests/viewer files into `$TEI_MAKER_DATA/baseline/...`.
-- [x] Generate checksums.
-- [x] Commit baseline docs.
+## Phase 1: Documentation Reset
 
-## Phase A: Package Skeleton Only, No Behavior Change
+- [x] Confirm current git status before edits.
+- [x] Review existing README and refactor docs.
+- [x] Run inventory commands needed for `REPO_AUDIT.md`.
+- [x] Rewrite `README.md` around scholarly EpiDoc outputs, viewer use, pipeline
+  direction, and external raw data.
+- [x] Rewrite `docs/refactor/PLAN.md` as the single authoritative forward plan.
+- [x] Add `docs/refactor/REPO_AUDIT.md`.
+- [x] Rewrite `docs/refactor/MIGRATION_MAP.md` as a path ledger only.
+- [x] Rewrite `docs/refactor/SOURCE_MANIFEST_DRAFT.md` as an external
+  raw/source manifest only.
+- [x] Add historical/supporting notices to baseline docs.
+- [x] Update `docs/refactor/WORKLOG.md`.
+- [x] Run docs/package checks.
+- [x] Commit docs-only checkpoint.
 
-- [x] Add `pyproject.toml` using PEP 621.
-- [x] Add console entry point `tei-maker`.
-- [x] Create `tei_maker/__init__.py`.
-- [x] Create `tei_maker/cli.py` with help text and stub subcommands.
-- [x] Create `tei_maker/config.py`.
-- [x] Create `tei_maker/io/paths.py`.
-- [x] Path resolver supports `TEI_MAKER_DATA`.
-- [x] Generation commands require `TEI_MAKER_DATA`.
-- [x] Viewer/static validation commands do not require `TEI_MAKER_DATA`.
-- [x] Generation output does not silently default to repo root.
-- [x] Add `.env.example`.
-- [x] Add minimal import and path-resolution tests.
-- [x] Add `.github/workflows/test.yml` if appropriate.
-- [x] Run tests.
-- [x] Commit.
+## Standing Protocol Before Each Later Phase
 
-## Phase B: Data/Build Boundary and Externalization
+- [ ] Record `git status --short`.
+- [ ] Record relevant `git status --ignored --short`.
+- [ ] Record relevant `find`, `du`, and `git ls-files` inventories.
+- [ ] Record current validation commands for affected TEI/viewer surfaces.
+- [ ] Update `WORKLOG.md` before or alongside implementation.
+- [ ] Record command failures and response decisions.
 
-- [x] Define canonical external data layout.
-- [x] Decide whether `chunks/` content is generated or editorial.
-- [x] Create `docs/refactor/SOURCE_MANIFEST_DRAFT.md` or `editions/sources.manifest.toml`.
-- [x] Record source files, checksums, URLs, licenses, and required status.
-- [x] Copy source PDFs/JP2/XML files to `$TEI_MAKER_DATA/sources/<slug>/`.
-- [x] Verify checksums.
-- [x] Copy OCR/chunk/image/audit generated trees to `$TEI_MAKER_DATA`.
-- [ ] Archive no-longer-needed generated artifacts.
-- [x] Update `.gitignore`.
-- [ ] Update existing scripts minimally to use `tei_maker.io.paths` where safe.
-- [x] Add `tei-maker data doctor`.
-- [x] Verify old scripts still run where feasible.
-- [ ] Commit.
+## Phase 3: Preserve Scholarly TEI Outputs
 
-## Phase C: Edition Registry and CTS Slugs
+- [ ] Inventory Berendes TEI and manifest.
+- [ ] Inventory Sprengel base TEI, manifest, source-like sidecars, and audits.
+- [ ] Inventory Sprengel Commentarius TEI, manifest, OCR XML/fragments, chapter
+  table, and audits.
+- [ ] Inventory Beck generated TEI variants, manifests, accepted ledgers, and
+  review outputs.
+- [ ] Identify pilot TEI not represented in later outputs.
+- [ ] Verify no TEI output is deleted.
+- [ ] Move TEI later with `git mv` only after this inventory is committed.
 
-- [ ] Create `editions/editions.toml`.
-- [ ] Keep filesystem slug separate from full CTS URN.
-- [ ] Store edition registry fields.
-- [ ] Document Sprengel Commentarius modeling decision.
-- [ ] Rename committed edition folders using `git mv`.
-- [ ] Move final TEI to `editions/<slug>/tei/edition.xml`.
-- [ ] Move committed manifests to `editions/<slug>/manifest.json`.
-- [ ] Move small committed Sprengel Commentarius artifacts if appropriate.
-- [ ] Archive older Beck passes.
-- [ ] Generate `editions/editions.json`.
-- [ ] Add `tei-maker editions export-json`.
-- [ ] Add `tei-maker editions export-json --check`.
-- [ ] Update viewer paths.
-- [ ] Run static server smoke test where feasible.
-- [ ] Commit.
+## Phase 4: External Raw Data Boundary
 
-## Phase D: Code Motion into Package
+- [ ] Confirm or create shared external raw-data root.
+- [ ] Record source PDFs, images, JP2 files, TLG/First1KGreek XML, and
+  private/local XML.
+- [ ] Capture checksums for every copied source.
+- [ ] Record source/license notes and required/optional status.
+- [ ] Record whether each repo copy remains, is ignored, or is later removed.
+- [ ] Do not delete raw sources until manifest and checksum verification are
+  complete.
 
-- [ ] Move shared utilities first with `git mv`.
-- [ ] Keep thin wrappers in old locations temporarily if needed.
-- [ ] Move manifest/page-map logic.
-- [ ] Move scaffold extraction logic.
-- [ ] Move chunk merge logic.
-- [ ] Move structural validation logic.
-- [ ] Move OCR drivers.
-- [ ] Move Berendes pipeline code into a subpackage.
-- [ ] Move Sprengel base pipeline code into a subpackage.
-- [ ] Move Sprengel Commentarius code into a subpackage.
-- [ ] Move Beck code into a subpackage.
-- [ ] Split Beck builder, footnotes, QC, OCR, and pipeline as needed.
-- [ ] Add or update imports.
-- [ ] Wire CLI commands.
-- [ ] Run tests after each moved group.
-- [ ] Commit after each meaningful group.
+## Phase 5: Viewer Stability
 
-## Phase E1: Validator Introduction, Report-Only First
+- [ ] Verify current registry and manifest paths.
+- [ ] Run `node --check viewer/app.js`.
+- [ ] Serve from repo root when paths or registry behavior changes.
+- [ ] Confirm public editions do not require private raw data.
+- [ ] Document private/local registry behavior.
 
-- [ ] Add schema directory.
-- [ ] Pin numbered EpiDoc schema version.
-- [ ] Record schema source and checksum.
-- [ ] Implement XML well-formedness validation.
-- [ ] Implement Relax NG validation.
-- [ ] Add project-level checks.
-- [ ] Run validator in report-only mode.
-- [ ] Save report to `build/audits/<slug>/`.
-- [ ] Avoid semantic TEI fixes in this phase.
-- [ ] Add coherent CI validation.
-- [ ] Commit.
+## Phase 6: Reusable Pipeline Extraction
 
-## Phase E2: TEI/CTS Compliance Pass
+- [ ] Identify shared path/config logic.
+- [ ] Identify edition registry helpers.
+- [ ] Identify page/image inventory logic.
+- [ ] Identify OCR evidence readers.
+- [ ] Identify TEI writer utilities.
+- [ ] Identify manifest writer logic.
+- [ ] Identify validation/report helpers.
+- [ ] Move code in small groups with wrappers preserved until replacement CLI
+  commands pass equivalent checks.
 
-- [ ] Implement `tei_maker/tei/headers.py`.
-- [ ] Generate standardized `teiHeader` from `editions.toml`.
-- [ ] Generate CTS-aware `refsDecl`.
-- [ ] Keep full CTS URNs in metadata/attributes.
-- [ ] Do not force full CTS URNs directly into `xml:id`.
-- [ ] Implement safe XML/CTS ID helpers with tests.
-- [ ] Apply to one edition first.
-- [ ] Diff against baseline.
-- [ ] Apply to remaining editions.
-- [ ] Validate all committed TEI.
-- [ ] Commit accepted semantic TEI diffs.
+## Phase 7: Cleanup And Retirement
 
-## Phase F: Documentation and Retirement
+- [ ] Classify cleanup candidates before removal.
+- [ ] Archive uncertain material rather than deleting it.
+- [ ] Preserve generated TEI, manifests, source-like sidecars, accepted review
+  decisions, and provenance by default.
+- [ ] Record every retirement in `WORKLOG.md`.
 
-- [ ] Create or update `docs/pipeline.md`.
-- [ ] Create or update `docs/editions.md`.
-- [ ] Create or update `docs/tei-conventions.md`.
-- [ ] Create or update `docs/contributing.md`.
-- [ ] Rewrite `README.md`.
-- [ ] Add Mermaid pipeline diagram.
-- [ ] Document `TEI_MAKER_DATA`.
-- [ ] Document clean clone behavior.
-- [ ] Document external source reconstruction.
-- [ ] Document archive policy.
-- [ ] Document validation and CI.
-- [ ] Retire old plans only after content is represented.
-- [ ] Remove wrappers only after proof gates.
-- [ ] Commit.
+## Phase 8: Acceptance
+
+- [ ] README explains the project goal.
+- [ ] `PLAN.md` is the single forward plan.
+- [ ] `REPO_AUDIT.md` accounts for repo contents.
+- [ ] `WORKLOG.md` records every phase.
+- [ ] No generated TEI XML is deleted.
+- [ ] Viewer remains usable.
+- [ ] Raw data boundary is documented with checksums.
+- [ ] Pipeline refactor proceeds only from documented inventory and validation.

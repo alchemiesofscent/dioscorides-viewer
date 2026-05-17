@@ -1,120 +1,254 @@
-# TEI Maker Refactor Plan
+# Refactor Plan
+
+This is the single authoritative forward plan for the `tei-maker` refactor.
+Other files in `docs/refactor/` support this plan: `REPO_AUDIT.md` records the
+current repository inventory, `MIGRATION_MAP.md` records path decisions only,
+`SOURCE_MANIFEST_DRAFT.md` records external raw/source assets, and
+`WORKLOG.md` records each work session.
+
+## Principle
+
+The project is scholarly-output-first. Generated EpiDoc TEI XMLs are corpus
+assets and regression baselines, not disposable build products. Do not delete or
+retire Berendes, Sprengel, Sprengel Commentarius, Beck, or pilot TEI outputs
+unless a validated replacement exists and the retirement is explicitly recorded.
+
+Cleanup means retiring obsolete process artifacts after audit. It does not mean
+discarding scholarly XML, manifests, accepted review decisions, or provenance
+needed to explain current TEI.
+
+## Preserved Edition Families
+
+### Berendes 1902
+
+- Current TEI: `output/berendes1902_epidoc.xml`.
+- Current manifest: `manifest.json`.
+- Source-like/editorial material: `chunks/`, `berendes (1).xml`, prompts, and
+  Berendes audit ledgers.
+- Status: preserve as current public viewer output and regression baseline.
+
+### Sprengel 1829/1830 Base Text
+
+- Current TEI: `output/sprengel1829_epidoc.xml`.
+- Current manifest: `editions/sprengel1829/manifest.json`.
+- Source-like/editorial material:
+  `editions/sprengel1829/sprengel_diplomatic.xml`,
+  `editions/sprengel1829/page_headers.csv`, and Sprengel audit ledgers.
+- Status: preserve as current review-grade viewer output and regression
+  baseline.
+
+### Sprengel 1830 Commentarius
+
+- Current TEI: `output/sprengel_comm_epidoc.xml`.
+- Current manifest: `sprengel_comm/manifest.json`.
+- Source-like/editorial material: `sprengel_comm/outputs/sprengel_comm_merged.xml`,
+  `sprengel_comm/sprengel_chapter_table.tsv`, OCR fragments, prompt notes, and
+  workflow metadata.
+- Status: preserve as current review-grade viewer output and regression
+  baseline.
+
+### Beck 2020
+
+- Current diplomatic TEI:
+  `output/beck2020_fresh_diplomatic_epidoc.xml`.
+- Current manifest:
+  `editions/beck2020_fresh_diplomatic/manifest.json`.
+- Related older/local streams:
+  `editions/beck2020/`, `editions/beck2020_fresh/`, ignored local TEI outputs,
+  OCR ledgers, and review queues.
+- Status: preserve private/local review outputs and accepted sidecars until a
+  validated public/private replacement and retirement note exist.
+
+### Pilot TEI And Review XML
+
+Any pilot TEI that records work not represented in a later accepted edition is a
+preservation candidate. Classify it before moving, archiving, or deleting it.
 
 ## Target Architecture
 
-- Python package: `tei_maker/`
-- Console command: `tei-maker`
-- Canonical edition registry: `editions/editions.toml`
-- Viewer registry generated from TOML: `editions/editions.json`
-- Committed final TEI: `editions/<slug>/tei/edition.xml`
-- External data root: `/home/seancoughlin/Projects/tei-maker-data`, addressed by `TEI_MAKER_DATA`
-- External source/generated layout:
-  - `$TEI_MAKER_DATA/sources/<slug>/`
-  - `$TEI_MAKER_DATA/ocr/<slug>/`
-  - `$TEI_MAKER_DATA/chunks/<slug>/`
-  - `$TEI_MAKER_DATA/images/<slug>/`
-  - `$TEI_MAKER_DATA/build/audits/<slug>/`
-  - `$TEI_MAKER_DATA/archive/<timestamp>/<original-relative-path>`
-- Repo-generated audits: gitignored `build/audits/<slug>/`
-- Static viewer: works from committed TEI and committed registry without `TEI_MAKER_DATA`
-- Generation/rebuild commands: require explicit `TEI_MAKER_DATA`
+- Canonical edition folders:
+  - `editions/<slug>/tei/edition.xml`
+  - `editions/<slug>/manifest.json`
+  - `editions/<slug>/source/` for small committed source-like sidecars when
+    appropriate
+  - `editions/<slug>/audit/` for committed review/audit material that remains
+    useful
+- Viewer registry:
+  - committed public registry for public editions;
+  - documented local/private registry overlay for private editions;
+  - registered paths must resolve from a clean checkout for public editions.
+- External raw data root:
+  - `TEI_MAKER_DATA` or the documented shared default;
+  - contains source PDFs, images, JP2 files, TLG/First1KGreek XML, private/local
+    XML, OCR scratch, and bulky generated intermediates;
+  - every externalized source has a checksum and source/license note.
+- Reusable pipeline package:
+  - `tei_maker/` owns path/config handling, edition registry handling,
+    page/image inventory, OCR evidence readers, TEI writer utilities, manifest
+    writing, validation helpers, and audit/report output.
+- Validation commands:
+  - package checks with `compileall`, `unittest`, and `tei_maker data doctor`;
+  - viewer syntax with `node --check viewer/app.js`;
+  - edition-specific TEI validation and rebuild commands recorded in the
+    worklog before path changes.
+- Audit logs:
+  - `docs/refactor/WORKLOG.md` records each work session;
+  - committed audit ledgers remain with the relevant edition or in a documented
+    legacy location until superseded.
 
-## Current Baseline
+## Phase 1: Documentation Reset
 
-- Initial observed branch before branch creation: `main`
-- Refactor branch: `refactor/tei-maker-pipeline`
-- Main/baseline tag: `pre-refactor-baseline` at `754d9622d4b85bbaaec20d3d4eb4743541b981c9`
-- Working baseline tag: `pre-refactor-working-baseline` at current branch HEAD after branch-state discrepancy
-- Current branch HEAD at plan creation: `18fecb1` (`Archive failed Beck Gemini pipeline`)
-- Expected external data root: `/home/seancoughlin/Projects/tei-maker-data`
+Scope: docs-only.
 
-The first sandbox status reported dirty Beck/Gemini files on `main`. After the approved branch switch, the working tree was clean on `refactor/tei-maker-pipeline` with those files represented by commit `18fecb1` under `archive/beck-gemini-full-page-pipeline/`. This discrepancy is recorded as a baseline risk in `BASELINE.md` and `WORKLOG.md`.
+- Rewrite `README.md` around scholarly EpiDoc outputs, viewer use, reusable
+  pipeline direction, and the external raw-data boundary.
+- Rewrite this plan as the single forward plan.
+- Add `docs/refactor/REPO_AUDIT.md` with path-group inventory and
+  preserve/archive/remove decisions.
+- Rewrite `CHECKLIST.md`, `MIGRATION_MAP.md`, and `SOURCE_MANIFEST_DRAFT.md` so
+  they support this plan instead of competing with it.
+- Mark `BASELINE.md`, `BASELINE_ARTIFACTS.md`, and `WORKLOG.md` as historical or
+  supporting records where appropriate.
+- Run docs/package checks.
+- Commit the docs-only checkpoint.
 
-## Edition Slugs
+No cleanup, deletion, path migration, or code motion happens in this phase.
 
-- `tlg0656.tlg001.berendes1902-ger1`
-- `tlg0656.tlg001.sprengel1829-grclat1`
-- `tlg0656.tlg001.sprengel1830-comm`
-- `tlg0656.tlg001.beck2020-eng1`
+## Phase 2: Audit And Logging Protocol
 
-## Phase Checklist
+Before each later implementation phase, run and record:
 
-### Phase 0: Baseline and inventory
+- `git status --short`;
+- relevant `git status --ignored --short`;
+- relevant `find`, `du`, and `git ls-files` inventory commands;
+- current validation commands for affected TEI/viewer surfaces.
 
-Create planning docs, capture repo state, identify source/generated/editorial files, create an external baseline snapshot with checksums, then commit the docs before any structural refactor.
+Each worklog entry records timestamp, objective, files/directories touched,
+commands run, verification results, docs updated, commit hash when known, and
+open risks or deferred decisions. Command failures are recorded with the chosen
+response.
 
-### Phase A: Package skeleton only, no behavior change
+## Phase 3: Preserve Scholarly TEI Outputs
 
-Add `pyproject.toml`, `tei_maker/`, path-resolution helpers, a `tei-maker` CLI with stub commands, `.env.example`, minimal tests, and CI if appropriate. Do not move existing pipeline logic.
+Inventory all generated/review-grade TEI XMLs before moving anything:
 
-### Phase B: Data/build boundary and externalization
+- Berendes TEI;
+- Sprengel base text TEI;
+- Sprengel Commentarius TEI;
+- Beck generated TEI variants;
+- pilot TEI not represented elsewhere.
 
-Define external data layout, identify generated vs editorial artifacts, copy source assets and generated scratch trees to `TEI_MAKER_DATA`, verify checksums, update `.gitignore`, and add an initial `tei-maker data doctor`.
+Move outputs later with `git mv` into canonical edition folders only after the
+audit docs are complete. Do not rewrite TEI semantics during path migration.
+Older generated variants remain named review/archive outputs until explicitly
+superseded.
 
-### Phase C: Edition registry and CTS-style slug migration
+## Phase 4: External Raw Data Boundary
 
-Create `editions/editions.toml`, keep slug and CTS fields separate, move final committed TEI and manifests under canonical slug folders, generate `editions/editions.json`, and keep the viewer working.
+Move or copy raw reusable files into shared external storage with checksums:
+PDFs, page images, JP2 zips and extracted trees, TLG/First1KGreek XML,
+private/local source XML, and large OCR/image intermediates needed for
+reproducibility.
 
-### Phase D: Code motion into package
+The source manifest records original repo path, external path, checksum,
+source/license notes, required/optional status, and whether the repo copy
+remains, is ignored, or is later removed. No raw-source deletion happens until
+manifest and checksum verification are complete.
 
-Move code with `git mv` in small groups, keep wrappers temporarily, then wire package modules and CLI commands.
+## Phase 5: Viewer Stability
 
-### Phase E1: Validator introduction, report-only first
+The viewer remains first-class and must keep working throughout the refactor.
 
-Add pinned schema validation, XML/project checks, report-only output under `build/audits/<slug>/`, and CI wiring where coherent.
+Requirements:
 
-### Phase E2: TEI/CTS compliance pass
+- load committed TEI outputs and current manifests/registry;
+- run locally from repo root with `python3 -m http.server 8000`;
+- avoid private raw-data requirements for public editions;
+- handle private/local editions only through documented local registry behavior.
 
-Standardize headers and CTS declarations separately from mechanical refactors. Apply to one edition first, compare against baseline, then continue.
+After each viewer-affecting change, run `node --check viewer/app.js`, verify
+registered paths, and update README/refactor docs if commands or paths change.
 
-### Phase F: Documentation and retirement
+## Phase 6: Reusable Pipeline Extraction
 
-Replace overlapping old docs, document `TEI_MAKER_DATA`, clean-clone behavior, validation, archive policy, and retire wrappers only after proof gates.
+Extract reusable logic from the current scripts without centering the design on
+one pilot. The target pipeline covers raw source or page images, page inventory,
+OCR evidence, diplomatic TEI construction, manifest generation, validation
+reports, and viewer registration.
 
-## Validation Strategy
+Old scripts remain wrappers until replacement CLI commands pass equivalent
+checks. Retire wrappers only after the worklog records proof that the new command
+covers the old behavior.
 
-- Preserve baseline behavior before mechanical moves.
-- Run existing checks first:
-  - `python3 scripts/validate_structure.py output/berendes1902_epidoc.xml`
-  - `node --check viewer/app.js`
-  - `python3 scripts/validate_beck_fresh_diplomatic.py output/beck2020_fresh_diplomatic_epidoc.xml --manifest editions/beck2020_fresh_diplomatic/manifest.json --expected-pdf-pages 711`
-  - `python3 scripts/build_sprengel_comm_epidoc.py --source sprengel_comm/outputs/sprengel_comm_merged.xml --chapter-table sprengel_comm/sprengel_chapter_table.tsv --output /tmp/tei-maker-sprengel-comm-baseline.xml`
-- Treat missing `pytest` as a baseline tooling gap until packaging adds test dependencies.
-- After Phase A, add import/path tests and require `pytest`.
-- After Phase C, require `tei-maker editions export-json --check`.
-- After validator work, require `tei-maker validate --all` to pass or emit documented known issues.
+## Phase 7: Cleanup And Retirement
 
-## Archive Policy
+Only retire artifacts after audit classification.
 
-- Do not delete valuable project material during mechanical phases.
-- Archive uncertain or heavy generated/source material under `$TEI_MAKER_DATA/archive/<YYYYMMDD-HHMMSS>/<original-relative-path>`.
-- Preserve original relative paths.
-- Record archive operations in `$TEI_MAKER_DATA/archive/ARCHIVE_MANIFEST.tsv`.
-- For tracked small historical material, prefer `git mv` into a repo archive only when it is useful to review.
-- Do not remove final TEI, prompts, OCR, chunks, manifests, or working scripts without a committed checkpoint and proof gate.
+Likely retirement candidates:
+
+- caches and `__pycache__`;
+- temporary crops;
+- old visual-pass panels/responses;
+- obsolete OCR scratch;
+- failed experiment outputs;
+- duplicated generated intermediates;
+- stale private review queues that no longer support TEI provenance.
+
+Not retirement candidates by default:
+
+- generated TEI XMLs;
+- manifests needed by the viewer;
+- source-like editorial sidecars;
+- accepted review decisions;
+- provenance needed to explain current TEI;
+- raw source files before external checksum capture.
+
+If uncertain, archive rather than delete.
+
+## Phase 8: Validation And Acceptance
+
+Core checks after docs-only changes:
+
+```bash
+git diff -- README.md docs/refactor
+python3 -m compileall tei_maker tests
+python3 -m unittest discover -s tests
+python3 -m tei_maker data doctor
+```
+
+Core checks after TEI/viewer path changes:
+
+```bash
+python3 scripts/validate_structure.py output/berendes1902_epidoc.xml
+python3 scripts/validate_beck_fresh_diplomatic.py \
+  output/beck2020_fresh_diplomatic_epidoc.xml \
+  --manifest editions/beck2020_fresh_diplomatic/manifest.json \
+  --expected-pdf-pages 711
+python3 scripts/build_sprengel_comm_epidoc.py \
+  --source sprengel_comm/outputs/sprengel_comm_merged.xml \
+  --chapter-table sprengel_comm/sprengel_chapter_table.tsv \
+  --output /tmp/tei-maker-sprengel-comm-baseline.xml
+node --check viewer/app.js
+```
+
+Acceptance criteria:
+
+- README clearly explains the project goal.
+- This plan is the single forward plan.
+- `REPO_AUDIT.md` accounts for repo contents.
+- `WORKLOG.md` records every phase.
+- No generated TEI XML is deleted.
+- Viewer remains usable.
+- Raw data boundary is documented with checksums.
+- Pipeline refactor proceeds only from documented inventory and validation.
 
 ## Commit Policy
 
-- Commit after planning docs.
-- Commit after package skeleton.
-- Commit after each externalization batch.
-- Commit after each slug migration.
-- Commit after each package move group.
-- Commit after each CLI command becomes functional.
-- Commit after validator/test workflow changes.
-- Keep mechanical moves separate from semantic TEI/CTS changes.
-- Stage only files belonging to the current phase.
+Use small commits. The current checkpoint is:
 
-## Stop Conditions
+1. `docs(refactor): reset plan around scholarly TEI outputs`
 
-Stop and document before continuing if:
-
-- A move would overwrite a non-identical file.
-- A checksum mismatch appears.
-- A TEI output changes during a mechanical phase.
-- A viewer path cannot be resolved.
-- A source asset appears untracked and irreplaceable.
-- A script has unknown callers.
-- A generated artifact may contain editorial decisions.
-- A test failure appears after a change and was not present in baseline.
-- A deletion candidate has not been archived or proven disposable.
+Later checkpoints should separate external source manifests, edition moves,
+viewer registry changes, and pipeline extraction. Each commit updates
+`WORKLOG.md`, includes only files for its phase, passes relevant checks, and
+leaves `git status --short` clean unless explicitly documented.

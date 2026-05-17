@@ -1,5 +1,10 @@
 # Baseline Artifacts
 
+Historical/supporting record. This file records the earlier external baseline
+snapshot. It is not the current source manifest or migration plan. Use
+`docs/refactor/PLAN.md`, `docs/refactor/REPO_AUDIT.md`, and
+`docs/refactor/SOURCE_MANIFEST_DRAFT.md` for current refactor decisions.
+
 ## External Snapshot
 
 - Snapshot path: `/home/seancoughlin/Projects/tei-maker-data/baseline/20260517-181217`

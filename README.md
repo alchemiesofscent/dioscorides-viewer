@@ -1,25 +1,41 @@
-# Dioscorides Viewer
+# TEI Maker
 
-Static TEI/EpiDoc viewer for Dioscorides editions, beginning with Julius
-Berendes' 1902 German translation, *Des Pedanios Dioskurides aus Anazarbos
-Arzneimittellehre in fünf Büchern*, plus Sprengel review streams for the
-1829/1830 Greek/Latin edition and its 1830 Commentarius.
+`tei-maker` produces scholarly TEI/EpiDoc XML editions for Dioscorides and
+related review streams. The committed XML is a corpus asset, a regression
+baseline, and the data source for the static viewer.
 
-The repository is designed to run on GitHub Pages. The text, page map, and
-viewer assets are committed; bulky facsimile images are not. The viewer loads
-Berendes page images directly from Heidelberg University Library facsimile URLs
-recorded in the TEI and `manifest.json`, and Sprengel images from the Internet
-Archive IIIF service.
+The repo currently has three jobs:
+
+- preserve generated and review-grade EpiDoc TEI outputs for scholarly use;
+- provide a dependency-free viewer for inspecting TEI against page images and
+  manifests;
+- refactor the existing edition-specific scripts into a reusable
+  image/source-to-diplomatic-EpiDoc pipeline.
+
+Raw source assets stay outside git in shared external storage. That includes
+PDFs, extracted page images, JP2 files, TLG/First1KGreek XML, private/local
+source XML, and bulky OCR or image intermediates. The repo records where those
+assets live and how they were checksummed, but it does not treat them as public
+redistributable files.
+
+## Current Scholarly Outputs
+
+Preserve these generated TEI outputs unless a validated replacement exists and
+the retirement is explicitly recorded in `docs/refactor/WORKLOG.md`:
+
+- `output/berendes1902_epidoc.xml` - Berendes 1902 German translation.
+- `output/sprengel1829_epidoc.xml` - Sprengel 1829/1830 Greek/Latin base text.
+- `output/sprengel_comm_epidoc.xml` - Sprengel 1830 Commentarius.
+- `output/beck2020_fresh_diplomatic_epidoc.xml` - Beck 2020 private/local
+  diplomatic review output.
+
+Related manifests, registries, source-like sidecars, accepted review decisions,
+and provenance ledgers are also preservation candidates. Cleanup work must
+distinguish disposable process artifacts from scholarly outputs.
 
 ## Open The Viewer
 
-When published to GitHub Pages:
-
-```text
-https://alchemiesofscent.github.io/dioscorides-viewer/
-```
-
-For local review from the repository root:
+Serve the repo root:
 
 ```bash
 python3 -m http.server 8000
@@ -31,130 +47,77 @@ Then open:
 http://localhost:8000/viewer/
 ```
 
-On localhost, the viewer also looks for the private Beck registry at
-`editions/beck2020/private_registry.json` and the fresh-PDF registry at
-`editions/beck2020_fresh/private_registry.json`, then appends those private
-review streams to the edition menu when their generated files are present. This
-local overlay does not change the public `editions.json` registry used by GitHub
-Pages.
+The public viewer reads `editions.json` and committed TEI/manifests. On
+localhost it can also load documented private registries, such as Beck review
+registries, when the corresponding local files are present. Public editions must
+not require private raw data.
 
-The fresh Beck footnote ambiguity workflow is image-first. Generate zoom panels
-and model proposals with:
-
-```bash
-python3 scripts/run_beck_fresh_footnote_visual_pass.py \
-  --run-codex \
-  --apply-high-confidence
-```
-
-The separate fresh Beck footnote zoom surface is available for diagnostics at:
+The Beck fresh footnote review surface is available locally at:
 
 ```text
 http://localhost:8000/tools/beck-fresh-footnotes/
 ```
 
-## Repository Contents
+## Repository Map
 
-- `viewer/` - dependency-free static browser viewer.
-- `tools/` - local review surfaces that are not required by the public viewer.
-- `editions.json` - public edition registry consumed by the viewer.
+- `viewer/` - static TEI/image inspection viewer.
+- `tools/` - local review surfaces.
+- `editions.json` - current viewer registry.
+- `editions/` - edition manifests and committed source-like sidecars.
+- `output/` - current committed viewer-facing TEI and audit outputs.
 - `chunks/` - normalized Berendes TEI chunk source.
-- `manifest.json` - Berendes page/image/chunk manifest.
-- `editions/sprengel1829/` - Sprengel base-edition source, sidecars, and
-  generated manifest data.
-- `sprengel_comm/` - committed Commentarius OCR fragments, merged OCR XML,
-  chapter authority table, prompt notes, and workflow metadata.
-- `output/` - committed viewer-facing generated XML and committed audit
-  reports.
-- `scripts/` - normalization, OCR, merge, audit, and validation tools;
-  Sprengel-specific implementations live under `scripts/sprengel/` with
-  compatibility wrappers at their old paths.
-- `prompts/` - TEI header and transcription prompt material.
-- `docs/` - ingest and workflow documentation.
+- `sprengel_comm/` - Commentarius OCR fragments, merged XML, manifest, and
+  authority tables.
+- `scripts/` - current edition builders, OCR helpers, audits, and wrappers.
+- `tei_maker/` - reusable package skeleton and shared helpers being expanded.
+- `prompts/` - TEI header and model prompt material.
+- `docs/refactor/` - authoritative refactor plan, audit, path ledger, source
+  manifest draft, and worklog.
 
-Large local assets such as PDFs, JP2 zips, extracted page images, `.env`,
-`sprengel/`, `ocr/`, `images/raw/`, `images/enhanced/`, and other scratch
-outputs are intentionally ignored. The public site works without them.
+## Refactor Authority
 
-## Generated Artifact Policy
+`docs/refactor/PLAN.md` is the single forward plan for the reorganization. Older
+baseline and artifact documents are historical/supporting records. Every
+implementation phase must update `docs/refactor/WORKLOG.md` with objective,
+commands, files touched, verification, and deferred risks.
 
-Commit generated XML when it is the viewer-facing source of truth or an
-intentional review artifact. Current committed generated outputs include:
+No path migration or cleanup should happen before the current documentation
+checkpoint is committed.
 
-- `output/berendes1902_epidoc.xml` - public Berendes viewer XML.
-- `output/sprengel1829_epidoc.xml` - Sprengel 1829/1830 Dioscorides base-text
-  viewer XML.
-- `output/sprengel_comm_epidoc.xml` - Sprengel 1830 Commentarius viewer XML,
-  generated from the Commentarius OCR stream.
-- `output/beck2020_fresh_diplomatic_epidoc.xml` - private/local diplomatic Beck
-  review XML.
-- `output/*_audit/` - committed audit ledgers and summaries used to review TEI
-  repair decisions.
+## Validation
 
-Do not commit bulky facsimiles, local OCR scratch, private source PDFs/XML, or
-secret-bearing files. Keep workflow-specific source folders distinct: Berendes
-normalization starts from `chunks/`, Sprengel base-edition sidecars live under
-`editions/sprengel1829/`, and Commentarius OCR inputs live under
-`sprengel_comm/`.
-
-## Validate And Rebuild
-
-Normalize chunk source:
+Core package/docs checks:
 
 ```bash
-python3 scripts/normalize_page_furniture_and_footnotes.py --chunks-dir chunks
+python3 -m compileall tei_maker tests
+python3 -m unittest discover -s tests
+python3 -m tei_maker data doctor
 ```
 
-Regenerate the merged TEI:
-
-```bash
-python3 scripts/merge_chunks.py \
-  --chunks-dir chunks \
-  --manifest manifest.json \
-  --header-template prompts/tei_header.xml \
-  --output output/berendes1902_epidoc.xml
-```
-
-Validate structure:
-
-```bash
-python3 scripts/validate_structure.py output/berendes1902_epidoc.xml
-```
-
-Check the viewer JavaScript:
+Viewer check:
 
 ```bash
 node --check viewer/app.js
 ```
 
-Rebuild the Sprengel Commentarius viewer XML:
+Current TEI/viewer validation examples:
 
 ```bash
+python3 scripts/validate_structure.py output/berendes1902_epidoc.xml
+python3 scripts/validate_beck_fresh_diplomatic.py \
+  output/beck2020_fresh_diplomatic_epidoc.xml \
+  --manifest editions/beck2020_fresh_diplomatic/manifest.json \
+  --expected-pdf-pages 711
 python3 scripts/build_sprengel_comm_epidoc.py \
   --source sprengel_comm/outputs/sprengel_comm_merged.xml \
   --chapter-table sprengel_comm/sprengel_chapter_table.tsv \
-  --output output/sprengel_comm_epidoc.xml
+  --output /tmp/tei-maker-sprengel-comm-baseline.xml
 ```
-
-## Source Facsimiles
-
-Berendes page images are served from Heidelberg University Library:
-
-https://digi.ub.uni-heidelberg.de/diglit/berendes1902
-
-Sprengel source images are wired to the Internet Archive item:
-
-https://archive.org/details/b23982500_0001/page/n5/mode/2up
-
-The TEI was generated from page image labels beginning at `page-0006.png`; this
-maps to Archive page `n5` and IIIF image `b23982500_0001_0006.jp2`.
-
-This repository does not bundle or relicense external facsimile images; see
-`NOTICE.md`.
 
 ## Licenses
 
 - Viewer and processing scripts: MIT (`LICENSE`).
 - TEI/data/docs: Creative Commons Attribution-NonCommercial 4.0 International
   (`LICENSE-DATA.md`).
-- External facsimile images: not bundled or relicensed here; see `NOTICE.md`.
+- External facsimile images and private/local sources are not bundled or
+  relicensed here; see `NOTICE.md`.

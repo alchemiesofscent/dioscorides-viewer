@@ -1,66 +1,80 @@
 # Source Manifest Draft
 
-This draft records non-destructive Phase B source and generated-artifact copies. It is not yet the canonical `editions/sources.manifest.toml`.
+This draft records raw/source assets and external copies. It is separate from
+generated TEI outputs, which are corpus assets preserved in git until a validated
+replacement and retirement note exist.
+
+## Scope
+
+Include:
+
+- source PDFs;
+- page images and extracted image trees;
+- JP2 zips and extracted JP2 trees;
+- TLG/First1KGreek XML;
+- private/local source XML;
+- large OCR/image intermediates needed for reproducibility.
+
+Do not list committed scholarly TEI outputs here except as source paths for
+checksum comparison when a future external copy is explicitly made.
 
 ## External Root
 
-- `TEI_MAKER_DATA`: `/home/seancoughlin/Projects/tei-maker-data`
-- Source checksum file: `/home/seancoughlin/Projects/tei-maker-data/sources/SOURCES_SHA256SUMS.txt`
-- Copy method: non-destructive copy to `$TEI_MAKER_DATA/sources/<slug>/`, `$TEI_MAKER_DATA/ocr/legacy/`, `$TEI_MAKER_DATA/images/<slug>/`, and `$TEI_MAKER_DATA/build/audits/<slug>/legacy/`
-- Removal/archive status: no repo files removed or archived in this batch
+- Default external root from prior work:
+  `/home/seancoughlin/Projects/tei-maker-data`.
+- Environment variable: `TEI_MAKER_DATA`.
+- Prior checksum files:
+  - `$TEI_MAKER_DATA/sources/SOURCES_SHA256SUMS.txt`
+  - `$TEI_MAKER_DATA/ocr/legacy/OCR_LEGACY_SHA256SUMS.txt`
+  - `$TEI_MAKER_DATA/images/IMAGES_SHA256SUMS.txt`
+  - `$TEI_MAKER_DATA/build/audits/AUDITS_SHA256SUMS.txt`
 
-## Classification Decisions
+## Raw Source Assets
 
-- `chunks/` is treated as committed editorial source for now, not generated build output.
-- `sprengel_comm/sprengel_chapter_table.tsv` is treated as curated authority data.
-- `sprengel_comm/ocr_fragments/` and `sprengel_comm/outputs/sprengel_comm_merged.xml` are treated as source-like build inputs until reproducibility is proven.
+| Repo path | External path | Classification | Required | Checksum status | Repo status | Notes |
+| --- | --- | --- | --- | --- | --- | --- |
+| `berendes1902__z3.pdf` | `$TEI_MAKER_DATA/sources/tlg0656.tlg001.berendes1902-ger1/berendes1902__z3.pdf` | raw source | yes | captured in prior source manifest | ignored | External facsimile rights not relicensed by repo. |
+| `berendes (1).xml` | `$TEI_MAKER_DATA/sources/tlg0656.tlg001.berendes1902-ger1/berendes (1).xml` | editorial/source-like input | yes | captured in prior source manifest | tracked | Keep tracked until replacement role is decided. |
+| `beck.pdf` | `$TEI_MAKER_DATA/sources/tlg0656.tlg001.beck2020-eng1/beck.pdf` | raw source | yes | captured in prior source manifest | ignored | Private/local source PDF. |
+| `beck.xml` | `$TEI_MAKER_DATA/sources/tlg0656.tlg001.beck2020-eng1/beck.xml` | raw source | optional | captured in prior source manifest | ignored | Private/local comparison XML. |
+| `tlg0656001.xml` | `$TEI_MAKER_DATA/sources/tlg0656.tlg001.sprengel1829-grclat1/tlg0656001.xml` | raw source | yes | captured in prior source manifest | ignored | Source XML. |
+| `tlg0656002.xml` | `$TEI_MAKER_DATA/sources/tlg0656.tlg001.sprengel1829-grclat1/tlg0656002.xml` | raw source | yes | captured in prior source manifest | ignored | Source XML. |
+| `tlg0656003.xml` | `$TEI_MAKER_DATA/sources/tlg0656.tlg001.sprengel1829-grclat1/tlg0656003.xml` | raw source | yes | captured in prior source manifest | ignored | Source XML. |
+| `tlg0656004.xml` | `$TEI_MAKER_DATA/sources/tlg0656.tlg001.sprengel1829-grclat1/tlg0656004.xml` | raw source | yes | captured in prior source manifest | ignored | Source XML. |
+| `b23982500_0002_jp2.zip` | `$TEI_MAKER_DATA/sources/tlg0656.tlg001.sprengel1830-comm/b23982500_0002_jp2.zip` | raw source | yes | captured in prior source manifest | ignored | Internet Archive JP2 zip. |
+| `sprengel/` | `$TEI_MAKER_DATA/sources/tlg0656.tlg001.sprengel1830-comm/sprengel/` | raw source | optional if zip is sufficient | pending | ignored | Extracted JP2 tree, about 534M in current checkout. |
 
-## Copied Sources
+## Generated Or Bulky Reproducibility Assets
 
-| Slug | Source file | External path | SHA256 | Required | License/source notes |
+| Repo path | External path | Classification | Checksum status | Repo status | Notes |
 | --- | --- | --- | --- | --- | --- |
-| `tlg0656.tlg001.berendes1902-ger1` | `berendes1902__z3.pdf` | `$TEI_MAKER_DATA/sources/tlg0656.tlg001.berendes1902-ger1/berendes1902__z3.pdf` | `4b6cc1adcd4076d9423bccdfa937e683da31c8e65f908ee60605720ab5532ee7` | yes | Local source PDF; external facsimile rights not relicensed by repo. |
-| `tlg0656.tlg001.berendes1902-ger1` | `berendes (1).xml` | `$TEI_MAKER_DATA/sources/tlg0656.tlg001.berendes1902-ger1/berendes (1).xml` | `91763b5f9e18ea41c5671b01467035d14be78b81cf135f71eebf60cf316260e5` | yes | Existing source XML; currently tracked and not moved in this batch. |
-| `tlg0656.tlg001.beck2020-eng1` | `beck.pdf` | `$TEI_MAKER_DATA/sources/tlg0656.tlg001.beck2020-eng1/beck.pdf` | `60ef22d296fcd4fcf8a2a0ff65830b138b8830913014ea2be816647dd7b617ff` | yes | Local/private source PDF; keep out of committed repo. |
-| `tlg0656.tlg001.beck2020-eng1` | `beck.xml` | `$TEI_MAKER_DATA/sources/tlg0656.tlg001.beck2020-eng1/beck.xml` | `4f87c63e9baa26f6e239f52161fc2e60b28c47de35149c803510d2ef442ab49d` | optional/comparison | Local/private source XML; keep out of committed repo. |
-| `tlg0656.tlg001.sprengel1829-grclat1` | `tlg0656001.xml` | `$TEI_MAKER_DATA/sources/tlg0656.tlg001.sprengel1829-grclat1/tlg0656001.xml` | `a38ad4b330fd795793e65a310acf4eb74ea5ee6b1137f9a7cb18db9c584611f8` | yes | Local source XML. |
-| `tlg0656.tlg001.sprengel1829-grclat1` | `tlg0656002.xml` | `$TEI_MAKER_DATA/sources/tlg0656.tlg001.sprengel1829-grclat1/tlg0656002.xml` | `7da6325c8684b1f6024e1f501b9637162f92df977fa4f6d3e633598165b8cbe9` | yes | Local source XML. |
-| `tlg0656.tlg001.sprengel1829-grclat1` | `tlg0656003.xml` | `$TEI_MAKER_DATA/sources/tlg0656.tlg001.sprengel1829-grclat1/tlg0656003.xml` | `64ea7abbefaae9f2cd0931a113f82683b3ec7b931ff17456112276cd3bd79b16` | yes | Local source XML. |
-| `tlg0656.tlg001.sprengel1829-grclat1` | `tlg0656004.xml` | `$TEI_MAKER_DATA/sources/tlg0656.tlg001.sprengel1829-grclat1/tlg0656004.xml` | `1c19a7c0068d3514d07e11b9abb2d6446a328c767e88b51908f940b01b970052` | yes | Local source XML. |
-| `tlg0656.tlg001.sprengel1830-comm` | `b23982500_0002_jp2.zip` | `$TEI_MAKER_DATA/sources/tlg0656.tlg001.sprengel1830-comm/b23982500_0002_jp2.zip` | `70b9786efda5f0d70ec0f4402144f18e6ce70cb4b5a878660967b8ac19a06165` | yes | Internet Archive JP2 source zip; extracted `sprengel/` tree not copied in this batch because it duplicates the zip and is 534M. |
+| `ocr/` | `$TEI_MAKER_DATA/ocr/legacy/` | generated intermediate | captured in prior generated-artifact manifest | ignored/mixed | About 4.0G; no repo removal yet. |
+| `images/raw/` and `images/enhanced/` | `$TEI_MAKER_DATA/images/tlg0656.tlg001.berendes1902-ger1/` | generated intermediate/raw facsimile cache | captured in prior generated-artifact manifest | ignored | About 660M total under `images/`. |
+| `editions/beck2020/page_images/` | `$TEI_MAKER_DATA/images/tlg0656.tlg001.beck2020-eng1/page_images/` | generated intermediate/raw facsimile cache | captured in prior generated-artifact manifest | ignored | Beck page image cache. |
+| `output/*_audit/` | `$TEI_MAKER_DATA/build/audits/<slug>/legacy/` or committed edition `audit/` | audit/provenance | partial prior copy | tracked/mixed | Classify before moving or retiring. |
+| `chunks_pilot_gate/` | `$TEI_MAKER_DATA/build/audits/legacy/` | generated intermediate | pending | ignored | Pilot scratch; audit before deletion. |
 
-## Copied Generated Artifacts
+## Source-Like Material Kept In Git For Now
 
-These copies are non-destructive mirrors. Repo copies were not removed or renamed.
+These are not raw public assets, but they may encode editorial decisions or
+hard-to-reproduce generation evidence:
 
-| Category | Current path | External path | Files copied | Checksum manifest |
-| --- | --- | --- | --- | --- |
-| OCR legacy | `ocr/` | `$TEI_MAKER_DATA/ocr/legacy/` | 9410 repo files; external tree has 9411 files including its manifest | `$TEI_MAKER_DATA/ocr/legacy/OCR_LEGACY_SHA256SUMS.txt` |
-| Berendes images | `images/raw/`, `images/enhanced/` | `$TEI_MAKER_DATA/images/tlg0656.tlg001.berendes1902-ger1/raw/`, `$TEI_MAKER_DATA/images/tlg0656.tlg001.berendes1902-ger1/enhanced/` | 620 | `$TEI_MAKER_DATA/images/IMAGES_SHA256SUMS.txt` |
-| Beck page images | `editions/beck2020/page_images/` | `$TEI_MAKER_DATA/images/tlg0656.tlg001.beck2020-eng1/page_images/` | 711 | `$TEI_MAKER_DATA/images/IMAGES_SHA256SUMS.txt` |
-| Berendes audit legacy | `output/berendes_heading_audit/` | `$TEI_MAKER_DATA/build/audits/tlg0656.tlg001.berendes1902-ger1/legacy/berendes_heading_audit/` | 4 | `$TEI_MAKER_DATA/build/audits/AUDITS_SHA256SUMS.txt` |
-| Beck audit legacy | `output/beck2020_fresh_diplomatic_audit/`, `output/beck_footnote_audit/`, `output/beck_text_cleaning/`, `output/beck_private_ingest_audit.md` | `$TEI_MAKER_DATA/build/audits/tlg0656.tlg001.beck2020-eng1/legacy/` | 36 | `$TEI_MAKER_DATA/build/audits/AUDITS_SHA256SUMS.txt` |
-| Sprengel audit legacy | `output/sprengel_heading_audit/`, `output/sprengel_page_header_audit/` | `$TEI_MAKER_DATA/build/audits/tlg0656.tlg001.sprengel1829-grclat1/legacy/` | 10 | `$TEI_MAKER_DATA/build/audits/AUDITS_SHA256SUMS.txt` |
+- `chunks/`;
+- `sprengel_comm/ocr_fragments/`;
+- `sprengel_comm/outputs/sprengel_comm_merged.xml`;
+- `sprengel_comm/sprengel_chapter_table.tsv`;
+- `editions/sprengel1829/page_headers.csv`;
+- Beck accepted/correction ledgers under ignored OCR trees and committed audit
+  summaries.
 
-Checksum manifest digests:
+Do not remove or externalize these as disposable intermediates without a
+specific audit entry.
 
-| Manifest | SHA256 |
-| --- | --- |
-| `$TEI_MAKER_DATA/ocr/legacy/OCR_LEGACY_SHA256SUMS.txt` | `4bce1550cf9303b14e3a0f413c1f39fd4c971b661ae097115c296f5c0a55c8b4` |
-| `$TEI_MAKER_DATA/images/IMAGES_SHA256SUMS.txt` | `b6604025b1f4489d8f7750929a689853f2bbffdb629e353497d392858d78ad7c` |
-| `$TEI_MAKER_DATA/build/audits/AUDITS_SHA256SUMS.txt` | `632be2d80ebe4bfb440cf33b45b747d2060c3deb821f556485a82564627b6bea` |
+## Open Decisions
 
-## Deferred Phase B Copies
-
-These trees are not copied or archived yet:
-
-- `sprengel/` extracted JP2 tree at about 534M; source zip is already copied and checksummed under `$TEI_MAKER_DATA/sources/`.
-- `chunks/` at about 3.0M; treated as editorial committed source until explicitly reviewed.
-- `sprengel_comm/ocr_fragments/`; tracked OCR fragments that may contain hard-to-reproduce editorial/generation decisions.
-- `sprengel_comm/outputs/sprengel_comm_merged.xml`; tracked merged OCR XML used as a builder input.
-
-## Open Questions
-
-- Whether `chunks/` should eventually move under the Berendes edition slug as committed editorial source.
-- Whether `sprengel_comm/ocr_fragments/` are reproducible OCR intermediates or should stay committed as source-like evidence.
-- Whether copied older Beck page image trees should later be archived or retired as obsolete review evidence.
+- Whether the existing external source copies should be refreshed after this
+  documentation reset.
+- Whether `sprengel/` needs its own checksum tree or can be reproduced from the
+  JP2 zip.
+- Which committed audit ledgers should move beside canonical edition folders and
+  which copied generated audits can remain external-only.

@@ -1,5 +1,58 @@
 # Refactor Worklog
 
+Supporting record for `docs/refactor/PLAN.md`. Every work session should add an
+entry with objective, touched files/directories, commands, verification, docs
+updated, commit hash when known, and open risks.
+
+## 2026-05-17 20:21 Europe/Budapest
+
+- Objective: Perform the docs-only reset requested by the autonomous refactor
+  plan before any cleanup, migration, deletion, or code motion.
+- Files/directories touched:
+  - `README.md`
+  - `docs/refactor/PLAN.md`
+  - `docs/refactor/REPO_AUDIT.md`
+  - `docs/refactor/CHECKLIST.md`
+  - `docs/refactor/MIGRATION_MAP.md`
+  - `docs/refactor/SOURCE_MANIFEST_DRAFT.md`
+  - `docs/refactor/BASELINE.md`
+  - `docs/refactor/BASELINE_ARTIFACTS.md`
+  - `docs/refactor/WORKLOG.md`
+- Commands run:
+  - `git status --short`
+  - `git status --ignored --short | sed -n '1,200p'`
+  - `git rev-parse --abbrev-ref HEAD`
+  - `git rev-parse --short HEAD`
+  - `git ls-files | wc -l`
+  - `find . -maxdepth 2 -type d | sort`
+  - `du -sh ./* ./.??* 2>/dev/null | sort -hr | sed -n '1,80p'`
+  - `git ls-files docs/refactor README.md | sort`
+  - `git diff -- README.md docs/refactor`
+  - `python3 -m compileall tei_maker tests`
+  - `python3 -m unittest discover -s tests`
+  - `python3 -m tei_maker data doctor`
+  - `node --check viewer/app.js`
+  - `git diff --check`
+  - `git status --short`
+- Verification result:
+  - Diff reviewed for docs-only scope.
+  - `compileall`: pass.
+  - `unittest`: 9 tests pass.
+  - `tei_maker data doctor`: pass with expected warning that
+    `TEI_MAKER_DATA` is not set, then reports the default external data root and
+    expected source/generated mirrors present.
+  - `node --check viewer/app.js`: pass.
+  - `git diff --check`: pass.
+- Docs updated: README and all current refactor docs listed above.
+- Commit hash: pending at time of entry.
+- Open risks or deferred decisions:
+  - Current branch already contains prior Phase A/B-style refactor work; this
+    checkpoint only resets documentation authority.
+  - No generated TEI, manifests, raw data, scripts, or viewer paths were moved
+    or deleted.
+  - Raw/source externalization status is based on prior manifest records and
+    should be refreshed before any removal decision.
+
 ## 2026-05-17 18:10 Europe/Budapest
 
 - Action taken: Started Phase 0 baseline and safety inspection.
