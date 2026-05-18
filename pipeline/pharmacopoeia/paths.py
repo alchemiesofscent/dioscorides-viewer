@@ -39,8 +39,8 @@ EDITION_REGISTRY: dict[str, dict[str, str]] = {
         "legacy_dir": "sprengel1829",
     },
     "sprengel1830-comm": {
-        "cts": "tlg0656.tlg001.sprengel1830-comm-lat1",
-        "urn": "urn:cts:greekLit:tlg0656.tlg001.sprengel1830-comm-lat1",
+        "cts": "tlg0656.tlg001.sprengel1830-comm",
+        "urn": "urn:cts:greekLit:tlg0656.tlg001.sprengel1830-comm",
         "label": "Sprengel 1830 Commentarius (Latin commentary)",
         "legacy_dir": "sprengel1830-comm",
     },

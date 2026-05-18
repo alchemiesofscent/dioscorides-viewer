@@ -43,7 +43,7 @@ Edition CTS work-versions in v1:
 |---|---|---|
 | `berendes1902` | `tlg0656.tlg001.berendes1902-ger1` | `urn:cts:greekLit:tlg0656.tlg001.berendes1902-ger1` |
 | `sprengel1829` | `tlg0656.tlg001.sprengel1829-grclat1` | `urn:cts:greekLit:tlg0656.tlg001.sprengel1829-grclat1` |
-| `sprengel1830-comm` | `tlg0656.tlg001.sprengel1830-comm-lat1` | `urn:cts:greekLit:tlg0656.tlg001.sprengel1830-comm-lat1` |
+| `sprengel1830-comm` | `tlg0656.tlg001.sprengel1830-comm` | `urn:cts:greekLit:tlg0656.tlg001.sprengel1830-comm` |
 | `beck2020` | `tlg0656.tlg001.beck2020-eng1` | `urn:cts:greekLit:tlg0656.tlg001.beck2020-eng1` |
 
 ## Scholarly principle
@@ -117,6 +117,16 @@ All stages are deterministic Python (no LLM calls in v1):
   `schemas/pharmacopoeia.sch` (chapter shape, note chains, xml:id
   uniqueness, lemma-link target resolution, `<lb>` standard, no bare JP2
   in `@facs`).
+
+## External data
+
+Raw source PDFs, JP2 archives, source XMLs, page images, OCR
+intermediates, and generated build artefacts live **outside the
+repository**, under the directory pointed to by `$TEI_MAKER_DATA`
+(default `~/Projects/tei-maker-data/`). See
+[`docs/DATA_LAYOUT.md`](docs/DATA_LAYOUT.md) for the full layout and SHA
+verification commands. The v1 pipeline does not currently read from this
+directory; it is the source of truth for v1.1+ regeneration workflows.
 
 ## Forward compatibility
 

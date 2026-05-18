@@ -37,10 +37,10 @@
     },
     {
       "id": "sprengel1830-comm",
-      "cts_urn": "urn:cts:greekLit:tlg0656.tlg001.sprengel1830-comm-lat1",
+      "cts_urn": "urn:cts:greekLit:tlg0656.tlg001.sprengel1830-comm",
       "label": "Sprengel 1830 Commentarius (Latin commentary)",
-      "tei": "corpus/dioscorides/editions/tlg0656.tlg001.sprengel1830-comm-lat1/tei/tlg0656.tlg001.sprengel1830-comm-lat1.xml",
-      "manifest": "corpus/dioscorides/editions/tlg0656.tlg001.sprengel1830-comm-lat1/manifest.json",
+      "tei": "corpus/dioscorides/editions/tlg0656.tlg001.sprengel1830-comm/tei/tlg0656.tlg001.sprengel1830-comm.xml",
+      "manifest": "corpus/dioscorides/editions/tlg0656.tlg001.sprengel1830-comm/manifest.json",
       "lemmas": {},
       "imageMode": "remote",
       "sourceLabel": "Internet Archive facsimile (Wellcome b23982500 vol. 2)",

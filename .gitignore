@@ -9,16 +9,9 @@ build/
 .venv/
 node_modules/
 
-# Local OCR / image source caches (not redistributable)
+# Raw sources, page images, OCR intermediates, and generated build
+# artefacts live under $TEI_MAKER_DATA — never inside the repo.
+# See docs/DATA_LAYOUT.md.
+# Defensive gitignores so accidental re-creation in the repo root is silent:
 ocr/
 images/
-
-# Local-only source assets (not bundled in git; users supply their own)
-b23982500_0002_jp2.zip
-beck.pdf
-beck.xml
-berendes1902__z3.pdf
-tlg0656*.xml
-chunks_pilot_gate/
-sprengel/
-costs.csv
