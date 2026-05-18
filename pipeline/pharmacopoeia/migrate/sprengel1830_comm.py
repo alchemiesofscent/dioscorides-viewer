@@ -63,10 +63,11 @@ TRAILING_NOTE_MARKER_RE = re.compile(r"(?:\d+|[⁰¹²³⁴⁵⁶⁷⁸⁹]+)$")
 JP2_BASENAME_RE = re.compile(r"(b23982500_0002_\d{4})\.jp2", re.IGNORECASE)
 SUPERSCRIPT_DIGITS = str.maketrans("⁰¹²³⁴⁵⁶⁷⁸⁹", "0123456789")
 LINE_END_HYPHEN_RE = re.compile(r"[-‐‑‒–—](\s*)$")
-CAP_PREFIX_RE = re.compile(
-    r"^\s*(Cap\.\s+[IVXLCDM]+(?:\s*[—–-]\s*[IVXLCDM]+|\.\s*[IVXLCDM]+)?\.\s*)",
-    re.IGNORECASE,
+CAP_PREFIX_PATTERN = (
+    r"Cap\.\s+[IVXLCDM]+(?:\s*[—–-]\s*[IVXLCDM]+|\.\s*[IVXLCDM]+(?=\.|\s|$))?\.?"
 )
+CAP_PREFIX_RE = re.compile(rf"^\s*({CAP_PREFIX_PATTERN})\s*", re.IGNORECASE)
+CAP_PREFIX_SEARCH_RE = re.compile(rf"(?:^|\s)({CAP_PREFIX_PATTERN})\s*", re.IGNORECASE)
 FRAGMENT_RELATIVE_PATH = Path(
     "ocr/tlg0656.tlg001.sprengel1830-comm/v1-llm-fragments"
 )
@@ -333,6 +334,50 @@ def _insert_missing_leading_lbs(root: etree._Element) -> int:
     return inserted
 
 
+def _split_literal_line_breaks_in_element(elem: etree._Element) -> int:
+    inserted = 0
+    if elem.text and "\n" in elem.text:
+        parts = elem.text.split("\n")
+        elem.text = parts[0]
+        insert_at = 0
+        for part in parts[1:]:
+            if not part.strip():
+                continue
+            lb = _new_lb()
+            lb.tail = part.lstrip()
+            elem.insert(insert_at, lb)
+            insert_at += 1
+            inserted += 1
+
+    for child in list(elem):
+        if child.tag != TEI + "lb":
+            inserted += _split_literal_line_breaks_in_element(child)
+        if not child.tail or "\n" not in child.tail:
+            continue
+        parts = child.tail.split("\n")
+        child.tail = parts[0]
+        insert_at = elem.index(child) + 1
+        for part in parts[1:]:
+            if not part.strip():
+                continue
+            lb = _new_lb()
+            lb.tail = part.lstrip()
+            elem.insert(insert_at, lb)
+            insert_at += 1
+            inserted += 1
+    return inserted
+
+
+def normalize_literal_body_line_breaks(root: etree._Element) -> int:
+    """Convert raw text newlines in body paragraphs into line milestones."""
+    inserted = 0
+    for p in root.iter(TEI + "p"):
+        if _inside_ignored_line_context(p):
+            continue
+        inserted += _split_literal_line_breaks_in_element(p)
+    return inserted
+
+
 def _line_text_from_element(elem: etree._Element) -> tuple[str, bool]:
     if elem.tag in LINE_BOUNDARY_TAGS:
         return "", True
@@ -543,13 +588,20 @@ def _cap_prefix_matches_fragment_line(
 ) -> str | None:
     if CAP_PREFIX_RE.match(body_line):
         return None
-    match = CAP_PREFIX_RE.match(fragment_line)
-    if not match:
-        return None
-    suffix = fragment_line[match.end():]
-    if not _line_starts_with_same_words(suffix, body_line):
-        return None
-    return " ".join(match.group(1).split())
+    for match in CAP_PREFIX_SEARCH_RE.finditer(fragment_line):
+        suffix = fragment_line[match.end():]
+        if _line_starts_with_same_words(suffix, body_line):
+            return _normalize_cap_prefix(match.group(1))
+    return None
+
+
+def _normalize_cap_prefix(prefix: str) -> str:
+    text = " ".join(prefix.split())
+    text = re.sub(r"\s*([—–-])\s*", r" \1 ", text)
+    text = re.sub(r"\s+", " ", text).strip()
+    if not text.endswith("."):
+        text = f"{text}."
+    return text
 
 
 def _heading_prefix_candidates(fragment_path: Path, body_line: str) -> list[str]:
@@ -1166,6 +1218,60 @@ def repair_known_missing_line_breaks(root: etree._Element) -> int:
         foreign.tail = "\n"
         parent.insert(parent.index(foreign) + 1, lb)
         repaired += 1
+    repaired += _repair_page_596_line_breaks(root)
+    return repaired
+
+
+def _element_page_n(elem: etree._Element) -> str:
+    pb = _pb_before_element(elem)
+    return pb.get("n") if pb is not None else ""
+
+
+def _insert_lb_before_element(elem: etree._Element) -> bool:
+    parent = elem.getparent()
+    if parent is None:
+        return False
+    previous = elem.getprevious()
+    if (
+        previous is not None
+        and previous.tag == TEI + "lb"
+        and not (previous.tail or "").strip()
+    ):
+        return False
+    lb = _new_lb()
+    lb.tail = ""
+    parent.insert(parent.index(elem), lb)
+    return True
+
+
+def _remove_empty_lb_before_element(elem: etree._Element) -> bool:
+    previous = elem.getprevious()
+    if previous is None or previous.tag != TEI + "lb":
+        return False
+    if previous.get("break") == "no" or (previous.tail or "").strip():
+        return False
+    previous.tail = " "
+    _remove_lb_preserving_text(previous)
+    return True
+
+
+def _repair_page_596_line_breaks(root: etree._Element) -> int:
+    """Restore checked page 596 lines that start with inline markup."""
+    repaired = 0
+    for hi in root.iter(TEI + "hi"):
+        if _element_page_n(hi) != "596":
+            continue
+        text = _normalized_text(hi)
+        if text.startswith("Cladium potius germanicum") and _insert_lb_before_element(hi):
+            repaired += 1
+        elif text == "acutum" and _insert_lb_before_element(hi):
+            repaired += 1
+
+    for foreign in root.iter(TEI + "foreign"):
+        if _element_page_n(foreign) != "596":
+            continue
+        if _normalized_text(foreign) == "Ὁλόσχοινος" and _remove_empty_lb_before_element(foreign):
+            repaired += 1
     return repaired
 
 
@@ -1374,6 +1480,7 @@ def run() -> None:
     preserved_sources = _preserve_pb_sources(root) if used_corpus_source else {}
     promote_plain_id_to_xml_id(root)
     strip_bloat_attrs(root)
+    literal_line_breaks_normalized = normalize_literal_body_line_breaks(root)
     heading_stats = reconcile_inline_chapter_headings(root, write_audit=True)
     footnote_refs_normalized = normalize_footnote_ref_markers(root)
     missing_line_breaks_repaired = repair_known_missing_line_breaks(root)
@@ -1425,6 +1532,7 @@ def run() -> None:
         f"{hyphen_stats.existing_cleared} existing break markers rederived), "
         f"{facs_rewritten} JP2 facs URLs rewritten to IIIF JPEG, "
         f"{sources_restored} pb @source attrs restored, "
+        f"{literal_line_breaks_normalized} literal body line breaks converted to <lb>, "
         f"{indent_stats['line_start_moved']} <lb> tags moved to line starts, "
         f"{indent_stats['tail_lines_joined']} <lb> tail lines joined, "
         f"{indent_stats['lb_lines_indented']} <lb> lines reindented, "

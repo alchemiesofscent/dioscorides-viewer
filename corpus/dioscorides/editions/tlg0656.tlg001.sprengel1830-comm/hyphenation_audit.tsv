@@ -42,6 +42,9 @@ page	fragment	status	before	after	matches
 456	b23982500_0002_0462.xml	ambiguous	Theo	phrasti	2
 456	b23982500_0002_0462.xml	ambiguous	Theo	phrasti	2
 458	b23982500_0002_0464.xml	unmatched	Hesio	Lib	0
+469	b23982500_0002_0475.xml	unmatched	no	stra	0
+469	b23982500_0002_0475.xml	unmatched	nomi	ne	0
+469	b23982500_0002_0475.xml	unmatched	no	men	0
 472	b23982500_0002_0478.xml	unmatched	γερά	νειον	0
 474	b23982500_0002_0480.xml	unmatched	ξηρό	τητα	0
 490	b23982500_0002_0496.xml	unmatched	se	ptem	0

@@ -3,6 +3,7 @@ import pytest
 
 from pharmacopoeia.migrate.sprengel1830_comm import (
     import_line_end_hyphenation,
+    normalize_literal_body_line_breaks,
     normalize_german_opening_quotes,
     normalize_page_line_numbering,
     normalize_page_top_furniture,
@@ -288,6 +289,118 @@ def test_common_heading_restores_cap_prefix_without_duplicating_title(tmp_path):
     assert stats.prefixes_restored == 1
     assert line_text.startswith("Cap. I. De Iride. Ἶρις")
     assert line_text.count("De Iride") == 1
+
+
+def test_heading_restores_cap_prefix_when_fragment_omits_roman_period(tmp_path):
+    root = _parse(
+        '<pb n="349" source="https://archive.org/download/b23982500_0002/'
+        'b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0357.jp2"/>'
+        '<div type="textpart" subtype="chapter" n="1.12">'
+        '<head><lb n="3"/>Cap. XII. De Cassia. <foreign xml:lang="grc">Περὶ Κασσίας</foreign></head>'
+        '<p><lb n="4"/><hi rend="italic">De Cassia</hi>. '
+        '<foreign xml:lang="grc">Κασσία</foreign> aut <foreign xml:lang="grc">κασία</foreign> quibusdam</p>'
+        '</div>'
+    )
+    _write_fragment(
+        tmp_path,
+        "b23982500_0002_0357.xml",
+        '<pb n="349"/>Cap. XII <hi rend="italic">De Cassia</hi>. '
+        '<foreign xml:lang="grc">Κασσία</foreign> aut <foreign xml:lang="grc">κασία</foreign> quibusdam<lb/>',
+    )
+
+    stats = reconcile_inline_chapter_headings(root, tmp_path)
+
+    head = root.find(f".//{TEI}head")
+    line_text = _flat_text(root.find(f".//{TEI}p"))
+    assert stats.prefixes_restored == 1
+    assert head.get("type") == "supplied"
+    assert head.find(f".//{TEI}lb") is None
+    assert line_text.startswith("Cap. XII. De Cassia. Κασσία")
+    assert line_text.count("De Cassia") == 1
+
+
+def test_heading_restores_cap_prefix_after_previous_fragment_text(tmp_path):
+    root = _parse(
+        '<pb n="348" source="https://archive.org/download/b23982500_0002/'
+        'b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0356.jp2"/>'
+        '<div type="textpart" subtype="chapter" n="1.11">'
+        '<head><lb n="20"/>Cap. XI. De Malabathro. '
+        '<foreign xml:lang="grc">Περὶ Μαλαβάθρου</foreign></head>'
+        '<p><lb n="21"/><hi rend="italic">De Malabathro.</hi> Obscuro huic loco lucem</p>'
+        '</div>'
+    )
+    _write_fragment(
+        tmp_path,
+        "b23982500_0002_0356.xml",
+        '<pb n="348"/>mari. Cap. XI. <hi rend="italic">De Malabathro.</hi> '
+        'Obscuro huic loco lucem<lb/>',
+    )
+
+    stats = reconcile_inline_chapter_headings(root, tmp_path)
+
+    line_text = _flat_text(root.find(f".//{TEI}p"))
+    assert stats.prefixes_restored == 1
+    assert line_text.startswith("Cap. XI. De Malabathro. Obscuro")
+    assert line_text.count("De Malabathro") == 1
+
+
+def test_literal_body_newlines_become_numbered_lines_and_enable_heading(tmp_path):
+    root = _parse(
+        '<pb n="596" source="https://archive.org/download/b23982500_0002/'
+        'b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0602.jp2"/>'
+        '<p><lb n="1"/>niger, rotundus, cuiusque culmi crassiores et carnosiores\n'
+        'sunt, forte Scirpus lacustris\n'
+        'sunt, sed pallida, aut Sc. maritimus. Tertia multo car\n'
+        '<lb n="2" break="no"/>nosior, ὁλόσχοινος\n'
+        'ob hanc ipsam caussam Sc. Holoschoenus esse nequit.\n'
+        '<hi rend="italic">Cladium potius germanicum</hi></p>'
+        '<div type="textpart" subtype="chapter" n="4.53">'
+        '<head><lb n="3"/>Cap. LIII. De Lichene. '
+        '<foreign xml:lang="grc">Περὶ Λειχῆνος</foreign></head>'
+        '<p><lb n="4"/>De lichene in roscidis petris nascente\n'
+        'aliter Plinius<ref target="#fn53" type="footnote-ref">53</ref>: „Nascitur in saxosis</p>'
+        '</div>'
+    )
+    _write_fragment(
+        tmp_path,
+        "b23982500_0002_0602.xml",
+        '<pb n="596"/>Cap. LIII. De lichene in roscidis petris nascente\n'
+        'aliter Plinius<ref target="#fn53">⁵³</ref>: ,,Nascitur in saxosis<lb/>',
+    )
+
+    inserted = normalize_literal_body_line_breaks(root)
+    repaired = repair_known_missing_line_breaks(root)
+    stats = reconcile_inline_chapter_headings(root, tmp_path)
+    normalize_page_line_numbering(root)
+
+    lines = root.findall(f".//{TEI}p//{TEI}lb")
+    chapter_text = _flat_text(root.findall(f".//{TEI}div/{TEI}p")[0])
+    assert inserted == 4
+    assert repaired == 1
+    assert stats.prefixes_restored == 1
+    assert [lb.get("n") for lb in lines] == ["1", "2", "3", "4", "5", "6", "7", "8"]
+    assert lines[5].tail == ""
+    assert lines[6].tail.startswith("Cap. LIII. De lichene")
+    assert chapter_text.startswith("Cap. LIII. De lichene in roscidis petris nascente")
+
+
+def test_page_596_removes_false_line_break_before_holoschoenus():
+    root = _parse(
+        '<pb n="596"/>'
+        '<p><lb n="7"/>id et in paludibus Peloponnesi.'
+        '<ref target="#fn596_49" type="footnote-ref">49</ref>'
+        '<lb n="8"/><foreign xml:lang="grc">Ὁλόσχοινος</foreign> Theophra'
+        '<lb n="9" break="no"/>sti</p>'
+    )
+
+    repaired = repair_known_missing_line_breaks(root)
+    normalize_page_line_numbering(root)
+
+    lbs = root.findall(f".//{TEI}p//{TEI}lb")
+    first_line = _flat_text(root.find(f".//{TEI}p"))
+    assert repaired == 1
+    assert [lb.get("n") for lb in lbs] == ["1", "2"]
+    assert "Peloponnesi.49 Ὁλόσχοινος Theophrasti" in first_line
 
 
 def test_heading_prefix_uses_current_page_fragment_not_earlier_page(tmp_path):
