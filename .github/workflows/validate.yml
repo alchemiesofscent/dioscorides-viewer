@@ -1,0 +1,30 @@
+name: Validate
+
+on:
+  pull_request:
+  push:
+    branches: [main, refactor/pharmacopoeia]
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install lxml pytest
+      - name: Run pharmacopoeia validate (working profile)
+        run: |
+          PYTHONPATH=pipeline python -m pharmacopoeia.cli validate --profile working
+      - name: Run pipeline tests
+        run: |
+          PYTHONPATH=pipeline python -m pytest pipeline/tests -v
+      - name: Viewer JS syntax check
+        run: node --check viewer/app.js

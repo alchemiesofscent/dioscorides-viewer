@@ -2,22 +2,42 @@
   "use strict";
 
   const REPO_ROOT = new URL("../", window.location.href);
-  const EDITIONS_PATH = "editions/editions.json";
-  const LOCAL_PRIVATE_REGISTRY_PATHS = [
-    "editions/beck2020_fresh_diplomatic/private_registry.json",
-  ];
+  const EDITIONS_PATH = "corpus/dioscorides/editions/index.json";
+  const LOCAL_PRIVATE_REGISTRY_PATHS = [];
   const XML_NS = "http://www.w3.org/XML/1998/namespace";
   const FALLBACK_EDITION = {
     id: "berendes1902",
     label: "Berendes 1902",
-    tei: "editions/berendes1902/tei/edition.xml",
-    manifest: "editions/berendes1902/manifest.json",
+    tei: "corpus/dioscorides/editions/berendes1902/tei/edition.xml",
+    manifest: "corpus/dioscorides/editions/berendes1902/manifest.json",
     imageMode: "remote",
     localImageRoot: "images/raw/",
     imageLabelRoot: "images/raw/",
     sourceUrl: "https://digi.ub.uni-heidelberg.de/diglit/berendes1902",
     sourceLabel: "Heidelberg facsimile",
   };
+
+  // Defensive: if any @facs URL still ends in .jp2 (browsers cannot render
+  // JPEG 2000), substitute the IIIF JPEG derivative on the fly. Migrations
+  // are supposed to do this at build time; this is belt-and-braces.
+  function coerceJpegUrl(url) {
+    if (!url || typeof url !== "string") return url;
+    const lower = url.toLowerCase();
+    if (!lower.endsWith(".jp2") && !lower.endsWith(".jp2/")) return url;
+    const m = url.match(
+      /^https?:\/\/archive\.org\/download\/([^/]+)\/([^/]+_jp2\.zip)\/(.+\.jp2)$/
+    );
+    if (!m) return url;
+    const inner = m[3].replace(/%2F/g, "/");
+    const identifier = [m[1], m[2], ...inner.split("/")]
+      .map((p) => encodeURIComponent(p))
+      .join("%2F");
+    return (
+      "https://iiif.archive.org/image/iiif/3/" +
+      identifier +
+      "/full/1200,/0/default.jpg"
+    );
+  }
 
   const els = {
     loadStatus: document.getElementById("loadStatus"),

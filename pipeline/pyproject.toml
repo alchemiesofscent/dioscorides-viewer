@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pharmacopoeia"
+version = "0.1.0"
+description = "TEI/EpiDoc migration, validation, and viewer-prep tooling for pharmacopoeia corpus."
+readme = "../README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+dependencies = [
+  "lxml>=5.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+pharmacopoeia = "pharmacopoeia.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["pharmacopoeia*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

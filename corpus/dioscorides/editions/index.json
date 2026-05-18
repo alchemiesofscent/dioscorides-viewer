@@ -1,0 +1,76 @@
+{
+  "defaultEdition": "berendes1902",
+  "editions": [
+    {
+      "id": "berendes1902",
+      "label": "Berendes 1902 (German translation)",
+      "tei": "corpus/dioscorides/editions/berendes1902/tei/edition.xml",
+      "manifest": "corpus/dioscorides/editions/berendes1902/manifest.json",
+      "lemmas": {
+        "grc": "corpus/dioscorides/lemmas/berendes1902-grc.xml",
+        "de": "corpus/dioscorides/lemmas/berendes1902-de.xml"
+      },
+      "imageMode": "remote",
+      "sourceLabel": "Heidelberg facsimile",
+      "sourceUrl": "https://digi.ub.uni-heidelberg.de/diglit/berendes1902",
+      "doi": "https://doi.org/10.11588/diglit.69903",
+      "urn": "urn:nbn:de:bsz:16-diglit-699033",
+      "iiifManifest3": "https://digi.ub.uni-heidelberg.de/diglit/iiif3/berendes1902/manifest",
+      "licenseNote": "TEI/data/docs: CC BY-NC 4.0. Code: MIT. Heidelberg facsimile is Public Domain Mark by Heidelberg."
+    },
+    {
+      "id": "sprengel1829",
+      "label": "Sprengel 1829/1830 (Greek + Latin parallel)",
+      "tei": "corpus/dioscorides/editions/sprengel1829/tei/edition.xml",
+      "manifest": "corpus/dioscorides/editions/sprengel1829/manifest.json",
+      "lemmas": {
+        "grc": "corpus/dioscorides/lemmas/sprengel1829-grc.xml",
+        "la": "corpus/dioscorides/lemmas/sprengel1829-la.xml"
+      },
+      "imageMode": "remote",
+      "sourceLabel": "Internet Archive facsimile (Wellcome b23982500)",
+      "sourceUrl": "https://archive.org/details/b23982500_0001/page/n5/mode/2up",
+      "iiifManifest3": "https://iiif.archive.org/iiif/b23982500_0001/manifest.json",
+      "licenseNote": "Diplomatic TEI generated from Wellcome source images, displayed against Internet Archive IIIF."
+    },
+    {
+      "id": "sprengel1830-comm",
+      "label": "Sprengel 1830 Commentarius (Latin commentary)",
+      "tei": "corpus/dioscorides/editions/sprengel1830-comm/tei/edition.xml",
+      "manifest": "corpus/dioscorides/editions/sprengel1830-comm/manifest.json",
+      "lemmas": {},
+      "imageMode": "remote",
+      "sourceLabel": "Internet Archive facsimile (Wellcome b23982500 vol. 2)",
+      "sourceUrl": "https://archive.org/details/b23982500_0002/page/n346/mode/2up",
+      "iiifManifest3": "https://iiif.archive.org/iiif/b23982500_0002/manifest.json",
+      "licenseNote": "Commentary normalized from OCR-derived TEI; JP2 facs URLs rewritten to IIIF JPEG."
+    },
+    {
+      "id": "beck2020",
+      "label": "Beck 2020 (English translation; local PDF source)",
+      "tei": "corpus/dioscorides/editions/beck2020/tei/edition.xml",
+      "manifest": "corpus/dioscorides/editions/beck2020/manifest.json",
+      "lemmas": {
+        "en": "corpus/dioscorides/lemmas/beck2020-en.xml",
+        "grc": "corpus/dioscorides/lemmas/beck2020-grc.xml"
+      },
+      "imageMode": "local",
+      "localImageRoot": "ocr/beck2020_fresh/images/",
+      "sourceLabel": "Local Beck PDF facsimile (private)",
+      "private": true,
+      "licenseNote": "Private review artifact; Beck 2020 source images are not redistributed."
+    }
+  ],
+  "lemmaLinks": [
+    {
+      "id": "sprengel1829-grc--sprengel1829-la",
+      "label": "Sprengel Greek ↔ Sprengel Latin (Sprengel's own pairings)",
+      "file": "corpus/dioscorides/lemma-links/sprengel1829-grc--sprengel1829-la.xml"
+    },
+    {
+      "id": "berendes1902-grc--berendes1902-de",
+      "label": "Berendes Greek ↔ Berendes German (Berendes's own pairings)",
+      "file": "corpus/dioscorides/lemma-links/berendes1902-grc--berendes1902-de.xml"
+    }
+  ]
+}

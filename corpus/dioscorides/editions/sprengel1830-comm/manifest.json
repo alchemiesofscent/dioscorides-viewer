@@ -1,0 +1,2634 @@
+{
+  "total_pages": 328,
+  "source": "Sprengel 1830 Commentarius OCR-derived viewer XML",
+  "source_url": "https://archive.org/details/b23982500_0002/page/n346/mode/2up",
+  "iiif_manifest": "https://iiif.archive.org/iiif/b23982500_0002/manifest.json",
+  "image_root": "https://iiif.archive.org/image/iiif/3/b23982500_0002/",
+  "iiif_width": 1200,
+  "pages": [
+    {
+      "book_page": "339",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0347.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n346/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0347.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0347",
+      "archive_page_n": 346
+    },
+    {
+      "book_page": "340",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0348.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n347/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0348.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0348",
+      "archive_page_n": 347
+    },
+    {
+      "book_page": "341",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0349.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n348/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0349.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0349",
+      "archive_page_n": 348
+    },
+    {
+      "book_page": "342",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0350.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n349/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0350.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0350",
+      "archive_page_n": 349
+    },
+    {
+      "book_page": "343",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0351.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n350/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0351.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0351",
+      "archive_page_n": 350
+    },
+    {
+      "book_page": "344",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0352.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n351/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0352.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0352",
+      "archive_page_n": 351
+    },
+    {
+      "book_page": "345",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0353.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n352/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0353.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0353",
+      "archive_page_n": 352
+    },
+    {
+      "book_page": "346",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0354.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n353/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0354.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0354",
+      "archive_page_n": 353
+    },
+    {
+      "book_page": "347",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0355.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n354/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0355.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0355",
+      "archive_page_n": 354
+    },
+    {
+      "book_page": "348",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0356.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n355/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0356.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0356",
+      "archive_page_n": 355
+    },
+    {
+      "book_page": "349",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0357.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n356/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0357.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0357",
+      "archive_page_n": 356
+    },
+    {
+      "book_page": "350",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0358.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n357/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0358.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0358",
+      "archive_page_n": 357
+    },
+    {
+      "book_page": "351",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0359.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n358/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0359.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0359",
+      "archive_page_n": 358
+    },
+    {
+      "book_page": "352",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0360.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n359/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0360.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0360",
+      "archive_page_n": 359
+    },
+    {
+      "book_page": "353",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0361.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n360/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0361.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0361",
+      "archive_page_n": 360
+    },
+    {
+      "book_page": "354",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0362.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n361/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0362.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0362",
+      "archive_page_n": 361
+    },
+    {
+      "book_page": "355",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0363.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n362/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0363.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0363",
+      "archive_page_n": 362
+    },
+    {
+      "book_page": "356",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0364.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n363/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0364.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0364",
+      "archive_page_n": 363
+    },
+    {
+      "book_page": "357",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0365.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n364/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0365.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0365",
+      "archive_page_n": 364
+    },
+    {
+      "book_page": "358",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0366.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n365/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0366.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0366",
+      "archive_page_n": 365
+    },
+    {
+      "book_page": "359",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0367.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n366/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0367.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0367",
+      "archive_page_n": 366
+    },
+    {
+      "book_page": "360",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0368.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n367/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0368.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0368",
+      "archive_page_n": 367
+    },
+    {
+      "book_page": "361",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0369.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n368/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0369.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0369",
+      "archive_page_n": 368
+    },
+    {
+      "book_page": "362",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0370.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n369/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0370.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0370",
+      "archive_page_n": 369
+    },
+    {
+      "book_page": "363",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0371.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n370/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0371.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0371",
+      "archive_page_n": 370
+    },
+    {
+      "book_page": "364",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0372.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n371/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0372.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0372",
+      "archive_page_n": 371
+    },
+    {
+      "book_page": "365",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0373.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n372/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0373.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0373",
+      "archive_page_n": 372
+    },
+    {
+      "book_page": "366",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0374.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n373/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0374.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0374",
+      "archive_page_n": 373
+    },
+    {
+      "book_page": "367",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0375.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n374/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0375.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0375",
+      "archive_page_n": 374
+    },
+    {
+      "book_page": "368",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0376.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n375/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0376.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0376",
+      "archive_page_n": 375
+    },
+    {
+      "book_page": "369",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0377.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n376/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0377.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0377",
+      "archive_page_n": 376
+    },
+    {
+      "book_page": "370",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0378.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n377/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0378.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0378",
+      "archive_page_n": 377
+    },
+    {
+      "book_page": "371",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0379.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n378/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0379.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0379",
+      "archive_page_n": 378
+    },
+    {
+      "book_page": "372",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0380.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n379/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0380.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0380",
+      "archive_page_n": 379
+    },
+    {
+      "book_page": "373",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0381.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n380/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0381.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0381",
+      "archive_page_n": 380
+    },
+    {
+      "book_page": "374",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0382.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n381/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0382.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0382",
+      "archive_page_n": 381
+    },
+    {
+      "book_page": "375",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0383.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n382/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0383.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0383",
+      "archive_page_n": 382
+    },
+    {
+      "book_page": "376",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0384.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n383/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0384.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0384",
+      "archive_page_n": 383
+    },
+    {
+      "book_page": "377",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0385.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n384/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0385.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0385",
+      "archive_page_n": 384
+    },
+    {
+      "book_page": "378",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0386.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n385/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0386.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0386",
+      "archive_page_n": 385
+    },
+    {
+      "book_page": "379",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0387.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n386/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0387.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0387",
+      "archive_page_n": 386
+    },
+    {
+      "book_page": "380",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0388.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n387/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0388.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0388",
+      "archive_page_n": 387
+    },
+    {
+      "book_page": "381",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0389.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n388/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0389.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0389",
+      "archive_page_n": 388
+    },
+    {
+      "book_page": "382",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0390.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n389/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0390.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0390",
+      "archive_page_n": 389
+    },
+    {
+      "book_page": "383",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0391.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n390/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0391.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0391",
+      "archive_page_n": 390
+    },
+    {
+      "book_page": "384",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0392.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n391/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0392.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0392",
+      "archive_page_n": 391
+    },
+    {
+      "book_page": "385",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0393.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n392/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0393.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0393",
+      "archive_page_n": 392
+    },
+    {
+      "book_page": "386",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0394.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n393/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0394.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0394",
+      "archive_page_n": 393
+    },
+    {
+      "book_page": "387",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0395.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n394/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0395.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0395",
+      "archive_page_n": 394
+    },
+    {
+      "book_page": "388",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0396.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n395/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0396.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0396",
+      "archive_page_n": 395
+    },
+    {
+      "book_page": "389",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0397.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n396/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0397.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0397",
+      "archive_page_n": 396
+    },
+    {
+      "book_page": "390",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0398.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n397/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0398.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0398",
+      "archive_page_n": 397
+    },
+    {
+      "book_page": "391",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0399.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n398/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0399.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0399",
+      "archive_page_n": 398
+    },
+    {
+      "book_page": "392",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0400.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n399/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0400.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0400",
+      "archive_page_n": 399
+    },
+    {
+      "book_page": "393",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0401.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n400/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0401.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0401",
+      "archive_page_n": 400
+    },
+    {
+      "book_page": "394",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0402.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n401/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0402.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0402",
+      "archive_page_n": 401
+    },
+    {
+      "book_page": "395",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0403.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n402/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0403.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0403",
+      "archive_page_n": 402
+    },
+    {
+      "book_page": "396",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0404.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n403/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0404.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0404",
+      "archive_page_n": 403
+    },
+    {
+      "book_page": "397",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0405.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n404/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0405.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0405",
+      "archive_page_n": 404
+    },
+    {
+      "book_page": "398",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0406.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n405/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0406.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0406",
+      "archive_page_n": 405
+    },
+    {
+      "book_page": "399",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0407.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n406/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0407.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0407",
+      "archive_page_n": 406
+    },
+    {
+      "book_page": "400",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0408.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n407/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0408.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0408",
+      "archive_page_n": 407
+    },
+    {
+      "book_page": "401",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0409.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n408/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0409.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0409",
+      "archive_page_n": 408
+    },
+    {
+      "book_page": "402",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0410.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n409/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0410.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0410",
+      "archive_page_n": 409
+    },
+    {
+      "book_page": "403",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0411.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n410/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0411.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0411",
+      "archive_page_n": 410
+    },
+    {
+      "book_page": "404",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0412.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n411/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0412.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0412",
+      "archive_page_n": 411
+    },
+    {
+      "book_page": "405",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0413.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n412/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0413.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0413",
+      "archive_page_n": 412
+    },
+    {
+      "book_page": "406",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0414.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n413/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0414.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0414",
+      "archive_page_n": 413
+    },
+    {
+      "book_page": "407",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0415.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n414/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0415.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0415",
+      "archive_page_n": 414
+    },
+    {
+      "book_page": "408",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0416.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n415/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0416.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0416",
+      "archive_page_n": 415
+    },
+    {
+      "book_page": "409",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0417.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n416/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0417.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0417",
+      "archive_page_n": 416
+    },
+    {
+      "book_page": "410",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0418.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n417/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0418.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0418",
+      "archive_page_n": 417
+    },
+    {
+      "book_page": "411",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0419.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n418/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0419.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0419",
+      "archive_page_n": 418
+    },
+    {
+      "book_page": "412",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0420.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n419/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0420.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0420",
+      "archive_page_n": 419
+    },
+    {
+      "book_page": "413",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0421.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n420/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0421.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0421",
+      "archive_page_n": 420
+    },
+    {
+      "book_page": "414",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0422.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n421/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0422.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0422",
+      "archive_page_n": 421
+    },
+    {
+      "book_page": "415",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0423.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n422/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0423.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0423",
+      "archive_page_n": 422
+    },
+    {
+      "book_page": "416",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0424.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n423/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0424.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0424",
+      "archive_page_n": 423
+    },
+    {
+      "book_page": "417",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0425.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n424/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0425.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0425",
+      "archive_page_n": 424
+    },
+    {
+      "book_page": "418",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0426.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n425/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0426.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0426",
+      "archive_page_n": 425
+    },
+    {
+      "book_page": "419",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0427.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n426/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0427.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0427",
+      "archive_page_n": 426
+    },
+    {
+      "book_page": "420",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0428.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n427/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0428.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0428",
+      "archive_page_n": 427
+    },
+    {
+      "book_page": "421",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0429.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n428/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0429.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0429",
+      "archive_page_n": 428
+    },
+    {
+      "book_page": "422",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0430.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n429/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0430.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0430",
+      "archive_page_n": 429
+    },
+    {
+      "book_page": "423",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0431.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n430/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0431.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0431",
+      "archive_page_n": 430
+    },
+    {
+      "book_page": "424",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0432.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n431/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0432.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0432",
+      "archive_page_n": 431
+    },
+    {
+      "book_page": "425",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0433.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n432/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0433.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0433",
+      "archive_page_n": 432
+    },
+    {
+      "book_page": "426",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0434.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n433/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0434.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0434",
+      "archive_page_n": 433
+    },
+    {
+      "book_page": "427",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0435.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n434/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0435.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0435",
+      "archive_page_n": 434
+    },
+    {
+      "book_page": "428",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0436.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n435/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0436.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0436",
+      "archive_page_n": 435
+    },
+    {
+      "book_page": "429",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0437.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n436/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0437.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0437",
+      "archive_page_n": 436
+    },
+    {
+      "book_page": "430",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0438.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n437/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0438.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0438",
+      "archive_page_n": 437
+    },
+    {
+      "book_page": "431",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0439.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n438/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0439.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0439",
+      "archive_page_n": 438
+    },
+    {
+      "book_page": "432",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0440.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n439/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0440.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0440",
+      "archive_page_n": 439
+    },
+    {
+      "book_page": "433",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0441.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n440/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0441.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0441",
+      "archive_page_n": 440
+    },
+    {
+      "book_page": "434",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0442.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n441/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0442.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0442",
+      "archive_page_n": 441
+    },
+    {
+      "book_page": "435",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0443.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n442/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0443.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0443",
+      "archive_page_n": 442
+    },
+    {
+      "book_page": "436",
+      "tei_facs": "https://archive.org/download/BIUSante_dioscsprengelx02/BIUSante_dioscsprengelx02_jp2.zip/BIUSante_dioscsprengelx02_jp2%2FBIUSante_dioscsprengelx02_0437.jp2",
+      "facs": "https://archive.org/details/BIUSante_dioscsprengelx02/page/n436/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/BIUSante_dioscsprengelx02%2FBIUSante_dioscsprengelx02_jp2.zip%2FBIUSante_dioscsprengelx02_jp2%2FBIUSante_dioscsprengelx02_0437.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0437",
+      "archive_page_n": 436
+    },
+    {
+      "book_page": "437",
+      "tei_facs": "https://archive.org/download/BIUSante_dioscsprengelx02/BIUSante_dioscsprengelx02_jp2.zip/BIUSante_dioscsprengelx02_jp2%2FBIUSante_dioscsprengelx02_0438.jp2",
+      "facs": "https://archive.org/details/BIUSante_dioscsprengelx02/page/n437/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/BIUSante_dioscsprengelx02%2FBIUSante_dioscsprengelx02_jp2.zip%2FBIUSante_dioscsprengelx02_jp2%2FBIUSante_dioscsprengelx02_0438.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0438",
+      "archive_page_n": 437
+    },
+    {
+      "book_page": "438",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0444.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n443/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0444.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0444",
+      "archive_page_n": 443
+    },
+    {
+      "book_page": "439",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0445.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n444/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0445.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0445",
+      "archive_page_n": 444
+    },
+    {
+      "book_page": "440",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0446.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n445/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0446.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0446",
+      "archive_page_n": 445
+    },
+    {
+      "book_page": "441",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0447.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n446/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0447.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0447",
+      "archive_page_n": 446
+    },
+    {
+      "book_page": "442",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0448.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n447/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0448.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0448",
+      "archive_page_n": 447
+    },
+    {
+      "book_page": "443",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0449.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n448/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0449.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0449",
+      "archive_page_n": 448
+    },
+    {
+      "book_page": "444",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0450.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n449/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0450.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0450",
+      "archive_page_n": 449
+    },
+    {
+      "book_page": "445",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0451.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n450/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0451.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0451",
+      "archive_page_n": 450
+    },
+    {
+      "book_page": "446",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0452.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n451/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0452.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0452",
+      "archive_page_n": 451
+    },
+    {
+      "book_page": "447",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0453.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n452/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0453.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0453",
+      "archive_page_n": 452
+    },
+    {
+      "book_page": "448",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0454.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n453/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0454.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0454",
+      "archive_page_n": 453
+    },
+    {
+      "book_page": "449",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0455.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n454/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0455.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0455",
+      "archive_page_n": 454
+    },
+    {
+      "book_page": "450",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0456.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n455/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0456.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0456",
+      "archive_page_n": 455
+    },
+    {
+      "book_page": "451",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0457.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n456/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0457.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0457",
+      "archive_page_n": 456
+    },
+    {
+      "book_page": "452",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0458.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n457/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0458.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0458",
+      "archive_page_n": 457
+    },
+    {
+      "book_page": "453",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0459.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n458/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0459.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0459",
+      "archive_page_n": 458
+    },
+    {
+      "book_page": "454",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0460.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n459/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0460.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0460",
+      "archive_page_n": 459
+    },
+    {
+      "book_page": "455",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0461.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n460/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0461.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0461",
+      "archive_page_n": 460
+    },
+    {
+      "book_page": "456",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0462.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n461/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0462.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0462",
+      "archive_page_n": 461
+    },
+    {
+      "book_page": "457",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0463.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n462/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0463.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0463",
+      "archive_page_n": 462
+    },
+    {
+      "book_page": "458",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0464.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n463/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0464.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0464",
+      "archive_page_n": 463
+    },
+    {
+      "book_page": "459",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0465.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n464/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0465.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0465",
+      "archive_page_n": 464
+    },
+    {
+      "book_page": "460",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0466.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n465/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0466.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0466",
+      "archive_page_n": 465
+    },
+    {
+      "book_page": "461",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0467.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n466/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0467.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0467",
+      "archive_page_n": 466
+    },
+    {
+      "book_page": "462",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0468.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n467/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0468.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0468",
+      "archive_page_n": 467
+    },
+    {
+      "book_page": "463",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0469.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n468/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0469.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0469",
+      "archive_page_n": 468
+    },
+    {
+      "book_page": "464",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0470.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n469/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0470.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0470",
+      "archive_page_n": 469
+    },
+    {
+      "book_page": "465",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0471.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n470/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0471.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0471",
+      "archive_page_n": 470
+    },
+    {
+      "book_page": "466",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0472.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n471/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0472.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0472",
+      "archive_page_n": 471
+    },
+    {
+      "book_page": "467",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0473.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n472/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0473.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0473",
+      "archive_page_n": 472
+    },
+    {
+      "book_page": "468",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0474.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n473/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0474.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0474",
+      "archive_page_n": 473
+    },
+    {
+      "book_page": "469",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0475.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n474/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0475.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0475",
+      "archive_page_n": 474
+    },
+    {
+      "book_page": "470",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0476.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n475/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0476.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0476",
+      "archive_page_n": 475
+    },
+    {
+      "book_page": "471",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0477.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n476/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0477.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0477",
+      "archive_page_n": 476
+    },
+    {
+      "book_page": "472",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0478.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n477/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0478.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0478",
+      "archive_page_n": 477
+    },
+    {
+      "book_page": "473",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0479.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n478/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0479.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0479",
+      "archive_page_n": 478
+    },
+    {
+      "book_page": "474",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0480.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n479/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0480.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0480",
+      "archive_page_n": 479
+    },
+    {
+      "book_page": "475",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0481.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n480/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0481.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0481",
+      "archive_page_n": 480
+    },
+    {
+      "book_page": "476",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0482.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n481/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0482.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0482",
+      "archive_page_n": 481
+    },
+    {
+      "book_page": "477",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0483.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n482/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0483.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0483",
+      "archive_page_n": 482
+    },
+    {
+      "book_page": "478",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0484.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n483/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0484.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0484",
+      "archive_page_n": 483
+    },
+    {
+      "book_page": "479",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0485.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n484/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0485.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0485",
+      "archive_page_n": 484
+    },
+    {
+      "book_page": "480",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0486.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n485/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0486.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0486",
+      "archive_page_n": 485
+    },
+    {
+      "book_page": "481",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0487.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n486/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0487.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0487",
+      "archive_page_n": 486
+    },
+    {
+      "book_page": "482",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0488.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n487/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0488.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0488",
+      "archive_page_n": 487
+    },
+    {
+      "book_page": "483",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0489.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n488/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0489.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0489",
+      "archive_page_n": 488
+    },
+    {
+      "book_page": "484",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0490.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n489/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0490.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0490",
+      "archive_page_n": 489
+    },
+    {
+      "book_page": "485",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0491.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n490/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0491.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0491",
+      "archive_page_n": 490
+    },
+    {
+      "book_page": "486",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0492.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n491/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0492.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0492",
+      "archive_page_n": 491
+    },
+    {
+      "book_page": "487",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0493.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n492/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0493.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0493",
+      "archive_page_n": 492
+    },
+    {
+      "book_page": "488",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0494.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n493/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0494.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0494",
+      "archive_page_n": 493
+    },
+    {
+      "book_page": "489",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0495.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n494/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0495.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0495",
+      "archive_page_n": 494
+    },
+    {
+      "book_page": "490",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0496.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n495/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0496.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0496",
+      "archive_page_n": 495
+    },
+    {
+      "book_page": "491",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0497.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n496/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0497.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0497",
+      "archive_page_n": 496
+    },
+    {
+      "book_page": "492",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0498.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n497/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0498.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0498",
+      "archive_page_n": 497
+    },
+    {
+      "book_page": "493",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0499.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n498/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0499.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0499",
+      "archive_page_n": 498
+    },
+    {
+      "book_page": "494",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0500.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n499/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0500.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0500",
+      "archive_page_n": 499
+    },
+    {
+      "book_page": "495",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0501.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n500/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0501.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0501",
+      "archive_page_n": 500
+    },
+    {
+      "book_page": "496",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0502.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n501/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0502.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0502",
+      "archive_page_n": 501
+    },
+    {
+      "book_page": "497",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0503.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n502/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0503.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0503",
+      "archive_page_n": 502
+    },
+    {
+      "book_page": "498",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0504.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n503/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0504.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0504",
+      "archive_page_n": 503
+    },
+    {
+      "book_page": "499",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0505.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n504/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0505.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0505",
+      "archive_page_n": 504
+    },
+    {
+      "book_page": "500",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0506.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n505/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0506.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0506",
+      "archive_page_n": 505
+    },
+    {
+      "book_page": "501",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0507.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n506/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0507.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0507",
+      "archive_page_n": 506
+    },
+    {
+      "book_page": "502",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0508.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n507/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0508.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0508",
+      "archive_page_n": 507
+    },
+    {
+      "book_page": "503",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0509.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n508/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0509.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0509",
+      "archive_page_n": 508
+    },
+    {
+      "book_page": "504",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0510.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n509/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0510.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0510",
+      "archive_page_n": 509
+    },
+    {
+      "book_page": "505",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0511.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n510/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0511.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0511",
+      "archive_page_n": 510
+    },
+    {
+      "book_page": "506",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0512.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n511/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0512.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0512",
+      "archive_page_n": 511
+    },
+    {
+      "book_page": "507",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0513.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n512/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0513.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0513",
+      "archive_page_n": 512
+    },
+    {
+      "book_page": "508",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0514.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n513/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0514.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0514",
+      "archive_page_n": 513
+    },
+    {
+      "book_page": "509",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0515.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n514/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0515.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0515",
+      "archive_page_n": 514
+    },
+    {
+      "book_page": "510",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0516.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n515/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0516.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0516",
+      "archive_page_n": 515
+    },
+    {
+      "book_page": "511",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0517.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n516/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0517.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0517",
+      "archive_page_n": 516
+    },
+    {
+      "book_page": "512",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0518.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n517/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0518.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0518",
+      "archive_page_n": 517
+    },
+    {
+      "book_page": "513",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0519.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n518/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0519.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0519",
+      "archive_page_n": 518
+    },
+    {
+      "book_page": "514",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0520.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n519/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0520.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0520",
+      "archive_page_n": 519
+    },
+    {
+      "book_page": "515",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0521.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n520/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0521.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0521",
+      "archive_page_n": 520
+    },
+    {
+      "book_page": "516",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0522.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n521/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0522.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0522",
+      "archive_page_n": 521
+    },
+    {
+      "book_page": "517",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0523.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n522/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0523.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0523",
+      "archive_page_n": 522
+    },
+    {
+      "book_page": "518",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0524.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n523/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0524.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0524",
+      "archive_page_n": 523
+    },
+    {
+      "book_page": "519",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0525.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n524/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0525.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0525",
+      "archive_page_n": 524
+    },
+    {
+      "book_page": "520",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0526.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n525/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0526.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0526",
+      "archive_page_n": 525
+    },
+    {
+      "book_page": "521",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0527.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n526/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0527.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0527",
+      "archive_page_n": 526
+    },
+    {
+      "book_page": "522",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0528.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n527/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0528.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0528",
+      "archive_page_n": 527
+    },
+    {
+      "book_page": "523",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0529.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n528/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0529.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0529",
+      "archive_page_n": 528
+    },
+    {
+      "book_page": "524",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0530.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n529/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0530.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0530",
+      "archive_page_n": 529
+    },
+    {
+      "book_page": "525",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0531.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n530/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0531.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0531",
+      "archive_page_n": 530
+    },
+    {
+      "book_page": "526",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0532.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n531/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0532.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0532",
+      "archive_page_n": 531
+    },
+    {
+      "book_page": "527",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0533.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n532/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0533.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0533",
+      "archive_page_n": 532
+    },
+    {
+      "book_page": "528",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0534.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n533/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0534.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0534",
+      "archive_page_n": 533
+    },
+    {
+      "book_page": "529",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0535.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n534/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0535.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0535",
+      "archive_page_n": 534
+    },
+    {
+      "book_page": "530",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0536.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n535/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0536.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0536",
+      "archive_page_n": 535
+    },
+    {
+      "book_page": "531",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0537.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n536/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0537.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0537",
+      "archive_page_n": 536
+    },
+    {
+      "book_page": "532",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0538.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n537/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0538.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0538",
+      "archive_page_n": 537
+    },
+    {
+      "book_page": "533",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0539.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n538/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0539.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0539",
+      "archive_page_n": 538
+    },
+    {
+      "book_page": "534",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0540.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n539/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0540.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0540",
+      "archive_page_n": 539
+    },
+    {
+      "book_page": "535",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0541.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n540/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0541.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0541",
+      "archive_page_n": 540
+    },
+    {
+      "book_page": "536",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0542.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n541/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0542.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0542",
+      "archive_page_n": 541
+    },
+    {
+      "book_page": "537",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0543.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n542/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0543.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0543",
+      "archive_page_n": 542
+    },
+    {
+      "book_page": "538",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0544.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n543/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0544.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0544",
+      "archive_page_n": 543
+    },
+    {
+      "book_page": "539",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0545.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n544/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0545.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0545",
+      "archive_page_n": 544
+    },
+    {
+      "book_page": "540",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0546.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n545/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0546.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0546",
+      "archive_page_n": 545
+    },
+    {
+      "book_page": "541",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0547.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n546/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0547.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0547",
+      "archive_page_n": 546
+    },
+    {
+      "book_page": "542",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0548.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n547/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0548.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0548",
+      "archive_page_n": 547
+    },
+    {
+      "book_page": "543",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0549.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n548/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0549.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0549",
+      "archive_page_n": 548
+    },
+    {
+      "book_page": "544",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0550.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n549/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0550.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0550",
+      "archive_page_n": 549
+    },
+    {
+      "book_page": "545",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0551.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n550/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0551.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0551",
+      "archive_page_n": 550
+    },
+    {
+      "book_page": "546",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0552.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n551/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0552.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0552",
+      "archive_page_n": 551
+    },
+    {
+      "book_page": "547",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0553.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n552/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0553.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0553",
+      "archive_page_n": 552
+    },
+    {
+      "book_page": "548",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0554.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n553/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0554.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0554",
+      "archive_page_n": 553
+    },
+    {
+      "book_page": "549",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0555.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n554/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0555.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0555",
+      "archive_page_n": 554
+    },
+    {
+      "book_page": "550",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0556.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n555/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0556.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0556",
+      "archive_page_n": 555
+    },
+    {
+      "book_page": "551",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0557.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n556/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0557.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0557",
+      "archive_page_n": 556
+    },
+    {
+      "book_page": "552",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0558.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n557/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0558.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0558",
+      "archive_page_n": 557
+    },
+    {
+      "book_page": "553",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0559.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n558/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0559.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0559",
+      "archive_page_n": 558
+    },
+    {
+      "book_page": "554",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0560.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n559/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0560.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0560",
+      "archive_page_n": 559
+    },
+    {
+      "book_page": "555",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0561.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n560/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0561.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0561",
+      "archive_page_n": 560
+    },
+    {
+      "book_page": "556",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0562.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n561/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0562.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0562",
+      "archive_page_n": 561
+    },
+    {
+      "book_page": "557",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0563.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n562/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0563.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0563",
+      "archive_page_n": 562
+    },
+    {
+      "book_page": "558",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0564.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n563/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0564.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0564",
+      "archive_page_n": 563
+    },
+    {
+      "book_page": "559",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0565.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n564/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0565.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0565",
+      "archive_page_n": 564
+    },
+    {
+      "book_page": "560",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0566.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n565/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0566.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0566",
+      "archive_page_n": 565
+    },
+    {
+      "book_page": "561",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0567.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n566/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0567.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0567",
+      "archive_page_n": 566
+    },
+    {
+      "book_page": "562",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0568.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n567/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0568.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0568",
+      "archive_page_n": 567
+    },
+    {
+      "book_page": "563",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0569.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n568/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0569.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0569",
+      "archive_page_n": 568
+    },
+    {
+      "book_page": "564",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0570.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n569/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0570.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0570",
+      "archive_page_n": 569
+    },
+    {
+      "book_page": "565",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0571.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n570/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0571.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0571",
+      "archive_page_n": 570
+    },
+    {
+      "book_page": "566",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0572.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n571/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0572.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0572",
+      "archive_page_n": 571
+    },
+    {
+      "book_page": "567",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0573.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n572/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0573.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0573",
+      "archive_page_n": 572
+    },
+    {
+      "book_page": "568",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0574.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n573/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0574.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0574",
+      "archive_page_n": 573
+    },
+    {
+      "book_page": "569",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0575.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n574/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0575.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0575",
+      "archive_page_n": 574
+    },
+    {
+      "book_page": "570",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0576.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n575/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0576.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0576",
+      "archive_page_n": 575
+    },
+    {
+      "book_page": "571",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0577.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n576/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0577.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0577",
+      "archive_page_n": 576
+    },
+    {
+      "book_page": "572",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0578.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n577/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0578.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0578",
+      "archive_page_n": 577
+    },
+    {
+      "book_page": "573",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0579.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n578/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0579.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0579",
+      "archive_page_n": 578
+    },
+    {
+      "book_page": "574",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0580.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n579/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0580.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0580",
+      "archive_page_n": 579
+    },
+    {
+      "book_page": "575",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0581.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n580/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0581.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0581",
+      "archive_page_n": 580
+    },
+    {
+      "book_page": "576",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0582.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n581/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0582.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0582",
+      "archive_page_n": 581
+    },
+    {
+      "book_page": "577",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0583.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n582/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0583.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0583",
+      "archive_page_n": 582
+    },
+    {
+      "book_page": "578",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0584.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n583/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0584.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0584",
+      "archive_page_n": 583
+    },
+    {
+      "book_page": "579",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0585.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n584/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0585.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0585",
+      "archive_page_n": 584
+    },
+    {
+      "book_page": "580",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0586.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n585/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0586.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0586",
+      "archive_page_n": 585
+    },
+    {
+      "book_page": "581",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0587.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n586/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0587.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0587",
+      "archive_page_n": 586
+    },
+    {
+      "book_page": "582",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0588.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n587/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0588.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0588",
+      "archive_page_n": 587
+    },
+    {
+      "book_page": "583",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0589.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n588/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0589.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0589",
+      "archive_page_n": 588
+    },
+    {
+      "book_page": "584",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0590.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n589/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0590.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0590",
+      "archive_page_n": 589
+    },
+    {
+      "book_page": "585",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0591.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n590/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0591.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0591",
+      "archive_page_n": 590
+    },
+    {
+      "book_page": "586",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0592.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n591/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0592.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0592",
+      "archive_page_n": 591
+    },
+    {
+      "book_page": "587",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0593.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n592/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0593.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0593",
+      "archive_page_n": 592
+    },
+    {
+      "book_page": "588",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0594.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n593/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0594.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0594",
+      "archive_page_n": 593
+    },
+    {
+      "book_page": "589",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0595.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n594/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0595.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0595",
+      "archive_page_n": 594
+    },
+    {
+      "book_page": "590",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0596.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n595/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0596.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0596",
+      "archive_page_n": 595
+    },
+    {
+      "book_page": "591",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0597.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n596/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0597.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0597",
+      "archive_page_n": 596
+    },
+    {
+      "book_page": "592",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0598.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n597/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0598.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0598",
+      "archive_page_n": 597
+    },
+    {
+      "book_page": "593",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0599.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n598/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0599.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0599",
+      "archive_page_n": 598
+    },
+    {
+      "book_page": "594",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0600.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n599/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0600.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0600",
+      "archive_page_n": 599
+    },
+    {
+      "book_page": "595",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0601.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n600/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0601.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0601",
+      "archive_page_n": 600
+    },
+    {
+      "book_page": "596",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0602.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n601/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0602.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0602",
+      "archive_page_n": 601
+    },
+    {
+      "book_page": "597",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0603.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n602/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0603.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0603",
+      "archive_page_n": 602
+    },
+    {
+      "book_page": "598",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0604.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n603/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0604.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0604",
+      "archive_page_n": 603
+    },
+    {
+      "book_page": "599",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0605.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n604/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0605.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0605",
+      "archive_page_n": 604
+    },
+    {
+      "book_page": "600",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0606.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n605/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0606.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0606",
+      "archive_page_n": 605
+    },
+    {
+      "book_page": "601",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0607.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n606/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0607.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0607",
+      "archive_page_n": 606
+    },
+    {
+      "book_page": "602",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0608.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n607/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0608.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0608",
+      "archive_page_n": 607
+    },
+    {
+      "book_page": "603",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0609.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n608/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0609.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0609",
+      "archive_page_n": 608
+    },
+    {
+      "book_page": "604",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0610.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n609/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0610.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0610",
+      "archive_page_n": 609
+    },
+    {
+      "book_page": "605",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0611.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n610/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0611.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0611",
+      "archive_page_n": 610
+    },
+    {
+      "book_page": "606",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0612.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n611/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0612.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0612",
+      "archive_page_n": 611
+    },
+    {
+      "book_page": "607",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0613.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n612/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0613.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0613",
+      "archive_page_n": 612
+    },
+    {
+      "book_page": "608",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0614.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n613/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0614.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0614",
+      "archive_page_n": 613
+    },
+    {
+      "book_page": "609",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0615.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n614/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0615.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0615",
+      "archive_page_n": 614
+    },
+    {
+      "book_page": "610",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0616.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n615/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0616.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0616",
+      "archive_page_n": 615
+    },
+    {
+      "book_page": "611",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0617.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n616/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0617.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0617",
+      "archive_page_n": 616
+    },
+    {
+      "book_page": "612",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0618.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n617/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0618.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0618",
+      "archive_page_n": 617
+    },
+    {
+      "book_page": "613",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0619.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n618/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0619.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0619",
+      "archive_page_n": 618
+    },
+    {
+      "book_page": "614",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0620.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n619/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0620.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0620",
+      "archive_page_n": 619
+    },
+    {
+      "book_page": "615",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0621.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n620/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0621.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0621",
+      "archive_page_n": 620
+    },
+    {
+      "book_page": "616",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0622.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n621/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0622.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0622",
+      "archive_page_n": 621
+    },
+    {
+      "book_page": "617",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0623.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n622/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0623.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0623",
+      "archive_page_n": 622
+    },
+    {
+      "book_page": "618",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0624.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n623/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0624.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0624",
+      "archive_page_n": 623
+    },
+    {
+      "book_page": "619",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0625.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n624/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0625.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0625",
+      "archive_page_n": 624
+    },
+    {
+      "book_page": "620",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0626.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n625/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0626.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0626",
+      "archive_page_n": 625
+    },
+    {
+      "book_page": "621",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0627.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n626/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0627.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0627",
+      "archive_page_n": 626
+    },
+    {
+      "book_page": "622",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0628.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n627/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0628.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0628",
+      "archive_page_n": 627
+    },
+    {
+      "book_page": "623",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0629.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n628/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0629.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0629",
+      "archive_page_n": 628
+    },
+    {
+      "book_page": "624",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0630.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n629/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0630.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0630",
+      "archive_page_n": 629
+    },
+    {
+      "book_page": "625",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0631.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n630/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0631.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0631",
+      "archive_page_n": 630
+    },
+    {
+      "book_page": "626",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0632.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n631/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0632.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0632",
+      "archive_page_n": 631
+    },
+    {
+      "book_page": "627",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0633.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n632/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0633.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0633",
+      "archive_page_n": 632
+    },
+    {
+      "book_page": "628",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0634.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n633/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0634.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0634",
+      "archive_page_n": 633
+    },
+    {
+      "book_page": "629",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0635.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n634/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0635.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0635",
+      "archive_page_n": 634
+    },
+    {
+      "book_page": "630",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0636.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n635/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0636.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0636",
+      "archive_page_n": 635
+    },
+    {
+      "book_page": "631",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0637.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n636/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0637.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0637",
+      "archive_page_n": 636
+    },
+    {
+      "book_page": "632",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0638.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n637/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0638.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0638",
+      "archive_page_n": 637
+    },
+    {
+      "book_page": "633",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0639.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n638/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0639.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0639",
+      "archive_page_n": 638
+    },
+    {
+      "book_page": "634",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0640.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n639/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0640.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0640",
+      "archive_page_n": 639
+    },
+    {
+      "book_page": "635",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0641.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n640/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0641.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0641",
+      "archive_page_n": 640
+    },
+    {
+      "book_page": "636",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0642.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n641/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0642.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0642",
+      "archive_page_n": 641
+    },
+    {
+      "book_page": "637",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0643.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n642/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0643.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0643",
+      "archive_page_n": 642
+    },
+    {
+      "book_page": "638",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0644.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n643/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0644.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0644",
+      "archive_page_n": 643
+    },
+    {
+      "book_page": "639",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0645.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n644/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0645.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0645",
+      "archive_page_n": 644
+    },
+    {
+      "book_page": "640",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0646.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n645/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0646.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0646",
+      "archive_page_n": 645
+    },
+    {
+      "book_page": "641",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0647.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n646/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0647.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0647",
+      "archive_page_n": 646
+    },
+    {
+      "book_page": "642",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0648.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n647/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0648.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0648",
+      "archive_page_n": 647
+    },
+    {
+      "book_page": "643",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0649.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n648/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0649.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0649",
+      "archive_page_n": 648
+    },
+    {
+      "book_page": "644",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0650.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n649/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0650.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0650",
+      "archive_page_n": 649
+    },
+    {
+      "book_page": "645",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0651.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n650/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0651.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0651",
+      "archive_page_n": 650
+    },
+    {
+      "book_page": "646",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0652.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n651/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0652.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0652",
+      "archive_page_n": 651
+    },
+    {
+      "book_page": "647",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0653.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n652/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0653.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0653",
+      "archive_page_n": 652
+    },
+    {
+      "book_page": "648",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0654.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n653/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0654.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0654",
+      "archive_page_n": 653
+    },
+    {
+      "book_page": "649",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0655.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n654/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0655.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0655",
+      "archive_page_n": 654
+    },
+    {
+      "book_page": "650",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0656.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n655/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0656.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0656",
+      "archive_page_n": 655
+    },
+    {
+      "book_page": "651",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0657.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n656/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0657.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0657",
+      "archive_page_n": 656
+    },
+    {
+      "book_page": "652",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0658.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n657/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0658.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0658",
+      "archive_page_n": 657
+    },
+    {
+      "book_page": "653",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0659.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n658/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0659.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0659",
+      "archive_page_n": 658
+    },
+    {
+      "book_page": "654",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0660.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n659/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0660.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0660",
+      "archive_page_n": 659
+    },
+    {
+      "book_page": "655",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0661.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n660/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0661.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0661",
+      "archive_page_n": 660
+    },
+    {
+      "book_page": "656",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0662.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n661/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0662.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0662",
+      "archive_page_n": 661
+    },
+    {
+      "book_page": "657",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0663.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n662/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0663.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0663",
+      "archive_page_n": 662
+    },
+    {
+      "book_page": "658",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0664.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n663/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0664.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0664",
+      "archive_page_n": 663
+    },
+    {
+      "book_page": "659",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0665.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n664/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0665.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0665",
+      "archive_page_n": 664
+    },
+    {
+      "book_page": "660",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0666.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n665/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0666.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0666",
+      "archive_page_n": 665
+    },
+    {
+      "book_page": "661",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0667.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n666/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0667.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0667",
+      "archive_page_n": 666
+    },
+    {
+      "book_page": "662",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0668.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n667/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0668.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0668",
+      "archive_page_n": 667
+    },
+    {
+      "book_page": "663",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0669.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n668/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0669.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0669",
+      "archive_page_n": 668
+    },
+    {
+      "book_page": "664",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0670.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n669/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0670.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0670",
+      "archive_page_n": 669
+    },
+    {
+      "book_page": "665",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0671.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n670/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0671.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0671",
+      "archive_page_n": 670
+    },
+    {
+      "book_page": "666",
+      "tei_facs": "https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0672.jp2",
+      "facs": "https://archive.org/details/b23982500_0002/page/n671/mode/1up",
+      "remoteImage": "https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0672.jp2/full/1200,/0/default.jpg",
+      "xml_id": "spr-comm-pb-0672",
+      "archive_page_n": 671
+    }
+  ]
+}
