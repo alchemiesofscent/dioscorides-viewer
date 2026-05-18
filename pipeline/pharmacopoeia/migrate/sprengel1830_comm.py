@@ -59,6 +59,7 @@ SIGNATURE_RE = re.compile(r"^DIOSCORIDES\s+II\.\s+[A-Za-z ]{1,3}$")
 WORD_RE = re.compile(r"[^\W_]+", re.UNICODE)
 JP2_BASENAME_RE = re.compile(r"(b23982500_0002_\d{4})\.jp2", re.IGNORECASE)
 SUPERSCRIPT_DIGITS = str.maketrans("⁰¹²³⁴⁵⁶⁷⁸⁹", "0123456789")
+LINE_END_HYPHEN_RE = re.compile(r"[-‐‑‒–—](\s*)$")
 CAP_PREFIX_RE = re.compile(
     r"^\s*(Cap\.\s+[IVXLCDM]+(?:\s*[—–-]\s*[IVXLCDM]+|\.\s*[IVXLCDM]+)?\.\s*)",
     re.IGNORECASE,
@@ -540,18 +541,22 @@ def _write_heading_audit(stats: HeadingReconciliationStats) -> None:
         lines.append(
             "\t".join(
                 [
-                    item.get("chapter", ""),
-                    item.get("page", ""),
-                    item.get("fragment", ""),
-                    item.get("status", ""),
-                    item.get("head", ""),
-                    item.get("body_line", ""),
-                    item.get("candidates", ""),
+                    _audit_cell(item.get("chapter", "")),
+                    _audit_cell(item.get("page", "")),
+                    _audit_cell(item.get("fragment", "")),
+                    _audit_cell(item.get("status", "")),
+                    _audit_cell(item.get("head", "")),
+                    _audit_cell(item.get("body_line", "")),
+                    _audit_cell(item.get("candidates", "")),
                 ]
             )
             + "\n"
         )
     audit_path.write_text("".join(lines), encoding="utf-8")
+
+
+def _audit_cell(value: str) -> str:
+    return " ".join(value.split()) or "-"
 
 
 def _write_hyphenation_audit(stats: HyphenationImportStats) -> None:
@@ -566,12 +571,12 @@ def _write_hyphenation_audit(stats: HyphenationImportStats) -> None:
         lines.append(
             "\t".join(
                 [
-                    item.get("page", ""),
-                    item.get("fragment", ""),
-                    item.get("status", ""),
-                    item.get("before", ""),
-                    item.get("after", ""),
-                    item.get("matches", ""),
+                    _audit_cell(item.get("page", "")),
+                    _audit_cell(item.get("fragment", "")),
+                    _audit_cell(item.get("status", "")),
+                    _audit_cell(item.get("before", "")),
+                    _audit_cell(item.get("after", "")),
+                    _audit_cell(item.get("matches", "")),
                 ]
             )
             + "\n"
@@ -872,6 +877,61 @@ def repair_known_text_errors(root: etree._Element) -> int:
     return repaired
 
 
+def normalize_german_opening_quotes(root: etree._Element) -> int:
+    """Use the printed German opening quote glyph instead of OCR double comma."""
+    changed = 0
+    for elem in root.iter():
+        if elem.text and ",," in elem.text:
+            elem.text = elem.text.replace(",,", "„")
+            changed += 1
+        if elem.tail and ",," in elem.tail:
+            elem.tail = elem.tail.replace(",,", "„")
+            changed += 1
+    return changed
+
+
+def _remove_terminal_hyphen(text: str | None) -> tuple[str | None, bool]:
+    if text is None:
+        return None, False
+    normalized, count = LINE_END_HYPHEN_RE.subn(r"\1", text, count=1)
+    return normalized, bool(count)
+
+
+def _remove_terminal_text_hyphen(elem: etree._Element) -> bool:
+    """Remove the visible hyphen immediately before a line-join milestone."""
+    prev = elem.getprevious()
+    if prev is not None:
+        prev.tail, changed = _remove_terminal_hyphen(prev.tail)
+        if changed:
+            return True
+        current = prev
+        while len(current):
+            last = current[-1]
+            last.tail, changed = _remove_terminal_hyphen(last.tail)
+            if changed:
+                return True
+            current = last
+        current.text, changed = _remove_terminal_hyphen(current.text)
+        return changed
+
+    parent = elem.getparent()
+    if parent is None:
+        return False
+    parent.text, changed = _remove_terminal_hyphen(parent.text)
+    return changed
+
+
+def remove_line_end_hyphen_glyphs(root: etree._Element) -> int:
+    """Let ``lb@break='no'`` carry line-end hyphenation without text glyphs."""
+    removed = 0
+    for lb in root.iter(TEI + "lb"):
+        if lb.get("break") != "no":
+            continue
+        if _remove_terminal_text_hyphen(lb):
+            removed += 1
+    return removed
+
+
 def _remove_empty_main_lbs(root: etree._Element) -> int:
     removed = 0
     for lb in list(root.iter(TEI + "lb")):
@@ -942,6 +1002,8 @@ def run() -> None:
     line_stats = normalize_page_line_numbering(root)
     hyphen_stats = import_line_end_hyphenation(root, write_audit=True)
     text_errors_repaired = repair_known_text_errors(root)
+    opening_quotes_normalized = normalize_german_opening_quotes(root)
+    line_end_hyphens_removed = remove_line_end_hyphen_glyphs(root)
     facs_rewritten = rewrite_pb_facs(root)
     sources_restored = _restore_pb_sources(root, preserved_sources)
 
@@ -964,6 +1026,8 @@ def run() -> None:
         f"{footnote_refs_normalized} superscript footnote ref markers normalized, "
         f"{missing_line_breaks_repaired} known missing line breaks repaired, "
         f"{text_errors_repaired} known text errors repaired, "
+        f"{opening_quotes_normalized} German opening quote markers normalized, "
+        f"{line_end_hyphens_removed} line-end hyphen glyphs removed before break=no, "
         f"{line_stats['leading_lbs_inserted']} leading body <lb> tags inserted, "
         f"{line_stats['empty_main_lbs_removed']} empty main body <lb> tags removed, "
         f"{line_stats['main_lbs_renumbered']} main body <lb> tags renumbered, "

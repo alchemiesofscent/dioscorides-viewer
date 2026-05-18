@@ -3,8 +3,10 @@ import pytest
 
 from pharmacopoeia.migrate.sprengel1830_comm import (
     import_line_end_hyphenation,
+    normalize_german_opening_quotes,
     normalize_page_line_numbering,
     normalize_footnote_ref_markers,
+    remove_line_end_hyphen_glyphs,
     repair_known_missing_line_breaks,
     repair_known_text_errors,
     reconcile_inline_chapter_headings,
@@ -321,6 +323,36 @@ def test_page_502_eryngium_greek_correction_preserves_split_line_break():
     assert split_lb.get("break") == "no"
     assert foreign_words[1].text == "σετέσρο"
     assert [lb.get("n") for lb in body_lbs] == ["1", "2", "3"]
+
+
+def test_german_opening_quotes_replace_double_commas_in_text_and_tail():
+    root = _parse(
+        '<p><lb n="1"/>,,a Paraetonii <hi rend="italic">ferme</hi>,, regione</p>'
+    )
+
+    changed = normalize_german_opening_quotes(root)
+
+    assert changed == 2
+    assert ",," not in "".join(root.itertext())
+    assert "„a Paraetonii" in "".join(root.itertext())
+    assert "„ regione" in "".join(root.itertext())
+
+
+def test_line_end_hyphen_glyphs_are_removed_before_break_no():
+    root = _parse(
+        '<p><lb n="1"/>Marmaridae, Mar-<lb n="2" break="no"/>cello '
+        '<hi rend="italic">Syr-</hi><lb n="3" break="no"/>tin '
+        '<foreign xml:lang="grc">μι-</foreign><lb n="4" break="no"/>κρὸν</p>'
+    )
+
+    removed = remove_line_end_hyphen_glyphs(root)
+
+    text = etree.tostring(root, encoding="unicode")
+    assert removed == 3
+    assert "Mar-" not in text
+    assert "Syr-" not in text
+    assert "μι-" not in text
+    assert text.count('break="no"') == 3
 
 
 def test_page_fragment_hyphenation_sets_break_no_on_matching_lb(tmp_path):
