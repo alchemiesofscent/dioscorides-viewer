@@ -55,8 +55,11 @@ LINE_BOUNDARY_TAGS = {
     TEI + "cb",
 }
 LINE_CONTAINER_TAGS = {TEI + "p", TEI + "head", TEI + "fw", TEI + "note"}
-SIGNATURE_RE = re.compile(r"^DIOSCORIDES\s+II\.\s+[A-Za-z ]{1,3}$")
+SIGNATURE_RE = re.compile(
+    r"^(?:DIOSCORIDES\s+II\.\s+[A-Za-z ]{1,3}|[A-Z][a-z]?\s+\d+)$"
+)
 WORD_RE = re.compile(r"[^\W_]+", re.UNICODE)
+TRAILING_NOTE_MARKER_RE = re.compile(r"(?:\d+|[⁰¹²³⁴⁵⁶⁷⁸⁹]+)$")
 JP2_BASENAME_RE = re.compile(r"(b23982500_0002_\d{4})\.jp2", re.IGNORECASE)
 SUPERSCRIPT_DIGITS = str.maketrans("⁰¹²³⁴⁵⁶⁷⁸⁹", "0123456789")
 LINE_END_HYPHEN_RE = re.compile(r"[-‐‑‒–—](\s*)$")
@@ -80,6 +83,20 @@ HEADING_AUDIT = (
     / "editions"
     / "tlg0656.tlg001.sprengel1830-comm"
     / "heading_audit.tsv"
+)
+CLEANUP_LEDGER = (
+    Path("corpus")
+    / "dioscorides"
+    / "editions"
+    / "tlg0656.tlg001.sprengel1830-comm"
+    / "cleanup_ledger.tsv"
+)
+CLEANUP_SUMMARY = (
+    Path("corpus")
+    / "dioscorides"
+    / "editions"
+    / "tlg0656.tlg001.sprengel1830-comm"
+    / "cleanup_summary.md"
 )
 
 
@@ -108,6 +125,19 @@ class HeadingReconciliationStats:
     no_first_line: int = 0
     duplicate_head_tails_removed: int = 0
     unresolved: list[dict[str, str]] = field(default_factory=list)
+
+
+@dataclass
+class PageFurnitureStats:
+    pages_seen: int = 0
+    page_numbers_inserted: int = 0
+    page_numbers_split: int = 0
+    page_numbers_normalized: int = 0
+    running_heads_normalized: int = 0
+    empty_fws_removed: int = 0
+    leaked_page_numbers_removed: int = 0
+    leaked_headers_removed: int = 0
+    review_rows: list[dict[str, str]] = field(default_factory=list)
 
 
 def _source_path(out_path: Path) -> tuple[Path, bool]:
@@ -339,7 +369,13 @@ def _line_text_after_lb(lb: etree._Element) -> str:
 
 
 def _word_fragments(text: str) -> list[str]:
-    return WORD_RE.findall(text)
+    fragments: list[str] = []
+    for word in WORD_RE.findall(text):
+        normalized = word.translate(SUPERSCRIPT_DIGITS)
+        normalized = TRAILING_NOTE_MARKER_RE.sub("", normalized)
+        if normalized and not normalized.isdigit():
+            fragments.append(normalized)
+    return fragments
 
 
 def _last_word_fragment(text: str) -> str:
@@ -584,6 +620,93 @@ def _write_hyphenation_audit(stats: HyphenationImportStats) -> None:
     audit_path.write_text("".join(lines), encoding="utf-8")
 
 
+def _write_cleanup_outputs(
+    heading_stats: HeadingReconciliationStats,
+    hyphen_stats: HyphenationImportStats,
+    page_stats: PageFurnitureStats,
+) -> None:
+    ledger_path = Path(__file__).resolve().parents[3] / CLEANUP_LEDGER
+    summary_path = Path(__file__).resolve().parents[3] / CLEANUP_SUMMARY
+    rows: list[dict[str, str]] = []
+
+    for item in heading_stats.unresolved:
+        status = item.get("status", "")
+        rows.append(
+            {
+                "issue_type": "heading",
+                "status": "needs-image-review" if status == "missing-fragment" else "needs-review",
+                "page": item.get("page", ""),
+                "fragment": item.get("fragment", ""),
+                "xml_id": item.get("chapter", ""),
+                "line": "",
+                "current": item.get("body_line", ""),
+                "evidence": item.get("head", ""),
+                "proposed_action": "restore printed prefix only if fragment or page image confirms it",
+                "note": status,
+            }
+        )
+
+    for item in hyphen_stats.unresolved:
+        status = item.get("status", "")
+        rows.append(
+            {
+                "issue_type": "hyphenation",
+                "status": "needs-image-review" if status == "ambiguous" else "needs-review",
+                "page": item.get("page", ""),
+                "fragment": item.get("fragment", ""),
+                "xml_id": "",
+                "line": "",
+                "current": f"{item.get('before', '')}|{item.get('after', '')}",
+                "evidence": item.get("matches", ""),
+                "proposed_action": "set lb@break='no' only when the page-local split is unique",
+                "note": status,
+            }
+        )
+
+    rows.extend(page_stats.review_rows)
+    ledger_path.parent.mkdir(parents=True, exist_ok=True)
+    columns = [
+        "issue_type",
+        "status",
+        "page",
+        "fragment",
+        "xml_id",
+        "line",
+        "current",
+        "evidence",
+        "proposed_action",
+        "note",
+    ]
+    lines = ["\t".join(columns) + "\n"]
+    for row in rows:
+        lines.append("\t".join(_audit_cell(row.get(column, "")) for column in columns) + "\n")
+    ledger_path.write_text("".join(lines), encoding="utf-8")
+
+    counts: dict[tuple[str, str], int] = defaultdict(int)
+    for row in rows:
+        counts[(row.get("issue_type", ""), row.get("status", ""))] += 1
+    summary_lines = [
+        "# Sprengel Commentarius Cleanup Summary\n",
+        "\n",
+        f"- Heading audit review rows: {len(heading_stats.unresolved)}\n",
+        f"- Hyphenation audit review rows: {len(hyphen_stats.unresolved)}\n",
+        f"- Page furniture review/action rows: {len(page_stats.review_rows)}\n",
+        f"- Pages scanned for page furniture: {page_stats.pages_seen}\n",
+        f"- Page numbers inserted: {page_stats.page_numbers_inserted}\n",
+        f"- Page numbers split from running heads: {page_stats.page_numbers_split}\n",
+        f"- Page-number furniture normalized: {page_stats.page_numbers_normalized}\n",
+        f"- Running heads normalized: {page_stats.running_heads_normalized}\n",
+        f"- Empty page-furniture elements removed: {page_stats.empty_fws_removed}\n",
+        f"- Leaked page-number body paragraphs removed: {page_stats.leaked_page_numbers_removed}\n",
+        f"- Leaked running-head text removed: {page_stats.leaked_headers_removed}\n",
+        "\n",
+        "## Review Counts\n",
+    ]
+    for (issue_type, status), count in sorted(counts.items()):
+        summary_lines.append(f"- {issue_type} / {status}: {count}\n")
+    summary_path.write_text("".join(summary_lines), encoding="utf-8")
+
+
 def import_line_end_hyphenation(
     root: etree._Element,
     fragment_dir: Path | None = None,
@@ -806,6 +929,209 @@ def reconcile_inline_chapter_headings(
         )
     if write_audit:
         _write_heading_audit(stats)
+    return stats
+
+
+def _page_number_place(page_n: str) -> str:
+    try:
+        return "top-left" if int(page_n) % 2 == 0 else "top-right"
+    except ValueError:
+        return "top-left"
+
+
+def _running_head_place(page_n: str) -> str:
+    return "top-right" if _page_number_place(page_n) == "top-left" else "top-left"
+
+
+def _set_fw_text(fw: etree._Element, text: str) -> None:
+    for child in list(fw):
+        fw.remove(child)
+    fw.text = text
+
+
+def _top_furniture_after_pb(pb: etree._Element) -> list[etree._Element]:
+    fws: list[etree._Element] = []
+    for sibling in pb.itersiblings():
+        if sibling.tag == TEI + "fw" and (
+            (sibling.get("place") or "").startswith("top")
+            or sibling.get("type") in {"header", "page-number"}
+        ):
+            fws.append(sibling)
+            continue
+        break
+    return fws
+
+
+def _page_before_element_in_stream(elem: etree._Element) -> etree._Element | None:
+    current: etree._Element | None = elem
+    while current is not None:
+        for sibling in reversed(list(current.itersiblings(preceding=True))):
+            if sibling.tag == TEI + "pb":
+                return sibling
+            for candidate in reversed(list(sibling.iter())):
+                if candidate.tag == TEI + "pb":
+                    return candidate
+        current = current.getparent()
+    return None
+
+
+def _remove_leaked_page_furniture(root: etree._Element, stats: PageFurnitureStats) -> None:
+    for p in list(root.iter(TEI + "p")):
+        pb = _page_before_element_in_stream(p)
+        if pb is None:
+            continue
+        page_n = pb.get("n") or ""
+        if page_n and _normalized_text(p) == page_n:
+            parent = p.getparent()
+            if parent is not None:
+                parent.remove(p)
+                stats.leaked_page_numbers_removed += 1
+                stats.review_rows.append(
+                    {
+                        "issue_type": "page-furniture",
+                        "status": "applied",
+                        "page": page_n,
+                        "fragment": _fragment_filename_from_pb(pb) or "",
+                        "xml_id": pb.get(XID) or "",
+                        "line": "",
+                        "current": f"body paragraph page number {page_n}",
+                        "evidence": pb.get("facs") or pb.get("source") or "",
+                        "proposed_action": "remove page number from body line stream",
+                        "note": "deterministic",
+                    }
+                )
+
+    for space in list(root.iter(TEI + "space")):
+        tail = " ".join((space.tail or "").split())
+        if not tail:
+            continue
+        next_elem = space.getnext()
+        if next_elem is None or next_elem.tag != TEI + "fw":
+            continue
+        if tail != _normalized_text(next_elem):
+            continue
+        pb = _page_before_element_in_stream(space)
+        parent = space.getparent()
+        if parent is None:
+            continue
+        parent.remove(space)
+        stats.leaked_headers_removed += 1
+        stats.review_rows.append(
+            {
+                "issue_type": "page-furniture",
+                "status": "applied",
+                "page": pb.get("n") if pb is not None else "",
+                "fragment": _fragment_filename_from_pb(pb) if pb is not None else "",
+                "xml_id": pb.get(XID) if pb is not None else "",
+                "line": "",
+                "current": tail,
+                "evidence": "space tail duplicated following fw",
+                "proposed_action": "remove leaked running head from body text",
+                "note": "deterministic",
+            }
+        )
+
+
+def _split_page_number(text: str, page_n: str) -> tuple[str, bool]:
+    normalized = " ".join(text.split())
+    if normalized == page_n:
+        return "", True
+    for pattern in (rf"^(?:{re.escape(page_n)})\s+(.+)$", rf"^(.+?)\s+(?:{re.escape(page_n)})$"):
+        match = re.match(pattern, normalized)
+        if match:
+            return match.group(1).strip(), True
+    return normalized, False
+
+
+def normalize_page_top_furniture(root: etree._Element) -> PageFurnitureStats:
+    """Standardize page-number/running-head furniture for each page."""
+    stats = PageFurnitureStats()
+    _remove_leaked_page_furniture(root, stats)
+    for pb in root.iter(TEI + "pb"):
+        page_n = pb.get("n") or ""
+        if not page_n:
+            continue
+        stats.pages_seen += 1
+        top_fws = _top_furniture_after_pb(pb)
+        page_fw: etree._Element | None = None
+        running_fws: list[etree._Element] = []
+        empty_fws: list[etree._Element] = []
+
+        for fw in top_fws:
+            text = _normalized_text(fw)
+            if not text:
+                empty_fws.append(fw)
+                continue
+            if fw.get("type") == "page-number" or text == page_n:
+                page_fw = fw
+                _set_fw_text(fw, page_n)
+                continue
+            running, found_page = _split_page_number(text, page_n)
+            if found_page and page_fw is None:
+                page_fw = etree.Element(TEI + "fw")
+                page_fw.text = page_n
+                fw.addprevious(page_fw)
+                stats.page_numbers_split += 1
+            if running:
+                _set_fw_text(fw, running)
+                running_fws.append(fw)
+            else:
+                empty_fws.append(fw)
+
+        if page_fw is None:
+            page_fw = etree.Element(TEI + "fw")
+            page_fw.text = page_n
+            insert_after = pb
+            insert_after.addnext(page_fw)
+            stats.page_numbers_inserted += 1
+            stats.review_rows.append(
+                {
+                    "issue_type": "page-furniture",
+                    "status": "applied",
+                    "page": page_n,
+                    "fragment": _fragment_filename_from_pb(pb) or "",
+                    "xml_id": pb.get(XID) or "",
+                    "line": "",
+                    "current": "missing page number",
+                    "evidence": pb.get("facs") or pb.get("source") or "",
+                    "proposed_action": "insert page-number fw using pb@n and parity placement",
+                    "note": "deterministic",
+                }
+            )
+
+        desired_page_place = _page_number_place(page_n)
+        if page_fw.get("type") != "page-number" or page_fw.get("place") != desired_page_place:
+            page_fw.set("type", "page-number")
+            page_fw.set("place", desired_page_place)
+            stats.page_numbers_normalized += 1
+
+        desired_head_place = _running_head_place(page_n)
+        for fw in running_fws:
+            if fw.get("type") != "header" or fw.get("place") != desired_head_place:
+                fw.set("type", "header")
+                fw.set("place", desired_head_place)
+                stats.running_heads_normalized += 1
+
+        for fw in empty_fws:
+            parent = fw.getparent()
+            if parent is not None:
+                parent.remove(fw)
+                stats.empty_fws_removed += 1
+
+        ordered = [fw for fw in _top_furniture_after_pb(pb) if fw.getparent() is not None]
+        if page_fw.get("place") == "top-left":
+            desired = [page_fw] + [fw for fw in ordered if fw is not page_fw]
+        else:
+            desired = [fw for fw in ordered if fw is not page_fw] + [page_fw]
+        parent = pb.getparent()
+        if parent is not None and ordered != desired:
+            insert_index = parent.index(pb) + 1
+            for fw in desired:
+                if fw.getparent() is parent:
+                    parent.remove(fw)
+            for offset, fw in enumerate(desired):
+                parent.insert(insert_index + offset, fw)
+
     return stats
 
 
@@ -1052,6 +1378,7 @@ def run() -> None:
     footnote_refs_normalized = normalize_footnote_ref_markers(root)
     missing_line_breaks_repaired = repair_known_missing_line_breaks(root)
     page_342_boundary_repairs = repair_page_342_book_boundary(root)
+    page_furniture_stats = normalize_page_top_furniture(root)
     line_stats = normalize_page_line_numbering(root)
     hyphen_stats = import_line_end_hyphenation(root, write_audit=True)
     text_errors_repaired = repair_known_text_errors(root)
@@ -1059,6 +1386,7 @@ def run() -> None:
     line_end_hyphens_removed = remove_line_end_hyphen_glyphs(root)
     facs_rewritten = rewrite_pb_facs(root)
     sources_restored = _restore_pb_sources(root, preserved_sources)
+    _write_cleanup_outputs(heading_stats, hyphen_stats, page_furniture_stats)
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
     xml_text, indent_stats = serialize_with_epidoc_indentation(tree)
@@ -1079,6 +1407,12 @@ def run() -> None:
         f"{footnote_refs_normalized} superscript footnote ref markers normalized, "
         f"{missing_line_breaks_repaired} known missing line breaks repaired, "
         f"{page_342_boundary_repairs} page 342 paragraph/book boundary repairs, "
+        f"{page_furniture_stats.page_numbers_inserted} page numbers inserted, "
+        f"{page_furniture_stats.page_numbers_split} page numbers split from running heads, "
+        f"{page_furniture_stats.page_numbers_normalized} page-number fw tags normalized, "
+        f"{page_furniture_stats.running_heads_normalized} running-head fw tags normalized, "
+        f"{page_furniture_stats.leaked_page_numbers_removed} leaked page-number paragraphs removed, "
+        f"{page_furniture_stats.leaked_headers_removed} leaked running heads removed, "
         f"{text_errors_repaired} known text errors repaired, "
         f"{opening_quotes_normalized} German opening quote markers normalized, "
         f"{line_end_hyphens_removed} line-end hyphen glyphs removed before break=no, "

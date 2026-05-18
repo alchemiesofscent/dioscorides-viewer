@@ -5,6 +5,7 @@ from pharmacopoeia.migrate.sprengel1830_comm import (
     import_line_end_hyphenation,
     normalize_german_opening_quotes,
     normalize_page_line_numbering,
+    normalize_page_top_furniture,
     normalize_footnote_ref_markers,
     repair_page_342_book_boundary,
     remove_line_end_hyphen_glyphs,
@@ -162,6 +163,74 @@ def test_signature_paragraph_moves_to_bottom_fw():
     assert fw.text == "DIOSCORIDES II. Z"
     assert fw.find(f".//{TEI}lb") is None
     assert [lb.get("n") for lb in body_lbs] == ["1", "2"]
+
+
+def test_short_signature_paragraph_moves_to_bottom_fw():
+    root = _parse(
+        '<pb n="339"/><p><lb n="1"/>Body</p>'
+        '<p><lb n="2"/>Y 2</p>'
+        '<p><lb n="3"/>Next body</p>'
+    )
+
+    stats = normalize_page_line_numbering(root)
+
+    fw = root.find(f".//{TEI}fw")
+    body_lbs = root.findall(f".//{TEI}p//{TEI}lb")
+    assert stats["signature_paragraphs_moved"] == 1
+    assert fw.get("type") == "sig"
+    assert fw.get("place") == "bottom"
+    assert fw.text == "Y 2"
+    assert [lb.get("n") for lb in body_lbs] == ["1", "2"]
+
+
+def test_page_top_furniture_splits_and_aligns_page_numbers():
+    root = _parse(
+        '<pb n="341"/><fw type="header" place="top">IN DIOSCORIDIS. PRAEF. 341</fw>'
+        '<p>body</p>'
+        '<pb n="342"/><fw type="header" place="top">COMMENTARIUS</fw><p>body</p>'
+    )
+
+    stats = normalize_page_top_furniture(root)
+
+    pbs = root.findall(f".//{TEI}pb")
+    page_341 = [sibling for sibling in pbs[0].itersiblings() if sibling.tag == TEI + "fw"][:2]
+    page_342 = [sibling for sibling in pbs[1].itersiblings() if sibling.tag == TEI + "fw"][:2]
+    assert stats.page_numbers_split == 1
+    assert stats.page_numbers_inserted == 1
+    assert [(fw.get("type"), fw.get("place"), _flat_text(fw)) for fw in page_341] == [
+        ("header", "top-left", "IN DIOSCORIDIS. PRAEF."),
+        ("page-number", "top-right", "341"),
+    ]
+    assert [(fw.get("type"), fw.get("place"), _flat_text(fw)) for fw in page_342] == [
+        ("page-number", "top-left", "342"),
+        ("header", "top-right", "COMMENTARIUS"),
+    ]
+
+
+def test_page_top_furniture_removes_leaked_body_page_number_and_header():
+    root = _parse(
+        '<pb n="540"/>'
+        '<p><lb n="1"/>540</p>'
+        '<space dim="horizontal" quantity="30" unit="char"/>COMMENTARIUS'
+        '<fw type="header" place="top">COMMENTARIUS</fw>'
+        '<p><lb n="2"/>facilis erat</p>'
+    )
+
+    stats = normalize_page_top_furniture(root)
+    normalize_page_line_numbering(root)
+
+    fws = root.findall(f".//{TEI}fw")
+    paragraphs = root.findall(f".//{TEI}p")
+    lbs = root.findall(f".//{TEI}p//{TEI}lb")
+    assert stats.leaked_page_numbers_removed == 1
+    assert stats.leaked_headers_removed == 1
+    assert [(fw.get("type"), fw.get("place"), _flat_text(fw)) for fw in fws] == [
+        ("page-number", "top-left", "540"),
+        ("header", "top-right", "COMMENTARIUS"),
+    ]
+    assert len(paragraphs) == 1
+    assert _flat_text(paragraphs[0]) == "facilis erat"
+    assert [lb.get("n") for lb in lbs] == ["1"]
 
 
 def test_zea_heading_becomes_supplied_and_printed_range_moves_to_body(tmp_path):
@@ -419,6 +488,27 @@ def test_page_fragment_hyphenation_sets_break_no_on_matching_lb(tmp_path):
     assert stats.candidates == 2
     assert stats.matched == 2
     assert [lb.get("break") for lb in lbs] == [None, "no", "no"]
+
+
+def test_hyphenation_import_ignores_fragment_footnote_marker_noise(tmp_path):
+    root = _parse(
+        '<pb n="341" source="https://archive.org/download/b23982500_0002/'
+        'b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0349.jp2"/>'
+        '<p><lb n="1"/>pius in opere μεταπο'
+        '<lb n="2"/>ροποιούσῃ et de reliquis</p>'
+    )
+    _write_fragment(
+        tmp_path,
+        "b23982500_0002_0349.xml",
+        '<pb n="341"/>pius in opere μεταπο<lb break="no"/>ροποιούσῃ¹⁵ et de reliquis<lb/>',
+    )
+
+    stats = import_line_end_hyphenation(root, tmp_path)
+
+    lbs = root.findall(f".//{TEI}p/{TEI}lb")
+    assert stats.matched == 1
+    assert stats.unmatched == 0
+    assert lbs[1].get("break") == "no"
 
 
 def test_hyphenation_import_matches_across_inline_markup(tmp_path):
