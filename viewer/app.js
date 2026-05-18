@@ -487,6 +487,13 @@
       .trim();
   }
 
+  function suppliedHeadTitle(text) {
+    return cleanBracketedTitle(text)
+      .replace(/\s+/g, " ")
+      .replace(/[.。]+$/, "")
+      .trim();
+  }
+
   function elementLang(element) {
     return element.getAttributeNS(XML_NS, "lang") || element.getAttribute("xml:lang") || element.getAttribute("lang") || "";
   }
@@ -576,6 +583,7 @@
   function extractNavTitle(div, title) {
     const directHead = directSectionHead(div);
     if (directHead) {
+      if (directHead.getAttribute("type") === "supplied") return suppliedHeadTitle(directHead.textContent || "");
       const berendesTitle = appendLeadingTranslationTitleContinuation(div, directHead, extractBerendesHeadTitle(directHead));
       if (berendesTitle) return berendesTitle;
       const hi = Array.from(directHead.getElementsByTagNameNS("*", "hi")).find((el) => hasRendToken(el, "bold"));
@@ -921,6 +929,7 @@
 
   function isRenderableHead(element, context) {
     if (localName(element) !== "head") return true;
+    if (element.getAttribute("type") === "supplied") return false;
     const parent = element.parentElement;
     if (!parent) return true;
     const parentName = localName(parent);
@@ -934,7 +943,12 @@
     const page = context.currentPage;
     const parent = context.container;
     if (!page || !parent) return;
-    if (parent.childNodes.length) parent.appendChild(document.createElement("br"));
+    if (parent.childNodes.length) {
+      if ((context.pendingLineElement.getAttribute("break") || "") === "no" && !/(?:-|‐|‑|‒|–|—)$/.test(parent.textContent || "")) {
+        parent.appendChild(document.createTextNode("-"));
+      }
+      parent.appendChild(document.createElement("br"));
+    }
     const line = context.pendingLineElement.getAttribute("n") || "";
     if (line && !page.firstLine) page.firstLine = line;
     context.lineTracker.current = line;
