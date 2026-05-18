@@ -57,7 +57,7 @@ integer `@n` counting printed lines on the current page (resets at each
 `<pb/>`).
 
 - `@n` is **required** when `<lb>` is a descendant of the main text stream
-  (`<ab>`, `<p>`, `<head>`, `<fw>`). It records the printed line number on the
+  (`<ab>`, `<p>`, `<head>`). It records the printed body line number on the
   page.
 - `@n` is **optional** when `<lb>` is inside a `<note>` body. There it marks a
   visual break within the footnote text, not a page-line.
@@ -74,6 +74,21 @@ integer `@n` counting printed lines on the current page (resets at each
   No ad-hoc hyphen-preservation conventions.
 - **Forbidden attributes on `<lb>`**: `bbox`, `cert`, `source`, `seq`, plain
   `id` (use `xml:id`). These are stripped at migration time.
+
+## `<fw>` — page furniture
+
+`<fw>` records printed page furniture, chiefly running headers, printed page
+numbers, and signatures. It is outside the body line-numbering stream.
+
+- `<fw>` must not contain `<lb>` descendants. If source OCR places
+  `<lb n="1"/>` inside a running header or signature, the migration unwraps the
+  marker and preserves the furniture text.
+- Removing furniture line markers must not shift the meaning of body lines:
+  migrations renumber main-stream `<lb>` values from `1..N` after each `<pb>`.
+- Use explicit furniture types and placement, e.g.
+  `<fw type="header" place="top">COMMENTARIUS</fw>`,
+  `<fw type="pageNum" place="top-outer">340</fw>`, or
+  `<fw type="sig" place="bottom">Y 2</fw>`.
 
 ## `<pb/>` — page beginning
 

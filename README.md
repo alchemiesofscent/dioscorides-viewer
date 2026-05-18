@@ -107,8 +107,9 @@ All stages are deterministic Python (no LLM calls in v1):
 - `migrate beck2020` — collapse 181 987 per-word `<w bbox="..." cert="...">`
   elements to plain text inside their parent `<ab>`/`<head>`; drop per-word
   xml:ids and bbox attrs (272K → 68K lines).
-- `migrate sprengel1830-comm` — enforce `<lb>` standard, rewrite JP2 facs
-  URLs to IIIF JPEG derivatives (preserving original on `@source`).
+- `migrate sprengel1830-comm` — enforce body `<lb>` numbering, unwrap
+  page-furniture `<fw>` line markers, rewrite JP2 facs URLs to IIIF JPEG
+  derivatives (preserving original on `@source`).
 - `lemmas extract <edition>` — walk chapter `<head>` elements to build
   per-edition lemma taxonomy files.
 - `lemmas seed-links <from> <to>` — auto-seed a lemma-link file from the

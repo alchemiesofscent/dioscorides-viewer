@@ -6,6 +6,9 @@ heads, 328 pbs, no MediaWiki residue). If that legacy source is absent, the
 current corpus TEI is normalized in place. This migration only:
 
 - enforces the canonical `<lb/>` standard (strip bloat attrs);
+- removes `<lb/>` milestones from `<fw>` page furniture;
+- inserts missing body-line `<lb/>` milestones at the start of body
+  paragraphs/headings, then renumbers main body lines page-by-page;
 - rewrites `<pb @facs>` JP2 URLs to IIIF JPEG derivatives so the viewer can
   render them (browsers cannot render JPEG 2000).
 - serializes with conventional EpiDoc-style hierarchy indentation and keeps
@@ -32,6 +35,8 @@ XML_NS = "http://www.w3.org/XML/1998/namespace"
 TEI_NS = "http://www.tei-c.org/ns/1.0"
 TEI = f"{{{TEI_NS}}}"
 XID = f"{{{XML_NS}}}id"
+MAIN_START_TAGS = {TEI + "p", TEI + "head"}
+IGNORED_LINE_CONTEXTS = {TEI + "fw", TEI + "note"}
 
 
 def _source_path(out_path: Path) -> tuple[Path, bool]:
@@ -73,6 +78,131 @@ def _restore_pb_sources(
     return restored
 
 
+def _inside(elem: etree._Element, tags: set[str]) -> bool:
+    parent = elem.getparent()
+    while parent is not None:
+        if parent.tag in tags:
+            return True
+        parent = parent.getparent()
+    return False
+
+
+def _inside_body(elem: etree._Element) -> bool:
+    return _inside(elem, {TEI + "body"})
+
+
+def _new_lb() -> etree._Element:
+    return etree.Element(TEI + "lb")
+
+
+def _remove_lb_preserving_text(lb: etree._Element) -> None:
+    parent = lb.getparent()
+    if parent is None:
+        return
+    replacement = (lb.text or "") + (lb.tail or "")
+    prev = lb.getprevious()
+    if prev is not None:
+        prev.tail = (prev.tail or "") + replacement
+    else:
+        parent.text = (parent.text or "") + replacement
+    parent.remove(lb)
+
+
+def _unwrap_fw_lbs(root: etree._Element) -> int:
+    removed = 0
+    for fw in root.iter(TEI + "fw"):
+        for lb in list(fw.iter(TEI + "lb")):
+            _remove_lb_preserving_text(lb)
+            removed += 1
+    return removed
+
+
+def _insert_lb_after_child(
+    elem: etree._Element,
+    child: etree._Element,
+    index: int,
+) -> bool:
+    tail = child.tail or ""
+    if not tail.strip():
+        return False
+    lb = _new_lb()
+    lb.tail = tail
+    child.tail = None
+    elem.insert(index + 1, lb)
+    return True
+
+
+def _insert_missing_leading_lb(elem: etree._Element) -> bool:
+    if elem.tag not in MAIN_START_TAGS:
+        return False
+    if not _inside_body(elem) or _inside(elem, IGNORED_LINE_CONTEXTS):
+        return False
+
+    if elem.text and elem.text.strip():
+        lb = _new_lb()
+        lb.tail = elem.text
+        elem.text = None
+        elem.insert(0, lb)
+        return True
+
+    for index, child in enumerate(list(elem)):
+        if not isinstance(child.tag, str):
+            continue
+        if child.tag == TEI + "lb":
+            return False
+        if child.tag in IGNORED_LINE_CONTEXTS or child.tag == TEI + "pb":
+            if _insert_lb_after_child(elem, child, index):
+                return True
+            continue
+        lb = _new_lb()
+        elem.insert(index, lb)
+        return True
+    return False
+
+
+def _insert_missing_leading_lbs(root: etree._Element) -> int:
+    inserted = 0
+    for elem in root.iter():
+        if _insert_missing_leading_lb(elem):
+            inserted += 1
+    return inserted
+
+
+def _renumber_main_lbs_by_page(root: etree._Element) -> int:
+    changed = 0
+    next_n: int | None = None
+    for elem in root.iter():
+        if elem.tag == TEI + "pb":
+            next_n = 1
+            continue
+        if elem.tag != TEI + "lb" or next_n is None:
+            continue
+        if _inside(elem, IGNORED_LINE_CONTEXTS):
+            continue
+        new_n = str(next_n)
+        if elem.get("n") != new_n:
+            changed += 1
+        elem.set("n", new_n)
+        next_n += 1
+    return changed
+
+
+def normalize_page_line_numbering(root: etree._Element) -> dict[str, int]:
+    """Normalize Sprengel commentary body line numbering page-by-page.
+
+    `<fw>` and `<note>` are outside the body-line stream. Notes keep their
+    internal `<lb/>` values as encoded visual breaks.
+    """
+    fw_lbs_removed = _unwrap_fw_lbs(root)
+    leading_lbs_inserted = _insert_missing_leading_lbs(root)
+    main_lbs_renumbered = _renumber_main_lbs_by_page(root)
+    return {
+        "fw_lbs_removed": fw_lbs_removed,
+        "leading_lbs_inserted": leading_lbs_inserted,
+        "main_lbs_renumbered": main_lbs_renumbered,
+    }
+
+
 def run() -> None:
     out_path = edition_tei(NEW_ID)
     src_path, used_corpus_source = _source_path(out_path)
@@ -86,6 +216,7 @@ def run() -> None:
     preserved_sources = _preserve_pb_sources(root) if used_corpus_source else {}
     promote_plain_id_to_xml_id(root)
     strip_bloat_attrs(root)
+    line_stats = normalize_page_line_numbering(root)
     facs_rewritten = rewrite_pb_facs(root)
     sources_restored = _restore_pb_sources(root, preserved_sources)
 
@@ -99,6 +230,9 @@ def run() -> None:
     print(
         f"sprengel1830-comm: {in_lines} -> {out_lines} lines, "
         f"output {output_state}, "
+        f"{line_stats['fw_lbs_removed']} <fw> <lb> tags unwrapped, "
+        f"{line_stats['leading_lbs_inserted']} leading body <lb> tags inserted, "
+        f"{line_stats['main_lbs_renumbered']} main body <lb> tags renumbered, "
         f"{facs_rewritten} JP2 facs URLs rewritten to IIIF JPEG, "
         f"{sources_restored} pb @source attrs restored, "
         f"{indent_stats['line_start_moved']} <lb> tags moved to line starts, "
