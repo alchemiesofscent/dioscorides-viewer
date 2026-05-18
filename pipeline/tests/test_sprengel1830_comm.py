@@ -6,6 +6,7 @@ from pharmacopoeia.migrate.sprengel1830_comm import (
     normalize_german_opening_quotes,
     normalize_page_line_numbering,
     normalize_footnote_ref_markers,
+    repair_page_342_book_boundary,
     remove_line_end_hyphen_glyphs,
     repair_known_missing_line_breaks,
     repair_known_text_errors,
@@ -14,6 +15,8 @@ from pharmacopoeia.migrate.sprengel1830_comm import (
 
 TEI_NS = "http://www.tei-c.org/ns/1.0"
 TEI = f"{{{TEI_NS}}}"
+XML_NS = "http://www.w3.org/XML/1998/namespace"
+XID = f"{{{XML_NS}}}id"
 
 
 def _parse(body: str) -> etree._Element:
@@ -323,6 +326,45 @@ def test_page_502_eryngium_greek_correction_preserves_split_line_break():
     assert split_lb.get("break") == "no"
     assert foreign_words[1].text == "σετέσρο"
     assert [lb.get("n") for lb in body_lbs] == ["1", "2", "3"]
+
+
+def test_page_342_preface_continuation_and_book_head_are_structural():
+    root = _parse(
+        '<div type="textpart" subtype="preface" xml:id="spr-comm-praefatio">'
+        '<pb n="342"/>'
+        '<fw type="header" place="top">COMMENTARIUS</fw>'
+        '<p><lb n="1"/>monio firmatur, <lb n="2"/>patet.'
+        '<lb n="3"/>P. 7. <foreign xml:lang="grc">Ὅτι τινὰ</foreign>'
+        '<lb n="4"/> Bauhino</p>'
+        '</div>'
+        '<div type="textpart" subtype="book" n="1" xml:id="book_1">'
+        '<head><lb n="5"/>LIB. I.</head>'
+        '<div type="textpart" subtype="chapter" n="1.1">'
+        '<head type="supplied">[Cap. I. De Iride.]</head>'
+        '<p><lb n="6"/>Cap. I. De Iride</p>'
+        '</div></div>'
+    )
+
+    changed = repair_page_342_book_boundary(root)
+    normalize_page_line_numbering(root)
+    second_changed = repair_page_342_book_boundary(root)
+
+    preface_ps = root.findall(f".//{TEI}div[@{XID}='spr-comm-praefatio']/{TEI}p")
+    book_head = root.find(f".//{TEI}div[@subtype='book']/{TEI}head")
+    body_lbs = [
+        lb
+        for lb in root.findall(f".//{TEI}lb")
+        if not any(parent.get("type") == "supplied" for parent in lb.iterancestors(TEI + "head"))
+    ]
+    assert changed == 3
+    assert second_changed == 0
+    assert preface_ps[0].get("type") == "continued"
+    assert _flat_text(preface_ps[0]) == "monio firmatur, patet."
+    assert _flat_text(preface_ps[1]).startswith("P. 7. Ὅτι τινὰ Bauhino")
+    assert book_head.get("type") == "supplied"
+    assert book_head.text == "[LIB. I.]"
+    assert book_head.find(f".//{TEI}lb") is None
+    assert [lb.get("n") for lb in body_lbs] == ["1", "2", "3", "4", "5"]
 
 
 def test_german_opening_quotes_replace_double_commas_in_text_and_tail():

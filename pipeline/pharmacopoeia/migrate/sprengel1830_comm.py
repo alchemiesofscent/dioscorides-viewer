@@ -877,6 +877,58 @@ def repair_known_text_errors(root: etree._Element) -> int:
     return repaired
 
 
+def _direct_head(div: etree._Element) -> etree._Element | None:
+    for child in div:
+        if child.tag == TEI + "head":
+            return child
+    return None
+
+
+def _first_line_text(elem: etree._Element) -> str:
+    lb = elem.find(f".//{TEI}lb")
+    return _line_text_after_lb(lb) if lb is not None else _normalized_text(elem)
+
+
+def repair_page_342_book_boundary(root: etree._Element) -> int:
+    """Fix checked page 342 paragraph/book boundary after the preface."""
+    repaired = 0
+    preface = root.find(f".//{TEI}div[@{XID}='spr-comm-praefatio']")
+    if preface is not None:
+        page_342_seen = False
+        for child in list(preface):
+            if child.tag == TEI + "pb" and child.get("n") == "342":
+                page_342_seen = True
+                continue
+            if not page_342_seen or child.tag != TEI + "p":
+                continue
+            if _first_line_text(child).lstrip().startswith("monio firmatur"):
+                if child.get("type") != "continued":
+                    child.set("type", "continued")
+                    repaired += 1
+                for index, item in enumerate(list(child)):
+                    if (
+                        item.tag == TEI + "lb"
+                        and (item.tail or "").lstrip().startswith("P. 7.")
+                    ):
+                        new_p = etree.Element(TEI + "p")
+                        new_p.tail = child.tail
+                        child.tail = "\n        "
+                        for moving in list(child)[index:]:
+                            child.remove(moving)
+                            new_p.append(moving)
+                        preface.insert(preface.index(child) + 1, new_p)
+                        repaired += 1
+                        break
+            break
+
+    book = root.find(f".//{TEI}div[@subtype='book'][@n='1']")
+    head = _direct_head(book) if book is not None else None
+    if head is not None and _normalized_text(head) == "LIB. I.":
+        if _set_head_supplied(head):
+            repaired += 1
+    return repaired
+
+
 def normalize_german_opening_quotes(root: etree._Element) -> int:
     """Use the printed German opening quote glyph instead of OCR double comma."""
     changed = 0
@@ -999,6 +1051,7 @@ def run() -> None:
     heading_stats = reconcile_inline_chapter_headings(root, write_audit=True)
     footnote_refs_normalized = normalize_footnote_ref_markers(root)
     missing_line_breaks_repaired = repair_known_missing_line_breaks(root)
+    page_342_boundary_repairs = repair_page_342_book_boundary(root)
     line_stats = normalize_page_line_numbering(root)
     hyphen_stats = import_line_end_hyphenation(root, write_audit=True)
     text_errors_repaired = repair_known_text_errors(root)
@@ -1025,6 +1078,7 @@ def run() -> None:
         f"{heading_stats.missing_fragments} missing fragments), "
         f"{footnote_refs_normalized} superscript footnote ref markers normalized, "
         f"{missing_line_breaks_repaired} known missing line breaks repaired, "
+        f"{page_342_boundary_repairs} page 342 paragraph/book boundary repairs, "
         f"{text_errors_repaired} known text errors repaired, "
         f"{opening_quotes_normalized} German opening quote markers normalized, "
         f"{line_end_hyphens_removed} line-end hyphen glyphs removed before break=no, "

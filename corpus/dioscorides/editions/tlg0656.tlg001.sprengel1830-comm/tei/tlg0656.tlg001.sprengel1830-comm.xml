@@ -174,9 +174,11 @@
         <pb n="342" xml:id="spr-comm-pb-bp342" facs="https://iiif.archive.org/image/iiif/3/b23982500_0002%2Fb23982500_0002_jp2.zip%2Fb23982500_0002_jp2%2Fb23982500_0002_0350.jp2/full/1200,/0/default.jpg" source="https://archive.org/download/b23982500_0002/b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0350.jp2"/>
         <fw type="header" place="top">
           COMMENTARIUS</fw>
-        <p>
+        <p type="continued">
           <lb n="1"/>monio firmatur, neque, fueritne idem cum Sextio Plinii<ref target="#fn342_26" type="footnote-ref" xml:id="ref-fn342_26">26</ref>,
           <lb n="2"/>patet.
+          </p>
+        <p>
           <lb n="3"/>P. 7. <foreign xml:lang="grc">Ὅτι τινὰ τῶν βοτανικῶν φαρμάκων</foreign> cum Io.
           <lb n="4"/>Bauhino esse legendum persuasissinum habeo, cum <foreign xml:lang="grc">τὰ δὲ</foreign>
           <lb n="5"/><foreign xml:lang="grc">λοιπὰ</foreign> sequatur. Assertio autem manifesto congruit cum
@@ -187,39 +189,38 @@
         </p>
       </div>
       <div type="textpart" subtype="book" n="1" xml:id="book_1">
-        <head>
-          <lb n="8"/>LIB. I.</head>
+        <head type="supplied">[LIB. I.]</head>
         <div type="textpart" subtype="chapter" n="1.1" xml:id="spr-ch-1.1-la" corresp="sprengel1829_epidoc.xml#spr-ch-1.1-la">
           <head type="supplied">[Cap. I. De Iride. Περὶ Ἴριδος]</head>
           <p>
-            <lb n="9"/>Cap. I. <hi rend="italic">De Iride</hi>. <foreign xml:lang="grc">Ἶρις, ἴριν</foreign> scribunt Aldina et op
-            <lb n="10" break="no"/>timi editores, quamquam Eustathius<ref target="#fn342_28" type="footnote-ref" xml:id="ref-fn342_28">28</ref>
+            <lb n="8"/>Cap. I. <hi rend="italic">De Iride</hi>. <foreign xml:lang="grc">Ἶρις, ἴριν</foreign> scribunt Aldina et op
+            <lb n="9" break="no"/>timi editores, quamquam Eustathius<ref target="#fn342_28" type="footnote-ref" xml:id="ref-fn342_28">28</ref>
             <foreign xml:lang="grc">ὀξύνεσθαι τὴν ἀρω</foreign>
-            <lb n="11" break="no"/><foreign xml:lang="grc">ματικὴν πόαν</foreign>, adeoque <foreign xml:lang="grc">ἰρίς</foreign> scribi doceat. <foreign xml:lang="grc">Βαρυτονεῖσθαι</foreign>
-            <lb n="12"/>etiam haud sine exemplis est: sic modo <foreign xml:lang="grc">ἶρις</foreign> apud Theo
-            <lb n="13" break="no"/>phrastum Schneideri legitur, modo <foreign xml:lang="grc">ἴρις</foreign>. De genitivo pa
-            <lb n="14" break="no"/>riter ambigitur. <foreign xml:lang="grc">Ἴριδος</foreign> legitur in optimis codicibus et
-            <lb n="15"/>Theophrasti et Dioscoridis. <foreign xml:lang="grc">Ἴρεως</foreign> tamen habent plures,
-            <lb n="16"/>ut LXX<ref target="#fn342_29" type="footnote-ref" xml:id="ref-fn342_29">29</ref>, auctor <foreign xml:lang="grc">εὐπορίστων</foreign>, Paullus Aegineta: <foreign xml:lang="grc">ἴριος</foreign>
-            <lb n="17"/>etiam Theophrastus.<ref target="#fn342_30" type="footnote-ref" xml:id="ref-fn342_30">30</ref>
-            <lb n="18"/><foreign xml:lang="grc">Θελπίδη</foreign>, aut cum cod. C. <foreign xml:lang="grc">θαλπίδη</foreign>, a <foreign xml:lang="grc">θάλπω, θάλ</foreign>
-            <lb n="19" break="no"/><foreign xml:lang="grc">πος</foreign> deducendum, signat calefacientem vim, quam in lin
-            <lb n="20" break="no"/>gua saltem radix exserit.
-            <lb n="21"/>Appellationem radicis <hi rend="italic">maricae</hi> possumus ex <hi rend="italic">amarican</hi>
-            <lb n="22" break="no"/><hi rend="italic">te</hi> corruptam habere. Sed Marcellus Vergilius potius legen
-            <lb n="23" break="no"/>dum esse <hi rend="italic">naronicam</hi> autumat, cum ad Narona fluvium,
-            <lb n="24"/><foreign xml:lang="grc">ὃς διαχωρίζει τοὺς Ἰλλυριοὺς καὶ Λιβύρνους</foreign> (schol. Nicand.)
-            <lb n="25"/>praecipue Iris proveniat.<ref target="#fn342_31a" type="footnote-ref" xml:id="ref-fn342_31a">31a</ref>
+            <lb n="10" break="no"/><foreign xml:lang="grc">ματικὴν πόαν</foreign>, adeoque <foreign xml:lang="grc">ἰρίς</foreign> scribi doceat. <foreign xml:lang="grc">Βαρυτονεῖσθαι</foreign>
+            <lb n="11"/>etiam haud sine exemplis est: sic modo <foreign xml:lang="grc">ἶρις</foreign> apud Theo
+            <lb n="12" break="no"/>phrastum Schneideri legitur, modo <foreign xml:lang="grc">ἴρις</foreign>. De genitivo pa
+            <lb n="13" break="no"/>riter ambigitur. <foreign xml:lang="grc">Ἴριδος</foreign> legitur in optimis codicibus et
+            <lb n="14"/>Theophrasti et Dioscoridis. <foreign xml:lang="grc">Ἴρεως</foreign> tamen habent plures,
+            <lb n="15"/>ut LXX<ref target="#fn342_29" type="footnote-ref" xml:id="ref-fn342_29">29</ref>, auctor <foreign xml:lang="grc">εὐπορίστων</foreign>, Paullus Aegineta: <foreign xml:lang="grc">ἴριος</foreign>
+            <lb n="16"/>etiam Theophrastus.<ref target="#fn342_30" type="footnote-ref" xml:id="ref-fn342_30">30</ref>
+            <lb n="17"/><foreign xml:lang="grc">Θελπίδη</foreign>, aut cum cod. C. <foreign xml:lang="grc">θαλπίδη</foreign>, a <foreign xml:lang="grc">θάλπω, θάλ</foreign>
+            <lb n="18" break="no"/><foreign xml:lang="grc">πος</foreign> deducendum, signat calefacientem vim, quam in lin
+            <lb n="19" break="no"/>gua saltem radix exserit.
+            <lb n="20"/>Appellationem radicis <hi rend="italic">maricae</hi> possumus ex <hi rend="italic">amarican</hi>
+            <lb n="21" break="no"/><hi rend="italic">te</hi> corruptam habere. Sed Marcellus Vergilius potius legen
+            <lb n="22" break="no"/>dum esse <hi rend="italic">naronicam</hi> autumat, cum ad Narona fluvium,
+            <lb n="23"/><foreign xml:lang="grc">ὃς διαχωρίζει τοὺς Ἰλλυριοὺς καὶ Λιβύρνους</foreign> (schol. Nicand.)
+            <lb n="24"/>praecipue Iris proveniat.<ref target="#fn342_31a" type="footnote-ref" xml:id="ref-fn342_31a">31a</ref>
             <hi rend="italic">Consecratrix</hi> Romanis dictam
-            <lb n="26"/>fuisse, idem auctor est, quod ad expiationes et lustratio
-            <lb n="27" break="no"/>nes adhiberetur, unde et <foreign xml:lang="grc">καθαίρων</foreign> appellata sit.
-            <lb n="28"/><foreign xml:lang="grc">Ὀπερτρίτος</foreign> aut <foreign xml:lang="grc">ὀπερτρίτις</foreign>, si latina est vox, nèc etrus
-            <lb n="29" break="no"/>ca, <hi rend="italic">pertritam</hi> videtur radicem signare, quia vel pertrita s.
-            <lb n="30"/>contusa adhibetur, aut quia usu tritissima est.
-            <lb n="31"/><foreign xml:lang="grc">Νάο</foreign> aegyptiaca vox est, etiamnum arabica <foreign xml:lang="ar">نار</foreign>, quae
-            <lb n="32"/>ignem signat, sicut hebraica <foreign xml:lang="he">נר</foreign> lampada s. lucernam.
-            <lb n="33"/>Iam accedo ad descriptionem: in qua quidem proti
-            <lb n="34" break="no"/>nus praeferendam esse duxi codicum vindobonensium le-
+            <lb n="25"/>fuisse, idem auctor est, quod ad expiationes et lustratio
+            <lb n="26" break="no"/>nes adhiberetur, unde et <foreign xml:lang="grc">καθαίρων</foreign> appellata sit.
+            <lb n="27"/><foreign xml:lang="grc">Ὀπερτρίτος</foreign> aut <foreign xml:lang="grc">ὀπερτρίτις</foreign>, si latina est vox, nèc etrus
+            <lb n="28" break="no"/>ca, <hi rend="italic">pertritam</hi> videtur radicem signare, quia vel pertrita s.
+            <lb n="29"/>contusa adhibetur, aut quia usu tritissima est.
+            <lb n="30"/><foreign xml:lang="grc">Νάο</foreign> aegyptiaca vox est, etiamnum arabica <foreign xml:lang="ar">نار</foreign>, quae
+            <lb n="31"/>ignem signat, sicut hebraica <foreign xml:lang="he">נר</foreign> lampada s. lucernam.
+            <lb n="32"/>Iam accedo ad descriptionem: in qua quidem proti
+            <lb n="33" break="no"/>nus praeferendam esse duxi codicum vindobonensium le-
 
           </p>
           <div type="footnotes">

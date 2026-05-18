@@ -322,11 +322,19 @@ select {
   padding-left: var(--line-gutter);
 }
 
+[data-edition-id="sprengel1830-comm"] .tei-p.tei-continued {
+  text-indent: 0;
+}
+
 [data-edition-id="sprengel1830-comm"] .tei-p .tei-line {
   display: inline-block;
   margin-left: calc(0px - var(--line-gutter) - 1.5em);
   text-indent: 0;
   width: var(--line-gutter);
+}
+
+[data-edition-id="sprengel1830-comm"] .tei-p.tei-continued .tei-line {
+  margin-left: calc(0px - var(--line-gutter));
 }
 
 [data-edition-id="sprengel1830-comm"] .tei-p br + .tei-line {
