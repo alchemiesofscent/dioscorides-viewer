@@ -10,6 +10,46 @@ The goal is one consistent shape across heterogeneous source TEI so that the
 viewer, schema-validation, lemma extraction, and cross-edition linking can
 treat all editions uniformly.
 
+## Edition identifiers (CTS work-version form)
+
+Each edition has three identifiers:
+
+| form | example | used for |
+|---|---|---|
+| **short alias** | `berendes1902` | CLI args, lemma URI prefixes, viewer registry `id` |
+| **CTS work-version** | `tlg0656.tlg001.berendes1902-ger1` | edition **directory name** and TEI **file basename** |
+| **CTS URN** | `urn:cts:greekLit:tlg0656.tlg001.berendes1902-ger1` | manifest `cts_urn` field, viewer registry `cts_urn`, future TEI header CTS metadata |
+
+The TEI file basename is the full CTS work-version (e.g.
+`tlg0656.tlg001.berendes1902-ger1.xml`), so the file is uniquely identified
+even if copied out of its directory:
+
+```
+corpus/dioscorides/editions/
+├── tlg0656.tlg001.berendes1902-ger1/
+│   ├── manifest.json
+│   └── tei/
+│       └── tlg0656.tlg001.berendes1902-ger1.xml
+├── tlg0656.tlg001.sprengel1829-grclat1/
+│   ├── manifest.json
+│   └── tei/
+│       └── tlg0656.tlg001.sprengel1829-grclat1.xml
+└── ...
+```
+
+CTS textgroup `tlg0656` is Dioscorides; work `tlg001` is *De materia
+medica*. Version suffixes follow CTS conventions: `-ger1` (German
+translation), `-grclat1` (Greek + Latin parallel — non-standard but
+descriptive), `-lat1` (Latin), `-eng1` (English). The mapping between short
+alias and CTS form is the single source of truth in
+`pipeline/pharmacopoeia/paths.py::EDITION_REGISTRY`.
+
+The lemma URI namespace continues to use the **short alias**
+(`lemma:berendes1902-grc:zingiberis`) rather than the full CTS form,
+because the URIs appear hundreds of times per edition and the short form is
+substantially more readable. The CTS URN is still recorded in each lemma
+file's `<teiHeader>` for provenance.
+
 ## `<lb/>` — line beginning
 
 **Canonical form:** `<lb n="N"/>` — self-closing, no space before `/>`,

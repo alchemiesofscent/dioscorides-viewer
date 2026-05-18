@@ -1,4 +1,7 @@
 {
+  "cts_id": "tlg0656.tlg001.sprengel1830-comm-lat1",
+  "cts_urn": "urn:cts:greekLit:tlg0656.tlg001.sprengel1830-comm-lat1",
+  "tei": "corpus/dioscorides/editions/tlg0656.tlg001.sprengel1830-comm-lat1/tei/tlg0656.tlg001.sprengel1830-comm-lat1.xml",
   "total_pages": 328,
   "source": "Sprengel 1830 Commentarius OCR-derived viewer XML",
   "source_url": "https://archive.org/details/b23982500_0002/page/n346/mode/2up",

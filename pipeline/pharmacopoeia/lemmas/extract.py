@@ -12,7 +12,7 @@ from datetime import datetime, timezone
 from lxml import etree
 
 from pharmacopoeia.lemmas.slugs import slugify as _slugify
-from pharmacopoeia.paths import edition_tei, lemma_file
+from pharmacopoeia.paths import edition_tei, edition_tei_relpath, lemma_file
 
 TEI_NS = "http://www.tei-c.org/ns/1.0"
 XML_NS = "http://www.w3.org/XML/1998/namespace"
@@ -144,10 +144,7 @@ def _write_taxonomy(
     )
     sd = etree.SubElement(fd, TEI + "sourceDesc")
     p2 = etree.SubElement(sd, TEI + "p")
-    p2.text = (
-        f"Lemmas extracted from chapter heads of "
-        f"corpus/dioscorides/editions/{edition}/tei/edition.xml."
-    )
+    p2.text = f"Lemmas extracted from chapter heads of {tei_relpath}."
 
     text = etree.SubElement(tei, TEI + "text")
     body = etree.SubElement(text, TEI + "body")
@@ -185,7 +182,7 @@ def run(edition: str) -> None:
     root = tree.getroot()
 
     records = _extract_from_heads(root, edition)
-    tei_relpath = f"corpus/dioscorides/editions/{edition}/tei/edition.xml"
+    tei_relpath = edition_tei_relpath(edition)
     tree.write(
         str(src), pretty_print=False, xml_declaration=True, encoding="utf-8",
     )

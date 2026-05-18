@@ -1,4 +1,7 @@
 {
+  "cts_id": "tlg0656.tlg001.berendes1902-ger1",
+  "cts_urn": "urn:cts:greekLit:tlg0656.tlg001.berendes1902-ger1",
+  "tei": "corpus/dioscorides/editions/tlg0656.tlg001.berendes1902-ger1/tei/tlg0656.tlg001.berendes1902-ger1.xml",
   "total_pages": 561,
   "chunk_size": 5,
   "total_chunks": 116,

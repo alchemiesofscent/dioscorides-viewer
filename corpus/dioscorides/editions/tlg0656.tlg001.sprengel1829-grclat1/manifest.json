@@ -1,4 +1,7 @@
 {
+  "cts_id": "tlg0656.tlg001.sprengel1829-grclat1",
+  "cts_urn": "urn:cts:greekLit:tlg0656.tlg001.sprengel1829-grclat1",
+  "tei": "corpus/dioscorides/editions/tlg0656.tlg001.sprengel1829-grclat1/tei/tlg0656.tlg001.sprengel1829-grclat1.xml",
   "total_pages": 857,
   "source": "Sprengel 1829/1830 diplomatic TEI normalized as page-first EpiDoc",
   "source_url": "https://archive.org/details/b23982500_0001/page/n5/mode/2up",

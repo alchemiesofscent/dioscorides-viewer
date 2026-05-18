@@ -3,9 +3,10 @@
   "editions": [
     {
       "id": "berendes1902",
+      "cts_urn": "urn:cts:greekLit:tlg0656.tlg001.berendes1902-ger1",
       "label": "Berendes 1902 (German translation)",
-      "tei": "corpus/dioscorides/editions/berendes1902/tei/edition.xml",
-      "manifest": "corpus/dioscorides/editions/berendes1902/manifest.json",
+      "tei": "corpus/dioscorides/editions/tlg0656.tlg001.berendes1902-ger1/tei/tlg0656.tlg001.berendes1902-ger1.xml",
+      "manifest": "corpus/dioscorides/editions/tlg0656.tlg001.berendes1902-ger1/manifest.json",
       "lemmas": {
         "grc": "corpus/dioscorides/lemmas/berendes1902-grc.xml",
         "de": "corpus/dioscorides/lemmas/berendes1902-de.xml"
@@ -20,9 +21,10 @@
     },
     {
       "id": "sprengel1829",
+      "cts_urn": "urn:cts:greekLit:tlg0656.tlg001.sprengel1829-grclat1",
       "label": "Sprengel 1829/1830 (Greek + Latin parallel)",
-      "tei": "corpus/dioscorides/editions/sprengel1829/tei/edition.xml",
-      "manifest": "corpus/dioscorides/editions/sprengel1829/manifest.json",
+      "tei": "corpus/dioscorides/editions/tlg0656.tlg001.sprengel1829-grclat1/tei/tlg0656.tlg001.sprengel1829-grclat1.xml",
+      "manifest": "corpus/dioscorides/editions/tlg0656.tlg001.sprengel1829-grclat1/manifest.json",
       "lemmas": {
         "grc": "corpus/dioscorides/lemmas/sprengel1829-grc.xml",
         "la": "corpus/dioscorides/lemmas/sprengel1829-la.xml"
@@ -35,9 +37,10 @@
     },
     {
       "id": "sprengel1830-comm",
+      "cts_urn": "urn:cts:greekLit:tlg0656.tlg001.sprengel1830-comm-lat1",
       "label": "Sprengel 1830 Commentarius (Latin commentary)",
-      "tei": "corpus/dioscorides/editions/sprengel1830-comm/tei/edition.xml",
-      "manifest": "corpus/dioscorides/editions/sprengel1830-comm/manifest.json",
+      "tei": "corpus/dioscorides/editions/tlg0656.tlg001.sprengel1830-comm-lat1/tei/tlg0656.tlg001.sprengel1830-comm-lat1.xml",
+      "manifest": "corpus/dioscorides/editions/tlg0656.tlg001.sprengel1830-comm-lat1/manifest.json",
       "lemmas": {},
       "imageMode": "remote",
       "sourceLabel": "Internet Archive facsimile (Wellcome b23982500 vol. 2)",
@@ -47,9 +50,10 @@
     },
     {
       "id": "beck2020",
+      "cts_urn": "urn:cts:greekLit:tlg0656.tlg001.beck2020-eng1",
       "label": "Beck 2020 (English translation; local PDF source)",
-      "tei": "corpus/dioscorides/editions/beck2020/tei/edition.xml",
-      "manifest": "corpus/dioscorides/editions/beck2020/manifest.json",
+      "tei": "corpus/dioscorides/editions/tlg0656.tlg001.beck2020-eng1/tei/tlg0656.tlg001.beck2020-eng1.xml",
+      "manifest": "corpus/dioscorides/editions/tlg0656.tlg001.beck2020-eng1/manifest.json",
       "lemmas": {
         "en": "corpus/dioscorides/lemmas/beck2020-en.xml",
         "grc": "corpus/dioscorides/lemmas/beck2020-grc.xml"

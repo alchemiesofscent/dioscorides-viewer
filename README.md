@@ -22,18 +22,29 @@ editions of Dioscorides' *De materia medica*:
 ```
 pharmacopoeia/
 ├── corpus/dioscorides/
-│   ├── editions/<id>/{manifest.json, tei/edition.xml}
+│   ├── editions/tlg0656.tlg001.<version>/      # CTS work-version dirs
+│   │   ├── manifest.json                       # carries cts_id + cts_urn
+│   │   └── tei/tlg0656.tlg001.<version>.xml    # basename is globally unique
 │   ├── editions/index.json                     # viewer registry
-│   ├── lemmas/<edition>-<lang>.xml             # one taxonomy per edition×language
+│   ├── lemmas/<short-alias>-<lang>.xml         # one taxonomy per edition×language
 │   └── lemma-links/<from>--<to>.xml            # scholarly cross-edition claims
-├── docs/TEI_STANDARD.md                        # canonical lb/pb/note/lemma rules
+├── docs/TEI_STANDARD.md                        # canonical lb/pb/note/lemma + CTS rules
 ├── schemas/pharmacopoeia.sch                   # working-profile Schematron
 ├── pipeline/                                   # migration + validation tooling
-│   ├── pharmacopoeia/                          # Python package
+│   ├── pharmacopoeia/                          # Python package; paths.py = registry
 │   └── tests/
 ├── viewer/                                     # static viewer (no build step)
 └── .github/workflows/{validate,pages}.yml
 ```
+
+Edition CTS work-versions in v1:
+
+| short alias | CTS work-version | CTS URN |
+|---|---|---|
+| `berendes1902` | `tlg0656.tlg001.berendes1902-ger1` | `urn:cts:greekLit:tlg0656.tlg001.berendes1902-ger1` |
+| `sprengel1829` | `tlg0656.tlg001.sprengel1829-grclat1` | `urn:cts:greekLit:tlg0656.tlg001.sprengel1829-grclat1` |
+| `sprengel1830-comm` | `tlg0656.tlg001.sprengel1830-comm-lat1` | `urn:cts:greekLit:tlg0656.tlg001.sprengel1830-comm-lat1` |
+| `beck2020` | `tlg0656.tlg001.beck2020-eng1` | `urn:cts:greekLit:tlg0656.tlg001.beck2020-eng1` |
 
 ## Scholarly principle
 

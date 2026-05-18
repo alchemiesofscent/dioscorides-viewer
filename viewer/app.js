@@ -8,8 +8,8 @@
   const FALLBACK_EDITION = {
     id: "berendes1902",
     label: "Berendes 1902",
-    tei: "corpus/dioscorides/editions/berendes1902/tei/edition.xml",
-    manifest: "corpus/dioscorides/editions/berendes1902/manifest.json",
+    tei: "corpus/dioscorides/editions/tlg0656.tlg001.berendes1902-ger1/tei/tlg0656.tlg001.berendes1902-ger1.xml",
+    manifest: "corpus/dioscorides/editions/tlg0656.tlg001.berendes1902-ger1/manifest.json",
     imageMode: "remote",
     localImageRoot: "images/raw/",
     imageLabelRoot: "images/raw/",
