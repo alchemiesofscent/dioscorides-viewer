@@ -1,4 +1,5 @@
 page	fragment	status	before	after	matches
+348	b23982500_0002_0356.xml	unmatched	Avicen	na	0
 348	b23982500_0002_0356.xml	unmatched	serio	Ed	0
 350	b23982500_0002_0358.xml	unmatched	doctri	Ezech	0
 351	b23982500_0002_0359.xml	unmatched	κιννά	μωμον	0
@@ -55,12 +56,15 @@ page	fragment	status	before	after	matches
 506	b23982500_0002_0512.xml	ambiguous	Ae	gypto	2
 506	b23982500_0002_0512.xml	ambiguous	Ae	gypto	2
 508	b23982500_0002_0514.xml	unmatched	magno	pere	0
+520	b23982500_0002_0526.xml	unmatched	le	git	0
 522	b23982500_0002_0528.xml	unmatched	Tabernaemon	Ies	0
 522	b23982500_0002_0528.xml	unmatched	Grae	cos	0
 530	b23982500_0002_0536.xml	unmatched	Ge	nov	0
 532	b23982500_0002_0538.xml	unmatched	πα	νάκους	0
 535	b23982500_0002_0541.xml	unmatched	ou	vrage	0
 535	b23982500_0002_0541.xml	unmatched	Me	lun	0
+540	b23982500_0002_0546.xml	unmatched	Caesalpi	nus	0
+544	b23982500_0002_0550.xml	unmatched	Gale	nus	0
 547	b23982500_0002_0553.xml	unmatched	peuce	Hist	0
 549	b23982500_0002_0555.xml	unmatched	gra	Rar	0
 556	b23982500_0002_0562.xml	unmatched	audie	Hist	0
@@ -83,6 +87,7 @@ page	fragment	status	before	after	matches
 601	b23982500_0002_0607.xml	ambiguous	Bo	chartus	2
 604	b23982500_0002_0610.xml	ambiguous	ne	que	2
 604	b23982500_0002_0610.xml	ambiguous	ne	que	2
+604	b23982500_0002_0610.xml	unmatched	alexi	pharmacorum	0
 611	b23982500_0002_0617.xml	unmatched	κα	κὸν	0
 611	b23982500_0002_0617.xml	unmatched	ἀπο	θνήσκειν	0
 616	b23982500_0002_0622.xml	unmatched	Ul	Hort	0

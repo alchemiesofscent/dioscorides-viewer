@@ -570,7 +570,13 @@ def _fragment_lines(fragment_path: Path) -> list[str]:
 
 
 def _match_words(text: str) -> list[str]:
-    return [word.casefold() for word in WORD_RE.findall(text)]
+    words: list[str] = []
+    for word in WORD_RE.findall(text):
+        normalized = word.translate(SUPERSCRIPT_DIGITS).casefold()
+        normalized = TRAILING_NOTE_MARKER_RE.sub("", normalized)
+        if normalized:
+            words.append(normalized)
+    return words
 
 
 def _line_starts_with_same_words(fragment_suffix: str, body_line: str) -> bool:
@@ -615,6 +621,69 @@ def _heading_prefix_candidates(fragment_path: Path, body_line: str) -> list[str]
 
 def _normalized_fragment_text(text: str) -> str:
     return " ".join(text.split())
+
+
+def _fragment_confirms_ref_followed_by_text(
+    fragment_path: Path,
+    marker: str,
+    next_text: str,
+) -> bool:
+    marker_text = marker.translate(SUPERSCRIPT_DIGITS).casefold().strip()
+    next_words = _match_words(next_text)[:2]
+    if not marker_text or not next_words:
+        return False
+    for line in _fragment_lines(fragment_path):
+        normalized_line = (
+            _normalized_fragment_text(line)
+            .translate(SUPERSCRIPT_DIGITS)
+            .replace("ϐ", "β")
+            .casefold()
+        )
+        for match in re.finditer(re.escape(marker_text), normalized_line):
+            if _match_words(normalized_line[match.end():])[: len(next_words)] == next_words:
+                return True
+    return False
+
+
+def repair_fragment_confirmed_inline_footnote_breaks(
+    root: etree._Element,
+    fragment_dir: Path | None = None,
+) -> int:
+    """Remove false line breaks after footnote refs when fragments confirm it."""
+    resolved_fragment_dir = _require_fragment_dir(fragment_dir)
+    lb_pages = _lb_page_map(root)
+    repaired = 0
+    for lb in list(root.iter(TEI + "lb")):
+        if _inside_ignored_line_context(lb):
+            continue
+        if lb.get("break") == "no" or (lb.tail or "").strip():
+            continue
+        previous = lb.getprevious()
+        next_sibling = lb.getnext()
+        if (
+            previous is None
+            or previous.tag != TEI + "ref"
+            or previous.get("type") != "footnote-ref"
+            or next_sibling is None
+            or next_sibling.tag not in {TEI + "foreign", TEI + "hi"}
+        ):
+            continue
+        pb = lb_pages.get(lb)
+        if pb is None:
+            pb = _pb_before_element(lb)
+        fragment_filename = _fragment_filename_from_pb(pb) if pb is not None else None
+        fragment_path = resolved_fragment_dir / fragment_filename if fragment_filename else None
+        if fragment_path is None or not fragment_path.exists():
+            continue
+        if not _fragment_confirms_ref_followed_by_text(
+            fragment_path,
+            previous.text or "",
+            _normalized_text(next_sibling),
+        ):
+            continue
+        if _remove_empty_lb_before_element(next_sibling):
+            repaired += 1
+    return repaired
 
 
 def _write_heading_audit(stats: HeadingReconciliationStats) -> None:
@@ -1201,6 +1270,19 @@ def normalize_footnote_ref_markers(root: etree._Element) -> int:
     return changed
 
 
+def normalize_beta_symbol(root: etree._Element) -> int:
+    """Use normal Greek beta instead of the beta-symbol glyph in text."""
+    changed = 0
+    for elem in root.iter():
+        if elem.text and "ϐ" in elem.text:
+            changed += elem.text.count("ϐ")
+            elem.text = elem.text.replace("ϐ", "β")
+        if elem.tail and "ϐ" in elem.tail:
+            changed += elem.tail.count("ϐ")
+            elem.tail = elem.tail.replace("ϐ", "β")
+    return changed
+
+
 def repair_known_missing_line_breaks(root: etree._Element) -> int:
     """Restore checked line breaks that are present in page evidence."""
     repaired = 0
@@ -1219,6 +1301,7 @@ def repair_known_missing_line_breaks(root: etree._Element) -> int:
         parent.insert(parent.index(foreign) + 1, lb)
         repaired += 1
     repaired += _repair_page_596_line_breaks(root)
+    repaired += _repair_page_576_line_breaks(root)
     return repaired
 
 
@@ -1255,6 +1338,13 @@ def _remove_empty_lb_before_element(elem: etree._Element) -> bool:
     return True
 
 
+def _remove_empty_lb_before_ref_id(root: etree._Element, ref_id: str) -> bool:
+    ref = root.find(f".//{TEI}ref[@{XID}='{ref_id}']")
+    if ref is None:
+        return False
+    return _remove_empty_lb_before_element(ref)
+
+
 def _repair_page_596_line_breaks(root: etree._Element) -> int:
     """Restore checked page 596 lines that start with inline markup."""
     repaired = 0
@@ -1271,6 +1361,20 @@ def _repair_page_596_line_breaks(root: etree._Element) -> int:
         if _element_page_n(foreign) != "596":
             continue
         if _normalized_text(foreign) == "Ὁλόσχοινος" and _remove_empty_lb_before_element(foreign):
+            repaired += 1
+    return repaired
+
+
+def _repair_page_576_line_breaks(root: etree._Element) -> int:
+    """Restore checked page 576 inline footnote-marker lines."""
+    repaired = 0
+    for ref_id in ("ref-fn576_64", "ref-fn576_69"):
+        if _remove_empty_lb_before_ref_id(root, ref_id):
+            repaired += 1
+    for foreign in root.iter(TEI + "foreign"):
+        if _element_page_n(foreign) != "576":
+            continue
+        if _normalized_text(foreign).startswith("ὁ φλεὼς") and _remove_empty_lb_before_element(foreign):
             repaired += 1
     return repaired
 
@@ -1306,6 +1410,49 @@ def repair_known_text_errors(root: etree._Element) -> int:
         if foreign.text == "σετέσσο":
             foreign.text = "σετέσρο"
             repaired += 1
+    return repaired
+
+
+def _unwrap_inline_element(elem: etree._Element) -> None:
+    parent = elem.getparent()
+    if parent is None:
+        return
+    index = parent.index(elem)
+    previous = elem.getprevious()
+    if previous is not None:
+        previous.tail = (previous.tail or "") + (elem.text or "")
+    else:
+        parent.text = (parent.text or "") + (elem.text or "")
+
+    insert_at = index
+    moved_children: list[etree._Element] = []
+    for child in list(elem):
+        elem.remove(child)
+        parent.insert(insert_at, child)
+        moved_children.append(child)
+        insert_at += 1
+
+    if moved_children:
+        moved_children[-1].tail = (moved_children[-1].tail or "") + (elem.tail or "")
+    elif previous is not None:
+        previous.tail = (previous.tail or "") + (elem.tail or "")
+    else:
+        parent.text = (parent.text or "") + (elem.tail or "")
+    parent.remove(elem)
+
+
+def repair_known_markup_errors(root: etree._Element) -> int:
+    """Apply small, user-checked markup corrections where fragment markup is wrong."""
+    repaired = 0
+    div = root.find(f".//{TEI}div[@{XID}='spr-ch-1.72-la']")
+    if div is not None:
+        for hi in list(div.iter(TEI + "hi")):
+            if (
+                hi.get("rend") == "italic"
+                and _normalized_text(hi) == "Mendesium unguentum nomen habet"
+            ):
+                _unwrap_inline_element(hi)
+                repaired += 1
     return repaired
 
 
@@ -1483,12 +1630,15 @@ def run() -> None:
     literal_line_breaks_normalized = normalize_literal_body_line_breaks(root)
     heading_stats = reconcile_inline_chapter_headings(root, write_audit=True)
     footnote_refs_normalized = normalize_footnote_ref_markers(root)
+    beta_symbols_normalized = normalize_beta_symbol(root)
     missing_line_breaks_repaired = repair_known_missing_line_breaks(root)
+    inline_footnote_breaks_repaired = repair_fragment_confirmed_inline_footnote_breaks(root)
     page_342_boundary_repairs = repair_page_342_book_boundary(root)
     page_furniture_stats = normalize_page_top_furniture(root)
     line_stats = normalize_page_line_numbering(root)
     hyphen_stats = import_line_end_hyphenation(root, write_audit=True)
     text_errors_repaired = repair_known_text_errors(root)
+    markup_errors_repaired = repair_known_markup_errors(root)
     opening_quotes_normalized = normalize_german_opening_quotes(root)
     line_end_hyphens_removed = remove_line_end_hyphen_glyphs(root)
     facs_rewritten = rewrite_pb_facs(root)
@@ -1512,7 +1662,9 @@ def run() -> None:
         f"({heading_stats.ambiguous} ambiguous, {heading_stats.unmatched} unmatched, "
         f"{heading_stats.missing_fragments} missing fragments), "
         f"{footnote_refs_normalized} superscript footnote ref markers normalized, "
+        f"{beta_symbols_normalized} beta-symbol glyphs normalized, "
         f"{missing_line_breaks_repaired} known missing line breaks repaired, "
+        f"{inline_footnote_breaks_repaired} fragment-confirmed inline footnote breaks repaired, "
         f"{page_342_boundary_repairs} page 342 paragraph/book boundary repairs, "
         f"{page_furniture_stats.page_numbers_inserted} page numbers inserted, "
         f"{page_furniture_stats.page_numbers_split} page numbers split from running heads, "
@@ -1521,6 +1673,7 @@ def run() -> None:
         f"{page_furniture_stats.leaked_page_numbers_removed} leaked page-number paragraphs removed, "
         f"{page_furniture_stats.leaked_headers_removed} leaked running heads removed, "
         f"{text_errors_repaired} known text errors repaired, "
+        f"{markup_errors_repaired} known markup errors repaired, "
         f"{opening_quotes_normalized} German opening quote markers normalized, "
         f"{line_end_hyphens_removed} line-end hyphen glyphs removed before break=no, "
         f"{line_stats['leading_lbs_inserted']} leading body <lb> tags inserted, "

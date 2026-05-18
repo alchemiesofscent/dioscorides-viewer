@@ -4,13 +4,16 @@ import pytest
 from pharmacopoeia.migrate.sprengel1830_comm import (
     import_line_end_hyphenation,
     normalize_literal_body_line_breaks,
+    normalize_beta_symbol,
     normalize_german_opening_quotes,
     normalize_page_line_numbering,
     normalize_page_top_furniture,
     normalize_footnote_ref_markers,
+    repair_fragment_confirmed_inline_footnote_breaks,
     repair_page_342_book_boundary,
     remove_line_end_hyphen_glyphs,
     repair_known_missing_line_breaks,
+    repair_known_markup_errors,
     repair_known_text_errors,
     reconcile_inline_chapter_headings,
 )
@@ -401,6 +404,101 @@ def test_page_596_removes_false_line_break_before_holoschoenus():
     assert repaired == 1
     assert [lb.get("n") for lb in lbs] == ["1", "2"]
     assert "Peloponnesi.49 Ὁλόσχοινος Theophrasti" in first_line
+
+
+def test_page_576_heading_matches_note_marker_and_repairs_ref_line(tmp_path):
+    root = _parse(
+        '<pb n="576" source="https://archive.org/download/b23982500_0002/'
+        'b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0582.jp2"/>'
+        '<div type="textpart" subtype="chapter" n="4.11">'
+        '<head><lb n="2"/>Cap. XI. De Holosteo. <foreign xml:lang="grc">Περὶ Ὁλοστέου</foreign></head>'
+        '<p><lb n="3"/><hi rend="italic">Holosteum</hi>, inquit <hi rend="italic">Plinius</hi>'
+        '<lb n="4"/><ref target="#fn576_64" type="footnote-ref" xml:id="ref-fn576_64">64</ref>, '
+        'sine duritia<lb n="5"/>est herba</p>'
+        '</div>'
+        '<div type="textpart" subtype="chapter" n="4.12">'
+        '<head><lb n="6"/>Cap. XII. De Stoebe.</head>'
+        '<p><lb n="7"/>Cap. XII. <foreign xml:lang="grc">Στοιϐὴ</foreign> adnumeratur.'
+        '<ref target="#fn576_71" type="footnote-ref" xml:id="ref-fn576_71">71</ref>'
+        '<lb n="8"/><foreign xml:lang="grc">ὁ φλεὼς (φέως)</foreign>'
+        '<lb n="9"/>appellata</p>'
+        '</div>'
+    )
+    _write_fragment(
+        tmp_path,
+        "b23982500_0002_0582.xml",
+        '<pb n="576"/>Cap. XI. <hi rend="italic">Holosteum</hi>, inquit '
+        '<hi rend="italic">Plinius</hi><ref target="#fn64">⁶⁴</ref>, sine duritia<lb/>',
+    )
+
+    repaired = repair_known_missing_line_breaks(root)
+    stats = reconcile_inline_chapter_headings(root, tmp_path)
+    normalize_page_line_numbering(root)
+
+    lbs = root.findall(f".//{TEI}p//{TEI}lb")
+    line_text = _flat_text(root.find(f".//{TEI}p"))
+    assert repaired == 2
+    assert stats.prefixes_restored == 1
+    assert [lb.get("n") for lb in lbs] == ["1", "2", "3", "4"]
+    assert line_text.startswith("Cap. XI. Holosteum, inquit Plinius 64, sine duritia")
+    assert "adnumeratur.71 ὁ φλεὼς (φέως)" in _flat_text(root.findall(f".//{TEI}div/{TEI}p")[1])
+
+
+def test_beta_symbol_is_normalized_in_text_and_tail():
+    root = _parse(
+        '<p><foreign xml:lang="grc">Στοιϐὴ</foreign> and '
+        '<foreign xml:lang="grc">ἀστοίϐη</foreign></p>'
+    )
+
+    changed = normalize_beta_symbol(root)
+
+    assert changed == 2
+    assert "ϐ" not in "".join(root.itertext())
+    assert "Στοιβὴ" in "".join(root.itertext())
+    assert "ἀστοίβη" in "".join(root.itertext())
+
+
+def test_page_370_mendesium_heading_text_is_not_italic():
+    root = _parse(
+        '<div type="textpart" subtype="chapter" n="1.72" xml:id="spr-ch-1.72-la">'
+        '<head type="supplied">[Cap. LXXII. De Mendesio.]</head>'
+        '<p><lb n="29"/>Cap. LXXII. <hi rend="italic">Mendesium unguentum nomen habet</hi>'
+        '<lb n="30"/>ab urbe Mendes</p>'
+        '</div>'
+    )
+
+    repaired = repair_known_markup_errors(root)
+
+    p = root.find(f".//{TEI}p")
+    assert repaired == 1
+    assert p.find(f".//{TEI}hi") is None
+    assert _flat_text(p).startswith("Cap. LXXII. Mendesium unguentum nomen habet")
+
+
+def test_fragment_confirmed_line_break_after_footnote_ref_is_removed(tmp_path):
+    root = _parse(
+        '<pb n="520" source="https://archive.org/download/b23982500_0002/'
+        'b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0526.jp2"/>'
+        '<p><lb n="7" break="no"/>git<ref target="#fn520_16" type="footnote-ref" '
+        'xml:id="ref-fn520_16">16</ref>'
+        '<lb n="8"/><foreign xml:lang="grc">πὰ βεβίρε</foreign>, quod signet</p>'
+    )
+    _write_fragment(
+        tmp_path,
+        "b23982500_0002_0526.xml",
+        '<pb n="520"/>Cap. LII. <foreign xml:lang="grc">Σταφυλίνου</foreign> '
+        'nomen aegyptium Rossius le<lb break="no"/>git<ref target="#fn16">¹⁶</ref> '
+        '<foreign xml:lang="grc">πὰ βεβίρε</foreign>, quod signet bryoniae similis.<lb/>',
+    )
+
+    repaired = repair_fragment_confirmed_inline_footnote_breaks(root, tmp_path)
+    normalize_page_line_numbering(root)
+
+    lbs = root.findall(f".//{TEI}p//{TEI}lb")
+    line_text = _flat_text(root.find(f".//{TEI}p"))
+    assert repaired == 1
+    assert [lb.get("n") for lb in lbs] == ["1"]
+    assert "git16 πὰ βεβίρε" in line_text
 
 
 def test_heading_prefix_uses_current_page_fragment_not_earlier_page(tmp_path):

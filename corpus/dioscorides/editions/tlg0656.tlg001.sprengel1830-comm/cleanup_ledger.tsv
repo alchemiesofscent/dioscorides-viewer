@@ -1,8 +1,7 @@
 issue_type	status	page	fragment	xml_id	line	current	evidence	proposed_action	note
 heading	needs-image-review	436	-	2.33	-	Ὠμοτάριχον esse carnem thynni sale	[Cap. XXXIII. De Salsamento crudo. Περὶ Ὠμοταρίχου]	restore printed prefix only if fragment or page image confirms it	missing-fragment
 heading	needs-image-review	437	-	2.34	-	Τὸ γάρον, vel, Atticorum more, ὁ	[Cap. XXXIV. De Garo. Περὶ Γάρου]	restore printed prefix only if fragment or page image confirms it	missing-fragment
-heading	needs-review	514	b23982500_0002_0520.xml	3.42	-	Marum Dioscoridis cum Dodonæo76	[Cap. XLII. De Maro. Περὶ Μάρου]	restore printed prefix only if fragment or page image confirms it	unmatched
-heading	needs-review	576	b23982500_0002_0582.xml	4.11	-	Holosteum, inquit Plinius	[Cap. XI. De Holosteo. Περὶ Ὁλοστέου]	restore printed prefix only if fragment or page image confirms it	unmatched
+hyphenation	needs-review	348	b23982500_0002_0356.xml	-	-	Avicen|na	0	set lb@break='no' only when the page-local split is unique	unmatched
 hyphenation	needs-review	348	b23982500_0002_0356.xml	-	-	serio|Ed	0	set lb@break='no' only when the page-local split is unique	unmatched
 hyphenation	needs-review	350	b23982500_0002_0358.xml	-	-	doctri|Ezech	0	set lb@break='no' only when the page-local split is unique	unmatched
 hyphenation	needs-review	351	b23982500_0002_0359.xml	-	-	κιννά|μωμον	0	set lb@break='no' only when the page-local split is unique	unmatched
@@ -59,12 +58,15 @@ hyphenation	needs-review	505	b23982500_0002_0511.xml	-	-	con|De	0	set lb@break='
 hyphenation	needs-image-review	506	b23982500_0002_0512.xml	-	-	Ae|gypto	2	set lb@break='no' only when the page-local split is unique	ambiguous
 hyphenation	needs-image-review	506	b23982500_0002_0512.xml	-	-	Ae|gypto	2	set lb@break='no' only when the page-local split is unique	ambiguous
 hyphenation	needs-review	508	b23982500_0002_0514.xml	-	-	magno|pere	0	set lb@break='no' only when the page-local split is unique	unmatched
+hyphenation	needs-review	520	b23982500_0002_0526.xml	-	-	le|git	0	set lb@break='no' only when the page-local split is unique	unmatched
 hyphenation	needs-review	522	b23982500_0002_0528.xml	-	-	Tabernaemon|Ies	0	set lb@break='no' only when the page-local split is unique	unmatched
 hyphenation	needs-review	522	b23982500_0002_0528.xml	-	-	Grae|cos	0	set lb@break='no' only when the page-local split is unique	unmatched
 hyphenation	needs-review	530	b23982500_0002_0536.xml	-	-	Ge|nov	0	set lb@break='no' only when the page-local split is unique	unmatched
 hyphenation	needs-review	532	b23982500_0002_0538.xml	-	-	πα|νάκους	0	set lb@break='no' only when the page-local split is unique	unmatched
 hyphenation	needs-review	535	b23982500_0002_0541.xml	-	-	ou|vrage	0	set lb@break='no' only when the page-local split is unique	unmatched
 hyphenation	needs-review	535	b23982500_0002_0541.xml	-	-	Me|lun	0	set lb@break='no' only when the page-local split is unique	unmatched
+hyphenation	needs-review	540	b23982500_0002_0546.xml	-	-	Caesalpi|nus	0	set lb@break='no' only when the page-local split is unique	unmatched
+hyphenation	needs-review	544	b23982500_0002_0550.xml	-	-	Gale|nus	0	set lb@break='no' only when the page-local split is unique	unmatched
 hyphenation	needs-review	547	b23982500_0002_0553.xml	-	-	peuce|Hist	0	set lb@break='no' only when the page-local split is unique	unmatched
 hyphenation	needs-review	549	b23982500_0002_0555.xml	-	-	gra|Rar	0	set lb@break='no' only when the page-local split is unique	unmatched
 hyphenation	needs-review	556	b23982500_0002_0562.xml	-	-	audie|Hist	0	set lb@break='no' only when the page-local split is unique	unmatched
@@ -87,6 +89,7 @@ hyphenation	needs-image-review	601	b23982500_0002_0607.xml	-	-	Bo|chartus	2	set 
 hyphenation	needs-image-review	601	b23982500_0002_0607.xml	-	-	Bo|chartus	2	set lb@break='no' only when the page-local split is unique	ambiguous
 hyphenation	needs-image-review	604	b23982500_0002_0610.xml	-	-	ne|que	2	set lb@break='no' only when the page-local split is unique	ambiguous
 hyphenation	needs-image-review	604	b23982500_0002_0610.xml	-	-	ne|que	2	set lb@break='no' only when the page-local split is unique	ambiguous
+hyphenation	needs-review	604	b23982500_0002_0610.xml	-	-	alexi|pharmacorum	0	set lb@break='no' only when the page-local split is unique	unmatched
 hyphenation	needs-review	611	b23982500_0002_0617.xml	-	-	κα|κὸν	0	set lb@break='no' only when the page-local split is unique	unmatched
 hyphenation	needs-review	611	b23982500_0002_0617.xml	-	-	ἀπο|θνήσκειν	0	set lb@break='no' only when the page-local split is unique	unmatched
 hyphenation	needs-review	616	b23982500_0002_0622.xml	-	-	Ul|Hort	0	set lb@break='no' only when the page-local split is unique	unmatched
