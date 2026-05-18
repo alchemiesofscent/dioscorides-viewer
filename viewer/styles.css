@@ -316,6 +316,10 @@ select {
   padding: 2px 4px;
 }
 
+[data-edition-id="sprengel1830-comm"] .tei-p {
+  text-indent: 1.5em;
+}
+
 .tei-block:hover,
 .tei-block.selected {
   background: #f0f7f5;

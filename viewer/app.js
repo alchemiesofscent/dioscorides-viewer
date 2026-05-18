@@ -1243,6 +1243,7 @@
     state.generatedSectionIdCounts = new Map();
     els.copyCorrection.disabled = true;
     els.searchInput.disabled = true;
+    els.teiText.dataset.editionId = state.edition.id || "";
     els.searchCount.textContent = "0/0";
     els.loadStatus.classList.remove("error");
     els.loadStatus.textContent = `Loading ${state.edition.label || state.edition.id}...`;
