@@ -61,6 +61,9 @@ integer `@n` counting printed lines on the current page (resets at each
   page.
 - `@n` is **optional** when `<lb>` is inside a `<note>` body. There it marks a
   visual break within the footnote text, not a page-line.
+- Empty main-stream `<lb>` milestones are not allowed. If a body-line marker
+  has no text before the next line, page break, or block boundary, migration
+  removes it and renumbers the page.
 - `@xml:id` is **optional**, recommended only when other elements reference
   the line (e.g. Sprengel 1829's `<ref target="#spr-lb-...">`). Recommended
   format: `<edition-prefix>-lb-<book>-<page>-<line>` (e.g.

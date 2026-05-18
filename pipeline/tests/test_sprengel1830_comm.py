@@ -83,3 +83,60 @@ def test_note_internal_lbs_are_not_renumbered_or_removed():
     note_lbs = root.findall(f".//{TEI}note/{TEI}lb")
     assert [lb.get("n") for lb in note_lbs] == [None, "99"]
     assert root.find(f".//{TEI}p/{TEI}lb").get("n") == "1"
+
+
+def test_terminal_empty_body_lb_is_removed_and_page_renumbered():
+    root = _parse(
+        '<pb n="1"/><p><lb n="1"/>videtur.<lb n="2"/></p>'
+        '<head><lb n="3"/>Cap. XV.</head>'
+    )
+
+    stats = normalize_page_line_numbering(root)
+
+    assert stats["empty_main_lbs_removed"] == 1
+    lbs = root.findall(f".//{TEI}lb")
+    assert [lb.get("n") for lb in lbs] == ["1", "2"]
+    assert root.find(f".//{TEI}head/{TEI}lb").tail == "Cap. XV."
+
+
+def test_empty_body_lb_before_next_lb_is_removed():
+    root = _parse('<pb n="1"/><p><lb n="1"/>one<lb n="2"/><lb n="3"/>two</p>')
+
+    normalize_page_line_numbering(root)
+
+    lbs = root.findall(f".//{TEI}p/{TEI}lb")
+    assert [lb.get("n") for lb in lbs] == ["1", "2"]
+    assert lbs[1].tail == "two"
+
+
+def test_inline_text_after_lb_is_not_treated_as_empty():
+    root = _parse(
+        '<pb n="1"/><p><lb n="1"/><foreign xml:lang="grc">miko</foreign>'
+        '<lb n="2"/><hi rend="italic">Costus</hi><lb n="3"/></p>'
+    )
+
+    normalize_page_line_numbering(root)
+
+    lbs = root.findall(f".//{TEI}p/{TEI}lb")
+    assert [lb.get("n") for lb in lbs] == ["1", "2"]
+    assert root.find(f".//{TEI}foreign").text == "miko"
+    assert root.find(f".//{TEI}hi").text == "Costus"
+
+
+def test_signature_paragraph_moves_to_bottom_fw():
+    root = _parse(
+        '<pb n="353"/><p><lb n="1"/>Body</p>'
+        '<p><lb n="2"/>DIOSCORIDES II. Z</p>'
+        '<p><lb n="3"/>Next body</p>'
+    )
+
+    stats = normalize_page_line_numbering(root)
+
+    fw = root.find(f".//{TEI}fw")
+    body_lbs = root.findall(f".//{TEI}p/{TEI}lb")
+    assert stats["signature_paragraphs_moved"] == 1
+    assert fw.get("type") == "sig"
+    assert fw.get("place") == "bottom"
+    assert fw.text == "DIOSCORIDES II. Z"
+    assert fw.find(f".//{TEI}lb") is None
+    assert [lb.get("n") for lb in body_lbs] == ["1", "2"]
