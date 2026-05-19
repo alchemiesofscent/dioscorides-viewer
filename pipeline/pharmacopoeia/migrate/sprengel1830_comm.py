@@ -99,6 +99,13 @@ CLEANUP_SUMMARY = (
     / "tlg0656.tlg001.sprengel1830-comm"
     / "cleanup_summary.md"
 )
+PARAGRAPH_AUDIT = (
+    Path("corpus")
+    / "dioscorides"
+    / "editions"
+    / "tlg0656.tlg001.sprengel1830-comm"
+    / "paragraph_audit.tsv"
+)
 
 
 @dataclass
@@ -139,6 +146,20 @@ class PageFurnitureStats:
     leaked_page_numbers_removed: int = 0
     leaked_headers_removed: int = 0
     review_rows: list[dict[str, str]] = field(default_factory=list)
+
+
+@dataclass
+class ParagraphRecoveryStats:
+    pages_seen: int = 0
+    fragments_seen: int = 0
+    candidates: int = 0
+    split: int = 0
+    merged_skipped: int = 0
+    already_paragraph: int = 0
+    skipped: int = 0
+    ambiguous: int = 0
+    unmatched: int = 0
+    unresolved: list[dict[str, str]] = field(default_factory=list)
 
 
 def _source_path(out_path: Path) -> tuple[Path, bool]:
@@ -553,9 +574,24 @@ def _fragment_lines(fragment_path: Path) -> list[str]:
     parser = etree.XMLParser(remove_blank_text=False)
     text = fragment_path.read_text(encoding="utf-8")
     root = etree.fromstring(f"<fragment>{text}</fragment>".encode("utf-8"), parser)
+    return _lines_from_fragment_root(root)
+
+
+def _fragment_body_lines(fragment_path: Path) -> list[str]:
+    parser = etree.XMLParser(remove_blank_text=False)
+    text = fragment_path.read_text(encoding="utf-8")
+    root = etree.fromstring(f"<fragment>{text}</fragment>".encode("utf-8"), parser)
+    return _lines_from_fragment_items(_flatten_fragment_until_first_note(root))
+
+
+def _lines_from_fragment_root(root: etree._Element) -> list[str]:
+    return _lines_from_fragment_items(_flatten_text_and_milestones(root))
+
+
+def _lines_from_fragment_items(items: list[tuple[str, str | None]]) -> list[str]:
     lines: list[str] = []
     current: list[str] = []
-    for kind, value in _flatten_text_and_milestones(root):
+    for kind, value in items:
         if kind in {"lb", "pb"}:
             line = "".join(current)
             if line.strip():
@@ -567,6 +603,32 @@ def _fragment_lines(fragment_path: Path) -> list[str]:
     if line.strip():
         lines.append(line)
     return lines
+
+
+def _flatten_fragment_until_first_note(root: etree._Element) -> list[tuple[str, str | None]]:
+    items: list[tuple[str, str | None]] = []
+
+    def walk(elem: etree._Element) -> bool:
+        if _local_name(elem) == "note":
+            return False
+        if elem.text:
+            items.append(("text", elem.text))
+        for child in elem:
+            if _local_name(child) == "note":
+                return False
+            if _local_name(child) in {"lb", "pb"}:
+                items.append((_local_name(child), child.get("break")))
+                if child.text:
+                    items.append(("text", child.text))
+            else:
+                if not walk(child):
+                    return False
+            if child.tail:
+                items.append(("text", child.tail))
+        return True
+
+    walk(root)
+    return items
 
 
 def _match_words(text: str) -> list[str]:
@@ -586,6 +648,17 @@ def _line_starts_with_same_words(fragment_suffix: str, body_line: str) -> bool:
         return False
     compare_count = min(len(fragment_words), len(body_words), 8)
     return fragment_words[:compare_count] == body_words[:compare_count]
+
+
+def _line_matches_fragment_start(fragment_line: str, body_line: str) -> bool:
+    fragment_text = _normalized_fragment_text(fragment_line)
+    body_text = _normalized_fragment_text(body_line)
+    if _line_starts_with_same_words(fragment_text, body_text):
+        return True
+    for match in CAP_PREFIX_SEARCH_RE.finditer(fragment_text):
+        if _line_starts_with_same_words(fragment_text[match.end():], body_text):
+            return True
+    return False
 
 
 def _cap_prefix_matches_fragment_line(
@@ -784,10 +857,37 @@ def _write_hyphenation_audit(stats: HyphenationImportStats) -> None:
     audit_path.write_text("".join(lines), encoding="utf-8")
 
 
+def _write_paragraph_audit(stats: ParagraphRecoveryStats) -> None:
+    audit_path = Path(__file__).resolve().parents[3] / PARAGRAPH_AUDIT
+    if not stats.unresolved:
+        if audit_path.exists():
+            audit_path.unlink()
+        return
+    audit_path.parent.mkdir(parents=True, exist_ok=True)
+    lines = ["status\tpage\tfragment\tfragment_line\treason\tmatch_count\ttext\n"]
+    for item in stats.unresolved:
+        lines.append(
+            "\t".join(
+                [
+                    _audit_cell(item.get("status", "")),
+                    _audit_cell(item.get("page", "")),
+                    _audit_cell(item.get("fragment", "")),
+                    _audit_cell(item.get("fragment_line", "")),
+                    _audit_cell(item.get("reason", "")),
+                    _audit_cell(item.get("match_count", "")),
+                    _audit_cell(item.get("text", "")),
+                ]
+            )
+            + "\n"
+        )
+    audit_path.write_text("".join(lines), encoding="utf-8")
+
+
 def _write_cleanup_outputs(
     heading_stats: HeadingReconciliationStats,
     hyphen_stats: HyphenationImportStats,
     page_stats: PageFurnitureStats,
+    paragraph_stats: ParagraphRecoveryStats | None = None,
 ) -> None:
     ledger_path = Path(__file__).resolve().parents[3] / CLEANUP_LEDGER
     summary_path = Path(__file__).resolve().parents[3] / CLEANUP_SUMMARY
@@ -828,6 +928,22 @@ def _write_cleanup_outputs(
         )
 
     rows.extend(page_stats.review_rows)
+    if paragraph_stats is not None:
+        for item in paragraph_stats.unresolved:
+            rows.append(
+                {
+                    "issue_type": "paragraph",
+                    "status": "needs-review",
+                    "page": item.get("page", ""),
+                    "fragment": item.get("fragment", ""),
+                    "xml_id": "",
+                    "line": item.get("fragment_line", ""),
+                    "current": item.get("text", ""),
+                    "evidence": item.get("reason", ""),
+                    "proposed_action": "split only when fragment paragraph start maps uniquely to a body line",
+                    "note": item.get("status", ""),
+                }
+            )
     ledger_path.parent.mkdir(parents=True, exist_ok=True)
     columns = [
         "issue_type",
@@ -855,6 +971,7 @@ def _write_cleanup_outputs(
         f"- Heading audit review rows: {len(heading_stats.unresolved)}\n",
         f"- Hyphenation audit review rows: {len(hyphen_stats.unresolved)}\n",
         f"- Page furniture review/action rows: {len(page_stats.review_rows)}\n",
+        f"- Paragraph audit review rows: {len(paragraph_stats.unresolved) if paragraph_stats else 0}\n",
         f"- Pages scanned for page furniture: {page_stats.pages_seen}\n",
         f"- Page numbers inserted: {page_stats.page_numbers_inserted}\n",
         f"- Page numbers split from running heads: {page_stats.page_numbers_split}\n",
@@ -928,6 +1045,210 @@ def import_line_end_hyphenation(
             )
     if write_audit:
         _write_hyphenation_audit(stats)
+    return stats
+
+
+GREEK_UPPER_RE = re.compile(r"^[\s\"'„“]*(?:[Α-ΩΆΈΉΊΌΎΏΪΫἈ-Ὧ])")
+LATIN_CUE_RE = re.compile(r"^[\s\"'„“]*[A-Z][A-Za-zÀ-ÖØ-öø-ÿ]+")
+PAGE_REFERENCE_RE = re.compile(r"^\s*P\.\s*\d+\.?")
+TERMINAL_PARAGRAPH_RE = re.compile(r"""[.!?:;]["'”’“»]*$""")
+TERMINAL_ABBREVIATION_RE = re.compile(
+    r"(?:\b(?:Io|I|D|C|N|L|M|S|St|V|Cod|cod|c|cap|lib|l|p|ed|"
+    r"f|fol|tom|vol|v|cf|Cf|Dr|Prof)\.)\s*(?:\d+[a-z]?)?$"
+)
+PARAGRAPH_SKIP_STARTS: dict[str, tuple[str, ...]] = {
+    "387": ("Ἕτεροι δὲ",),
+    "398": ("Inter Arabas Beitarides",),
+    "489": ("LIB. III.",),
+    "502": ("Cap. XXI. Eryngii cognomen",),
+    "515": ("Βάκχαρις",),
+    "522": ("Cap. LIV. De Coriandro",),
+    "624": ("Cap. LXVI. Ὄναγρα",),
+    "629": ("Petendam autem potissimum esse",),
+    "656": ("Τὴν ἀπὸ Θρηϊκίου",),
+}
+
+
+def _fragment_paragraph_candidates(fragment_path: Path) -> list[dict[str, str]]:
+    candidates: list[dict[str, str]] = []
+    lines = [_normalized_fragment_text(line) for line in _fragment_body_lines(fragment_path)]
+    for index, line in enumerate(lines):
+        if not line:
+            continue
+        reason = ""
+        if CAP_PREFIX_RE.match(line):
+            reason = "chapter-heading"
+        elif PAGE_REFERENCE_RE.match(line):
+            reason = "page-reference"
+        elif (
+            index > 0
+            and TERMINAL_PARAGRAPH_RE.search(lines[index - 1])
+            and not TERMINAL_ABBREVIATION_RE.search(lines[index - 1])
+        ):
+            if GREEK_UPPER_RE.match(line):
+                reason = "greek-line-after-terminal"
+            elif LATIN_CUE_RE.match(line):
+                reason = "latin-cue-after-terminal"
+        if reason:
+            candidates.append(
+                {
+                    "fragment_line": str(index + 1),
+                    "reason": reason,
+                    "text": line,
+                }
+            )
+    return candidates
+
+
+def _page_paragraph_lbs(root: etree._Element) -> dict[etree._Element, list[etree._Element]]:
+    pages: dict[etree._Element, list[etree._Element]] = {}
+    current_pb: etree._Element | None = None
+    for elem in root.iter():
+        if elem.tag == TEI + "pb":
+            current_pb = elem
+            pages.setdefault(elem, [])
+            continue
+        if elem.tag != TEI + "lb" or current_pb is None:
+            continue
+        if not _inside_body(elem) or _inside_ignored_line_context(elem):
+            continue
+        if elem.getparent() is not None and elem.getparent().tag == TEI + "p":
+            pages[current_pb].append(elem)
+    return pages
+
+
+def _lb_starts_paragraph(lb: etree._Element) -> bool:
+    parent = lb.getparent()
+    if parent is None or parent.tag != TEI + "p":
+        return False
+    if parent.text and parent.text.strip():
+        return False
+    for sibling in parent:
+        if sibling is lb:
+            return True
+        if sibling.tag == TEI + "lb" and not (sibling.tail or "").strip():
+            continue
+        if _normalized_text(sibling) or (sibling.tail or "").strip():
+            return False
+    return True
+
+
+def _split_paragraph_at_direct_lb(lb: etree._Element) -> bool:
+    parent = lb.getparent()
+    if parent is None or parent.tag != TEI + "p" or _lb_starts_paragraph(lb):
+        return False
+    grandparent = parent.getparent()
+    if grandparent is None:
+        return False
+    new_p = etree.Element(parent.tag)
+    new_p.tail = parent.tail
+    parent.tail = "\n          "
+    moving = False
+    for child in list(parent):
+        if child is lb:
+            moving = True
+        if moving:
+            parent.remove(child)
+            new_p.append(child)
+    grandparent.insert(grandparent.index(parent) + 1, new_p)
+    return True
+
+
+def _merge_paragraph_start_with_previous(lb: etree._Element) -> bool:
+    parent = lb.getparent()
+    if parent is None or parent.tag != TEI + "p" or not _lb_starts_paragraph(lb):
+        return False
+    grandparent = parent.getparent()
+    if grandparent is None:
+        return False
+    parent_index = grandparent.index(parent)
+    if parent_index == 0:
+        return False
+    previous = grandparent[parent_index - 1]
+    if previous.tag != TEI + "p":
+        return False
+    for child in list(parent):
+        parent.remove(child)
+        previous.append(child)
+    previous.tail = parent.tail
+    grandparent.remove(parent)
+    return True
+
+
+def recover_fragment_paragraphs(
+    root: etree._Element,
+    fragment_dir: Path | None = None,
+    *,
+    write_audit: bool = False,
+) -> ParagraphRecoveryStats:
+    """Recover conservative body paragraph starts from the checked fragments."""
+    resolved_fragment_dir = _require_fragment_dir(fragment_dir)
+    stats = ParagraphRecoveryStats()
+    for pb, lbs in _page_paragraph_lbs(root).items():
+        stats.pages_seen += 1
+        fragment_filename = _fragment_filename_from_pb(pb)
+        fragment_path = resolved_fragment_dir / fragment_filename if fragment_filename else None
+        if fragment_path is None or not fragment_path.exists():
+            continue
+        stats.fragments_seen += 1
+        page_n = pb.get("n") or ""
+        for candidate in _fragment_paragraph_candidates(fragment_path):
+            stats.candidates += 1
+            text = candidate["text"]
+            if any(text.startswith(prefix) for prefix in PARAGRAPH_SKIP_STARTS.get(page_n, ())):
+                matches = [
+                    lb
+                    for lb in lbs
+                    if _line_matches_fragment_start(text, _line_text_after_lb(lb))
+                ]
+                if len(matches) == 1 and _merge_paragraph_start_with_previous(matches[0]):
+                    stats.merged_skipped += 1
+                stats.skipped += 1
+                continue
+            matches = [
+                lb
+                for lb in lbs
+                if _line_matches_fragment_start(text, _line_text_after_lb(lb))
+            ]
+            if len(matches) != 1:
+                if matches:
+                    stats.ambiguous += 1
+                    status = "ambiguous"
+                else:
+                    stats.unmatched += 1
+                    status = "unmatched"
+                stats.unresolved.append(
+                    {
+                        "status": status,
+                        "page": page_n,
+                        "fragment": fragment_path.name,
+                        "fragment_line": candidate["fragment_line"],
+                        "reason": candidate["reason"],
+                        "match_count": str(len(matches)),
+                        "text": text,
+                    }
+                )
+                continue
+            if _lb_starts_paragraph(matches[0]):
+                stats.already_paragraph += 1
+                continue
+            if _split_paragraph_at_direct_lb(matches[0]):
+                stats.split += 1
+            else:
+                stats.unmatched += 1
+                stats.unresolved.append(
+                    {
+                        "status": "unsupported-nested-lb",
+                        "page": page_n,
+                        "fragment": fragment_path.name,
+                        "fragment_line": candidate["fragment_line"],
+                        "reason": candidate["reason"],
+                        "match_count": "1",
+                        "text": text,
+                    }
+                )
+    if write_audit:
+        _write_paragraph_audit(stats)
     return stats
 
 
@@ -1006,6 +1327,28 @@ def _remove_duplicate_head_tail(head: etree._Element, body_line: str) -> bool:
 def _insert_prefix_after_lb(lb: etree._Element, prefix: str) -> None:
     tail = lb.tail or ""
     lb.tail = f"{prefix} {tail.lstrip()}"
+
+
+def _insert_corrected_cap_prefix_after_lb(
+    lb: etree._Element,
+    printed: str,
+    corrected: str,
+) -> bool:
+    if (lb.tail or "").lstrip().startswith("Cap."):
+        return False
+    tail = lb.tail or ""
+    lb.tail = f"Cap. "
+    choice = etree.Element(TEI + "choice")
+    sic = etree.SubElement(choice, TEI + "sic")
+    sic.text = printed
+    corr = etree.SubElement(choice, TEI + "corr")
+    corr.text = corrected
+    choice.tail = f". {tail.lstrip()}"
+    parent = lb.getparent()
+    if parent is None:
+        return False
+    parent.insert(parent.index(lb) + 1, choice)
+    return True
 
 
 def reconcile_inline_chapter_headings(
@@ -1568,6 +1911,8 @@ def repair_known_markup_errors(root: etree._Element) -> int:
                 _unwrap_inline_element(hi)
                 repaired += 1
     repaired += _repair_page_374_bdellium_body_head(root)
+    repaired += repair_reviewed_inline_heads_and_labels(root)
+    repaired += restore_reviewed_missing_cap_prefixes(root)
     return repaired
 
 
@@ -1580,6 +1925,159 @@ def _repair_page_374_bdellium_body_head(root: etree._Element) -> int:
             head.tag = TEI + "p"
             return 1
     return 0
+
+
+def _append_text_to_element(elem: etree._Element, text: str) -> None:
+    if not text:
+        return
+    if len(elem):
+        elem[-1].tail = (elem[-1].tail or "") + text
+    else:
+        elem.text = (elem.text or "") + text
+
+
+def _first_direct_lb(p: etree._Element) -> etree._Element | None:
+    for child in p:
+        if child.tag == TEI + "lb":
+            return child
+    return None
+
+
+def _remove_duplicate_first_line_prefix(p: etree._Element, duplicate: str) -> bool:
+    duplicate_text = " ".join(duplicate.split())
+    if not duplicate_text:
+        return False
+    lb = _first_direct_lb(p)
+    if lb is None:
+        return False
+    tail = lb.tail or ""
+    duplicate_words = _match_words(duplicate_text)
+    tail_words = _match_words(tail)
+    if duplicate_words and tail_words[: len(duplicate_words)] == duplicate_words:
+        lb.tail = ""
+        return True
+    return False
+
+
+def _merge_following_paragraph_into_p(p: etree._Element, following: etree._Element) -> None:
+    if following.text:
+        _append_text_to_element(p, following.text)
+    for child in list(following):
+        following.remove(child)
+        p.append(child)
+    p.tail = following.tail
+    parent = following.getparent()
+    if parent is not None:
+        parent.remove(following)
+
+
+def _next_element_sibling(elem: etree._Element) -> etree._Element | None:
+    sibling = elem.getnext()
+    while sibling is not None and not isinstance(sibling.tag, str):
+        sibling = sibling.getnext()
+    return sibling
+
+
+def _inline_printed_head(head: etree._Element) -> bool:
+    if head.get("type") == "supplied":
+        return False
+    if not _inside_body(head):
+        return False
+    text = _normalized_text(head)
+    if not text.startswith("Cap. "):
+        return False
+    following = _next_element_sibling(head)
+    tail = head.tail or ""
+    head.tag = TEI + "p"
+    if tail.strip():
+        _append_text_to_element(head, " " + tail.strip())
+        head.tail = "\n          "
+    if following is not None and following.tag == TEI + "p":
+        if tail.strip():
+            _remove_duplicate_first_line_prefix(following, tail)
+            first_lb = _first_direct_lb(following)
+            if first_lb is not None and not (first_lb.tail or "").strip():
+                first_lb.tail = " "
+                _remove_lb_preserving_text(first_lb)
+        else:
+            first_lb = _first_direct_lb(following)
+            if first_lb is not None:
+                first_lb.tail = " " + (first_lb.tail or "").lstrip()
+                _remove_lb_preserving_text(first_lb)
+        _merge_following_paragraph_into_p(head, following)
+    return True
+
+
+def _inline_printed_label(label: etree._Element) -> bool:
+    if not _normalized_text(label).startswith("Cap. "):
+        return False
+    following = _next_element_sibling(label)
+    if following is None or following.tag != TEI + "p":
+        return False
+    lb = _first_direct_lb(following)
+    if lb is None:
+        return False
+    label_text = _normalized_text(label)
+    label_tail = " ".join((label.tail or "").split())
+    if label_tail:
+        _remove_duplicate_first_line_prefix(following, label_tail)
+    prefix = f"{label_text} {label_tail}".strip()
+    if not _line_text_after_lb(lb).lstrip().startswith(prefix):
+        lb.tail = f"{prefix} {(lb.tail or '').lstrip()}"
+    parent = label.getparent()
+    if parent is not None:
+        parent.remove(label)
+    return True
+
+
+def repair_reviewed_inline_heads_and_labels(root: etree._Element) -> int:
+    """Move reviewed printed heads/labels back into the diplomatic body."""
+    repaired = 0
+    for label in list(root.iter(TEI + "label")):
+        if _inline_printed_label(label):
+            repaired += 1
+    for head in list(root.iter(TEI + "head")):
+        if _inline_printed_head(head):
+            repaired += 1
+    return repaired
+
+
+REVIEWED_PREFIX_REPAIRS: tuple[dict[str, str], ...] = (
+    {"page": "429", "start": "Σκολόπενδρα χερσαία", "prefix": "Cap. XVI."},
+    {"page": "447", "start": "Καλλιώνυμος", "prefix": "Cap. LXXXVI."},
+    {"page": "522", "start": "De Coriandro", "printed": "LIV", "corrected": "LXIV"},
+    {"page": "624", "start": "Ὄναγρα", "printed": "LXVI", "corrected": "CXVI"},
+    {"page": "665", "start": "p. 29. De pharico", "prefix": "Cap. XIX."},
+)
+
+
+def restore_reviewed_missing_cap_prefixes(root: etree._Element) -> int:
+    """Restore reviewed printed Cap. prefixes that fragment matching skipped."""
+    repaired = 0
+    lb_pages = _lb_page_map(root)
+    for repair in REVIEWED_PREFIX_REPAIRS:
+        for lb in list(root.iter(TEI + "lb")):
+            if _inside_ignored_line_context(lb):
+                continue
+            pb = lb_pages.get(lb)
+            if pb is None:
+                pb = _pb_before_element(lb)
+            if pb is None or pb.get("n") != repair["page"]:
+                continue
+            if not _line_text_after_lb(lb).lstrip().startswith(repair["start"]):
+                continue
+            if "printed" in repair:
+                if _insert_corrected_cap_prefix_after_lb(
+                    lb,
+                    repair["printed"],
+                    repair["corrected"],
+                ):
+                    repaired += 1
+            elif not CAP_PREFIX_RE.match(_line_text_after_lb(lb)):
+                _insert_prefix_after_lb(lb, repair["prefix"])
+                repaired += 1
+            break
+    return repaired
 
 
 def _direct_head(div: etree._Element) -> etree._Element | None:
@@ -1774,16 +2272,17 @@ def run() -> None:
     inline_footnote_breaks_repaired = repair_fragment_confirmed_inline_footnote_breaks(root)
     page_342_boundary_repairs = repair_page_342_book_boundary(root)
     page_furniture_stats = normalize_page_top_furniture(root)
-    line_stats = normalize_page_line_numbering(root)
-    hyphen_stats = import_line_end_hyphenation(root, write_audit=True)
     text_errors_repaired = repair_known_text_errors(root)
     markup_errors_repaired = repair_known_markup_errors(root)
+    paragraph_stats = recover_fragment_paragraphs(root, write_audit=True)
+    line_stats = normalize_page_line_numbering(root)
+    hyphen_stats = import_line_end_hyphenation(root, write_audit=True)
     opening_quotes_normalized = normalize_german_opening_quotes(root)
     closing_quotes_normalized = normalize_german_closing_quotes(root)
     line_end_hyphens_removed = remove_line_end_hyphen_glyphs(root)
     facs_rewritten = rewrite_pb_facs(root)
     sources_restored = _restore_pb_sources(root, preserved_sources)
-    _write_cleanup_outputs(heading_stats, hyphen_stats, page_furniture_stats)
+    _write_cleanup_outputs(heading_stats, hyphen_stats, page_furniture_stats, paragraph_stats)
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
     xml_text, indent_stats = serialize_with_epidoc_indentation(tree)
@@ -1812,6 +2311,10 @@ def run() -> None:
         f"{page_furniture_stats.running_heads_normalized} running-head fw tags normalized, "
         f"{page_furniture_stats.leaked_page_numbers_removed} leaked page-number paragraphs removed, "
         f"{page_furniture_stats.leaked_headers_removed} leaked running heads removed, "
+        f"{paragraph_stats.split}/{paragraph_stats.candidates} fragment paragraph starts split "
+        f"({paragraph_stats.already_paragraph} already paragraphs, {paragraph_stats.skipped} skipped, "
+        f"{paragraph_stats.merged_skipped} skipped false starts merged, "
+        f"{paragraph_stats.ambiguous} ambiguous, {paragraph_stats.unmatched} unmatched), "
         f"{text_errors_repaired} known text errors repaired, "
         f"{markup_errors_repaired} known markup errors repaired, "
         f"{opening_quotes_normalized} German opening quote markers normalized, "

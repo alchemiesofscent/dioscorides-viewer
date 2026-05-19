@@ -10,6 +10,7 @@ from pharmacopoeia.migrate.sprengel1830_comm import (
     normalize_page_line_numbering,
     normalize_page_top_furniture,
     normalize_footnote_ref_markers,
+    recover_fragment_paragraphs,
     repair_fragment_confirmed_inline_footnote_breaks,
     repair_page_342_book_boundary,
     remove_line_end_hyphen_glyphs,
@@ -17,6 +18,8 @@ from pharmacopoeia.migrate.sprengel1830_comm import (
     repair_known_markup_errors,
     repair_known_text_errors,
     reconcile_inline_chapter_headings,
+    restore_reviewed_missing_cap_prefixes,
+    repair_reviewed_inline_heads_and_labels,
 )
 
 TEI_NS = "http://www.tei-c.org/ns/1.0"
@@ -885,6 +888,166 @@ def test_page_374_bdellium_body_head_becomes_normal_paragraph():
     assert len(ps) == 2
     assert _flat_text(ps[0]).startswith("Cap. LXXX. Bdellium esse lacrimam")
     assert [lb.get("n") for lb in root.findall(f'.//{TEI}p//{TEI}lb')] == ["1", "2", "3"]
+
+
+def test_fragment_paragraph_recovery_splits_checked_body_lines(tmp_path):
+    root = _parse(
+        '<pb n="342" source="https://archive.org/download/b23982500_0002/'
+        'b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0350.jp2"/>'
+        '<p><lb n="8"/>Cap. I. De Iride. start'
+        '<lb n="9"/>continuation.'
+        '<lb n="10"/><foreign xml:lang="grc">Θελπίδη</foreign>, aut cum cod. C.'
+        '<lb n="11"/>lingua radix exserit.'
+        '<lb n="12"/>Appellationem radicis maricae possumus</p>'
+    )
+    _write_fragment(
+        tmp_path,
+        "b23982500_0002_0350.xml",
+        '<pb n="342"/>Cap. I. De Iride. start<lb/>continuation.<lb/>'
+        '<foreign xml:lang="grc">Θελπίδη</foreign>, aut cum cod. C.<lb/>'
+        'lingua radix exserit.<lb/>'
+        'Appellationem radicis maricae possumus<lb/>',
+    )
+
+    stats = recover_fragment_paragraphs(root, tmp_path)
+    normalize_page_line_numbering(root)
+
+    paragraphs = root.findall(f".//{TEI}p")
+    assert stats.split == 2
+    assert len(paragraphs) == 3
+    assert _flat_text(paragraphs[1]).startswith("Θελπίδη")
+    assert _flat_text(paragraphs[2]).startswith("Appellationem")
+
+
+def test_fragment_paragraph_recovery_skips_reviewed_quote_line(tmp_path):
+    root = _parse(
+        '<pb n="656" source="https://archive.org/download/b23982500_0002/'
+        'b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0662.jp2"/>'
+        '<p><lb n="1"/>Cap. CXLVI. De thracio lapide apponere libet versus:'
+        '<lb n="2"/><foreign xml:lang="grc">Τὴν ἀπὸ Θρηϊκίου νομέες</foreign>'
+        '<lb n="3"/>Eumdem autem Agricola habet</p>'
+    )
+    _write_fragment(
+        tmp_path,
+        "b23982500_0002_0662.xml",
+        '<pb n="656"/>Cap. CXLVI. De thracio lapide apponere libet versus:<lb/>'
+        '<foreign xml:lang="grc">Τὴν ἀπὸ Θρηϊκίου νομέες</foreign><lb/>'
+        'Eumdem autem Agricola habet<lb/>',
+    )
+
+    stats = recover_fragment_paragraphs(root, tmp_path)
+
+    assert stats.skipped == 1
+    assert len(root.findall(f".//{TEI}p")) == 1
+
+
+def test_fragment_paragraph_recovery_skips_page_629_continuation_line(tmp_path):
+    root = _parse(
+        '<pb n="629" source="https://archive.org/download/b23982500_0002/'
+        'b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0635.jp2"/>'
+        '<p><lb n="27"/>notat. Esse nimirum herbam latis foliis, sicut Maru,'
+        '<lb n="28"/>ad tactum asperis, ramis pariter asperis, sicut pedes lo'
+        '<lb n="29" break="no"/>custae (pansis); colorem eius ex viridi et flavo conspici.'
+        '</p><p><lb n="30"/>Petendam autem potissimum esse e Khorassan, foliis calloso'
+        '<lb n="31" break="no"/>hirsutis: namque aliam vulgarem esse Maru.</p>'
+    )
+    _write_fragment(
+        tmp_path,
+        "b23982500_0002_0635.xml",
+        '<pb n="629"/>notat. Esse nimirum herbam latis foliis, sicut Maru,<lb/>'
+        'ad tactum asperis, ramis pariter asperis, sicut pedes lo<lb break="no"/>'
+        'custae (pansis); colorem eius ex viridi et flavo conspici.<lb/>'
+        'Petendam autem potissimum esse e Khorassan, foliis calloso<lb break="no"/>'
+        'hirsutis: namque aliam vulgarem esse Maru.<lb/>',
+    )
+
+    stats = recover_fragment_paragraphs(root, tmp_path)
+
+    assert stats.skipped == 1
+    assert stats.merged_skipped == 1
+    assert stats.split == 0
+    assert len(root.findall(f".//{TEI}p")) == 1
+
+
+def test_reviewed_inline_label_moves_into_body_line():
+    root = _parse(
+        '<pb n="438"/><label>Cap. XXXV.</label> Qui ad iusculum hoc suadentur pi-'
+        '<p><lb n="15"/> Qui ad iusculum hoc suadentur pi'
+        '<lb n="16" break="no"/>sces, sunt qui</p>'
+    )
+
+    changed = repair_reviewed_inline_heads_and_labels(root)
+    normalize_page_line_numbering(root)
+
+    assert changed == 1
+    assert root.find(f".//{TEI}label") is None
+    assert _flat_text(root.find(f".//{TEI}p")).startswith("Cap. XXXV. Qui ad iusculum")
+
+
+def test_reviewed_printed_head_merges_with_following_body():
+    root = _parse(
+        '<pb n="658"/>'
+        '<head><lb n="10"/>Cap. CLIII. <foreign xml:lang="grc">Θυίτην</foreign> lapidem dici,</head>'
+        'Hermolai Barbari iam est sententia.'
+        '<p><lb n="11"/>Hermolai Barbari iam est sententia.'
+        '<ref target="#fn89" type="footnote-ref">89</ref> Neque tamen</p>'
+    )
+
+    changed = repair_reviewed_inline_heads_and_labels(root)
+    normalize_page_line_numbering(root)
+
+    paragraphs = root.findall(f".//{TEI}p")
+    assert changed == 1
+    assert root.find(f".//{TEI}head") is None
+    assert len(paragraphs) == 1
+    assert _flat_text(paragraphs[0]).count("Hermolai Barbari iam est sententia") == 1
+    assert "89 Neque tamen" in _flat_text(paragraphs[0])
+
+
+def test_reviewed_short_printed_head_joins_following_body_line():
+    root = _parse(
+        '<pb n="472"/>'
+        '<head><lb n="7"/>Cap. CLXXIV.</head>'
+        '<p><lb n="8"/><foreign xml:lang="grc">Ὕδνον</foreign>, quod Thraces</p>'
+    )
+
+    changed = repair_reviewed_inline_heads_and_labels(root)
+    normalize_page_line_numbering(root)
+
+    paragraph = root.find(f".//{TEI}p")
+    lbs = paragraph.findall(f".//{TEI}lb")
+    assert changed == 1
+    assert len(lbs) == 1
+    assert _flat_text(paragraph).startswith("Cap. CLXXIV. Ὕδνον")
+
+
+def test_reviewed_printed_head_removes_loose_duplicate_tail():
+    root = _parse(
+        '<pb n="472"/>'
+        '<head><lb n="29"/>Cap. CLXXVI.</head> De '
+        '<p><lb n="30"/>De <foreign xml:lang="grc">μηδική</foreign>, Medicagine</p>'
+    )
+
+    changed = repair_reviewed_inline_heads_and_labels(root)
+    normalize_page_line_numbering(root)
+
+    paragraph = root.find(f".//{TEI}p")
+    assert changed == 1
+    assert _flat_text(paragraph).startswith("Cap. CLXXVI. De μηδική")
+    assert "De De" not in _flat_text(paragraph)
+
+
+def test_reviewed_prefix_with_sic_corr_preserves_printed_number():
+    root = _parse(
+        '<pb n="624"/><p><lb n="25"/><foreign xml:lang="grc">Ὄναγρα</foreign> nil esse potest</p>'
+    )
+
+    changed = restore_reviewed_missing_cap_prefixes(root)
+
+    choice = root.find(f".//{TEI}choice")
+    assert changed == 1
+    assert choice.find(f"{TEI}sic").text == "LXVI"
+    assert choice.find(f"{TEI}corr").text == "CXVI"
 
 
 def test_german_closing_quotes_replace_double_backticks_in_text_and_tail():

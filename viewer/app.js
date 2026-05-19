@@ -1144,6 +1144,9 @@
     if (name === "head" && !isRenderableHead(node, context)) {
       return context;
     }
+    if (name === "corr" && node.parentElement && localName(node.parentElement) === "choice") {
+      return context;
+    }
     context.topFurnitureRow = null;
 
     const shouldRender = context.currentPage && (isBlockElement(node) || context.frames.length > 0);
