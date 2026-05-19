@@ -501,6 +501,66 @@ def test_fragment_confirmed_line_break_after_footnote_ref_is_removed(tmp_path):
     assert "git16 πὰ βεβίρε" in line_text
 
 
+def test_fragment_confirmed_line_break_before_footnote_ref_is_removed(tmp_path):
+    root = _parse(
+        '<pb n="384" source="https://archive.org/download/b23982500_0002/'
+        'b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0392.jp2"/>'
+        '<p><lb n="5"/>asphaltites a Iudaeis medii aevi dicitur '
+        '<foreign xml:lang="he">אגם החמר</foreign>'
+        '<lb n="6"/><ref target="#fn384_10" type="footnote-ref" '
+        'xml:id="ref-fn384_10">10</ref>, a no'
+        '<lb n="7" break="no"/>strae aetatis Arabibus</p>'
+    )
+    _write_fragment(
+        tmp_path,
+        "b23982500_0002_0392.xml",
+        '<pb n="384"/>asphaltites a Iudaeis medii aevi dicitur '
+        '<foreign xml:lang="he">אגם החמר</foreign><ref target="#fn10">10</ref>, a no'
+        '<lb break="no"/>strae aetatis Arabibus<lb/>',
+    )
+
+    repaired = repair_fragment_confirmed_inline_footnote_breaks(root, tmp_path)
+    normalize_page_line_numbering(root)
+
+    lbs = root.findall(f".//{TEI}p//{TEI}lb")
+    line_text = _flat_text(root.find(f".//{TEI}p"))
+    assert repaired == 1
+    assert [lb.get("n") for lb in lbs] == ["1", "2"]
+    assert lbs[1].get("break") == "no"
+    assert "אגם החמר 10, a nostrae" in line_text
+
+
+def test_fragment_confirmed_line_break_before_ref_after_foreign_is_removed(tmp_path):
+    root = _parse(
+        '<pb n="440" source="https://archive.org/download/b23982500_0002/'
+        'b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0446.jp2"/>'
+        '<p><foreign xml:lang="grc"><lb n="1"/>χρηστὸν αἷμα γεννῶντες.</foreign>'
+        '<lb n="2"/><ref target="#fn440_30" type="footnote-ref" '
+        'xml:id="ref-fn440_30">30</ref> Paullus aliter, '
+        '<foreign xml:lang="grc">ἐπικρατητικός.</foreign>'
+        '<lb n="3"/><ref target="#fn440_31" type="footnote-ref" '
+        'xml:id="ref-fn440_31">31</ref> Si vera est lectio</p>'
+    )
+    _write_fragment(
+        tmp_path,
+        "b23982500_0002_0446.xml",
+        '<pb n="440"/><foreign xml:lang="grc">χρηστὸν αἷμα γεννῶντες.</foreign> '
+        '<ref target="#fn30">30</ref> Paullus aliter, imo haud satis recte '
+        '<foreign xml:lang="grc">ἐπικρατητικός.</foreign> '
+        '<ref target="#fn31">31</ref> Si vera est lectio<lb/>',
+    )
+
+    repaired = repair_fragment_confirmed_inline_footnote_breaks(root, tmp_path)
+    normalize_page_line_numbering(root)
+
+    lbs = root.findall(f".//{TEI}p//{TEI}lb")
+    line_text = _flat_text(root.find(f".//{TEI}p"))
+    assert repaired == 2
+    assert [lb.get("n") for lb in lbs] == ["1"]
+    assert "γεννῶντες. 30 Paullus" in line_text
+    assert "ἐπικρατητικός. 31 Si vera" in line_text
+
+
 def test_heading_prefix_uses_current_page_fragment_not_earlier_page(tmp_path):
     root = _parse(
         '<pb n="1" source="https://archive.org/download/b23982500_0002/'

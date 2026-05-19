@@ -645,6 +645,19 @@ def _fragment_confirms_ref_followed_by_text(
     return False
 
 
+def _text_following_ref(ref: etree._Element) -> str:
+    parts = [ref.tail or ""]
+    for sibling in ref.itersiblings():
+        if sibling.tag in LINE_BOUNDARY_TAGS:
+            break
+        parts.append(_normalized_text(sibling))
+        if sibling.tail:
+            parts.append(sibling.tail)
+        if len(_match_words(" ".join(parts))) >= 2:
+            break
+    return " ".join(parts)
+
+
 def repair_fragment_confirmed_inline_footnote_breaks(
     root: etree._Element,
     fragment_dir: Path | None = None,
@@ -660,13 +673,25 @@ def repair_fragment_confirmed_inline_footnote_breaks(
             continue
         previous = lb.getprevious()
         next_sibling = lb.getnext()
+        ref: etree._Element | None = None
+        next_text = ""
         if (
-            previous is None
-            or previous.tag != TEI + "ref"
-            or previous.get("type") != "footnote-ref"
-            or next_sibling is None
-            or next_sibling.tag not in {TEI + "foreign", TEI + "hi"}
+            next_sibling is not None
+            and next_sibling.tag == TEI + "ref"
+            and next_sibling.get("type") == "footnote-ref"
         ):
+            ref = next_sibling
+            next_text = _text_following_ref(ref)
+        elif (
+            previous is not None
+            and previous.tag == TEI + "ref"
+            and previous.get("type") == "footnote-ref"
+            and next_sibling is not None
+            and next_sibling.tag in {TEI + "foreign", TEI + "hi"}
+        ):
+            ref = previous
+            next_text = _normalized_text(next_sibling)
+        else:
             continue
         pb = lb_pages.get(lb)
         if pb is None:
@@ -677,11 +702,12 @@ def repair_fragment_confirmed_inline_footnote_breaks(
             continue
         if not _fragment_confirms_ref_followed_by_text(
             fragment_path,
-            previous.text or "",
-            _normalized_text(next_sibling),
+            ref.text or "",
+            next_text,
         ):
             continue
-        if _remove_empty_lb_before_element(next_sibling):
+        target = next_sibling if ref is next_sibling else next_sibling
+        if target is not None and _remove_empty_lb_before_element(target):
             repaired += 1
     return repaired
 
