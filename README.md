@@ -101,9 +101,9 @@ All stages are deterministic Python (no LLM calls in v1):
 - `migrate berendes1902` — flatten `<div subtype="continuation">` wrappers
   into parent chapter divs; add `@corresp="lemma:..."` hooks on chapter
   `<head>` Greek and German spans.
-- `migrate sprengel1829` — walk `<milestone unit="chapter">` markers,
-  rebracket content into per-language `<div type="textpart" subtype="chapter">`
-  trees with `corresp` linking the Greek and Latin parallels.
+- `migrate sprengel1829` — preserve the page-first diplomatic TEI, with Greek
+  top zones and Latin bottom zones on the same printed page; chapter structure
+  remains encoded as paired `<milestone unit="chapter">` markers.
 - `migrate beck2020` — collapse 181 987 per-word `<w bbox="..." cert="...">`
   elements to plain text inside their parent `<ab>`/`<head>`; drop per-word
   xml:ids and bbox attrs (272K → 68K lines).

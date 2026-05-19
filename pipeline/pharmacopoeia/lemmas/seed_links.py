@@ -1,7 +1,8 @@
 """Seed lemma-link files from pre-existing @corresp evidence.
 
-- ``sprengel1829 -> sprengel1829``: walk Sprengel chapter divs, pair them by
-  @n into Greek↔Latin lemma-link records (Sprengel's own bilingual layout).
+- ``sprengel1829 -> sprengel1829``: walk Sprengel chapter milestones, pair
+  them by @n into Greek↔Latin lemma-link records (Sprengel's bilingual page
+  layout).
 - ``berendes1902 -> berendes1902``: walk Berendes chapter heads, pair Greek
   and German @corresp lemma annotations.
 """
@@ -40,7 +41,7 @@ def _emit_link_file(
     sd = etree.SubElement(fd, TEI + "sourceDesc")
     p2 = etree.SubElement(sd, TEI + "p")
     p2.text = (
-        "Seeded mechanically from chapter @corresp pairs in the source TEI. "
+        "Seeded mechanically from chapter pairing evidence in the source TEI. "
         "Each link records the responsible party and evidence basis as a "
         "scholarly claim, not as a silent equivalence."
     )
@@ -79,13 +80,15 @@ def _sprengel_grc_la_pairs() -> list[dict]:
     root = tree.getroot()
 
     by_n: dict[str, dict[str, dict]] = {}
-    for ch in root.xpath(".//*[local-name()='div' and @subtype='chapter']"):
-        n = ch.get("n")
-        lang = ch.get(XLANG)
-        head = ch.find(TEI + "head")
-        if not n or not lang or head is None:
+    milestones = root.xpath(
+        ".//*[local-name()='milestone' and @unit='chapter' and @n and @xml:lang]"
+    )
+    for milestone in milestones:
+        n = milestone.get("n")
+        lang = milestone.get(XLANG)
+        text = (milestone.get("label") or "").strip()
+        if not n or lang not in {"grc", "la"} or not text:
             continue
-        text = "".join(head.itertext()).strip()
         head_form = text
         if lang == "grc":
             head_form = (head_form.removeprefix("Περὶ ")
@@ -93,7 +96,11 @@ def _sprengel_grc_la_pairs() -> list[dict]:
         elif lang == "la":
             head_form = head_form.removeprefix("De ").strip()
         slug = _slugify(head_form)
-        lemma_id = f"lemma:sprengel1829-{lang}:{slug}"
+        corresp = milestone.get("corresp") or ""
+        lemma_id = (
+            corresp if corresp.startswith("lemma:")
+            else f"lemma:sprengel1829-{lang}:{slug}"
+        )
         by_n.setdefault(n, {})[lang] = {"id": lemma_id, "text": text}
 
     pairs: list[dict] = []

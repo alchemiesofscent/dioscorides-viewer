@@ -7,6 +7,7 @@ locally without requiring an XSLT/Schematron toolchain.
 Checks:
 - well-formed XML
 - every chapter <div type="textpart" subtype="chapter"> has @n and <head>
+  (Sprengel 1829 instead uses paired chapter milestones in page-first TEI)
 - every <link>/@target token references an existing lemma id
 - every <note>/@next is paired with a reciprocal <note>/@prev
 - xml:ids are globally unique within the file
@@ -32,6 +33,7 @@ TEI_NS = "http://www.tei-c.org/ns/1.0"
 XML_NS = "http://www.w3.org/XML/1998/namespace"
 TEI = f"{{{TEI_NS}}}"
 XID = f"{{{XML_NS}}}id"
+XLANG = f"{{{XML_NS}}}lang"
 
 EDITIONS = ("berendes1902", "sprengel1829", "beck2020", "sprengel1830-comm")
 BANNED_ATTRS = ("bbox", "cert", "seq")
@@ -75,14 +77,17 @@ def _check_edition(edition: str) -> CheckResult:
             f"duplicate xml:ids: {dups[:5]}{'...' if len(dups) > 5 else ''}"
         )
 
-    # chapter divs have @n and <head>
-    chapters = root.xpath(".//*[local-name()='div' and @subtype='chapter']")
-    missing_n = [c for c in chapters if not c.get("n")]
-    if missing_n:
-        res.error(f"{len(missing_n)} chapter divs missing @n")
-    missing_head = [c for c in chapters if c.find(TEI + "head") is None]
-    if missing_head:
-        res.warn(f"{len(missing_head)} chapter divs missing <head>")
+    if edition == "sprengel1829":
+        _check_sprengel1829_page_first(root, res)
+    else:
+        # chapter divs have @n and <head>
+        chapters = root.xpath(".//*[local-name()='div' and @subtype='chapter']")
+        missing_n = [c for c in chapters if not c.get("n")]
+        if missing_n:
+            res.error(f"{len(missing_n)} chapter divs missing @n")
+        missing_head = [c for c in chapters if c.find(TEI + "head") is None]
+        if missing_head:
+            res.warn(f"{len(missing_head)} chapter divs missing <head>")
 
     # books present
     books = root.xpath(".//*[local-name()='div' and @subtype='book']")
@@ -135,6 +140,42 @@ def _check_edition(edition: str) -> CheckResult:
             )
 
     return res
+
+
+def _check_sprengel1829_page_first(root: etree._Element, res: CheckResult) -> None:
+    pages = root.xpath(".//*[local-name()='div' and @subtype='diplomatic-page']")
+    paired_zone_pages = 0
+    for page in pages:
+        zones = page.xpath("./*[local-name()='ab' and @type='pageZone']")
+        places = {zone.get("place") for zone in zones}
+        if "top" in places and "bottom" in places:
+            paired_zone_pages += 1
+    if not paired_zone_pages:
+        res.error("no Sprengel page has paired top/bottom diplomatic page zones")
+
+    edition_divs = root.xpath(".//*[local-name()='body']/*[local-name()='div' and @subtype='edition']")
+    edition_langs = {elem.get(XLANG) for elem in edition_divs}
+    if {"grc", "la"} <= edition_langs:
+        res.error("Sprengel 1829 is chapter-major split; expected page-first diplomatic TEI")
+
+    milestones = root.xpath(
+        ".//*[local-name()='milestone' and @unit='chapter' and @n and @xml:lang]"
+    )
+    by_n: dict[str, set[str]] = {}
+    for milestone in milestones:
+        by_n.setdefault(milestone.get("n"), set()).add(milestone.get(XLANG))
+    if not by_n:
+        res.error("Sprengel 1829 has no chapter milestones")
+        return
+    missing_pairs = [
+        n for n, langs in by_n.items()
+        if not ({"grc", "la"} <= langs)
+    ]
+    if missing_pairs:
+        res.error(
+            "Sprengel 1829 chapter milestones missing Greek/Latin pair "
+            f"(first: {missing_pairs[0]})"
+        )
 
 
 def _gather_lemma_ids() -> set[str]:

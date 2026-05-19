@@ -25,9 +25,62 @@ def _strip_text(elem: etree._Element) -> str:
     return "".join(elem.itertext()).strip()
 
 
+def _headword_from_label(label: str, lang: str) -> str:
+    if lang == "grc":
+        return re.sub(r"^Περ[ὶί]\s+", "", label).strip()
+    if lang == "la":
+        return re.sub(r"^De\s+", "", label).strip()
+    return label.strip()
+
+
+def _add_record(
+    by_lang: dict[str, dict[str, dict]],
+    edition: str,
+    lang: str,
+    form: str,
+    occurrence: str | None,
+) -> str:
+    headword = _headword_from_label(form, lang)
+    lemma_id = f"lemma:{edition}-{lang}:{_slugify(headword)}"
+    rec = by_lang[lang].get(lemma_id)
+    if rec is None:
+        by_lang[lang][lemma_id] = {
+            "id": lemma_id, "lang": lang, "form": form,
+            "headword": headword,
+            "occurrences": [occurrence] if occurrence else [],
+        }
+    elif occurrence and occurrence not in rec["occurrences"]:
+        rec["occurrences"].append(occurrence)
+    return lemma_id
+
+
+def _extract_sprengel_milestones(root: etree._Element) -> dict[str, dict[str, dict]]:
+    by_lang: dict[str, dict[str, dict]] = defaultdict(dict)
+    milestones = root.xpath(
+        ".//*[local-name()='milestone' and @unit='chapter' and @n and @xml:lang]"
+    )
+    for milestone in milestones:
+        lang = milestone.get(XLANG)
+        label = (milestone.get("label") or "").strip()
+        if lang not in {"grc", "la"} or not label:
+            continue
+        lemma_id = _add_record(
+            by_lang,
+            "sprengel1829",
+            lang,
+            label,
+            milestone.get(XID),
+        )
+        milestone.set("corresp", lemma_id)
+    return by_lang
+
+
 def _extract_from_heads(
     root: etree._Element, edition: str,
 ) -> dict[str, dict[str, dict]]:
+    if edition == "sprengel1829":
+        return _extract_sprengel_milestones(root)
+
     by_lang: dict[str, dict[str, dict]] = defaultdict(dict)
     for ch in root.xpath(".//*[local-name()='div' and @subtype='chapter']"):
         ch_id = ch.get(XID)
@@ -62,10 +115,8 @@ def _extract_from_heads(
             lang = ch.get(XLANG)
             if lang:
                 text = _strip_text(head)
-                head_form = re.sub(r"^Περ[ὶί]\s+", "", text).strip()
-                head_form = re.sub(r"^De\s+", "", head_form).strip()
-                slug = _slugify(head_form)
-                lemma_id = f"lemma:{edition}-{lang}:{slug}"
+                head_form = _headword_from_label(text, lang)
+                lemma_id = f"lemma:{edition}-{lang}:{_slugify(head_form)}"
                 rec = by_lang[lang].get(lemma_id)
                 if rec is None:
                     by_lang[lang][lemma_id] = {
@@ -144,7 +195,8 @@ def _write_taxonomy(
     )
     sd = etree.SubElement(fd, TEI + "sourceDesc")
     p2 = etree.SubElement(sd, TEI + "p")
-    p2.text = f"Lemmas extracted from chapter heads of {tei_relpath}."
+    basis = "chapter milestones" if edition == "sprengel1829" else "chapter heads"
+    p2.text = f"Lemmas extracted from {basis} of {tei_relpath}."
 
     text = etree.SubElement(tei, TEI + "text")
     body = etree.SubElement(text, TEI + "body")
