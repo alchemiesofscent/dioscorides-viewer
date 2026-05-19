@@ -114,6 +114,27 @@
     return host === "localhost" || host === "0.0.0.0" || host === "::1" || /^127(?:\.\d{1,3}){3}$/.test(host);
   }
 
+  function hasFreshDataRequest() {
+    const value = (new URLSearchParams(window.location.search).get("fresh") || "").toLowerCase();
+    return value === "1" || value === "true" || value === "yes";
+  }
+
+  function shouldBypassDataCache() {
+    return isLocalViewerHost() || hasFreshDataRequest();
+  }
+
+  function cacheBustedDataPath(path) {
+    if (!shouldBypassDataCache()) return path;
+    try {
+      const url = new URL(path, window.location.href);
+      if (url.origin !== window.location.origin) return path;
+      url.searchParams.set("_teiFresh", String(Date.now()));
+      return url.href;
+    } catch (error) {
+      return path;
+    }
+  }
+
   function mergeEditionRegistries(primary, overlay) {
     if (!overlay || !Array.isArray(overlay.editions) || !overlay.editions.length) return primary;
     const merged = [];
@@ -1179,15 +1200,21 @@
     state.chapters = state.chapters.filter((section) => section.firstPageIndex !== null);
   }
 
-  async function loadText(path) {
-    const response = await fetch(path);
+  async function fetchData(path) {
+    const requestPath = cacheBustedDataPath(path);
+    const options = shouldBypassDataCache() ? { cache: "no-store" } : {};
+    const response = await fetch(requestPath, options);
     if (!response.ok) throw new Error(`Could not load ${path}: HTTP ${response.status}`);
+    return response;
+  }
+
+  async function loadText(path) {
+    const response = await fetchData(path);
     return response.text();
   }
 
   async function loadJson(path) {
-    const response = await fetch(path);
-    if (!response.ok) throw new Error(`Could not load ${path}: HTTP ${response.status}`);
+    const response = await fetchData(path);
     return response.json();
   }
 
@@ -1248,9 +1275,11 @@
     els.loadStatus.classList.remove("error");
     els.loadStatus.textContent = `Loading ${state.edition.label || state.edition.id}...`;
 
+    const teiUrl = resolveRepoPath(state.edition.tei);
+    const manifestUrl = resolveRepoPath(state.edition.manifest);
     const [teiText, manifest] = await Promise.all([
-      loadText(resolveRepoPath(state.edition.tei)),
-      loadJson(resolveRepoPath(state.edition.manifest)),
+      loadText(teiUrl),
+      loadJson(manifestUrl),
     ]);
     const teiDoc = new DOMParser().parseFromString(teiText, "application/xml");
     const parseError = parserErrorText(teiDoc);
@@ -1264,7 +1293,17 @@
     populateSections();
     els.searchInput.disabled = false;
     document.title = `${state.edition.label || state.edition.id} · Dioscorides Viewer`;
-    els.loadStatus.textContent = `${state.pages.length} TEI pages loaded from ${state.edition.label || state.edition.id}`;
+    const loadedAt = new Date().toLocaleTimeString();
+    const cacheBypassed = shouldBypassDataCache();
+    els.loadStatus.textContent = `${state.pages.length} TEI pages loaded from ${state.edition.label || state.edition.id}${cacheBypassed ? ` · loaded ${loadedAt}` : ""}`;
+    els.loadStatus.title = `TEI: ${teiUrl}`;
+    console.info("Dioscorides viewer loaded TEI", {
+      edition: state.edition.id || "",
+      teiUrl,
+      manifestUrl,
+      loadedAt,
+      cacheBypassed,
+    });
     const initialPage = options.pageIndex ?? pageFromHash();
     showPage(initialPage >= 0 ? initialPage : 0, { skipHash: options.skipHash || initialPage >= 0 });
   }

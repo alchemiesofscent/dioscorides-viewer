@@ -16,6 +16,7 @@ hyphenation	needs-review	373	b23982500_0002_0381.xml	-	-	grae|cis	0	set lb@break
 hyphenation	needs-review	382	b23982500_0002_0390.xml	-	-	tar|water	0	set lb@break='no' only when the page-local split is unique	unmatched
 hyphenation	needs-image-review	383	b23982500_0002_0391.xml	-	-	no|men	2	set lb@break='no' only when the page-local split is unique	ambiguous
 hyphenation	needs-image-review	383	b23982500_0002_0391.xml	-	-	no|men	2	set lb@break='no' only when the page-local split is unique	ambiguous
+hyphenation	needs-review	388	b23982500_0002_0396.xml	-	-	eva|cuatio	0	set lb@break='no' only when the page-local split is unique	unmatched
 hyphenation	needs-review	394	b23982500_0002_0402.xml	-	-	descri|Lib	0	set lb@break='no' only when the page-local split is unique	unmatched
 hyphenation	needs-review	399	b23982500_0002_0407.xml	-	-	ap|pellamus	0	set lb@break='no' only when the page-local split is unique	unmatched
 hyphenation	needs-review	408	b23982500_0002_0416.xml	-	-	composi|Athen	0	set lb@break='no' only when the page-local split is unique	unmatched

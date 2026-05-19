@@ -1,7 +1,7 @@
 # Sprengel Commentarius Cleanup Summary
 
 - Heading audit review rows: 2
-- Hyphenation audit review rows: 101
+- Hyphenation audit review rows: 102
 - Page furniture review/action rows: 0
 - Pages scanned for page furniture: 328
 - Page numbers inserted: 0
@@ -15,4 +15,4 @@
 ## Review Counts
 - heading / needs-image-review: 2
 - hyphenation / needs-image-review: 28
-- hyphenation / needs-review: 73
+- hyphenation / needs-review: 74

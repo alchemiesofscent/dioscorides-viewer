@@ -5,6 +5,7 @@ from pharmacopoeia.migrate.sprengel1830_comm import (
     import_line_end_hyphenation,
     normalize_literal_body_line_breaks,
     normalize_beta_symbol,
+    normalize_german_closing_quotes,
     normalize_german_opening_quotes,
     normalize_page_line_numbering,
     normalize_page_top_furniture,
@@ -561,6 +562,35 @@ def test_fragment_confirmed_line_break_before_ref_after_foreign_is_removed(tmp_p
     assert "ἐπικρατητικός. 31 Si vera" in line_text
 
 
+def test_fragment_confirmed_footnote_ref_on_own_line_is_joined(tmp_path):
+    root = _parse(
+        '<pb n="411" source="https://archive.org/download/b23982500_0002/'
+        'b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0419.jp2"/>'
+        '<p><foreign xml:lang="grc"><lb n="1"/>σκληρότερος δ᾽ ὁ θηβαϊκός.</foreign>'
+        '<lb n="2"/><ref target="#fn411_98" type="footnote-ref" '
+        'xml:id="ref-fn411_98">98</ref>'
+        '<lb n="3"/> Caryoton vocat palmam thebaicam, quo nomine praestan'
+        '<lb n="4" break="no"/>tior ceteris varietatibus insigniebatur.</p>'
+    )
+    _write_fragment(
+        tmp_path,
+        "b23982500_0002_0419.xml",
+        '<pb n="411"/><foreign xml:lang="grc">σκληρότερος δ᾽ ὁ θηβαϊκός.</foreign> '
+        '<ref target="#fn98">98</ref> Caryoton vocat palmam thebaicam, quo nomine praestan'
+        '<lb break="no"/>tior ceteris varietatibus insigniebatur.<lb/>',
+    )
+
+    repaired = repair_fragment_confirmed_inline_footnote_breaks(root, tmp_path)
+    normalize_page_line_numbering(root)
+
+    lbs = root.findall(f".//{TEI}p//{TEI}lb")
+    line_text = _flat_text(root.find(f".//{TEI}p"))
+    assert repaired == 2
+    assert [lb.get("n") for lb in lbs] == ["1", "2"]
+    assert lbs[1].get("break") == "no"
+    assert "θηβαϊκός. 98 Caryoton" in line_text
+
+
 def test_heading_prefix_uses_current_page_fragment_not_earlier_page(tmp_path):
     root = _parse(
         '<pb n="1" source="https://archive.org/download/b23982500_0002/'
@@ -638,6 +668,122 @@ def test_page_519_chiron_quote_tail_gets_missing_line_break():
     assert [lb.get("n") for lb in lbs] == ["1", "2", "3"]
     assert lbs[1].tail.startswith("Quaenam sit planta")
     assert lbs[2].get("break") == "no"
+
+
+def test_page_411_thebaic_palm_footnote_ref_is_inline():
+    root = _parse(
+        '<pb n="411"/>'
+        '<p><foreign xml:lang="grc"><lb n="1"/>σκληρότερος δ᾽ ὁ θηβαϊκός, '
+        'ἀλλὰ τῇ γεύσει εὐστομώτερος.</foreign>'
+        '<lb n="2"/><ref target="#fn411_98" type="footnote-ref" '
+        'xml:id="ref-fn411_98">98</ref>'
+        '<lb n="3"/> Caryoton vocat palmam thebaicam, quo nomine praestan'
+        '<lb n="4" break="no"/>tior ceteris varietatibus insigniebatur.</p>'
+    )
+
+    changed = repair_known_missing_line_breaks(root)
+    normalize_page_line_numbering(root)
+
+    lbs = root.findall(f".//{TEI}p//{TEI}lb")
+    assert changed == 2
+    assert [lb.get("n") for lb in lbs] == ["1", "2"]
+    assert lbs[1].get("break") == "no"
+    assert "εὐστομώτερος. 98 Caryoton" in _flat_text(root.find(f".//{TEI}p"))
+
+
+def test_page_437_garum_footnote_ref_is_inline_after_foreign():
+    root = _parse(
+        '<pb n="437"/>'
+        '<p><lb n="13"/><foreign xml:lang="grc">Τὸ γάρον</foreign>, vel, '
+        'Atticorum more, <foreign xml:lang="grc">ὁ</foreign>'
+        '<lb n="14"/><foreign xml:lang="grc">γάρος</foreign>'
+        '<lb n="15"/><ref target="#fn437_7" type="footnote-ref" '
+        'xml:id="ref-fn437_7">13</ref>, liquor erat, secundum Plinium '
+        '<ref target="#fn437_8" type="footnote-ref" xml:id="ref-fn437_8">14</ref>, '
+        'expressus e pi-<lb n="16" break="no"/>scium intestinis</p>'
+    )
+
+    changed = repair_known_missing_line_breaks(root)
+    normalize_page_line_numbering(root)
+
+    lbs = root.findall(f".//{TEI}p//{TEI}lb")
+    assert changed == 1
+    assert [lb.get("n") for lb in lbs] == ["1", "2", "3"]
+    assert lbs[2].get("break") == "no"
+    assert "γάρος 13, liquor erat" in _flat_text(root.find(f".//{TEI}p"))
+
+
+def test_page_381_dadion_starts_new_line_after_note_89(tmp_path):
+    root = _parse(
+        '<pb n="381" source="https://archive.org/download/b23982500_0002/'
+        'b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0389.jp2"/>'
+        '<p><lb n="11" break="no"/>rentur, Galenus auctor est.'
+        '<ref target="#fn381_89" type="footnote-ref" xml:id="ref-fn381_89">89</ref>'
+        '<foreign xml:lang="grc">Δᾳδίον</foreign> proprie est facula, qua lustrationes '
+        'et <foreign xml:lang="grc">καθαρ<lb n="12" break="no"/>μοῖ</foreign> instituebantur.</p>'
+    )
+    _write_fragment(
+        tmp_path,
+        "b23982500_0002_0389.xml",
+        'rentur, Galenus auctor est.<ref target="#fn89">89</ref>\n'
+        '<foreign xml:lang="grc">Δᾳδίον</foreign> proprie est facula, qua lustrationes '
+        'et <foreign xml:lang="grc">καθαρ-<lb break="no"/>μοῖ</foreign> instituebantur.<lb/>',
+    )
+
+    changed = repair_known_missing_line_breaks(root)
+    inline_changed = repair_fragment_confirmed_inline_footnote_breaks(root, tmp_path)
+    normalize_page_line_numbering(root)
+
+    lbs = root.findall(f".//{TEI}p//{TEI}lb")
+    assert changed == 1
+    assert inline_changed == 0
+    assert [lb.get("n") for lb in lbs] == ["1", "2", "3"]
+    assert lbs[1].getnext().tag == TEI + "foreign"
+    assert lbs[1].getnext().text == "Δᾳδίον"
+    assert "Galenus auctor est.89 Δᾳδίον" not in _flat_text(root.find(f".//{TEI}p"))
+
+
+def test_page_388_evacuatio_sive_stays_on_one_line():
+    root = _parse(
+        '<pb n="388"/>'
+        '<p><lb n="9" break="no"/><foreign xml:lang="grc">μαϊσμός</foreign> '
+        'dicebatur purgatio corporis et alvi eva'
+        '<lb n="10" break="no"/>cuatio, sive'
+        '<lb n="11"/> id per superiora fieret.</p>'
+    )
+
+    changed = repair_known_missing_line_breaks(root)
+    normalize_page_line_numbering(root)
+
+    lbs = root.findall(f".//{TEI}p//{TEI}lb")
+    assert changed == 1
+    assert [lb.get("n") for lb in lbs] == ["1", "2"]
+    assert all(not (lb.tail or "").lstrip().startswith("cuatio, sive") for lb in lbs)
+    assert "evacuatio, sive" in _flat_text(root.find(f".//{TEI}p"))
+
+
+def test_page_398_halimus_note_and_arabic_word_are_inline():
+    root = _parse(
+        '<pb n="398"/>'
+        '<p><lb n="7"/>a sepibus, quas frutex constituit: '
+        '<foreign xml:lang="grc">ἀσλοερὶ</foreign> et '
+        '<foreign xml:lang="grc">ἀσοντρί</foreign>'
+        '<lb n="8"/><ref target="#fn398_91" type="footnote-ref" '
+        'xml:id="ref-fn398_91">91</ref>.'
+        '<lb n="9"/>Inter Arabas <hi rend="italic">Beitarides</hi>'
+        '<lb n="10"/><foreign xml:lang="ar">ملوخ</foreign> (malûch) vocat'
+        '<ref target="#fn398_92" type="footnote-ref" xml:id="ref-fn398_92">92</ref>.</p>'
+    )
+
+    changed = repair_known_missing_line_breaks(root)
+    normalize_page_line_numbering(root)
+
+    lbs = root.findall(f".//{TEI}p//{TEI}lb")
+    line_text = _flat_text(root.find(f".//{TEI}p"))
+    assert changed == 2
+    assert [lb.get("n") for lb in lbs] == ["1", "2"]
+    assert "ἀσοντρί 91" in line_text
+    assert "Beitarides ملوخ" in line_text
 
 
 def test_page_502_eryngium_greek_correction_preserves_split_line_break():
@@ -718,6 +864,39 @@ def test_german_opening_quotes_replace_double_commas_in_text_and_tail():
     assert ",," not in "".join(root.itertext())
     assert "„a Paraetonii" in "".join(root.itertext())
     assert "„ regione" in "".join(root.itertext())
+
+
+def test_page_374_bdellium_body_head_becomes_normal_paragraph():
+    root = _parse(
+        '<pb n="374"/>'
+        '<head><lb n="6"/>Cap. LXXX. Bdellium esse lacrimam arboris arabi-'
+        '<lb n="7"/>cae, loco saracenicae, posui.</head>'
+        '<p><lb n="8"/>Avicenna disertis verbis</p>'
+    )
+
+    changed = repair_known_markup_errors(root)
+    normalize_page_line_numbering(root)
+    second_changed = repair_known_markup_errors(root)
+
+    ps = root.findall(f".//{TEI}p")
+    assert changed == 1
+    assert second_changed == 0
+    assert root.find(f".//{TEI}head") is None
+    assert len(ps) == 2
+    assert _flat_text(ps[0]).startswith("Cap. LXXX. Bdellium esse lacrimam")
+    assert [lb.get("n") for lb in root.findall(f'.//{TEI}p//{TEI}lb')] == ["1", "2", "3"]
+
+
+def test_german_closing_quotes_replace_double_backticks_in_text_and_tail():
+    root = _parse('<p><lb n="1"/>utiles.`` <hi rend="italic">quoted``</hi> tail``</p>')
+
+    changed = normalize_german_closing_quotes(root)
+
+    assert changed == 3
+    assert "``" not in "".join(root.itertext())
+    assert "utiles.“" in "".join(root.itertext())
+    assert "quoted“" in "".join(root.itertext())
+    assert "tail“" in "".join(root.itertext())
 
 
 def test_line_end_hyphen_glyphs_are_removed_before_break_no():

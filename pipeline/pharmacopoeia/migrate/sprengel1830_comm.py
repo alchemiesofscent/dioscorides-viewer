@@ -633,14 +633,13 @@ def _fragment_confirms_ref_followed_by_text(
     if not marker_text or not next_words:
         return False
     for line in _fragment_lines(fragment_path):
-        normalized_line = (
-            _normalized_fragment_text(line)
-            .translate(SUPERSCRIPT_DIGITS)
-            .replace("ϐ", "β")
-            .casefold()
-        )
+        normalized_line = line.translate(SUPERSCRIPT_DIGITS).replace("ϐ", "β").casefold()
         for match in re.finditer(re.escape(marker_text), normalized_line):
-            if _match_words(normalized_line[match.end():])[: len(next_words)] == next_words:
+            suffix = normalized_line[match.end():]
+            first_word = WORD_RE.search(suffix)
+            if first_word is not None and "\n" in suffix[: first_word.start()]:
+                continue
+            if _match_words(suffix)[: len(next_words)] == next_words:
                 return True
     return False
 
@@ -648,6 +647,11 @@ def _fragment_confirms_ref_followed_by_text(
 def _text_following_ref(ref: etree._Element) -> str:
     parts = [ref.tail or ""]
     for sibling in ref.itersiblings():
+        if sibling.tag == TEI + "lb" and sibling.get("break") != "no":
+            parts.append(sibling.tail or "")
+            if len(_match_words(" ".join(parts))) >= 2:
+                break
+            continue
         if sibling.tag in LINE_BOUNDARY_TAGS:
             break
         parts.append(_normalized_text(sibling))
@@ -656,6 +660,17 @@ def _text_following_ref(ref: etree._Element) -> str:
         if len(_match_words(" ".join(parts))) >= 2:
             break
     return " ".join(parts)
+
+
+def _remove_lb_after_element(elem: etree._Element) -> bool:
+    next_sibling = elem.getnext()
+    if next_sibling is None or next_sibling.tag != TEI + "lb":
+        return False
+    if next_sibling.get("break") == "no":
+        return False
+    next_sibling.tail = " " + (next_sibling.tail or "").lstrip()
+    _remove_lb_preserving_text(next_sibling)
+    return True
 
 
 def repair_fragment_confirmed_inline_footnote_breaks(
@@ -709,6 +724,8 @@ def repair_fragment_confirmed_inline_footnote_breaks(
         target = next_sibling if ref is next_sibling else next_sibling
         if target is not None and _remove_empty_lb_before_element(target):
             repaired += 1
+            if ref is target and _remove_lb_after_element(ref):
+                repaired += 1
     return repaired
 
 
@@ -1328,6 +1345,11 @@ def repair_known_missing_line_breaks(root: etree._Element) -> int:
         repaired += 1
     repaired += _repair_page_596_line_breaks(root)
     repaired += _repair_page_576_line_breaks(root)
+    repaired += _repair_page_411_footnote_line_breaks(root)
+    repaired += _repair_page_437_footnote_line_breaks(root)
+    repaired += _repair_page_381_line_breaks(root)
+    repaired += _repair_page_388_line_breaks(root)
+    repaired += _repair_page_398_line_breaks(root)
     return repaired
 
 
@@ -1369,6 +1391,72 @@ def _remove_empty_lb_before_ref_id(root: etree._Element, ref_id: str) -> bool:
     if ref is None:
         return False
     return _remove_empty_lb_before_element(ref)
+
+
+def _remove_lb_after_ref_id(root: etree._Element, ref_id: str) -> bool:
+    ref = root.find(f".//{TEI}ref[@{XID}='{ref_id}']")
+    if ref is None:
+        return False
+    return _remove_lb_after_element(ref)
+
+
+def _repair_page_411_footnote_line_breaks(root: etree._Element) -> int:
+    """Restore checked page 411 text where note 98 is inline after Greek."""
+    repaired = 0
+    if _remove_empty_lb_before_ref_id(root, "ref-fn411_98"):
+        repaired += 1
+    if _remove_lb_after_ref_id(root, "ref-fn411_98"):
+        repaired += 1
+    return repaired
+
+
+def _repair_page_437_footnote_line_breaks(root: etree._Element) -> int:
+    """Restore checked page 437 garum line where note 13 follows γάρος inline."""
+    return 1 if _remove_empty_lb_before_ref_id(root, "ref-fn437_7") else 0
+
+
+def _repair_page_381_line_breaks(root: etree._Element) -> int:
+    """Restore checked page 381 line break before Δᾳδίον."""
+    for foreign in root.iter(TEI + "foreign"):
+        if _element_page_n(foreign) != "381":
+            continue
+        if _normalized_text(foreign) == "Δᾳδίον" and _insert_lb_before_element(foreign):
+            return 1
+    return 0
+
+
+def _remove_lb_before_line_start(
+    root: etree._Element,
+    page_n: str,
+    line_start: str,
+    join_with_space: bool = False,
+) -> bool:
+    lb_pages = _lb_page_map(root)
+    for lb in list(root.iter(TEI + "lb")):
+        pb = lb_pages.get(lb)
+        if pb is None or pb.get("n") != page_n:
+            continue
+        if _line_text_after_lb(lb).lstrip().startswith(line_start):
+            if join_with_space:
+                lb.tail = " " + (lb.tail or "").lstrip()
+            _remove_lb_preserving_text(lb)
+            return True
+    return False
+
+
+def _repair_page_388_line_breaks(root: etree._Element) -> int:
+    """Restore checked page 388 line where evacuatio, sive stays together."""
+    return 1 if _remove_lb_before_line_start(root, "388", "cuatio, sive") else 0
+
+
+def _repair_page_398_line_breaks(root: etree._Element) -> int:
+    """Restore checked page 398 inline note and Arabic word breaks."""
+    repaired = 0
+    if _remove_empty_lb_before_ref_id(root, "ref-fn398_91"):
+        repaired += 1
+    if _remove_lb_before_line_start(root, "398", "ملوخ", join_with_space=True):
+        repaired += 1
+    return repaired
 
 
 def _repair_page_596_line_breaks(root: etree._Element) -> int:
@@ -1479,7 +1567,19 @@ def repair_known_markup_errors(root: etree._Element) -> int:
             ):
                 _unwrap_inline_element(hi)
                 repaired += 1
+    repaired += _repair_page_374_bdellium_body_head(root)
     return repaired
+
+
+def _repair_page_374_bdellium_body_head(root: etree._Element) -> int:
+    """Render the checked Bdellium opening as normal body text, not a heading."""
+    for head in root.iter(TEI + "head"):
+        if _element_page_n(head) != "374":
+            continue
+        if _normalized_text(head).startswith("Cap. LXXX. Bdellium esse lacrimam"):
+            head.tag = TEI + "p"
+            return 1
+    return 0
 
 
 def _direct_head(div: etree._Element) -> etree._Element | None:
@@ -1543,6 +1643,19 @@ def normalize_german_opening_quotes(root: etree._Element) -> int:
             changed += 1
         if elem.tail and ",," in elem.tail:
             elem.tail = elem.tail.replace(",,", "„")
+            changed += 1
+    return changed
+
+
+def normalize_german_closing_quotes(root: etree._Element) -> int:
+    """Use the printed German closing quote glyph instead of OCR double backtick."""
+    changed = 0
+    for elem in root.iter():
+        if elem.text and "``" in elem.text:
+            elem.text = elem.text.replace("``", "“")
+            changed += 1
+        if elem.tail and "``" in elem.tail:
+            elem.tail = elem.tail.replace("``", "“")
             changed += 1
     return changed
 
@@ -1666,6 +1779,7 @@ def run() -> None:
     text_errors_repaired = repair_known_text_errors(root)
     markup_errors_repaired = repair_known_markup_errors(root)
     opening_quotes_normalized = normalize_german_opening_quotes(root)
+    closing_quotes_normalized = normalize_german_closing_quotes(root)
     line_end_hyphens_removed = remove_line_end_hyphen_glyphs(root)
     facs_rewritten = rewrite_pb_facs(root)
     sources_restored = _restore_pb_sources(root, preserved_sources)
@@ -1701,6 +1815,7 @@ def run() -> None:
         f"{text_errors_repaired} known text errors repaired, "
         f"{markup_errors_repaired} known markup errors repaired, "
         f"{opening_quotes_normalized} German opening quote markers normalized, "
+        f"{closing_quotes_normalized} German closing quote markers normalized, "
         f"{line_end_hyphens_removed} line-end hyphen glyphs removed before break=no, "
         f"{line_stats['leading_lbs_inserted']} leading body <lb> tags inserted, "
         f"{line_stats['empty_main_lbs_removed']} empty main body <lb> tags removed, "

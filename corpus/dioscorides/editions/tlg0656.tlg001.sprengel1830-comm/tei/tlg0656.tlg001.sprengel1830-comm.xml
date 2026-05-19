@@ -1905,7 +1905,7 @@ ridi.<p>
             <lb n="3"/>inter Phrygiam et Ciliciam media, evehebatur. Tum vero
             <lb n="4"/>et cilicius commendabatur. Et nostra etiamnum aetate
             <lb n="5"/>styrax ex Asia minore Syriaque advehitur.</p>
-          <head>
+          <p>
             <lb n="6"/>Cap. LXXX. Bdellium esse lacrimam arboris arabi-
             <lb n="7"/>cae, loco saracenicae, posui, Marcello iam monente et
             <lb n="8"/>testantibus Plinio, Galeno et Oribasio. Posset tamen le-
@@ -1916,7 +1916,7 @@ ridi.<p>
             <lb n="13"/>quae ad Elymaida pertinebat, appellationem dedit, ipsa
             <lb n="14"/>etiam natione Characena vocata.<ref target="#fn374_40" type="footnote-ref" xml:id="ref-fn374_40">40</ref> Itaque characenica
             <lb n="15"/>potuit a Dioscoride dici haec substantia, quae aliis arabi-
-            <lb n="16"/>ca vocabatur.</head>
+            <lb n="16"/>ca vocabatur.</p>
           <p>
             <lb n="17"/>Avicenna disertis verbis<ref target="#fn374_41" type="footnote-ref" xml:id="ref-fn374_41">41</ref>
             <foreign xml:lang="ar">مقل</foreign>, quod bdellium est, di-
@@ -2253,33 +2253,33 @@ ridi.<p>
             <lb n="9"/>fructibus autem arboris recentiores semper intelligere
             <lb n="10"/><foreign xml:lang="grc">στροβίλους</foreign>, si antiquis <foreign xml:lang="grc">κῶνοι</foreign>, Hippocrati <foreign xml:lang="grc">κόκκαλοι</foreign> dice
             <lb n="11" break="no"/>rentur, Galenus auctor est.<ref target="#fn381_89" type="footnote-ref" xml:id="ref-fn381_89">89</ref>
-            <foreign xml:lang="grc">Δᾳδίον</foreign> proprie est facula, qua lustrationes et <foreign xml:lang="grc">καθαρ
-              <lb n="12" break="no"/>μοῖ</foreign> instituebantur<ref target="#fn381_90" type="footnote-ref" xml:id="ref-fn381_90">90</ref>; sed taedulam etiam seu festucam,
-            <lb n="13"/>quamvis e pingui ligno pineo, signat. <foreign xml:lang="grc">Σπάθη</foreign> aut <foreign xml:lang="grc">σπαθίς</foreign>
-            <lb n="14"/>est spathula, qua et miscebantur res, unguenta ingredien
-            <lb n="15" break="no"/>tes, aut qua illinebantur etiam <foreign xml:lang="grc">τὰ μύρα</foreign>.<ref target="#fn381_91" type="footnote-ref" xml:id="ref-fn381_91">91</ref>
+            <lb n="12"/><foreign xml:lang="grc">Δᾳδίον</foreign> proprie est facula, qua lustrationes et <foreign xml:lang="grc">καθαρ
+              <lb n="13" break="no"/>μοῖ</foreign> instituebantur<ref target="#fn381_90" type="footnote-ref" xml:id="ref-fn381_90">90</ref>; sed taedulam etiam seu festucam,
+            <lb n="14"/>quamvis e pingui ligno pineo, signat. <foreign xml:lang="grc">Σπάθη</foreign> aut <foreign xml:lang="grc">σπαθίς</foreign>
+            <lb n="15"/>est spathula, qua et miscebantur res, unguenta ingredien
+            <lb n="16" break="no"/>tes, aut qua illinebantur etiam <foreign xml:lang="grc">τὰ μύρα</foreign>.<ref target="#fn381_91" type="footnote-ref" xml:id="ref-fn381_91">91</ref>
           </p>
         </div>
         <div type="textpart" subtype="chapter" n="1.89" next="1.90" xml:id="spr-ch-1.89-la" corresp="sprengel1829_epidoc.xml#spr-ch-1.89-la">
           <head type="supplied">[Cap. LXXXIX. De Lentisco. Περὶ Σχίνου]</head>
           <p>
-            <lb n="16"/>Cap. LXXXIX. XC. <hi rend="italic">De Lentisco.</hi> Supra iam c. 51.
-            <lb n="17"/>de Mastiche chia praestantissima sermo fuit. Virentibus
-            <lb n="18"/>surculis delicatuli dentes purgare consuerunt, ut <foreign xml:lang="grc">σχινο
-              <lb n="19" break="no"/>τρώκταν</foreign> Lucianus eum vocet, qui manducat lentiscum, ut
-            <lb n="20"/>dentes albescant.<ref target="#fn381_92" type="footnote-ref" xml:id="ref-fn381_92">92</ref>
-            <lb n="21"/>Avicenna mastichen (<foreign xml:lang="ar">مصطكى</foreign>) duplicem habet, grae
-            <lb n="22" break="no"/>cum (<foreign xml:lang="ar">رومی</foreign>) album et nabataeum (<foreign xml:lang="ar">نبطى</foreign> pro <foreign xml:lang="ar">قبطى</foreign> legen
-            <lb n="23" break="no"/>dum) nigrescentem.</p>
+            <lb n="17"/>Cap. LXXXIX. XC. <hi rend="italic">De Lentisco.</hi> Supra iam c. 51.
+            <lb n="18"/>de Mastiche chia praestantissima sermo fuit. Virentibus
+            <lb n="19"/>surculis delicatuli dentes purgare consuerunt, ut <foreign xml:lang="grc">σχινο
+              <lb n="20" break="no"/>τρώκταν</foreign> Lucianus eum vocet, qui manducat lentiscum, ut
+            <lb n="21"/>dentes albescant.<ref target="#fn381_92" type="footnote-ref" xml:id="ref-fn381_92">92</ref>
+            <lb n="22"/>Avicenna mastichen (<foreign xml:lang="ar">مصطكى</foreign>) duplicem habet, grae
+            <lb n="23" break="no"/>cum (<foreign xml:lang="ar">رومی</foreign>) album et nabataeum (<foreign xml:lang="ar">نبطى</foreign> pro <foreign xml:lang="ar">قبطى</foreign> legen
+            <lb n="24" break="no"/>dum) nigrescentem.</p>
         </div>
         <div type="textpart" subtype="chapter" n="1.91" xml:id="spr-ch-1.91-la" corresp="sprengel1829_epidoc.xml#spr-ch-1.91-la">
           <head type="supplied">[Cap. XCI. De Terebintho. Περὶ Τερεμίνθου]</head>
           <p>
-            <lb n="24"/>Cap. XCI. Terebinthi fructum edulem esse, e ve
-            <lb n="25" break="no"/>teribus Aelianus<ref target="#fn381_93" type="footnote-ref" xml:id="ref-fn381_93">93</ref> et Strabo<ref target="#fn381_94" type="footnote-ref" xml:id="ref-fn381_94">94</ref>, e recentioribus Belonius.<ref target="#fn381_95" type="footnote-ref" xml:id="ref-fn381_95">95</ref>
-            <lb n="26"/>Arabibus audit arbor <foreign xml:lang="ar">البطم</foreign> et fructus <foreign xml:lang="ar">حبه الخضرا</foreign>,
-            <lb n="27"/>propter colorem exquisite glaucum.
-            <lb n="28"/>Locum hunc de praestantia resinae lentiscinae infi-</p>
+            <lb n="25"/>Cap. XCI. Terebinthi fructum edulem esse, e ve
+            <lb n="26" break="no"/>teribus Aelianus<ref target="#fn381_93" type="footnote-ref" xml:id="ref-fn381_93">93</ref> et Strabo<ref target="#fn381_94" type="footnote-ref" xml:id="ref-fn381_94">94</ref>, e recentioribus Belonius.<ref target="#fn381_95" type="footnote-ref" xml:id="ref-fn381_95">95</ref>
+            <lb n="27"/>Arabibus audit arbor <foreign xml:lang="ar">البطم</foreign> et fructus <foreign xml:lang="ar">حبه الخضرا</foreign>,
+            <lb n="28"/>propter colorem exquisite glaucum.
+            <lb n="29"/>Locum hunc de praestantia resinae lentiscinae infi-</p>
           <div type="footnotes">
             <note xml:id="fn381_86" n="86" place="bottom" type="footnote" corresp="#ref-fn381_86">Cels. hierob. I. p. 110.</note>
             <note xml:id="fn381_87" n="87" place="bottom" type="footnote" corresp="#ref-fn381_87">Avic. ed. rom. p. 179.</note>
@@ -2643,36 +2643,35 @@ ridi.<p>
             <lb n="6" break="no"/>chus quoque innuit.<ref target="#fn388_32" type="footnote-ref" xml:id="ref-fn388_32">32</ref> Hinc etiam Herodotus dicere po
             <lb n="7" break="no"/>tuit<ref target="#fn388_33" type="footnote-ref" xml:id="ref-fn388_33">33</ref>, <foreign xml:lang="grc">συρμαίῃ διηθήσαντες τὴν κοιλίην ταριχεύεσθαι τοὺς
               <lb n="8"/> νεκροὺς τοὺς χρήμασι ἀσθενεστέρους</foreign>. <foreign xml:lang="grc">Συρμαία</foreign> enim et <foreign xml:lang="grc">συρ
-              <lb n="9" break="no"/>μαϊσμός</foreign> dicebatur purgatio corporis et alvi eva
-            <lb n="10" break="no"/>cuatio, sive
-            <lb n="11"/> id per superiora fieret, sive per inferiora.<ref target="#fn388_34" type="footnote-ref" xml:id="ref-fn388_34">34</ref> Paullo ante
-            <lb n="12"/> Herodotus morem Aegyptiorum tradiderat, per triduum
-            <lb n="13"/> singulorum mensium vomitionibus <foreign xml:lang="grc">συρμαΐζειν</foreign>
+              <lb n="9" break="no"/>μαϊσμός</foreign> dicebatur purgatio corporis et alvi evacuatio, sive
+            <lb n="10"/> id per superiora fieret, sive per inferiora.<ref target="#fn388_34" type="footnote-ref" xml:id="ref-fn388_34">34</ref> Paullo ante
+            <lb n="11"/> Herodotus morem Aegyptiorum tradiderat, per triduum
+            <lb n="12"/> singulorum mensium vomitionibus <foreign xml:lang="grc">συρμαΐζειν</foreign>
             <ref target="#fn388_35" type="footnote-ref" xml:id="ref-fn388_35">35</ref>. Itaque
-            <lb n="14"/> exedere nequivit viscera <foreign xml:lang="grc">κεδρίᾳ</foreign>, sed praestitit id natrum
-            <lb n="15"/> causticum.
-            <lb n="16"/>Theophrastus <foreign xml:lang="grc">ἄρκευθον</foreign> et <foreign xml:lang="grc">κέδρον</foreign> diverso sensu sum
-            <lb n="17" break="no"/>sit. Illam enim phoeniceam dixit, procerioris staturae,
-            <lb n="18"/> mollioribus foliis insignem, fructum nigrum, austerum ac
-            <lb n="19"/><foreign xml:lang="grc">ἄβρωτον</foreign>. Cedrum autem lyciam etiam Oxycedrum dici,
-            <lb n="20"/> foliis esse durioribus, spinosis, fructum gerere flavum,
-            <lb n="21"/> myrti mole.<ref target="#fn388_36" type="footnote-ref" xml:id="ref-fn388_36">36</ref> Incidisse autem in plures videtur errores,
-            <lb n="22"/> cum vulgares in Graecia plantas plures haud ipse cogno
-            <lb n="23" break="no"/>verit.</p>
+            <lb n="13"/> exedere nequivit viscera <foreign xml:lang="grc">κεδρίᾳ</foreign>, sed praestitit id natrum
+            <lb n="14"/> causticum.
+            <lb n="15"/>Theophrastus <foreign xml:lang="grc">ἄρκευθον</foreign> et <foreign xml:lang="grc">κέδρον</foreign> diverso sensu sum
+            <lb n="16" break="no"/>sit. Illam enim phoeniceam dixit, procerioris staturae,
+            <lb n="17"/> mollioribus foliis insignem, fructum nigrum, austerum ac
+            <lb n="18"/><foreign xml:lang="grc">ἄβρωτον</foreign>. Cedrum autem lyciam etiam Oxycedrum dici,
+            <lb n="19"/> foliis esse durioribus, spinosis, fructum gerere flavum,
+            <lb n="20"/> myrti mole.<ref target="#fn388_36" type="footnote-ref" xml:id="ref-fn388_36">36</ref> Incidisse autem in plures videtur errores,
+            <lb n="21"/> cum vulgares in Graecia plantas plures haud ipse cogno
+            <lb n="22" break="no"/>verit.</p>
         </div>
         <div type="textpart" subtype="chapter" n="1.106" xml:id="spr-ch-1.106-la" corresp="sprengel1829_epidoc.xml#spr-ch-1.106-la">
           <head type="supplied">[Cap. CVI. De Lauro. Περὶ Δάφνης]</head>
           <p>
-            <lb n="24"/>Cap. CVI. Laurum duplicem, foliis angustiori
-            <lb n="25" break="no"/>bus latioribusque et Theophrastus pronunciat.<ref target="#fn388_37" type="footnote-ref" xml:id="ref-fn388_37">37</ref> Plinius
-            <lb n="26"/> multa, et diversa quidem, genera lauri citans, <hi rend="italic">regiam</hi>
-            <lb n="27"/> habet laurum, quae coeperit Augusta appellari, amplissi
-            <lb n="28" break="no"/>mam et arbore et folio.<ref target="#fn388_38" type="footnote-ref" xml:id="ref-fn388_38">38</ref> Matthiolus utramque, vulga
-            <lb n="29" break="no"/>rem (angustioribus foliis) et latifoliam, pingi curavit. Va
-            <lb n="30" break="no"/>rietatem hanc, cultu productam, habemus.
-            <lb n="31"/>Avicenna duobus locis, diversisque nominibus <foreign xml:lang="ar">دهمسة</foreign>
-            <lb n="32"/> (<hi rend="italic">dahemast</hi>) et <foreign xml:lang="ar">غار</foreign> (<hi rend="italic">gâr</hi>) tractat, persico illo et hoc
-            <lb n="33"/> arabico.</p>
+            <lb n="23"/>Cap. CVI. Laurum duplicem, foliis angustiori
+            <lb n="24" break="no"/>bus latioribusque et Theophrastus pronunciat.<ref target="#fn388_37" type="footnote-ref" xml:id="ref-fn388_37">37</ref> Plinius
+            <lb n="25"/> multa, et diversa quidem, genera lauri citans, <hi rend="italic">regiam</hi>
+            <lb n="26"/> habet laurum, quae coeperit Augusta appellari, amplissi
+            <lb n="27" break="no"/>mam et arbore et folio.<ref target="#fn388_38" type="footnote-ref" xml:id="ref-fn388_38">38</ref> Matthiolus utramque, vulga
+            <lb n="28" break="no"/>rem (angustioribus foliis) et latifoliam, pingi curavit. Va
+            <lb n="29" break="no"/>rietatem hanc, cultu productam, habemus.
+            <lb n="30"/>Avicenna duobus locis, diversisque nominibus <foreign xml:lang="ar">دهمسة</foreign>
+            <lb n="31"/> (<hi rend="italic">dahemast</hi>) et <foreign xml:lang="ar">غار</foreign> (<hi rend="italic">gâr</hi>) tractat, persico illo et hoc
+            <lb n="32"/> arabico.</p>
           <div type="footnotes">
             <note xml:id="fn388_30" n="30" place="bottom" type="footnote" corresp="#ref-fn388_30">Iter germ. p. 108.</note>
             <note xml:id="fn388_31" n="31" place="bottom" type="footnote" corresp="#ref-fn388_31">Ueber ägyptische Mumien, p. 14. 15.</note>
@@ -3171,42 +3170,42 @@ ridi.<p>
             <lb n="5"/>cymas etiamnum edules observaverint. Nomen graecum
             <lb n="6"/>a loco natali (<foreign xml:lang="grc">ἁλίμῳ</foreign>, <foreign xml:lang="grc">παραθαλασσίῳ</foreign>). Nomina aegyptia
             <lb n="7"/>a sepibus, quas frutex constituit: <foreign xml:lang="grc">ἀσλοερὶ</foreign> et <foreign xml:lang="grc">ἀσοντρί</foreign>
-            <lb n="8"/><ref target="#fn398_91" type="footnote-ref" xml:id="ref-fn398_91">91</ref>.
-            <lb n="9"/>Inter Arabas <hi rend="italic">Beitarides</hi>
-            <lb n="10"/><foreign xml:lang="ar">ملوخ</foreign> (malûch) vocat<ref target="#fn398_92" type="footnote-ref" xml:id="ref-fn398_92">92</ref>. In
-            <lb n="11"/>arabica Avicennae editione corruptum hoc nomen <foreign xml:lang="ar">مبتبيخ</foreign>
-            <lb n="12"/>legitur, ubi <foreign xml:lang="ar">ملوخ</foreign> scribi debebat.</p>
+            <ref target="#fn398_91" type="footnote-ref" xml:id="ref-fn398_91">91</ref>.
+            <lb n="8"/>Inter Arabas <hi rend="italic">Beitarides</hi>
+            <foreign xml:lang="ar">ملوخ</foreign> (malûch) vocat<ref target="#fn398_92" type="footnote-ref" xml:id="ref-fn398_92">92</ref>. In
+            <lb n="9"/>arabica Avicennae editione corruptum hoc nomen <foreign xml:lang="ar">مبتبيخ</foreign>
+            <lb n="10"/>legitur, ubi <foreign xml:lang="ar">ملوخ</foreign> scribi debebat.</p>
         </div>
         <div type="textpart" subtype="chapter" n="1.121" xml:id="spr-ch-1.121-la" corresp="sprengel1829_epidoc.xml#spr-ch-1.121-la">
           <head type="supplied">[Cap. CXXI. De Paliuro. Περὶ Παλιούρου]</head>
           <p>
-            <lb n="13"/>Cap. CXXI. <hi rend="italic">Paliurus australis</hi> Gaertn. semen habet
-            <lb n="14"/>lini seminis haud absimile, nitidum ac pinguiusculum,
-            <lb n="15"/>sed magis convexum: cuius usum adversus tussem Theo
-            <lb n="16" break="no"/>phrastus pariter praedicat.<ref target="#fn398_93" type="footnote-ref" xml:id="ref-fn398_93">93</ref>
+            <lb n="11"/>Cap. CXXI. <hi rend="italic">Paliurus australis</hi> Gaertn. semen habet
+            <lb n="12"/>lini seminis haud absimile, nitidum ac pinguiusculum,
+            <lb n="13"/>sed magis convexum: cuius usum adversus tussem Theo
+            <lb n="14" break="no"/>phrastus pariter praedicat.<ref target="#fn398_93" type="footnote-ref" xml:id="ref-fn398_93">93</ref>
           </p>
         </div>
         <div type="textpart" subtype="chapter" n="1.122" xml:id="spr-ch-1.122-la" corresp="sprengel1829_epidoc.xml#spr-ch-1.122-la">
           <head type="supplied">[Cap. CXXII. De Oxyacantha. Περὶ Ὀξυακάνθης]</head>
           <p>
-            <lb n="17"/>Cap. CXXII. De <hi rend="italic">Oxyacantha</hi> variae sunt veterum
-            <lb n="18"/>auctorum sententiae. <hi rend="italic">Pyracantham</hi> vocat Plinius, qui
-            <lb n="19"/>omnino ab alia spina, quam appendicem vocat, quoniam
-            <lb n="20"/>baccae puniceae eo nomine appellentur, probe distinguit.<ref target="#fn398_94" type="footnote-ref" xml:id="ref-fn398_94">94</ref>
-            <lb n="21"/>Galenus <foreign xml:lang="grc">ὀξυακάνθην</foreign> fere eodem modo ac Dioscorides de
-            <lb n="22" break="no"/>scribit, nisi quod fructum dicat <foreign xml:lang="grc">ἀραιόν</foreign> loco <foreign xml:lang="grc">ἁδροῦ</foreign>.<ref target="#fn398_95" type="footnote-ref" xml:id="ref-fn398_95">95</ref> Nisi,
-            <lb n="23"/>quod suspicor, falsa est lectio; alium fruticem commuta
-            <lb n="24" break="no"/>vit Galenus, forte Plinii spinam appendicem, quae Ber
-            <lb n="25" break="no"/>beris Arabum est. Serapion enim <foreign xml:lang="ar">امير بريس</foreign> (<hi rend="italic">amir berîs</hi>),
-            <lb n="26"/>seu <foreign xml:lang="ar">برباريس</foreign> (<hi rend="italic">berbarîs</hi>), quam et <foreign xml:lang="ar">اثرار</foreign> (<hi rend="italic">atsrâr</hi>) et <foreign xml:lang="ar">اثرارثه</foreign>
-            <lb n="27"/>(<hi rend="italic">atsratsrah</hi>) dixere, pro <foreign xml:lang="grc">ὀξυακάνθη</foreign> Dioscoridis habet. Eum
-            <lb n="28"/>et Arabes et Latinobarbari<ref target="#fn398_96" type="footnote-ref" xml:id="ref-fn398_96">96</ref> ita sequuti sunt, ut post re
-            <lb n="29" break="no"/>natas literas <hi rend="italic">oxyacantha</hi> Dioscoridis fere ab omnibus di
-            <lb n="30" break="no"/>ceretur <hi rend="italic">berberis</hi>. <hi rend="italic">Valerius Cordus</hi> primus est, qui ad h.
-            <lb n="31"/>l. differentiam insignem utriusque monstraverit. <hi rend="italic">Dodo
-              <lb n="32" break="no"/>naeus</hi> quoque, <hi rend="italic">Matthiolus</hi> et alii <hi rend="italic">Mespilum Pyracantham</hi>
-            <lb n="33"/>in <foreign xml:lang="grc">ὀξυακάνθη</foreign> Dioscoridis recognoverunt. Negotium tamen
-            <lb n="34"/>facessit, quod D. <foreign xml:lang="grc">πυρῆνα</foreign> tantum in fructu habitare perhi-</p>
+            <lb n="15"/>Cap. CXXII. De <hi rend="italic">Oxyacantha</hi> variae sunt veterum
+            <lb n="16"/>auctorum sententiae. <hi rend="italic">Pyracantham</hi> vocat Plinius, qui
+            <lb n="17"/>omnino ab alia spina, quam appendicem vocat, quoniam
+            <lb n="18"/>baccae puniceae eo nomine appellentur, probe distinguit.<ref target="#fn398_94" type="footnote-ref" xml:id="ref-fn398_94">94</ref>
+            <lb n="19"/>Galenus <foreign xml:lang="grc">ὀξυακάνθην</foreign> fere eodem modo ac Dioscorides de
+            <lb n="20" break="no"/>scribit, nisi quod fructum dicat <foreign xml:lang="grc">ἀραιόν</foreign> loco <foreign xml:lang="grc">ἁδροῦ</foreign>.<ref target="#fn398_95" type="footnote-ref" xml:id="ref-fn398_95">95</ref> Nisi,
+            <lb n="21"/>quod suspicor, falsa est lectio; alium fruticem commuta
+            <lb n="22" break="no"/>vit Galenus, forte Plinii spinam appendicem, quae Ber
+            <lb n="23" break="no"/>beris Arabum est. Serapion enim <foreign xml:lang="ar">امير بريس</foreign> (<hi rend="italic">amir berîs</hi>),
+            <lb n="24"/>seu <foreign xml:lang="ar">برباريس</foreign> (<hi rend="italic">berbarîs</hi>), quam et <foreign xml:lang="ar">اثرار</foreign> (<hi rend="italic">atsrâr</hi>) et <foreign xml:lang="ar">اثرارثه</foreign>
+            <lb n="25"/>(<hi rend="italic">atsratsrah</hi>) dixere, pro <foreign xml:lang="grc">ὀξυακάνθη</foreign> Dioscoridis habet. Eum
+            <lb n="26"/>et Arabes et Latinobarbari<ref target="#fn398_96" type="footnote-ref" xml:id="ref-fn398_96">96</ref> ita sequuti sunt, ut post re
+            <lb n="27" break="no"/>natas literas <hi rend="italic">oxyacantha</hi> Dioscoridis fere ab omnibus di
+            <lb n="28" break="no"/>ceretur <hi rend="italic">berberis</hi>. <hi rend="italic">Valerius Cordus</hi> primus est, qui ad h.
+            <lb n="29"/>l. differentiam insignem utriusque monstraverit. <hi rend="italic">Dodo
+              <lb n="30" break="no"/>naeus</hi> quoque, <hi rend="italic">Matthiolus</hi> et alii <hi rend="italic">Mespilum Pyracantham</hi>
+            <lb n="31"/>in <foreign xml:lang="grc">ὀξυακάνθη</foreign> Dioscoridis recognoverunt. Negotium tamen
+            <lb n="32"/>facessit, quod D. <foreign xml:lang="grc">πυρῆνα</foreign> tantum in fructu habitare perhi-</p>
           <div type="footnotes">
             <note xml:id="fn398_90" n="90" place="bottom" type="footnote" corresp="#ref-fn398_90">Obs. p. 24. 25. in Clus. exot. Tournef. iter, p. 43.</note>
             <note xml:id="fn398_91" n="91" place="bottom" type="footnote" corresp="#ref-fn398_91">Rossi etym. aeg. p. 19.</note>
@@ -3868,46 +3867,45 @@ ridi.<p>
           <p>
             <lb n="1"/><foreign xml:lang="grc">Θηβαΐδι καὶ ὁ ἐν Ἰουδαίᾳ, ὅ, τε ἄλλος καὶ ὁ καρυωτός·
               <lb n="2"/> σκληρότερος δ᾽ ὁ θηβαϊκός, ἀλλὰ τῇ γεύσει εὐστομώτερος.</foreign>
-            <lb n="3"/><ref target="#fn411_98" type="footnote-ref" xml:id="ref-fn411_98">98</ref>
-            <lb n="4"/> Caryoton vocat palmam thebaicam, quo nomine praestan
-            <lb n="5" break="no"/>tior ceteris varietatibus insigniebatur.</p>
+            <ref target="#fn411_98" type="footnote-ref" xml:id="ref-fn411_98">98</ref> Caryoton vocat palmam thebaicam, quo nomine praestan
+            <lb n="3" break="no"/>tior ceteris varietatibus insigniebatur.</p>
           <p>
-            <lb n="6"/><foreign xml:lang="grc">Χαμαίξηλος φοῖνιξ</foreign>, ad finem capitis nominatus, est
-            <lb n="7"/><hi rend="italic">Chamaerops humilis</hi> L., per oras maris mediterranei vul
-            <lb n="8" break="no"/>garis. Arabibus dicitur <foreign xml:lang="ar">وقل</foreign> (<hi rend="italic">wakl</hi>), fructus <foreign xml:lang="ar">مقل</foreign> (<hi rend="italic">mokl</hi>),
-            <lb n="9"/> qua tamen inscriptione Serapion totum de palmis tracta
-            <lb n="10" break="no"/>tum (c. 148. 149.) comprehendit.</p>
+            <lb n="4"/><foreign xml:lang="grc">Χαμαίξηλος φοῖνιξ</foreign>, ad finem capitis nominatus, est
+            <lb n="5"/><hi rend="italic">Chamaerops humilis</hi> L., per oras maris mediterranei vul
+            <lb n="6" break="no"/>garis. Arabibus dicitur <foreign xml:lang="ar">وقل</foreign> (<hi rend="italic">wakl</hi>), fructus <foreign xml:lang="ar">مقل</foreign> (<hi rend="italic">mokl</hi>),
+            <lb n="7"/> qua tamen inscriptione Serapion totum de palmis tracta
+            <lb n="8" break="no"/>tum (c. 148. 149.) comprehendit.</p>
         </div>
         <div type="textpart" subtype="chapter" n="1.150" xml:id="spr-ch-1.150-la" corresp="sprengel1829_epidoc.xml#spr-ch-1.150-la">
           <head type="supplied">[Cap. CL. De palmae spatha. Περὶ σπάθης φοίνικος]</head>
           <p>
-            <lb n="11"/>Cap. CL. De <foreign xml:lang="grc">ἐλάτῃ φοίνικος</foreign> iam c. 54. praecepimus.
-            <lb n="12"/> Sed plura etiamnum exponenda sunt: protinus quidem
-            <lb n="13"/> cognomen <foreign xml:lang="grc">ἐλάτης</foreign>, <foreign xml:lang="grc">βόρασσος</foreign>, seu, ut Sambuci codex ha
-            <lb n="14" break="no"/>bet, <foreign xml:lang="grc">βούρασσος</foreign>, sic et Asulanus. Eam vocem, transposi
-            <lb n="15" break="no"/>tis literis, ortam esse e <foreign xml:lang="ar">بسر</foreign> (<hi rend="italic">bosr</hi>), quo nomine dactyli
-            <lb n="16"/> immaturi appellantur in Arabia, quodque cum ebraico
-            <lb n="17"/><foreign xml:lang="he">בֹּסֶר</foreign>, uva immatura, congruit, existimat Salmasius<ref target="#fn411_99" type="footnote-ref" xml:id="ref-fn411_99">99</ref>; quam
-            <lb n="18"/> quidem opinionem nec refutare potis sum, nec firmius
-            <lb n="19"/> stabilire. Esset itaque <foreign xml:lang="grc">βόσσαρος</foreign> scribendum. Quod vero
-            <lb n="20"/> Linnaeus palmae peculiare genus <hi rend="italic">Borassi</hi> nomine insigni
-            <lb n="21" break="no"/>verit, nominis indigentia duntaxat excusandum est.</p>
+            <lb n="9"/>Cap. CL. De <foreign xml:lang="grc">ἐλάτῃ φοίνικος</foreign> iam c. 54. praecepimus.
+            <lb n="10"/> Sed plura etiamnum exponenda sunt: protinus quidem
+            <lb n="11"/> cognomen <foreign xml:lang="grc">ἐλάτης</foreign>, <foreign xml:lang="grc">βόρασσος</foreign>, seu, ut Sambuci codex ha
+            <lb n="12" break="no"/>bet, <foreign xml:lang="grc">βούρασσος</foreign>, sic et Asulanus. Eam vocem, transposi
+            <lb n="13" break="no"/>tis literis, ortam esse e <foreign xml:lang="ar">بسر</foreign> (<hi rend="italic">bosr</hi>), quo nomine dactyli
+            <lb n="14"/> immaturi appellantur in Arabia, quodque cum ebraico
+            <lb n="15"/><foreign xml:lang="he">בֹּסֶר</foreign>, uva immatura, congruit, existimat Salmasius<ref target="#fn411_99" type="footnote-ref" xml:id="ref-fn411_99">99</ref>; quam
+            <lb n="16"/> quidem opinionem nec refutare potis sum, nec firmius
+            <lb n="17"/> stabilire. Esset itaque <foreign xml:lang="grc">βόσσαρος</foreign> scribendum. Quod vero
+            <lb n="18"/> Linnaeus palmae peculiare genus <hi rend="italic">Borassi</hi> nomine insigni
+            <lb n="19" break="no"/>verit, nominis indigentia duntaxat excusandum est.</p>
           <p>
-            <lb n="22"/>Eamdem spatham masculi floris <foreign xml:lang="grc">σεβένιον</foreign> Archigenes
-            <lb n="23"/> apud Galenum<ref target="#fn411_100" type="footnote-ref" xml:id="ref-fn411_100">100</ref> appellat.</p>
+            <lb n="20"/>Eamdem spatham masculi floris <foreign xml:lang="grc">σεβένιον</foreign> Archigenes
+            <lb n="21"/> apud Galenum<ref target="#fn411_100" type="footnote-ref" xml:id="ref-fn411_100">100</ref> appellat.</p>
           <p>
-            <lb n="24"/>Quod <foreign xml:lang="grc">ἐγκάρδιον</foreign> palmae dicitur, medulla quidem ver
-            <lb n="25" break="no"/>titur, sed ea medulla, quae in nostratibus plantis est, ca
-            <lb n="26" break="no"/>rent palmae, sicut et nullo cortice vestiuntur, cum omnis
-            <lb n="27"/> truncus e fibrarum fasciculis, interiecta tela cellulari,
-            <lb n="28"/> constituatur. Arctiores tamen sunt fibrarum fasciculi ver
-            <lb n="29" break="no"/>sus ambitum, laxiores centro, ut hic quidem medulla,
-            <lb n="30"/> quae telam cellularem complectitur, quodam modo assu
-            <lb n="31" break="no"/>mi possit. Cycas circinalis, e qua medullam, Sago nomi
-            <lb n="32" break="no"/>ne, abundanter obtinemus, et eo a palmis differt, quod
-            <lb n="33"/> concentrica strata fasciculorum fibrosorum et centralem
-            <lb n="34"/> medullam contineat, quod Brongniarus nuper contra Ri
-            <lb n="35" break="no"/>chardium utrumque probavit.<ref target="#fn411_1" type="footnote-ref" xml:id="ref-fn411_1">1</ref>
+            <lb n="22"/>Quod <foreign xml:lang="grc">ἐγκάρδιον</foreign> palmae dicitur, medulla quidem ver
+            <lb n="23" break="no"/>titur, sed ea medulla, quae in nostratibus plantis est, ca
+            <lb n="24" break="no"/>rent palmae, sicut et nullo cortice vestiuntur, cum omnis
+            <lb n="25"/> truncus e fibrarum fasciculis, interiecta tela cellulari,
+            <lb n="26"/> constituatur. Arctiores tamen sunt fibrarum fasciculi ver
+            <lb n="27" break="no"/>sus ambitum, laxiores centro, ut hic quidem medulla,
+            <lb n="28"/> quae telam cellularem complectitur, quodam modo assu
+            <lb n="29" break="no"/>mi possit. Cycas circinalis, e qua medullam, Sago nomi
+            <lb n="30" break="no"/>ne, abundanter obtinemus, et eo a palmis differt, quod
+            <lb n="31"/> concentrica strata fasciculorum fibrosorum et centralem
+            <lb n="32"/> medullam contineat, quod Brongniarus nuper contra Ri
+            <lb n="33" break="no"/>chardium utrumque probavit.<ref target="#fn411_1" type="footnote-ref" xml:id="ref-fn411_1">1</ref>
           </p>
           <div type="footnotes">
             <note xml:id="fn411_98" n="98" place="bottom" type="footnote" corresp="#ref-fn411_98">98) Lib. 17. p. 610. 611.</note>
@@ -5395,21 +5393,21 @@ DIOSCORIDES II. Ee
           <p>
             <lb n="13"/><foreign xml:lang="grc">Τὸ γάρον</foreign>, vel, Atticorum more, <foreign xml:lang="grc">ὁ</foreign>
             <lb n="14"/><foreign xml:lang="grc">γάρος</foreign>
-            <lb n="15"/><ref target="#fn437_7" type="footnote-ref" xml:id="ref-fn437_7">13</ref>, liquor erat, secundum Plinium <ref target="#fn437_8" type="footnote-ref" xml:id="ref-fn437_8">14</ref>, expressus e pi-
-            <lb n="16"/>scium intestinis sale maceratis. Laudatissimum Romanis
-            <lb n="17"/>erat e scombro pisce ad Carthaginem ibericam confectum;
-            <lb n="18"/>in insula praeprimis, quam Scombrariam ideo dicebant. <ref target="#fn437_9" type="footnote-ref" xml:id="ref-fn437_9">15</ref>
-            <lb n="19"/>„Nec liquor ullus paene, praeter unguenta, maiore in
-            <lb n="20"/>pretio esse coepit. Scombros quidem et Mauritania Bae-
-            <lb n="21"/>ticaeque Carteia ex oceano intrantes capiunt, ad nihil
-            <lb n="22"/>aliud utiles.`` <ref target="#fn437_10" type="footnote-ref" xml:id="ref-fn437_10">16</ref>
+            <ref target="#fn437_7" type="footnote-ref" xml:id="ref-fn437_7">13</ref>, liquor erat, secundum Plinium <ref target="#fn437_8" type="footnote-ref" xml:id="ref-fn437_8">14</ref>, expressus e pi-
+            <lb n="15"/>scium intestinis sale maceratis. Laudatissimum Romanis
+            <lb n="16"/>erat e scombro pisce ad Carthaginem ibericam confectum;
+            <lb n="17"/>in insula praeprimis, quam Scombrariam ideo dicebant. <ref target="#fn437_9" type="footnote-ref" xml:id="ref-fn437_9">15</ref>
+            <lb n="18"/>„Nec liquor ullus paene, praeter unguenta, maiore in
+            <lb n="19"/>pretio esse coepit. Scombros quidem et Mauritania Bae-
+            <lb n="20"/>ticaeque Carteia ex oceano intrantes capiunt, ad nihil
+            <lb n="21"/>aliud utiles.“ <ref target="#fn437_10" type="footnote-ref" xml:id="ref-fn437_10">16</ref>
           </p>
           <p>
-            <lb n="23"/>Seriori tempore garum liquaminis nomine venit. <ref target="#fn437_11" type="footnote-ref" xml:id="ref-fn437_11">17</ref>
-            <lb n="24"/>Sumebantur autem pisciculi marini exiles, quos salitos
-            <lb n="25"/>soli committebant, frequenter versando. Ex inveteratis
-            <lb n="26"/>piscibus per cophinum in vas immissum percolabatur li-
-            <lb n="27"/>quamen, cuius residuum <hi rend="italic">alex</hi> dicebatur. <ref target="#fn437_12" type="footnote-ref" xml:id="ref-fn437_12">18</ref> Parare etiam</p>
+            <lb n="22"/>Seriori tempore garum liquaminis nomine venit. <ref target="#fn437_11" type="footnote-ref" xml:id="ref-fn437_11">17</ref>
+            <lb n="23"/>Sumebantur autem pisciculi marini exiles, quos salitos
+            <lb n="24"/>soli committebant, frequenter versando. Ex inveteratis
+            <lb n="25"/>piscibus per cophinum in vas immissum percolabatur li-
+            <lb n="26"/>quamen, cuius residuum <hi rend="italic">alex</hi> dicebatur. <ref target="#fn437_12" type="footnote-ref" xml:id="ref-fn437_12">18</ref> Parare etiam</p>
           <div type="footnotes">
             <note xml:id="fn437_1" n="1" place="bottom" type="footnote" corresp="#ref-fn437_1">7) Vid. supra p. 71.</note>
             <note xml:id="fn437_2" n="2" place="bottom" type="footnote" corresp="#ref-fn437_2">8) Hist. anim. 6, 51.</note>
@@ -5942,18 +5940,17 @@ DIOSCORIDES II. Ee
             <lb n="21"/>a <foreign xml:lang="grc">πυός</foreign>, colostrum, <foreign xml:lang="grc">τὸ πρῶτον γάλα</foreign>, nasci perhibent.</p>
           <p>
             <lb n="22"/><foreign xml:lang="grc">Ἱππάκην</foreign>, quam Hippocrates iam dicit <foreign xml:lang="grc">τυρὸν ἵππων</foreign>
-            <lb n="23"/><ref target="#fn446_89" type="footnote-ref" xml:id="ref-fn446_89">89</ref>,
-            <lb n="24"/>Hippocraticus auctor quoque, quod caseus sit, diserte ex
-            <lb n="25" break="no"/>ponit.<ref target="#fn446_90" type="footnote-ref" xml:id="ref-fn446_90">90</ref> Neque cuiusquam loci memini, ubi <foreign xml:lang="grc">ἱππάκη</foreign> aliud
-            <lb n="26"/>quid significaret.</p>
+            <ref target="#fn446_89" type="footnote-ref" xml:id="ref-fn446_89">89</ref>, Hippocraticus auctor quoque, quod caseus sit, diserte ex
+            <lb n="23" break="no"/>ponit.<ref target="#fn446_90" type="footnote-ref" xml:id="ref-fn446_90">90</ref> Neque cuiusquam loci memini, ubi <foreign xml:lang="grc">ἱππάκη</foreign> aliud
+            <lb n="24"/>quid significaret.</p>
           <p>
-            <lb n="27"/>Varia animalia bisulca hic nominantur, in quibus<foreign xml:lang="grc">δορκάς</foreign>
-            <lb n="28"/><hi rend="italic">Antilope Dorcas</hi>, <foreign xml:lang="grc">πλατύνερος</foreign>
-            <lb n="29"/><hi rend="italic">Cervus Dama</hi>, <foreign xml:lang="grc">δόρ
-              <lb n="30" break="no"/>κος</foreign>
-            <lb n="31"/><hi rend="italic">Cervus Capreolus</hi> esse videntur. Non sum nescius,
-            <lb n="32"/>Marcellum Vergilium <foreign xml:lang="grc">πλατυκέρωντα</foreign> tanquam adiectivum<foreign xml:lang="grc">τῇ δορκάδι</foreign> adscribere, itaque loco <foreign xml:lang="grc">καὶ</foreign> legere <foreign xml:lang="grc">δορκάδος τῆς</foreign>
-            <lb n="33"/><foreign xml:lang="grc">πλατυκέρωτος</foreign>, in quo et C. Gesnerum et Bochartum ha-</p>
+            <lb n="25"/>Varia animalia bisulca hic nominantur, in quibus<foreign xml:lang="grc">δορκάς</foreign>
+            <lb n="26"/><hi rend="italic">Antilope Dorcas</hi>, <foreign xml:lang="grc">πλατύνερος</foreign>
+            <lb n="27"/><hi rend="italic">Cervus Dama</hi>, <foreign xml:lang="grc">δόρ
+              <lb n="28" break="no"/>κος</foreign>
+            <lb n="29"/><hi rend="italic">Cervus Capreolus</hi> esse videntur. Non sum nescius,
+            <lb n="30"/>Marcellum Vergilium <foreign xml:lang="grc">πλατυκέρωντα</foreign> tanquam adiectivum<foreign xml:lang="grc">τῇ δορκάδι</foreign> adscribere, itaque loco <foreign xml:lang="grc">καὶ</foreign> legere <foreign xml:lang="grc">δορκάδος τῆς</foreign>
+            <lb n="31"/><foreign xml:lang="grc">πλατυκέρωτος</foreign>, in quo et C. Gesnerum et Bochartum ha-</p>
           <div type="footnotes">
             <note xml:id="fn446_83" n="83" place="bottom" type="footnote" corresp="#ref-fn446_83">83) Hipp. de morb. 4. p. 357. ed. Lips.</note>
             <note xml:id="fn446_84" n="84" place="bottom" type="footnote" corresp="#ref-fn446_84">84) Coray ad Hipp. de aëre, aquis et locis, p. 284.</note>
