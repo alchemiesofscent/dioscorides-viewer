@@ -154,7 +154,7 @@ class ParagraphRecoveryStats:
     fragments_seen: int = 0
     candidates: int = 0
     split: int = 0
-    merged_skipped: int = 0
+    merged_false_starts: int = 0
     already_paragraph: int = 0
     skipped: int = 0
     ambiguous: int = 0
@@ -581,7 +581,7 @@ def _fragment_body_lines(fragment_path: Path) -> list[str]:
     parser = etree.XMLParser(remove_blank_text=False)
     text = fragment_path.read_text(encoding="utf-8")
     root = etree.fromstring(f"<fragment>{text}</fragment>".encode("utf-8"), parser)
-    return _lines_from_fragment_items(_flatten_fragment_until_first_note(root))
+    return [record["text"] for record in _fragment_body_line_records(root)]
 
 
 def _lines_from_fragment_root(root: etree._Element) -> list[str]:
@@ -605,12 +605,41 @@ def _lines_from_fragment_items(items: list[tuple[str, str | None]]) -> list[str]
     return lines
 
 
+def _fragment_body_line_records(root: etree._Element) -> list[dict[str, object]]:
+    lines: list[dict[str, object]] = []
+    current: list[str] = []
+    starts_paragraph = False
+
+    def flush() -> None:
+        nonlocal current, starts_paragraph
+        line = "".join(current)
+        if line.strip():
+            lines.append({"text": line, "starts_paragraph": starts_paragraph})
+        current = []
+        starts_paragraph = False
+
+    for kind, value in _flatten_fragment_until_first_note(root):
+        if kind == "p_start":
+            if "".join(current).strip():
+                flush()
+            starts_paragraph = True
+            continue
+        if kind in {"lb", "pb"}:
+            flush()
+            continue
+        current.append(value or "")
+    flush()
+    return lines
+
+
 def _flatten_fragment_until_first_note(root: etree._Element) -> list[tuple[str, str | None]]:
     items: list[tuple[str, str | None]] = []
 
     def walk(elem: etree._Element) -> bool:
         if _local_name(elem) == "note":
             return False
+        if _local_name(elem) == "p":
+            items.append(("p_start", None))
         if elem.text:
             items.append(("text", elem.text))
         for child in elem:
@@ -1056,6 +1085,9 @@ TERMINAL_ABBREVIATION_RE = re.compile(
     r"(?:\b(?:Io|I|D|C|N|L|M|S|St|V|Cod|cod|c|cap|lib|l|p|ed|"
     r"f|fol|tom|vol|v|cf|Cf|Dr|Prof)\.)\s*(?:\d+[a-z]?)?$"
 )
+MIN_SHORT_PARAGRAPH_LINE = 35
+MAX_SHORT_PARAGRAPH_LINE = 45
+SHORT_PARAGRAPH_LINE_RATIO = 0.75
 PARAGRAPH_SKIP_STARTS: dict[str, tuple[str, ...]] = {
     "387": ("Ἕτεροι δὲ",),
     "398": ("Inter Arabas Beitarides",),
@@ -1069,26 +1101,73 @@ PARAGRAPH_SKIP_STARTS: dict[str, tuple[str, ...]] = {
 }
 
 
+def _fragment_line_width(records: list[dict[str, object]]) -> int:
+    lengths = sorted(
+        len(_normalized_fragment_text(str(record["text"])))
+        for record in records
+        if len(_normalized_fragment_text(str(record["text"]))) >= MIN_SHORT_PARAGRAPH_LINE
+    )
+    if not lengths:
+        return MAX_SHORT_PARAGRAPH_LINE
+    return lengths[int(len(lengths) * 0.75)]
+
+
+def _is_short_paragraph_end(line: str, width: int) -> bool:
+    threshold = min(
+        MAX_SHORT_PARAGRAPH_LINE,
+        max(MIN_SHORT_PARAGRAPH_LINE, int(width * SHORT_PARAGRAPH_LINE_RATIO)),
+    )
+    return len(_normalized_fragment_text(line)) <= threshold
+
+
+def _paragraph_cue_reason(line: str, previous_line: str, width: int) -> str:
+    if not TERMINAL_PARAGRAPH_RE.search(previous_line):
+        return ""
+    if TERMINAL_ABBREVIATION_RE.search(previous_line):
+        return ""
+    if not _is_short_paragraph_end(previous_line, width):
+        return ""
+    if GREEK_UPPER_RE.match(line):
+        return "greek-line-after-short-terminal"
+    if LATIN_CUE_RE.match(line):
+        return "latin-cue-after-short-terminal"
+    return ""
+
+
+def _continuation_cue_after_full_line(line: str, previous_line: str, width: int) -> bool:
+    if not TERMINAL_PARAGRAPH_RE.search(previous_line):
+        return False
+    if TERMINAL_ABBREVIATION_RE.search(previous_line):
+        return False
+    if _is_short_paragraph_end(previous_line, width):
+        return False
+    return bool(GREEK_UPPER_RE.match(line) or LATIN_CUE_RE.match(line))
+
+
 def _fragment_paragraph_candidates(fragment_path: Path) -> list[dict[str, str]]:
     candidates: list[dict[str, str]] = []
-    lines = [_normalized_fragment_text(line) for line in _fragment_body_lines(fragment_path)]
-    for index, line in enumerate(lines):
+    parser = etree.XMLParser(remove_blank_text=False)
+    text = fragment_path.read_text(encoding="utf-8")
+    root = etree.fromstring(f"<fragment>{text}</fragment>".encode("utf-8"), parser)
+    records = _fragment_body_line_records(root)
+    width = _fragment_line_width(records)
+    for index, record in enumerate(records):
+        line = _normalized_fragment_text(str(record["text"]))
         if not line:
             continue
         reason = ""
-        if CAP_PREFIX_RE.match(line):
+        if index > 0 and bool(record.get("starts_paragraph")):
+            reason = "fragment-paragraph"
+        elif CAP_PREFIX_RE.match(line):
             reason = "chapter-heading"
         elif PAGE_REFERENCE_RE.match(line):
             reason = "page-reference"
-        elif (
-            index > 0
-            and TERMINAL_PARAGRAPH_RE.search(lines[index - 1])
-            and not TERMINAL_ABBREVIATION_RE.search(lines[index - 1])
-        ):
-            if GREEK_UPPER_RE.match(line):
-                reason = "greek-line-after-terminal"
-            elif LATIN_CUE_RE.match(line):
-                reason = "latin-cue-after-terminal"
+        elif index > 0:
+            reason = _paragraph_cue_reason(
+                line,
+                _normalized_fragment_text(str(records[index - 1]["text"])),
+                width,
+            )
         if reason:
             candidates.append(
                 {
@@ -1098,6 +1177,23 @@ def _fragment_paragraph_candidates(fragment_path: Path) -> list[dict[str, str]]:
                 }
             )
     return candidates
+
+
+def _fragment_continuation_after_full_line_starts(fragment_path: Path) -> list[str]:
+    parser = etree.XMLParser(remove_blank_text=False)
+    text = fragment_path.read_text(encoding="utf-8")
+    root = etree.fromstring(f"<fragment>{text}</fragment>".encode("utf-8"), parser)
+    records = _fragment_body_line_records(root)
+    width = _fragment_line_width(records)
+    starts: list[str] = []
+    for index, record in enumerate(records):
+        if index == 0 or bool(record.get("starts_paragraph")):
+            continue
+        line = _normalized_fragment_text(str(record["text"]))
+        previous_line = _normalized_fragment_text(str(records[index - 1]["text"]))
+        if _continuation_cue_after_full_line(line, previous_line, width):
+            starts.append(line)
+    return starts
 
 
 def _page_paragraph_lbs(root: etree._Element) -> dict[etree._Element, list[etree._Element]]:
@@ -1192,7 +1288,8 @@ def recover_fragment_paragraphs(
             continue
         stats.fragments_seen += 1
         page_n = pb.get("n") or ""
-        for candidate in _fragment_paragraph_candidates(fragment_path):
+        candidates = _fragment_paragraph_candidates(fragment_path)
+        for candidate in candidates:
             stats.candidates += 1
             text = candidate["text"]
             if any(text.startswith(prefix) for prefix in PARAGRAPH_SKIP_STARTS.get(page_n, ())):
@@ -1202,7 +1299,7 @@ def recover_fragment_paragraphs(
                     if _line_matches_fragment_start(text, _line_text_after_lb(lb))
                 ]
                 if len(matches) == 1 and _merge_paragraph_start_with_previous(matches[0]):
-                    stats.merged_skipped += 1
+                    stats.merged_false_starts += 1
                 stats.skipped += 1
                 continue
             matches = [
@@ -1247,6 +1344,20 @@ def recover_fragment_paragraphs(
                         "text": text,
                     }
                 )
+        candidate_texts = [candidate["text"] for candidate in candidates]
+        for text in _fragment_continuation_after_full_line_starts(fragment_path):
+            if any(
+                _line_matches_fragment_start(candidate_text, text)
+                for candidate_text in candidate_texts
+            ):
+                continue
+            matches = [
+                lb
+                for lb in lbs
+                if _line_matches_fragment_start(text, _line_text_after_lb(lb))
+            ]
+            if len(matches) == 1 and _merge_paragraph_start_with_previous(matches[0]):
+                stats.merged_false_starts += 1
     if write_audit:
         _write_paragraph_audit(stats)
     return stats
@@ -2313,7 +2424,7 @@ def run() -> None:
         f"{page_furniture_stats.leaked_headers_removed} leaked running heads removed, "
         f"{paragraph_stats.split}/{paragraph_stats.candidates} fragment paragraph starts split "
         f"({paragraph_stats.already_paragraph} already paragraphs, {paragraph_stats.skipped} skipped, "
-        f"{paragraph_stats.merged_skipped} skipped false starts merged, "
+        f"{paragraph_stats.merged_false_starts} false starts merged, "
         f"{paragraph_stats.ambiguous} ambiguous, {paragraph_stats.unmatched} unmatched), "
         f"{text_errors_repaired} known text errors repaired, "
         f"{markup_errors_repaired} known markup errors repaired, "

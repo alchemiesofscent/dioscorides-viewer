@@ -937,11 +937,11 @@ def test_fragment_paragraph_recovery_skips_reviewed_quote_line(tmp_path):
 
     stats = recover_fragment_paragraphs(root, tmp_path)
 
-    assert stats.skipped == 1
+    assert stats.skipped == 0
     assert len(root.findall(f".//{TEI}p")) == 1
 
 
-def test_fragment_paragraph_recovery_skips_page_629_continuation_line(tmp_path):
+def test_fragment_paragraph_recovery_merges_page_629_continuation_line(tmp_path):
     root = _parse(
         '<pb n="629" source="https://archive.org/download/b23982500_0002/'
         'b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0635.jp2"/>'
@@ -963,8 +963,35 @@ def test_fragment_paragraph_recovery_skips_page_629_continuation_line(tmp_path):
 
     stats = recover_fragment_paragraphs(root, tmp_path)
 
-    assert stats.skipped == 1
-    assert stats.merged_skipped == 1
+    assert stats.skipped == 0
+    assert stats.merged_false_starts == 1
+    assert stats.split == 0
+    assert len(root.findall(f".//{TEI}p")) == 1
+
+
+def test_fragment_paragraph_recovery_merges_page_634_full_line_false_start(tmp_path):
+    root = _parse(
+        '<pb n="634" source="https://archive.org/download/b23982500_0002/'
+        'b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0640.jp2"/>'
+        '<p><lb n="30"/>Cap. CXLVI. Daphnoidem habeo Daphnen alpinam,'
+        '<lb n="31"/>in montibus Europae australis et Asiae mediae prove'
+        '<lb n="32" break="no"/>nientem. Folia sunt laurinis similia, sed molliora et'
+        '<lb n="33"/>angustiora. Flores albi in medio gerunt germen conicum.</p>'
+        '<p><lb n="34"/>Tota planta, maxime cortex et folia, principio scatent acri,</p>'
+    )
+    _write_fragment(
+        tmp_path,
+        "b23982500_0002_0640.xml",
+        '<pb n="634"/><p>Cap. CXLVI. Daphnoidem habeo Daphnen alpinam,<lb/>'
+        'in montibus Europae australis et Asiae mediae prove<lb break="no"/>'
+        'nientem. Folia sunt laurinis similia, sed molliora et<lb/>'
+        'angustiora. Flores albi in medio gerunt germen conicum.<lb/>'
+        'Tota planta, maxime cortex et folia, principio scatent acri,</p>',
+    )
+
+    stats = recover_fragment_paragraphs(root, tmp_path)
+
+    assert stats.merged_false_starts == 1
     assert stats.split == 0
     assert len(root.findall(f".//{TEI}p")) == 1
 

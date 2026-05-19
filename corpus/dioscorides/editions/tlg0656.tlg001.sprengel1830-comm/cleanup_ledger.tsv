@@ -103,8 +103,13 @@ hyphenation	needs-review	659	b23982500_0002_0665.xml	-	-	Dres|den	0	set lb@break
 hyphenation	needs-review	659	b23982500_0002_0665.xml	-	-	Cosch|witz	0	set lb@break='no' only when the page-local split is unique	unmatched
 hyphenation	needs-image-review	666	b23982500_0002_0672.xml	-	-	lo|cum	2	set lb@break='no' only when the page-local split is unique	ambiguous
 hyphenation	needs-image-review	666	b23982500_0002_0672.xml	-	-	lo|cum	2	set lb@break='no' only when the page-local split is unique	ambiguous
-paragraph	needs-review	357	b23982500_0002_0365.xml	-	3	Brownio.31	latin-cue-after-terminal	split only when fragment paragraph start maps uniquely to a body line	unmatched
-paragraph	needs-review	560	b23982500_0002_0566.xml	-	30	Errarunt, qui cum Trago⁴ Anthemida tinctoriam	latin-cue-after-terminal	split only when fragment paragraph start maps uniquely to a body line	unmatched
-paragraph	needs-review	602	b23982500_0002_0608.xml	-	7	Aesculapii.⁶ Dicitur autem hortensis strychnos, non quia colitur	latin-cue-after-terminal	split only when fragment paragraph start maps uniquely to a body line	unmatched
+paragraph	needs-review	374	b23982500_0002_0382.xml	-	17	Avicenna disertis verbis41 مقل, quod bdellium est, di-	fragment-paragraph	split only when fragment paragraph start maps uniquely to a body line	unmatched
+paragraph	needs-review	446	b23982500_0002_0452.xml	-	15	Varia animalia bisulca hic nominantur, in quibus δορκάς Antilope Dorcas, πλατύνερος Cervus Dama, δόρ	fragment-paragraph	split only when fragment paragraph start maps uniquely to a body line	unmatched
+paragraph	needs-review	510	b23982500_0002_0516.xml	-	9	Tertium, foliis σισυμβρίου aemulis, et cuius flores ὀργάνου ἀγρίου speciem prae se ferre dicuntur, Pona pri	fragment-paragraph	split only when fragment paragraph start maps uniquely to a body line	unmatched
+paragraph	needs-review	560	b23982500_0002_0566.xml	-	30	Errarunt, qui cum Trago⁴ Anthemida tinctoriam	latin-cue-after-short-terminal	split only when fragment paragraph start maps uniquely to a body line	unmatched
+paragraph	needs-review	566	b23982500_0002_0572.xml	-	6	Ἐμπρίοντα vocat Nicander⁴⁵ ὀνόγυρον; ubi inepte	fragment-paragraph	split only when fragment paragraph start maps uniquely to a body line	unmatched
+paragraph	needs-review	588	b23982500_0002_0594.xml	-	5	Καλαμάγρωστιν, a qua plerique maio-	fragment-paragraph	split only when fragment paragraph start maps uniquely to a body line	unmatched
+paragraph	needs-review	588	b23982500_0002_0594.xml	-	19	In gramine Parnassi, quod gramen	fragment-paragraph	split only when fragment paragraph start maps uniquely to a body line	unmatched
+paragraph	needs-review	588	b23982500_0002_0594.xml	-	29	In Sideritidis cognominibus deest la-	fragment-paragraph	split only when fragment paragraph start maps uniquely to a body line	unmatched
 paragraph	needs-review	629	b23982500_0002_0635.xml	-	9	Cap. CXXV. Cum Plinius⁴⁰ chamaepeuci folia tri	chapter-heading	split only when fragment paragraph start maps uniquely to a body line	unmatched
-paragraph	needs-review	629	b23982500_0002_0635.xml	-	13	Cordus⁴¹ Lycopodium clavatum, Anguillara Camfo	latin-cue-after-terminal	split only when fragment paragraph start maps uniquely to a body line	unmatched
+paragraph	needs-review	660	b23982500_0002_0666.xml	-	2	cum iam in pentateucho¹ ספיר occurrat, cuius radix in	fragment-paragraph	split only when fragment paragraph start maps uniquely to a body line	unmatched
