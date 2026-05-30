@@ -19,6 +19,7 @@ current corpus TEI is normalized in place. This migration only:
 from __future__ import annotations
 
 import re
+import json
 from collections import defaultdict
 from dataclasses import dataclass, field
 from os import environ
@@ -106,6 +107,20 @@ PARAGRAPH_AUDIT = (
     / "tlg0656.tlg001.sprengel1830-comm"
     / "paragraph_audit.tsv"
 )
+PARAGRAPH_START_AUDIT = (
+    Path("corpus")
+    / "dioscorides"
+    / "editions"
+    / "tlg0656.tlg001.sprengel1830-comm"
+    / "paragraph_start_audit.tsv"
+)
+PARAGRAPH_REVIEW_DECISIONS = (
+    Path("corpus")
+    / "dioscorides"
+    / "editions"
+    / "tlg0656.tlg001.sprengel1830-comm"
+    / "paragraph_review_decisions.json"
+)
 
 
 @dataclass
@@ -159,7 +174,11 @@ class ParagraphRecoveryStats:
     skipped: int = 0
     ambiguous: int = 0
     unmatched: int = 0
+    review_accepted: int = 0
+    review_rejected: int = 0
+    review_notes: int = 0
     unresolved: list[dict[str, str]] = field(default_factory=list)
+    start_rows: list[dict[str, str]] = field(default_factory=list)
 
 
 def _source_path(out_path: Path) -> tuple[Path, bool]:
@@ -861,6 +880,10 @@ def _audit_cell(value: str) -> str:
     return " ".join(value.split()) or "-"
 
 
+def _audit_cell_preserve_blank(value: str) -> str:
+    return " ".join(value.split())
+
+
 def _write_hyphenation_audit(stats: HyphenationImportStats) -> None:
     audit_path = Path(__file__).resolve().parents[3] / HYPHENATION_AUDIT
     if not stats.unresolved:
@@ -907,6 +930,44 @@ def _write_paragraph_audit(stats: ParagraphRecoveryStats) -> None:
                     _audit_cell(item.get("text", "")),
                 ]
             )
+            + "\n"
+        )
+    audit_path.write_text("".join(lines), encoding="utf-8")
+
+
+def _write_paragraph_start_audit(stats: ParagraphRecoveryStats) -> None:
+    audit_path = Path(__file__).resolve().parents[3] / PARAGRAPH_START_AUDIT
+    if not stats.start_rows:
+        if audit_path.exists():
+            audit_path.unlink()
+        return
+    audit_path.parent.mkdir(parents=True, exist_ok=True)
+    columns = [
+        "page",
+        "fragment",
+        "fragment_line",
+        "tei_line",
+        "candidate_class",
+        "reason",
+        "previous_length",
+        "line_width",
+        "prev_current_sum",
+        "current_next_sum",
+        "prev_triple_gap",
+        "boundary_triple_gap",
+        "next_triple_gap",
+        "gap_delta",
+        "previous_text",
+        "candidate_text",
+        "current_state",
+        "proposed_action",
+        "review_decision",
+        "review_note",
+    ]
+    lines = ["\t".join(columns) + "\n"]
+    for item in sorted(stats.start_rows, key=_paragraph_start_sort_key):
+        lines.append(
+            "\t".join(_audit_cell_preserve_blank(item.get(column, "")) for column in columns)
             + "\n"
         )
     audit_path.write_text("".join(lines), encoding="utf-8")
@@ -1001,6 +1062,10 @@ def _write_cleanup_outputs(
         f"- Hyphenation audit review rows: {len(hyphen_stats.unresolved)}\n",
         f"- Page furniture review/action rows: {len(page_stats.review_rows)}\n",
         f"- Paragraph audit review rows: {len(paragraph_stats.unresolved) if paragraph_stats else 0}\n",
+        f"- Paragraph start candidate rows: {len(paragraph_stats.start_rows) if paragraph_stats else 0}\n",
+        f"- Paragraph review accepted starts: {paragraph_stats.review_accepted if paragraph_stats else 0}\n",
+        f"- Paragraph review rejected starts: {paragraph_stats.review_rejected if paragraph_stats else 0}\n",
+        f"- Paragraph review pages with notes: {paragraph_stats.review_notes if paragraph_stats else 0}\n",
         f"- Pages scanned for page furniture: {page_stats.pages_seen}\n",
         f"- Page numbers inserted: {page_stats.page_numbers_inserted}\n",
         f"- Page numbers split from running heads: {page_stats.page_numbers_split}\n",
@@ -1078,16 +1143,19 @@ def import_line_end_hyphenation(
 
 
 GREEK_UPPER_RE = re.compile(r"^[\s\"'„“]*(?:[Α-ΩΆΈΉΊΌΎΏΪΫἈ-Ὧ])")
-LATIN_CUE_RE = re.compile(r"^[\s\"'„“]*[A-Z][A-Za-zÀ-ÖØ-öø-ÿ]+")
+LATIN_CUE_RE = re.compile(r"^[\s\"'„“]*[A-ZÀ-ÖØ-Þ](?:[A-Za-zÀ-ÖØ-öø-ÿ]+)?\b")
 PAGE_REFERENCE_RE = re.compile(r"^\s*P\.\s*\d+\.?")
 TERMINAL_PARAGRAPH_RE = re.compile(r"""[.!?:;]["'”’“»]*$""")
 TERMINAL_ABBREVIATION_RE = re.compile(
     r"(?:\b(?:Io|I|D|C|N|L|M|S|St|V|Cod|cod|c|cap|lib|l|p|ed|"
     r"f|fol|tom|vol|v|cf|Cf|Dr|Prof)\.)\s*(?:\d+[a-z]?)?$"
 )
+TRANSITION_CUE_RE = re.compile(r"^[\s\"'„“]*(?:De|E|Ex|Iam|Hinc|Sed)\b")
+TEXT_START_RE = re.compile(r"^[\s\"'„“]*[^\W\d_]", re.UNICODE)
 MIN_SHORT_PARAGRAPH_LINE = 35
 MAX_SHORT_PARAGRAPH_LINE = 45
 SHORT_PARAGRAPH_LINE_RATIO = 0.75
+UNDERFULL_TRIPLE_REVIEW_GAP = 28
 PARAGRAPH_SKIP_STARTS: dict[str, tuple[str, ...]] = {
     "387": ("Ἕτεροι δὲ",),
     "398": ("Inter Arabas Beitarides",),
@@ -1098,6 +1166,106 @@ PARAGRAPH_SKIP_STARTS: dict[str, tuple[str, ...]] = {
     "624": ("Cap. LXVI. Ὄναγρα",),
     "629": ("Petendam autem potissimum esse",),
     "656": ("Τὴν ἀπὸ Θρηϊκίου",),
+}
+
+
+def load_paragraph_review_decisions(path: Path | None = None) -> dict[str, object]:
+    """Load page-complete paragraph review decisions if they exist."""
+    review_path = path or Path(__file__).resolve().parents[3] / PARAGRAPH_REVIEW_DECISIONS
+    if not review_path.exists():
+        return {"schema": "tei-maker.paragraph-review.v1", "pages": {}}
+    data = json.loads(review_path.read_text(encoding="utf-8"))
+    if not isinstance(data, dict):
+        raise ValueError(f"Paragraph review decisions must be a JSON object: {review_path}")
+    pages = data.get("pages")
+    if not isinstance(pages, dict):
+        raise ValueError(f"Paragraph review decisions missing object field 'pages': {review_path}")
+    return data
+
+
+def _page_review(decisions: dict[str, object] | None, page_n: str) -> dict[str, object]:
+    if not decisions:
+        return {}
+    pages = decisions.get("pages")
+    if not isinstance(pages, dict):
+        return {}
+    page = pages.get(page_n)
+    return page if isinstance(page, dict) else {}
+
+
+def _review_start_texts(page_review: dict[str, object], field: str) -> list[str]:
+    values = page_review.get(field)
+    if not isinstance(values, list):
+        return []
+    starts: list[str] = []
+    for value in values:
+        if isinstance(value, str):
+            text = value
+        elif isinstance(value, dict):
+            text = value.get("text", "")
+        else:
+            text = ""
+        if isinstance(text, str) and text.strip():
+            starts.append(_normalized_fragment_text(text))
+    return starts
+
+
+def _page_has_review_notes(page_review: dict[str, object]) -> bool:
+    for field in ("notes", "pageNotes", "textNotes", "layoutNotes"):
+        value = page_review.get(field)
+        if isinstance(value, str) and value.strip():
+            return True
+        if isinstance(value, list) and any(str(item).strip() for item in value):
+            return True
+    return False
+
+
+def _review_text_matches(review_text: str, candidate_text: str) -> bool:
+    return _line_matches_review_start(review_text, candidate_text) or _line_matches_review_start(
+        candidate_text,
+        review_text,
+    )
+
+
+def _line_matches_review_start(review_text: str, body_line: str) -> bool:
+    if _line_matches_fragment_start(review_text, body_line):
+        return True
+    review_words = _match_words(review_text)
+    body_words = _match_words(body_line)
+    if len(review_words) == 1 and body_words:
+        return review_words[0] == body_words[0]
+    return False
+
+
+def _review_decision_for_candidate(
+    page_review: dict[str, object],
+    candidate_text: str,
+    candidate_class: str,
+) -> str:
+    accepted = _review_start_texts(page_review, "acceptedStarts")
+    rejected = _review_start_texts(page_review, "rejectedStarts")
+    if any(_review_text_matches(text, candidate_text) for text in accepted):
+        return "accepted"
+    if any(_review_text_matches(text, candidate_text) for text in rejected):
+        return "rejected"
+    if page_review.get("reviewed") is True and candidate_class in REVIEW_CANDIDATE_CLASSES:
+        return "rejected"
+    return ""
+
+
+def _accepted_start_was_seen(seen: set[str], text: str) -> bool:
+    return any(_review_text_matches(item, text) for item in seen)
+REVIEW_CANDIDATE_CLASSES = {
+    "review-transition",
+    "review-terminal-capital",
+    "review-underfull-triple",
+}
+CANDIDATE_CLASS_SORT = {
+    "review-transition": 0,
+    "review-terminal-capital": 1,
+    "review-underfull-triple": 2,
+    "reviewed": 3,
+    "auto": 4,
 }
 
 
@@ -1120,6 +1288,61 @@ def _is_short_paragraph_end(line: str, width: int) -> bool:
     return len(_normalized_fragment_text(line)) <= threshold
 
 
+def _line_length(records: list[dict[str, object]], index: int) -> int:
+    if index < 0 or index >= len(records):
+        return 0
+    return len(_normalized_fragment_text(str(records[index]["text"])))
+
+
+def _triple_gap(lengths: list[int], width: int) -> int:
+    return (width * 3) - sum(lengths)
+
+
+def _paragraph_metric_fields(
+    records: list[dict[str, object]],
+    index: int,
+    width: int,
+) -> dict[str, str]:
+    prev_len = _line_length(records, index - 1)
+    current_len = _line_length(records, index)
+    next_len = _line_length(records, index + 1)
+    prev_triple_gap = _triple_gap(
+        [
+            _line_length(records, index - 3),
+            _line_length(records, index - 2),
+            prev_len,
+        ],
+        width,
+    )
+    boundary_triple_gap = _triple_gap(
+        [
+            _line_length(records, index - 1),
+            current_len,
+            next_len,
+        ],
+        width,
+    )
+    next_triple_gap = _triple_gap(
+        [
+            current_len,
+            next_len,
+            _line_length(records, index + 2),
+        ],
+        width,
+    )
+    gap_delta = boundary_triple_gap - max(prev_triple_gap, next_triple_gap)
+    return {
+        "previous_length": str(prev_len),
+        "line_width": str(width),
+        "prev_current_sum": str(prev_len + current_len),
+        "current_next_sum": str(current_len + next_len),
+        "prev_triple_gap": str(prev_triple_gap),
+        "boundary_triple_gap": str(boundary_triple_gap),
+        "next_triple_gap": str(next_triple_gap),
+        "gap_delta": str(gap_delta),
+    }
+
+
 def _paragraph_cue_reason(line: str, previous_line: str, width: int) -> str:
     if not TERMINAL_PARAGRAPH_RE.search(previous_line):
         return ""
@@ -1132,6 +1355,26 @@ def _paragraph_cue_reason(line: str, previous_line: str, width: int) -> str:
     if LATIN_CUE_RE.match(line):
         return "latin-cue-after-short-terminal"
     return ""
+
+
+def _review_cue_class(
+    line: str,
+    previous_line: str,
+    metrics: dict[str, str],
+) -> tuple[str, str]:
+    if not TERMINAL_PARAGRAPH_RE.search(previous_line):
+        return "", ""
+    if TERMINAL_ABBREVIATION_RE.search(previous_line):
+        return "", ""
+    if TRANSITION_CUE_RE.match(line):
+        return "review-transition", "terminal-transition"
+    if GREEK_UPPER_RE.match(line) or LATIN_CUE_RE.match(line):
+        return "review-terminal-capital", "terminal-capital"
+    boundary_gap = int(metrics.get("boundary_triple_gap", "0") or "0")
+    gap_delta = int(metrics.get("gap_delta", "0") or "0")
+    if TEXT_START_RE.match(line) and boundary_gap >= UNDERFULL_TRIPLE_REVIEW_GAP and gap_delta > 0:
+        return "review-underfull-triple", "underfull-triple"
+    return "", ""
 
 
 def _continuation_cue_after_full_line(line: str, previous_line: str, width: int) -> bool:
@@ -1151,11 +1394,19 @@ def _fragment_paragraph_candidates(fragment_path: Path) -> list[dict[str, str]]:
     root = etree.fromstring(f"<fragment>{text}</fragment>".encode("utf-8"), parser)
     records = _fragment_body_line_records(root)
     width = _fragment_line_width(records)
+    pb = root.find(".//pb")
+    page_n = pb.get("n") if pb is not None else ""
     for index, record in enumerate(records):
         line = _normalized_fragment_text(str(record["text"]))
         if not line:
             continue
         reason = ""
+        previous_line = (
+            _normalized_fragment_text(str(records[index - 1]["text"])) if index > 0 else ""
+        )
+        metrics = _paragraph_metric_fields(records, index, width)
+        candidate_class = "auto"
+        auto = "1"
         if index > 0 and bool(record.get("starts_paragraph")):
             reason = "fragment-paragraph"
         elif CAP_PREFIX_RE.match(line):
@@ -1163,17 +1414,21 @@ def _fragment_paragraph_candidates(fragment_path: Path) -> list[dict[str, str]]:
         elif PAGE_REFERENCE_RE.match(line):
             reason = "page-reference"
         elif index > 0:
-            reason = _paragraph_cue_reason(
-                line,
-                _normalized_fragment_text(str(records[index - 1]["text"])),
-                width,
-            )
+            reason = _paragraph_cue_reason(line, previous_line, width)
+            if not reason:
+                candidate_class, reason = _review_cue_class(line, previous_line, metrics)
+                if reason:
+                    auto = "0"
         if reason:
             candidates.append(
                 {
                     "fragment_line": str(index + 1),
                     "reason": reason,
+                    "candidate_class": candidate_class,
                     "text": line,
+                    "previous_text": previous_line,
+                    "auto": auto,
+                    **metrics,
                 }
             )
     return candidates
@@ -1271,14 +1526,191 @@ def _merge_paragraph_start_with_previous(lb: etree._Element) -> bool:
     return True
 
 
+def _paragraph_start_audit_row(
+    page_n: str,
+    fragment_name: str,
+    candidate: dict[str, str],
+    tei_line: str,
+    current_state: str,
+    proposed_action: str,
+    candidate_class: str | None = None,
+    review_decision: str = "",
+    review_note: str = "",
+) -> dict[str, str]:
+    return {
+        "page": page_n,
+        "fragment": fragment_name,
+        "fragment_line": candidate.get("fragment_line", ""),
+        "tei_line": tei_line,
+        "candidate_class": candidate_class or candidate.get("candidate_class", "auto"),
+        "reason": candidate.get("reason", ""),
+        "previous_length": candidate.get("previous_length", ""),
+        "line_width": candidate.get("line_width", ""),
+        "prev_current_sum": candidate.get("prev_current_sum", ""),
+        "current_next_sum": candidate.get("current_next_sum", ""),
+        "prev_triple_gap": candidate.get("prev_triple_gap", ""),
+        "boundary_triple_gap": candidate.get("boundary_triple_gap", ""),
+        "next_triple_gap": candidate.get("next_triple_gap", ""),
+        "gap_delta": candidate.get("gap_delta", ""),
+        "previous_text": candidate.get("previous_text", ""),
+        "candidate_text": candidate.get("text", ""),
+        "current_state": current_state,
+        "proposed_action": proposed_action,
+        "review_decision": review_decision,
+        "review_note": review_note,
+    }
+
+
+def _int_sort_value(value: str, default: int = 0) -> int:
+    try:
+        return int(value)
+    except ValueError:
+        return default
+
+
+def _paragraph_start_sort_key(row: dict[str, str]) -> tuple[int, int, int, int, str, str, str]:
+    candidate_class = row.get("candidate_class", "")
+    is_unresolved_review = (
+        candidate_class in REVIEW_CANDIDATE_CLASSES
+        and row.get("current_state") not in {"already-paragraph", "split"}
+    )
+    return (
+        0 if is_unresolved_review else 1,
+        CANDIDATE_CLASS_SORT.get(candidate_class, 99),
+        -_int_sort_value(row.get("boundary_triple_gap", "")),
+        -_int_sort_value(row.get("gap_delta", "")),
+        row.get("page", ""),
+        row.get("fragment", ""),
+        row.get("fragment_line", ""),
+    )
+
+
+def _apply_reviewed_paragraph_start(
+    stats: ParagraphRecoveryStats,
+    page_n: str,
+    fragment_name: str,
+    candidate: dict[str, str],
+    matches: list[etree._Element],
+    *,
+    review_decision: str,
+    review_note: str = "",
+) -> None:
+    tei_line = matches[0].get("n", "") if len(matches) == 1 else ""
+    if len(matches) != 1:
+        status = "ambiguous" if matches else "unmatched"
+        if matches:
+            stats.ambiguous += 1
+        else:
+            stats.unmatched += 1
+        stats.start_rows.append(
+            _paragraph_start_audit_row(
+                page_n,
+                fragment_name,
+                candidate,
+                tei_line,
+                status,
+                "review accepted start could not be applied uniquely",
+                candidate_class="reviewed",
+                review_decision=review_decision,
+                review_note=review_note,
+            )
+        )
+        stats.unresolved.append(
+            {
+                "status": status,
+                "page": page_n,
+                "fragment": fragment_name,
+                "fragment_line": candidate.get("fragment_line", ""),
+                "reason": candidate.get("reason", "review-accepted"),
+                "match_count": str(len(matches)),
+                "text": candidate.get("text", ""),
+            }
+        )
+        return
+    if _lb_starts_paragraph(matches[0]):
+        stats.already_paragraph += 1
+        current_state = "already-paragraph"
+        proposed_action = "none"
+    elif _split_paragraph_at_direct_lb(matches[0]):
+        stats.split += 1
+        current_state = "split"
+        proposed_action = "split paragraph from review decision"
+    else:
+        stats.unmatched += 1
+        current_state = "unsupported-nested-lb"
+        proposed_action = "review accepted start could not be applied"
+        stats.unresolved.append(
+            {
+                "status": current_state,
+                "page": page_n,
+                "fragment": fragment_name,
+                "fragment_line": candidate.get("fragment_line", ""),
+                "reason": candidate.get("reason", "review-accepted"),
+                "match_count": "1",
+                "text": candidate.get("text", ""),
+            }
+        )
+    stats.start_rows.append(
+        _paragraph_start_audit_row(
+            page_n,
+            fragment_name,
+            candidate,
+            tei_line,
+            current_state,
+            proposed_action,
+            candidate_class="reviewed",
+            review_decision=review_decision,
+            review_note=review_note,
+        )
+    )
+
+
+def _record_reviewed_false_start(
+    stats: ParagraphRecoveryStats,
+    page_n: str,
+    fragment_name: str,
+    candidate: dict[str, str],
+    matches: list[etree._Element],
+    *,
+    review_decision: str = "rejected",
+    review_note: str = "",
+) -> None:
+    tei_line = matches[0].get("n", "") if len(matches) == 1 else ""
+    current_state = "reviewed-rejected"
+    if len(matches) == 1 and _merge_paragraph_start_with_previous(matches[0]):
+        stats.merged_false_starts += 1
+        current_state = "merged-reviewed-false-start"
+    stats.review_rejected += 1
+    stats.start_rows.append(
+        _paragraph_start_audit_row(
+            page_n,
+            fragment_name,
+            candidate,
+            tei_line,
+            current_state,
+            "none; reviewed false paragraph start",
+            candidate_class="reviewed",
+            review_decision=review_decision,
+            review_note=review_note,
+        )
+    )
+
+
 def recover_fragment_paragraphs(
     root: etree._Element,
     fragment_dir: Path | None = None,
     *,
     write_audit: bool = False,
+    review_decisions: dict[str, object] | None = None,
+    review_path: Path | None = None,
 ) -> ParagraphRecoveryStats:
     """Recover conservative body paragraph starts from the checked fragments."""
     resolved_fragment_dir = _require_fragment_dir(fragment_dir)
+    decisions = (
+        review_decisions
+        if review_decisions is not None
+        else load_paragraph_review_decisions(review_path)
+    )
     stats = ParagraphRecoveryStats()
     for pb, lbs in _page_paragraph_lbs(root).items():
         stats.pages_seen += 1
@@ -1288,25 +1720,87 @@ def recover_fragment_paragraphs(
             continue
         stats.fragments_seen += 1
         page_n = pb.get("n") or ""
+        page_review = _page_review(decisions, page_n)
+        if _page_has_review_notes(page_review):
+            stats.review_notes += 1
+        seen_accepted: set[str] = set()
         candidates = _fragment_paragraph_candidates(fragment_path)
         for candidate in candidates:
             stats.candidates += 1
             text = candidate["text"]
-            if any(text.startswith(prefix) for prefix in PARAGRAPH_SKIP_STARTS.get(page_n, ())):
-                matches = [
-                    lb
-                    for lb in lbs
-                    if _line_matches_fragment_start(text, _line_text_after_lb(lb))
-                ]
-                if len(matches) == 1 and _merge_paragraph_start_with_previous(matches[0]):
-                    stats.merged_false_starts += 1
-                stats.skipped += 1
-                continue
+            review_decision = _review_decision_for_candidate(
+                page_review,
+                text,
+                candidate.get("candidate_class", ""),
+            )
+            if review_decision == "accepted":
+                seen_accepted.add(text)
+                stats.review_accepted += 1
             matches = [
                 lb
                 for lb in lbs
-                if _line_matches_fragment_start(text, _line_text_after_lb(lb))
+                if _line_matches_review_start(text, _line_text_after_lb(lb))
             ]
+            tei_line = matches[0].get("n", "") if len(matches) == 1 else ""
+            if review_decision == "accepted":
+                _apply_reviewed_paragraph_start(
+                    stats,
+                    page_n,
+                    fragment_path.name,
+                    candidate,
+                    matches,
+                    review_decision="accepted",
+                )
+                continue
+            if review_decision == "rejected":
+                _record_reviewed_false_start(
+                    stats,
+                    page_n,
+                    fragment_path.name,
+                    candidate,
+                    matches,
+                )
+                continue
+            if any(text.startswith(prefix) for prefix in PARAGRAPH_SKIP_STARTS.get(page_n, ())):
+                current_state = "skipped"
+                if len(matches) == 1 and _merge_paragraph_start_with_previous(matches[0]):
+                    stats.merged_false_starts += 1
+                    current_state = "merged-skipped-false-start"
+                stats.start_rows.append(
+                    _paragraph_start_audit_row(
+                        page_n,
+                        fragment_path.name,
+                        candidate,
+                        tei_line,
+                        current_state,
+                        "none; reviewed false paragraph start",
+                        candidate_class="reviewed",
+                    )
+                )
+                stats.skipped += 1
+                continue
+            if candidate.get("auto", "1") != "1":
+                if len(matches) == 1:
+                    current_state = (
+                        "already-paragraph"
+                        if _lb_starts_paragraph(matches[0])
+                        else "inline-candidate"
+                    )
+                elif len(matches) > 1:
+                    current_state = "ambiguous"
+                else:
+                    current_state = "unmatched"
+                stats.start_rows.append(
+                    _paragraph_start_audit_row(
+                        page_n,
+                        fragment_path.name,
+                        candidate,
+                        tei_line,
+                        current_state,
+                        "review; split only after confirming printed paragraph indentation",
+                    )
+                )
+                continue
             if len(matches) != 1:
                 if matches:
                     stats.ambiguous += 1
@@ -1314,6 +1808,16 @@ def recover_fragment_paragraphs(
                 else:
                     stats.unmatched += 1
                     status = "unmatched"
+                stats.start_rows.append(
+                    _paragraph_start_audit_row(
+                        page_n,
+                        fragment_path.name,
+                        candidate,
+                        tei_line,
+                        status,
+                        "review unmatched paragraph candidate",
+                    )
+                )
                 stats.unresolved.append(
                     {
                         "status": status,
@@ -1327,12 +1831,42 @@ def recover_fragment_paragraphs(
                 )
                 continue
             if _lb_starts_paragraph(matches[0]):
+                stats.start_rows.append(
+                    _paragraph_start_audit_row(
+                        page_n,
+                        fragment_path.name,
+                        candidate,
+                        tei_line,
+                        "already-paragraph",
+                        "none",
+                    )
+                )
                 stats.already_paragraph += 1
                 continue
             if _split_paragraph_at_direct_lb(matches[0]):
+                stats.start_rows.append(
+                    _paragraph_start_audit_row(
+                        page_n,
+                        fragment_path.name,
+                        candidate,
+                        tei_line,
+                        "split",
+                        "split paragraph",
+                    )
+                )
                 stats.split += 1
             else:
                 stats.unmatched += 1
+                stats.start_rows.append(
+                    _paragraph_start_audit_row(
+                        page_n,
+                        fragment_path.name,
+                        candidate,
+                        tei_line,
+                        "unsupported-nested-lb",
+                        "review unsupported nested line break",
+                    )
+                )
                 stats.unresolved.append(
                     {
                         "status": "unsupported-nested-lb",
@@ -1345,6 +1879,33 @@ def recover_fragment_paragraphs(
                     }
                 )
         candidate_texts = [candidate["text"] for candidate in candidates]
+        for accepted_text in _review_start_texts(page_review, "acceptedStarts"):
+            if _accepted_start_was_seen(seen_accepted, accepted_text):
+                continue
+            matches = [
+                lb
+                for lb in lbs
+                if _line_matches_review_start(accepted_text, _line_text_after_lb(lb))
+            ]
+            candidate = {
+                "fragment_line": "",
+                "reason": "review-custom",
+                "candidate_class": "reviewed",
+                "text": accepted_text,
+                "previous_text": "",
+                "auto": "1",
+            }
+            stats.candidates += 1
+            stats.review_accepted += 1
+            _apply_reviewed_paragraph_start(
+                stats,
+                page_n,
+                fragment_path.name,
+                candidate,
+                matches,
+                review_decision="accepted",
+                review_note="custom review start",
+            )
         for text in _fragment_continuation_after_full_line_starts(fragment_path):
             if any(
                 _line_matches_fragment_start(candidate_text, text)
@@ -1360,6 +1921,7 @@ def recover_fragment_paragraphs(
                 stats.merged_false_starts += 1
     if write_audit:
         _write_paragraph_audit(stats)
+        _write_paragraph_start_audit(stats)
     return stats
 
 

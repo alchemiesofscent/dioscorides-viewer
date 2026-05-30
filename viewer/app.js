@@ -3,6 +3,9 @@
 
   const REPO_ROOT = new URL("../", window.location.href);
   const EDITIONS_PATH = "corpus/dioscorides/editions/index.json";
+  const PARAGRAPH_REVIEW_DECISIONS_PATH = "corpus/dioscorides/editions/tlg0656.tlg001.sprengel1830-comm/paragraph_review_decisions.json";
+  const PARAGRAPH_START_AUDIT_PATH = "corpus/dioscorides/editions/tlg0656.tlg001.sprengel1830-comm/paragraph_start_audit.tsv";
+  const PARAGRAPH_REVIEW_API = "/api/paragraph-review";
   const LOCAL_PRIVATE_REGISTRY_PATHS = [];
   const XML_NS = "http://www.w3.org/XML/1998/namespace";
   const FALLBACK_EDITION = {
@@ -16,6 +19,8 @@
     sourceUrl: "https://digi.ub.uni-heidelberg.de/diglit/berendes1902",
     sourceLabel: "Heidelberg facsimile",
   };
+  const REVIEW_PARAMS = new URLSearchParams(window.location.search);
+  const PARAGRAPH_REVIEW_ENABLED = REVIEW_PARAMS.get("review") === "paragraphs";
 
   // Defensive: if any @facs URL still ends in .jp2 (browsers cannot render
   // JPEG 2000), substitute the IIIF JPEG derivative on the fly. Migrations
@@ -65,6 +70,19 @@
     openImage: document.getElementById("openImage"),
     openFacs: document.getElementById("openFacs"),
     textViewToggle: document.getElementById("textViewToggle"),
+    layout: document.querySelector(".layout"),
+    paragraphReviewPanel: document.getElementById("paragraphReviewPanel"),
+    paragraphReviewStatus: document.getElementById("paragraphReviewStatus"),
+    saveParagraphReview: document.getElementById("saveParagraphReview"),
+    paragraphCandidates: document.getElementById("paragraphCandidates"),
+    detectedParagraphStarts: document.getElementById("detectedParagraphStarts"),
+    acceptedParagraphStarts: document.getElementById("acceptedParagraphStarts"),
+    customParagraphStart: document.getElementById("customParagraphStart"),
+    addCustomParagraphStart: document.getElementById("addCustomParagraphStart"),
+    paragraphPageNotes: document.getElementById("paragraphPageNotes"),
+    paragraphTextNotes: document.getElementById("paragraphTextNotes"),
+    paragraphLayoutNotes: document.getElementById("paragraphLayoutNotes"),
+    markParagraphPageComplete: document.getElementById("markParagraphPageComplete"),
     toast: document.getElementById("toast"),
   };
 
@@ -87,6 +105,13 @@
     textViewMode: "diplomatic",
     generatedSectionIds: new WeakMap(),
     generatedSectionIdCounts: new Map(),
+    paragraphReview: {
+      enabled: PARAGRAPH_REVIEW_ENABLED,
+      decisions: { schema: "tei-maker.paragraph-review.v1", pages: {} },
+      candidatesByPage: new Map(),
+      loaded: false,
+      saveAvailable: false,
+    },
   };
 
   function resolveRepoPath(path) {
@@ -331,6 +356,112 @@
 
   function normalizeText(text) {
     return text.replace(/\s+/g, " ").trim();
+  }
+
+  function parseTsv(text) {
+    const lines = text.replace(/\r\n?/g, "\n").split("\n").filter((line) => line.length);
+    if (!lines.length) return [];
+    const headers = lines[0].split("\t");
+    return lines.slice(1).map((line) => {
+      const cells = line.split("\t");
+      const row = {};
+      headers.forEach((header, index) => {
+        row[header] = cells[index] || "";
+      });
+      return row;
+    });
+  }
+
+  function candidateKey(row) {
+    return [
+      row.page || "",
+      row.fragment || "",
+      row.fragment_line || "",
+      normalizeText(row.candidate_text || "").slice(0, 96),
+    ].join("|");
+  }
+
+  function reviewStartText(item) {
+    if (typeof item === "string") return normalizeText(item);
+    if (item && typeof item === "object") return normalizeText(item.text || "");
+    return "";
+  }
+
+  function reviewStartList(pageDecision, field) {
+    const values = Array.isArray(pageDecision[field]) ? pageDecision[field] : [];
+    return values.map(reviewStartText).filter(Boolean);
+  }
+
+  function startsMatch(a, b) {
+    const left = normalizeText(a).toLocaleLowerCase();
+    const right = normalizeText(b).toLocaleLowerCase();
+    if (!left || !right) return false;
+    const leftWords = left.match(/[^\W_]+/gu) || [];
+    const rightWords = right.match(/[^\W_]+/gu) || [];
+    const compareCount = Math.min(leftWords.length, rightWords.length, 8);
+    if (compareCount < 2) return left === right;
+    return leftWords.slice(0, compareCount).join(" ") === rightWords.slice(0, compareCount).join(" ");
+  }
+
+  function pageReviewKey(page) {
+    return page ? String(page.n || (page.manifest && page.manifest.book_page) || "") : "";
+  }
+
+  function ensurePageDecision(page) {
+    const key = pageReviewKey(page);
+    if (!key) return null;
+    const decisions = state.paragraphReview.decisions;
+    if (!decisions.pages || typeof decisions.pages !== "object") decisions.pages = {};
+    if (!decisions.pages[key] || typeof decisions.pages[key] !== "object") {
+      decisions.pages[key] = {
+        page: key,
+        reviewed: false,
+        acceptedStarts: [],
+        rejectedStarts: [],
+        pageNotes: "",
+        textNotes: "",
+        layoutNotes: "",
+      };
+    }
+    return decisions.pages[key];
+  }
+
+  function pageDecision(page) {
+    const pages = state.paragraphReview.decisions.pages || {};
+    return pages[pageReviewKey(page)] || {};
+  }
+
+  function candidateDecision(row, decision) {
+    const text = row.candidate_text || "";
+    if (reviewStartList(decision, "acceptedStarts").some((start) => startsMatch(start, text))) return "accepted";
+    if (reviewStartList(decision, "rejectedStarts").some((start) => startsMatch(start, text))) return "rejected";
+    if (decision.reviewed && (row.candidate_class || "").startsWith("review-")) return "rejected";
+    return "";
+  }
+
+  function addAcceptedStart(page, text, extra = {}) {
+    const decision = ensurePageDecision(page);
+    if (!decision) return false;
+    const start = normalizeText(text);
+    if (!start) return false;
+    decision.acceptedStarts = Array.isArray(decision.acceptedStarts) ? decision.acceptedStarts : [];
+    if (!reviewStartList(decision, "acceptedStarts").some((item) => startsMatch(item, start))) {
+      decision.acceptedStarts.push({ text: start, ...extra });
+    }
+    decision.rejectedStarts = (Array.isArray(decision.rejectedStarts) ? decision.rejectedStarts : [])
+      .filter((item) => !startsMatch(reviewStartText(item), start));
+    return true;
+  }
+
+  function removeAcceptedStart(page, text) {
+    const decision = ensurePageDecision(page);
+    if (!decision) return;
+    decision.acceptedStarts = (Array.isArray(decision.acceptedStarts) ? decision.acceptedStarts : [])
+      .filter((item) => !startsMatch(reviewStartText(item), text));
+  }
+
+  function pageCandidates(page) {
+    return state.paragraphReview.candidatesByPage.get(pageReviewKey(page)) || [];
   }
 
   function prepareRenderedTextClone(clone) {
@@ -1230,6 +1361,36 @@
     }
   }
 
+  async function loadParagraphReviewData() {
+    if (!state.paragraphReview.enabled) return;
+    state.paragraphReview.loaded = false;
+    state.paragraphReview.saveAvailable = false;
+    try {
+      state.paragraphReview.decisions = await loadJson(PARAGRAPH_REVIEW_API);
+      state.paragraphReview.saveAvailable = true;
+    } catch (apiError) {
+      try {
+        state.paragraphReview.decisions = await loadJson(resolveRepoPath(PARAGRAPH_REVIEW_DECISIONS_PATH));
+      } catch (staticError) {
+        state.paragraphReview.decisions = { schema: "tei-maker.paragraph-review.v1", pages: {} };
+      }
+    }
+    try {
+      const rows = parseTsv(await loadText(resolveRepoPath(PARAGRAPH_START_AUDIT_PATH)));
+      const byPage = new Map();
+      for (const row of rows) {
+        if (!row.page) continue;
+        if (!byPage.has(row.page)) byPage.set(row.page, []);
+        byPage.get(row.page).push({ ...row, key: candidateKey(row) });
+      }
+      state.paragraphReview.candidatesByPage = byPage;
+    } catch (error) {
+      console.warn("Paragraph start audit unavailable", error);
+      state.paragraphReview.candidatesByPage = new Map();
+    }
+    state.paragraphReview.loaded = true;
+  }
+
   async function loadEditionRegistry() {
     try {
       let registry = await loadJson(resolveRepoPath(registryPath()));
@@ -1290,6 +1451,7 @@
 
     state.manifest = manifest;
     extractPages(teiDoc, manifest);
+    await loadParagraphReviewData();
     if (!state.pages.length) throw new Error("No TEI page breaks found.");
     populateEditionSelect();
     populatePageSelect();
@@ -1434,11 +1596,40 @@
     els.zoomReset.textContent = `${Math.round(state.zoom * 100)}%`;
   }
 
+  function isParagraphReviewMode() {
+    return state.paragraphReview.enabled;
+  }
+
+  function fitImageButtonLabel() {
+    if (!els.fitWidth) return;
+    if (isParagraphReviewMode()) {
+      els.fitWidth.textContent = "Height";
+      els.fitWidth.title = "Fit height";
+      els.fitWidth.setAttribute("aria-label", "Fit height");
+    } else {
+      els.fitWidth.textContent = "Fit";
+      els.fitWidth.title = "Fit width";
+      els.fitWidth.setAttribute("aria-label", "Fit width");
+    }
+  }
+
   function fitImageWidth() {
     if (!els.pageImage.naturalWidth) return;
     const available = Math.max(220, els.imageStage.clientWidth - 32);
     state.imageFitMode = true;
     setZoom(available / els.pageImage.naturalWidth);
+  }
+
+  function fitImageHeight() {
+    if (!els.pageImage.naturalHeight) return;
+    const available = Math.max(220, els.imageStage.clientHeight - 32);
+    state.imageFitMode = true;
+    setZoom(available / els.pageImage.naturalHeight);
+  }
+
+  function fitImageDefault() {
+    if (isParagraphReviewMode()) fitImageHeight();
+    else fitImageWidth();
   }
 
   function renderImage(page) {
@@ -1476,7 +1667,7 @@
     els.pageImage.onload = () => {
       els.pageImage.hidden = false;
       els.imageFallback.hidden = true;
-      if (state.imageFitMode) fitImageWidth();
+      if (state.imageFitMode) fitImageDefault();
       else setZoom(1);
     };
     els.pageImage.onerror = () => {
@@ -1527,6 +1718,186 @@
     for (const selected of els.teiText.querySelectorAll(".selected")) selected.classList.remove("selected");
   }
 
+  function detectedParagraphStarts(page) {
+    return Array.from(page.fragment.querySelectorAll(".tei-p")).map((paragraph) => {
+      const line = paragraph.querySelector(".tei-line");
+      return {
+        line: line ? line.dataset.line || "" : "",
+        text: normalizedRenderedText(paragraph).slice(0, 140),
+      };
+    }).filter((item) => item.text);
+  }
+
+  function renderReviewList(container, items, emptyText, renderItem) {
+    container.innerHTML = "";
+    if (!items.length) {
+      const empty = document.createElement("div");
+      empty.className = "review-empty";
+      empty.textContent = emptyText;
+      container.appendChild(empty);
+      return;
+    }
+    for (const item of items) container.appendChild(renderItem(item));
+  }
+
+  function scrollToRenderedLine(line) {
+    if (!line) return;
+    const anchor = Array.from(els.teiText.querySelectorAll(".tei-line"))
+      .find((item) => item.dataset.line === String(line));
+    if (anchor) anchor.scrollIntoView({ block: "center" });
+  }
+
+  function syncReviewInputs(page) {
+    const decision = ensurePageDecision(page);
+    if (!decision) return;
+    decision.pageNotes = els.paragraphPageNotes.value;
+    decision.textNotes = els.paragraphTextNotes.value;
+    decision.layoutNotes = els.paragraphLayoutNotes.value;
+  }
+
+  function renderParagraphReview(page) {
+    if (!state.paragraphReview.enabled) return;
+    els.layout.classList.add("paragraph-review-mode");
+    els.paragraphReviewPanel.hidden = false;
+    const enabledForEdition = (state.edition.id || "") === "sprengel1830-comm";
+    const decision = ensurePageDecision(page);
+    const candidates = pageCandidates(page);
+    els.saveParagraphReview.disabled = !enabledForEdition || !state.paragraphReview.saveAvailable;
+    els.paragraphReviewStatus.textContent = !enabledForEdition
+      ? "Switch to Sprengel Commentarius"
+      : decision.reviewed
+        ? `Page ${pageReviewKey(page)} complete`
+        : `Page ${pageReviewKey(page)} open`;
+    els.paragraphPageNotes.value = decision.pageNotes || decision.notes || "";
+    els.paragraphTextNotes.value = decision.textNotes || "";
+    els.paragraphLayoutNotes.value = decision.layoutNotes || "";
+
+    renderReviewList(
+      els.paragraphCandidates,
+      candidates,
+      "No candidate rows for this page.",
+      (row) => {
+        const status = candidateDecision(row, decision);
+        const item = document.createElement("div");
+        item.className = `review-item ${status}`.trim();
+        const title = document.createElement("div");
+        title.className = "review-item-title";
+        title.textContent = row.candidate_text || "";
+        const meta = document.createElement("div");
+        meta.className = "review-item-meta";
+        meta.textContent = [
+          row.tei_line ? `line ${row.tei_line}` : "",
+          row.candidate_class || "",
+          row.reason || "",
+          status || row.current_state || "",
+        ].filter(Boolean).join(" · ");
+        const actions = document.createElement("div");
+        actions.className = "review-item-actions";
+        const inspect = document.createElement("button");
+        inspect.type = "button";
+        inspect.textContent = "Line";
+        inspect.addEventListener("click", () => scrollToRenderedLine(row.tei_line));
+        const accept = document.createElement("button");
+        accept.type = "button";
+        accept.textContent = status === "accepted" ? "Accepted" : "Accept";
+        accept.disabled = status === "accepted";
+        accept.addEventListener("click", () => {
+          addAcceptedStart(page, row.candidate_text, {
+            candidateKey: row.key,
+            fragment: row.fragment || "",
+            fragmentLine: row.fragment_line || "",
+            teiLine: row.tei_line || "",
+          });
+          renderParagraphReview(page);
+        });
+        actions.append(inspect, accept);
+        item.append(title, meta, actions);
+        return item;
+      },
+    );
+
+    renderReviewList(
+      els.detectedParagraphStarts,
+      detectedParagraphStarts(page),
+      "No paragraph blocks detected on this page.",
+      (start) => {
+        const item = document.createElement("div");
+        item.className = "review-item";
+        item.innerHTML = '<div class="review-item-title"></div><div class="review-item-meta"></div>';
+        item.querySelector(".review-item-title").textContent = start.text;
+        item.querySelector(".review-item-meta").textContent = start.line ? `line ${start.line}` : "";
+        item.addEventListener("click", () => scrollToRenderedLine(start.line));
+        return item;
+      },
+    );
+
+    renderReviewList(
+      els.acceptedParagraphStarts,
+      reviewStartList(decision, "acceptedStarts"),
+      "No accepted starts for this page.",
+      (text) => {
+        const item = document.createElement("div");
+        item.className = "review-item accepted";
+        const title = document.createElement("div");
+        title.className = "review-item-title";
+        title.textContent = text;
+        const actions = document.createElement("div");
+        actions.className = "review-item-actions";
+        const remove = document.createElement("button");
+        remove.type = "button";
+        remove.textContent = "Remove";
+        remove.addEventListener("click", () => {
+          removeAcceptedStart(page, text);
+          renderParagraphReview(page);
+        });
+        actions.appendChild(remove);
+        item.append(title, actions);
+        return item;
+      },
+    );
+  }
+
+  function markParagraphPageComplete() {
+    const page = state.pages[state.currentIndex];
+    const decision = ensurePageDecision(page);
+    if (!decision) return;
+    syncReviewInputs(page);
+    decision.reviewed = true;
+    const accepted = reviewStartList(decision, "acceptedStarts");
+    const rejected = [];
+    for (const row of pageCandidates(page)) {
+      if ((row.candidate_class || "").startsWith("review-") && !accepted.some((text) => startsMatch(text, row.candidate_text || ""))) {
+        rejected.push({ text: row.candidate_text || "", candidateKey: row.key });
+      }
+    }
+    decision.rejectedStarts = rejected;
+    renderParagraphReview(page);
+  }
+
+  async function saveParagraphReviewPage() {
+    const page = state.pages[state.currentIndex];
+    const decision = ensurePageDecision(page);
+    if (!decision) return;
+    syncReviewInputs(page);
+    state.paragraphReview.decisions.schema = "tei-maker.paragraph-review.v1";
+    state.paragraphReview.decisions.edition = "tlg0656.tlg001.sprengel1830-comm";
+    state.paragraphReview.decisions.updatedAt = new Date().toISOString();
+    try {
+      const response = await fetch(PARAGRAPH_REVIEW_API, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(state.paragraphReview.decisions, null, 2),
+      });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      state.paragraphReview.decisions = await response.json();
+      showToast(`Saved page ${pageReviewKey(page)}`);
+      renderParagraphReview(page);
+    } catch (error) {
+      showToast("Review server is not writable");
+      console.error("Paragraph review save failed", error);
+    }
+  }
+
   function showPage(index, options = {}) {
     if (!state.pages.length) return;
     const nextIndex = Math.max(0, Math.min(state.pages.length - 1, index));
@@ -1561,6 +1932,7 @@
     renderImage(page);
     updateActiveSection(page);
     updateSearchMarkers();
+    renderParagraphReview(page);
     if (!options.skipHash) updateHash(page);
   }
 
@@ -1758,6 +2130,10 @@
   }
 
   function bindEvents() {
+    fitImageButtonLabel();
+    if (!state.paragraphReview.enabled) {
+      els.paragraphReviewPanel.hidden = true;
+    }
     els.editionSelect.addEventListener("change", async () => {
       const edition = state.editions.find((item) => item.id === els.editionSelect.value);
       if (!edition) return;
@@ -1789,6 +2165,21 @@
       else moveSearch(1);
     });
     els.copyCorrection.addEventListener("click", copyCorrectionNote);
+    els.addCustomParagraphStart.addEventListener("click", () => {
+      const page = state.pages[state.currentIndex];
+      if (addAcceptedStart(page, els.customParagraphStart.value, { source: "custom" })) {
+        els.customParagraphStart.value = "";
+        renderParagraphReview(page);
+      }
+    });
+    els.markParagraphPageComplete.addEventListener("click", markParagraphPageComplete);
+    els.saveParagraphReview.addEventListener("click", saveParagraphReviewPage);
+    for (const input of [els.paragraphPageNotes, els.paragraphTextNotes, els.paragraphLayoutNotes]) {
+      input.addEventListener("input", () => {
+        const page = state.pages[state.currentIndex];
+        syncReviewInputs(page);
+      });
+    }
     els.textViewToggle.addEventListener("click", () => {
       state.textViewMode = state.textViewMode === "parallel" ? "diplomatic" : "parallel";
       showPage(state.currentIndex, { skipHash: true });
@@ -1813,15 +2204,38 @@
       state.imageFitMode = false;
       setZoom(1);
     });
-    els.fitWidth.addEventListener("click", fitImageWidth);
+    els.fitWidth.addEventListener("click", fitImageDefault);
     window.addEventListener("resize", () => {
-      if (state.imageFitMode) fitImageWidth();
+      if (state.imageFitMode) fitImageDefault();
     });
     window.addEventListener("hashchange", () => {
       const index = pageFromHash();
       if (index >= 0 && index !== state.currentIndex) showPage(index, { skipHash: true });
     });
     window.addEventListener("keydown", handleKeyboardNavigation);
+    window.addEventListener("keydown", (event) => {
+      if (!state.paragraphReview.enabled || event.altKey || event.ctrlKey || event.metaKey) return;
+      if (!isNavigationShortcutTarget(event.target)) return;
+      const page = state.pages[state.currentIndex];
+      if (!page) return;
+      if (event.key.toLowerCase() === "c") {
+        els.customParagraphStart.focus();
+        event.preventDefault();
+      } else if (event.key.toLowerCase() === "n") {
+        markParagraphPageComplete();
+        event.preventDefault();
+      } else if (event.key.toLowerCase() === "s") {
+        saveParagraphReviewPage();
+        event.preventDefault();
+      } else if (event.key.toLowerCase() === "a") {
+        const decision = ensurePageDecision(page);
+        const next = pageCandidates(page).find((row) => candidateDecision(row, decision) !== "accepted");
+        if (next && addAcceptedStart(page, next.candidate_text, { candidateKey: next.key })) {
+          renderParagraphReview(page);
+          event.preventDefault();
+        }
+      }
+    });
   }
 
   async function init() {

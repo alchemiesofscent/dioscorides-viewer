@@ -17,6 +17,10 @@
   box-sizing: border-box;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 html,
 body {
   height: 100%;
@@ -30,7 +34,8 @@ body {
 
 button,
 input,
-select {
+select,
+textarea {
   font: inherit;
 }
 
@@ -59,7 +64,8 @@ button:hover:not(:disabled),
 
 button:disabled,
 input:disabled,
-select:disabled {
+select:disabled,
+textarea:disabled {
   cursor: not-allowed;
   opacity: 0.55;
 }
@@ -129,13 +135,19 @@ select:disabled {
 }
 
 select,
-input {
+input,
+textarea {
   min-height: 34px;
   border: 1px solid var(--line);
   border-radius: 6px;
   background: #ffffff;
   color: var(--ink);
   padding: 6px 8px;
+}
+
+textarea {
+  min-height: 72px;
+  resize: vertical;
 }
 
 select {
@@ -163,9 +175,18 @@ select {
   min-height: 0;
 }
 
+.layout.paragraph-review-mode {
+  grid-template-columns: 230px minmax(420px, 1fr) minmax(380px, 0.95fr);
+  grid-template-rows: minmax(0, 2fr) minmax(0, 1fr);
+  grid-template-areas:
+    "toc text image"
+    "toc review image";
+}
+
 .sidebar,
 .text-pane,
-.image-pane {
+.image-pane,
+.review-pane {
   min-height: 0;
   border-right: 1px solid var(--line);
   background: var(--panel);
@@ -173,6 +194,8 @@ select {
 
 .image-pane {
   border-right: 0;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
 }
 
 .text-pane {
@@ -183,6 +206,28 @@ select {
 .sidebar {
   display: grid;
   grid-template-rows: auto 1fr;
+}
+
+.review-pane {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+.layout.paragraph-review-mode .sidebar {
+  grid-area: toc;
+}
+
+.layout.paragraph-review-mode .text-pane {
+  grid-area: text;
+  border-bottom: 1px solid var(--line);
+}
+
+.layout.paragraph-review-mode .review-pane {
+  grid-area: review;
+}
+
+.layout.paragraph-review-mode .image-pane {
+  grid-area: image;
 }
 
 .sidebar-head,
@@ -210,6 +255,7 @@ select {
 }
 
 .section-list {
+  min-height: 0;
   overflow: auto;
   padding: 8px;
 }
@@ -283,6 +329,7 @@ select {
 
 .tei-text {
   height: auto;
+  min-height: 0;
   overflow: auto;
   padding: 18px 22px 48px;
   font-family: Georgia, "Times New Roman", serif;
@@ -299,6 +346,99 @@ select {
   margin: 20px 0;
   padding: 20px;
   text-align: center;
+}
+
+.review-head {
+  align-items: start;
+}
+
+.review-body {
+  min-height: 0;
+  overflow: auto;
+  padding: 12px;
+}
+
+.review-section {
+  border-bottom: 1px solid var(--line);
+  padding: 0 0 14px;
+  margin: 0 0 14px;
+}
+
+.review-section h3 {
+  font-size: 12px;
+  letter-spacing: 0;
+  line-height: 1.2;
+  margin: 0 0 8px;
+  text-transform: uppercase;
+}
+
+.review-list {
+  display: grid;
+  gap: 8px;
+}
+
+.review-list.compact {
+  gap: 4px;
+}
+
+.review-empty {
+  color: var(--muted);
+  font-size: 13px;
+  padding: 6px 0;
+}
+
+.review-item {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fffdf8;
+  padding: 8px;
+}
+
+.review-item.accepted {
+  border-color: #2f6f73;
+  background: #eef7f4;
+}
+
+.review-item.rejected {
+  border-color: #b8aa94;
+  background: #f3efe7;
+  color: #6d6254;
+}
+
+.review-item-title {
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.review-item-meta {
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 4px;
+}
+
+.review-item-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.review-item-actions button {
+  min-height: 28px;
+  padding: 4px 7px;
+}
+
+.review-custom-field,
+.review-note-field {
+  margin-bottom: 8px;
+}
+
+.review-custom-field input,
+.review-note-field textarea {
+  width: 100%;
+}
+
+.review-complete-button {
+  width: 100%;
 }
 
 .tei-page-boundary {
@@ -588,7 +728,7 @@ select {
 }
 
 .image-stage {
-  height: calc(100% - 58px);
+  min-height: 0;
   overflow: auto;
   background: #302d28;
   padding: 16px;
@@ -638,6 +778,16 @@ select {
     grid-template-columns: 1fr;
   }
 
+  .layout.paragraph-review-mode {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+      "toc"
+      "text"
+      "review"
+      "image";
+  }
+
   .tei-parallel {
     display: block;
   }
@@ -647,7 +797,8 @@ select {
   }
 
   .text-pane,
-  .image-pane {
+  .image-pane,
+  .review-pane {
     min-height: 70vh;
   }
 
@@ -658,6 +809,10 @@ select {
 
   .text-pane .tei-text {
     height: auto;
+  }
+
+  .layout.paragraph-review-mode .text-pane {
+    border-bottom: 0;
   }
 }
 

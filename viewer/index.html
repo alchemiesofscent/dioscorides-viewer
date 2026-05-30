@@ -57,6 +57,51 @@
         <article id="teiText" class="tei-text" tabindex="0"></article>
       </section>
 
+      <aside id="paragraphReviewPanel" class="review-pane" aria-label="Paragraph review" hidden>
+        <div class="pane-head review-head">
+          <div>
+            <h2>Paragraph Review</h2>
+            <div id="paragraphReviewStatus" class="muted">Not loaded</div>
+          </div>
+          <button id="saveParagraphReview" type="button" disabled title="Save page review">Save</button>
+        </div>
+        <div class="review-body">
+          <section class="review-section">
+            <h3>Candidate Starts</h3>
+            <div id="paragraphCandidates" class="review-list"></div>
+          </section>
+          <section class="review-section">
+            <h3>Detected Starts</h3>
+            <div id="detectedParagraphStarts" class="review-list compact"></div>
+          </section>
+          <section class="review-section">
+            <h3>Accepted Starts</h3>
+            <div id="acceptedParagraphStarts" class="review-list compact"></div>
+            <label class="field review-custom-field">
+              <span>Custom start</span>
+              <input id="customParagraphStart" type="text" placeholder="Start text" autocomplete="off">
+            </label>
+            <button id="addCustomParagraphStart" type="button">Add custom start</button>
+          </section>
+          <section class="review-section">
+            <h3>Notes</h3>
+            <label class="field review-note-field">
+              <span>Page</span>
+              <textarea id="paragraphPageNotes" rows="3"></textarea>
+            </label>
+            <label class="field review-note-field">
+              <span>Text repair</span>
+              <textarea id="paragraphTextNotes" rows="3"></textarea>
+            </label>
+            <label class="field review-note-field">
+              <span>Layout repair</span>
+              <textarea id="paragraphLayoutNotes" rows="3"></textarea>
+            </label>
+          </section>
+          <button id="markParagraphPageComplete" class="review-complete-button" type="button">No more starts</button>
+        </div>
+      </aside>
+
       <section class="image-pane" aria-label="Scanned page image">
         <div class="pane-head">
           <div>

@@ -4,6 +4,10 @@
 - Hyphenation audit review rows: 102
 - Page furniture review/action rows: 0
 - Paragraph audit review rows: 10
+- Paragraph start candidate rows: 1241
+- Paragraph review accepted starts: 28
+- Paragraph review rejected starts: 11
+- Paragraph review pages with notes: 4
 - Pages scanned for page furniture: 328
 - Page numbers inserted: 0
 - Page numbers split from running heads: 0

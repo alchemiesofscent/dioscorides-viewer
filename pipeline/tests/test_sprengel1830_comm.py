@@ -937,8 +937,11 @@ def test_fragment_paragraph_recovery_skips_reviewed_quote_line(tmp_path):
 
     stats = recover_fragment_paragraphs(root, tmp_path)
 
-    assert stats.skipped == 0
+    assert stats.skipped == 1
     assert len(root.findall(f".//{TEI}p")) == 1
+    row = next(row for row in stats.start_rows if row["candidate_text"].startswith("Τὴν"))
+    assert row["candidate_class"] == "reviewed"
+    assert row["current_state"] == "skipped"
 
 
 def test_fragment_paragraph_recovery_merges_page_629_continuation_line(tmp_path):
@@ -963,7 +966,7 @@ def test_fragment_paragraph_recovery_merges_page_629_continuation_line(tmp_path)
 
     stats = recover_fragment_paragraphs(root, tmp_path)
 
-    assert stats.skipped == 0
+    assert stats.skipped == 1
     assert stats.merged_false_starts == 1
     assert stats.split == 0
     assert len(root.findall(f".//{TEI}p")) == 1
@@ -991,9 +994,225 @@ def test_fragment_paragraph_recovery_merges_page_634_full_line_false_start(tmp_p
 
     stats = recover_fragment_paragraphs(root, tmp_path)
 
-    assert stats.merged_false_starts == 1
+    assert stats.merged_false_starts == 0
+    assert stats.split == 0
+    assert len(root.findall(f".//{TEI}p")) == 2
+    row = next(row for row in stats.start_rows if row["candidate_text"].startswith("Tota planta"))
+    assert row["candidate_class"] == "review-terminal-capital"
+    assert row["current_state"] == "already-paragraph"
+
+
+def test_fragment_paragraph_recovery_splits_single_letter_latin_cue(tmp_path):
+    root = _parse(
+        '<pb n="644" source="https://archive.org/download/b23982500_0002/'
+        'b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0650.jp2"/>'
+        '<p><lb n="5"/>colebantur et in Tuscorum regione. Sabinum denique'
+        '<lb n="6"/>ad compositiones utilissimum iudicat.'
+        '<lb n="7"/>E Graecis vinis a nostro chium maxime praedicatur,</p>'
+    )
+    _write_fragment(
+        tmp_path,
+        "b23982500_0002_0650.xml",
+        '<pb n="643"/>colebantur et in Tuscorum regione. Sabinum denique<lb/>'
+        'ad compositiones utilissimum iudicat.<lb/>'
+        'E Graecis vinis a nostro chium maxime praedicatur,<lb/>',
+    )
+
+    stats = recover_fragment_paragraphs(root, tmp_path)
+
+    assert stats.split == 1
+    paragraphs = root.findall(f".//{TEI}p")
+    assert len(paragraphs) == 2
+    assert _flat_text(paragraphs[1]).startswith("E Graecis")
+
+
+def test_fragment_paragraph_recovery_reviews_terminal_transition(tmp_path):
+    root = _parse(
+        '<pb n="644" source="https://archive.org/download/b23982500_0002/'
+        'b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0650.jp2"/>'
+        '<p><lb n="16"/>Laconia, quae Alcman apyra kai antheos odonta dixit.'
+        '<lb n="17"/>De asiaticis vinis indicium diversum est. Noster vi</p>'
+    )
+    _write_fragment(
+        tmp_path,
+        "b23982500_0002_0650.xml",
+        '<pb n="644"/>Laconia, quae Alcman apyra kai antheos odonta dixit.<lb/>'
+        'De asiaticis vinis indicium diversum est. Noster vi<lb/>',
+    )
+
+    stats = recover_fragment_paragraphs(root, tmp_path)
+
     assert stats.split == 0
     assert len(root.findall(f".//{TEI}p")) == 1
+    assert stats.start_rows[0]["reason"] == "terminal-transition"
+    assert stats.start_rows[0]["candidate_class"] == "review-transition"
+    assert stats.start_rows[0]["previous_length"]
+    assert stats.start_rows[0]["line_width"]
+    assert stats.start_rows[0]["review_decision"] == ""
+    assert stats.start_rows[0]["review_note"] == ""
+    assert stats.start_rows[0]["current_state"] == "inline-candidate"
+    assert stats.start_rows[0]["proposed_action"].startswith("review")
+
+
+def test_fragment_paragraph_recovery_reviews_page_646_terminal_capital(tmp_path):
+    root = _parse(
+        '<pb n="646" source="https://archive.org/download/b23982500_0002/'
+        'b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0652.jp2"/>'
+        '<p><lb n="28"/>rubrum habent, quod LXX. priori loco milton, posteriori'
+        '<lb n="29"/>graphida, Chaldaeus paraphrastes vero sikra vertit.'
+        '<lb n="30"/>Vulgatissima est cinnabaris nostrae, hydrargyri mi</p>'
+    )
+    _write_fragment(
+        tmp_path,
+        "b23982500_0002_0652.xml",
+        '<pb n="646"/>rubrum habent, quod LXX. priori loco milton, posteriori<lb/>'
+        'graphida, Chaldaeus paraphrastes vero sikra vertit.<lb/>'
+        'Vulgatissima est cinnabaris nostrae, hydrargyri mi-<lb break="no"/>',
+    )
+
+    stats = recover_fragment_paragraphs(root, tmp_path)
+
+    assert stats.split == 0
+    assert len(root.findall(f".//{TEI}p")) == 1
+    row = stats.start_rows[0]
+    assert row["candidate_text"].startswith("Vulgatissima est cinnabaris")
+    assert row["candidate_class"] == "review-terminal-capital"
+    assert row["current_state"] == "inline-candidate"
+    assert row["prev_current_sum"]
+    assert row["current_next_sum"]
+    assert row["prev_triple_gap"]
+    assert row["boundary_triple_gap"]
+    assert row["next_triple_gap"]
+    assert row["gap_delta"]
+
+
+def test_fragment_paragraph_recovery_splits_reviewed_page_643_starts(tmp_path):
+    root = _parse(
+        '<pb n="643" source="https://archive.org/download/b23982500_0002/'
+        'b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0649.jp2"/>'
+        '<p><lb n="5"/>colebantur et in Tuscorum regione. Sabinum denique'
+        '<lb n="6"/>ad compositiones utilissimum iudicat.'
+        '<lb n="7"/>E Graecis vinis a nostro chium maxime praedicatur,'
+        '<lb n="16"/>Laconia, quae Alcman apyra kai antheos odonta dixit.'
+        '<lb n="17"/>De asiaticis vinis indicium diversum est. Noster vi</p>'
+    )
+    _write_fragment(
+        tmp_path,
+        "b23982500_0002_0649.xml",
+        '<pb n="643"/>colebantur et in Tuscorum regione. Sabinum denique<lb/>'
+        'ad compositiones utilissimum iudicat.<lb/>'
+        'E Graecis vinis a nostro chium maxime praedicatur,<lb/>'
+        'Laconia, quae Alcman apyra kai antheos odonta dixit.<lb/>'
+        'De asiaticis vinis indicium diversum est. Noster vi<lb/>',
+    )
+
+    decisions = {
+        "pages": {
+            "643": {
+                "reviewed": True,
+                "acceptedStarts": [
+                    {"text": "E Graecis vinis a nostro chium maxime praedicatur"},
+                    {"text": "De asiaticis vinis indicium diversum est"},
+                ],
+            }
+        }
+    }
+
+    stats = recover_fragment_paragraphs(root, tmp_path, review_decisions=decisions)
+
+    assert stats.split == 2
+    paragraphs = root.findall(f".//{TEI}p")
+    assert len(paragraphs) == 3
+    assert _flat_text(paragraphs[1]).startswith("E Graecis")
+    assert _flat_text(paragraphs[2]).startswith("De asiaticis")
+    assert [row["review_decision"] for row in stats.start_rows] == ["accepted", "accepted"]
+
+
+def test_page_complete_review_rejects_omitted_review_candidates(tmp_path):
+    root = _parse(
+        '<pb n="345" source="https://archive.org/download/b23982500_0002/'
+        'b23982500_0002_jp2.zip/b23982500_0002_jp2%2Fb23982500_0002_0353.jp2"/>'
+        '<p><lb n="13"/>tum euxinum Bosporumque thracicum advehebantur.'
+        '<lb n="14"/>Sed fuit etiam alia indicarum mercium via, e Babylone</p>'
+    )
+    _write_fragment(
+        tmp_path,
+        "b23982500_0002_0353.xml",
+        '<pb n="345"/>tum euxinum Bosporumque thracicum advehebantur.<lb/>'
+        'Sed fuit etiam alia indicarum mercium via, e Babylone<lb/>',
+    )
+    decisions = {"pages": {"345": {"reviewed": True, "acceptedStarts": []}}}
+
+    stats = recover_fragment_paragraphs(root, tmp_path, review_decisions=decisions)
+
+    assert stats.split == 0
+    assert stats.review_rejected == 1
+    assert stats.unresolved == []
+    assert len(root.findall(f".//{TEI}p")) == 1
+    row = stats.start_rows[0]
+    assert row["review_decision"] == "rejected"
+    assert row["current_state"] == "reviewed-rejected"
+
+
+def test_review_decision_accepts_custom_start_not_in_candidate_tsv(tmp_path):
+    root = _parse(
+        '<pb n="341" source="https://archive.org/download/b23982500_0002/'
+        'b23982500_0002_jp2.zip/b23982500_0002_0349.jp2"/>'
+        '<p><lb n="21"/>ordinary lower-case continuation'
+        '<lb n="22"/>custom start hidden by the heuristic</p>'
+    )
+    _write_fragment(
+        tmp_path,
+        "b23982500_0002_0349.xml",
+        '<pb n="341"/>ordinary lower-case continuation<lb/>'
+        'custom start hidden by the heuristic<lb/>',
+    )
+    decisions = {
+        "pages": {
+            "341": {
+                "reviewed": True,
+                "acceptedStarts": [{"text": "custom start hidden by the heuristic"}],
+            }
+        }
+    }
+
+    stats = recover_fragment_paragraphs(root, tmp_path, review_decisions=decisions)
+
+    assert stats.split == 1
+    paragraphs = root.findall(f".//{TEI}p")
+    assert len(paragraphs) == 2
+    assert _flat_text(paragraphs[1]).startswith("custom start hidden")
+    row = stats.start_rows[0]
+    assert row["reason"] == "review-custom"
+    assert row["review_decision"] == "accepted"
+
+
+def test_review_notes_are_counted_but_do_not_mutate_tei(tmp_path):
+    root = _parse(
+        '<pb n="359" source="https://archive.org/download/b23982500_0002/'
+        'b23982500_0002_jp2.zip/b23982500_0002_0367.jp2"/>'
+        '<p><lb n="1"/>De Bryo<lb n="2"/><foreign xml:lang="grc">Βρύον</foreign> varium</p>'
+    )
+    _write_fragment(
+        tmp_path,
+        "b23982500_0002_0367.xml",
+        '<pb n="359"/>De Bryo<lb/><foreign xml:lang="grc">Βρύον</foreign> varium<lb/>',
+    )
+    before = etree.tostring(root, encoding="unicode")
+    decisions = {
+        "pages": {
+            "359": {
+                "reviewed": True,
+                "acceptedStarts": [],
+                "layoutNotes": ["false linebreak after De Bryo. before Βρύον"],
+            }
+        }
+    }
+
+    stats = recover_fragment_paragraphs(root, tmp_path, review_decisions=decisions)
+
+    assert stats.review_notes == 1
+    assert etree.tostring(root, encoding="unicode") == before
 
 
 def test_reviewed_inline_label_moves_into_body_line():

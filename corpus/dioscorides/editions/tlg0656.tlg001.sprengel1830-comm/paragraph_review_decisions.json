@@ -1,0 +1,322 @@
+{
+  "schema": "tei-maker.paragraph-review.v1",
+  "edition": "tlg0656.tlg001.sprengel1830-comm",
+  "updatedAt": "2026-05-21T04:10:32.813Z",
+  "pages": {
+    "339": {
+      "page": "339",
+      "reviewed": true,
+      "acceptedStarts": [
+        {
+          "text": "Sequitur Cratevas herbarius, qui Mithridati plantam",
+          "candidateKey": "339|b23982500_0002_0347.xml|16|Sequitur Cratevas herbarius, qui Mithridati plantam",
+          "fragment": "b23982500_0002_0347.xml",
+          "fragmentLine": "16",
+          "teiLine": "19"
+        },
+        {
+          "text": "Ut, quonam iure opus susceperit, patescat, censura ma-",
+          "candidateKey": "339|b23982500_0002_0347.xml|2|Ut, quonam iure opus susceperit, patescat, censura ma-",
+          "fragment": "b23982500_0002_0347.xml",
+          "fragmentLine": "2",
+          "teiLine": "5"
+        }
+      ],
+      "rejectedStarts": [
+        {
+          "text": "A Plinio pluribus locis"
+        },
+        {
+          "text": "Scripsisse autem eum non de omni materia medica"
+        }
+      ],
+      "pageNotes": "",
+      "textNotes": "",
+      "layoutNotes": ""
+    },
+    "340": {
+      "page": "340",
+      "reviewed": false,
+      "acceptedStarts": [
+        {
+          "text": "Andreas, quem medicum noster appellat, deductis",
+          "candidateKey": "340|b23982500_0002_0348.xml|7|Andreas, quem medicum noster appellat, deductis",
+          "fragment": "b23982500_0002_0348.xml",
+          "fragmentLine": "7",
+          "teiLine": "6"
+        },
+        {
+          "text": "μικῷ effigies plantarum pinxit.7 Eum noster saepius ex-",
+          "candidateKey": "340|b23982500_0002_0348.xml|2|μικῷ effigies plantarum pinxit.7 Eum noster saepius ex-",
+          "fragment": "b23982500_0002_0348.xml",
+          "fragmentLine": "2",
+          "teiLine": "1"
+        },
+        {
+          "text": "His priscorum nomine insignitis, ad recentiores ac-",
+          "candidateKey": "340|b23982500_0002_0348.xml|11|His priscorum nomine insignitis, ad recentiores ac-",
+          "fragment": "b23982500_0002_0348.xml",
+          "fragmentLine": "11",
+          "teiLine": "10"
+        }
+      ],
+      "rejectedStarts": [],
+      "pageNotes": "",
+      "textNotes": "",
+      "layoutNotes": "false line break, 26-27: methodici τὴν\nμετασύγκρισιν\nshould be on one line"
+    },
+    "341": {
+      "page": "341",
+      "reviewed": true,
+      "acceptedStarts": [
+        {
+          "text": "Nominat autem Dioscorides inter Asclepiadis asseclas"
+        },
+        {
+          "text": "De Nicerato nihil liquet"
+        },
+        {
+          "text": "Nec, in tanta memoriarum caritate"
+        },
+        {
+          "text": "Qui hic Νίγερ"
+        }
+      ],
+      "rejectedStarts": [],
+      "pageNotes": "",
+      "textNotes": "",
+      "layoutNotes": "false line beak 15-16: laíov\n᾽Ιούλιον esse ponendum autumavit, Goupylus vero et \nshould be on one line"
+    },
+    "342": {
+      "page": "342",
+      "reviewed": true,
+      "acceptedStarts": [
+        {
+          "text": "Θελπίδη"
+        },
+        {
+          "text": "Appellationem radicis maricae"
+        },
+        {
+          "text": "Ὀπερτρίτος"
+        },
+        {
+          "text": "Νάο aegyptiaca vox est"
+        },
+        {
+          "text": "Iam accedo ad descriptionem"
+        }
+      ],
+      "rejectedStarts": [],
+      "pageNotes": "",
+      "textNotes": "",
+      "layoutNotes": ""
+    },
+    "344": {
+      "page": "344",
+      "reviewed": true,
+      "acceptedStarts": [
+        {
+          "text": "Aliud cognomen"
+        },
+        {
+          "text": "In voce ἐρυσίσκηπτρον"
+        }
+      ],
+      "rejectedStarts": [],
+      "pageNotes": "",
+      "textNotes": "",
+      "layoutNotes": ""
+    },
+    "345": {
+      "page": "345",
+      "reviewed": true,
+      "acceptedStarts": [],
+      "rejectedStarts": [],
+      "pageNotes": "No additional paragraph starts.",
+      "textNotes": "",
+      "layoutNotes": ""
+    },
+    "346": {
+      "page": "346",
+      "reviewed": true,
+      "acceptedStarts": [
+        {
+          "text": "Τράγον"
+        }
+      ],
+      "rejectedStarts": [],
+      "pageNotes": "",
+      "textNotes": "",
+      "layoutNotes": ""
+    },
+    "347": {
+      "page": "347",
+      "reviewed": true,
+      "acceptedStarts": [
+        {
+          "text": "Οὐλακῖτις"
+        }
+      ],
+      "rejectedStarts": [],
+      "pageNotes": "",
+      "textNotes": "Οὐλακῖτις likely should be Θὐλακῖτις.",
+      "layoutNotes": ""
+    },
+    "349": {
+      "page": "349",
+      "reviewed": true,
+      "acceptedStarts": [
+        {
+          "text": "Optimam speciem"
+        }
+      ],
+      "rejectedStarts": [],
+      "pageNotes": "",
+      "textNotes": "",
+      "layoutNotes": ""
+    },
+    "350": {
+      "page": "350",
+      "reviewed": true,
+      "acceptedStarts": [
+        {
+          "text": "Id tamen notandum"
+        }
+      ],
+      "rejectedStarts": [],
+      "pageNotes": "",
+      "textNotes": "",
+      "layoutNotes": ""
+    },
+    "351": {
+      "page": "351",
+      "reviewed": true,
+      "acceptedStarts": [
+        {
+          "text": "Septem"
+        }
+      ],
+      "rejectedStarts": [],
+      "pageNotes": "",
+      "textNotes": "",
+      "layoutNotes": ""
+    },
+    "353": {
+      "page": "353",
+      "reviewed": true,
+      "acceptedStarts": [
+        {
+          "text": "Nec de Rauwolfii"
+        },
+        {
+          "text": "C. Hofmannus malam"
+        },
+        {
+          "text": "Ἀμωμίς illa"
+        }
+      ],
+      "rejectedStarts": [],
+      "pageNotes": "",
+      "textNotes": "",
+      "layoutNotes": ""
+    },
+    "354": {
+      "page": "354",
+      "reviewed": true,
+      "acceptedStarts": [
+        {
+          "text": "Helenii radix"
+        }
+      ],
+      "rejectedStarts": [],
+      "pageNotes": "",
+      "textNotes": "",
+      "layoutNotes": ""
+    },
+    "355": {
+      "page": "355",
+      "reviewed": true,
+      "acceptedStarts": [
+        {
+          "text": "Theophrastus"
+        }
+      ],
+      "rejectedStarts": [],
+      "pageNotes": "",
+      "textNotes": "",
+      "layoutNotes": ""
+    },
+    "356": {
+      "page": "356",
+      "reviewed": true,
+      "acceptedStarts": [
+        {
+          "text": "In ora Arabiae maritima"
+        },
+        {
+          "text": "In Aegyptum igitur"
+        }
+      ],
+      "rejectedStarts": [],
+      "pageNotes": "",
+      "textNotes": "",
+      "layoutNotes": ""
+    },
+    "357": {
+      "page": "357",
+      "reviewed": true,
+      "acceptedStarts": [
+        {
+          "text": "Hactenus de patria"
+        },
+        {
+          "text": "Egregie primus recentiorum"
+        }
+      ],
+      "rejectedStarts": [],
+      "pageNotes": "",
+      "textNotes": "",
+      "layoutNotes": ""
+    },
+    "359": {
+      "page": "359",
+      "reviewed": true,
+      "acceptedStarts": [
+        {
+          "text": "Arabes vocant"
+        }
+      ],
+      "rejectedStarts": [],
+      "pageNotes": "",
+      "textNotes": "",
+      "layoutNotes": "False linebreak after De Bryo. before Βρύον."
+    },
+    "360": {
+      "page": "360",
+      "reviewed": true,
+      "acceptedStarts": [
+        {
+          "text": "Iam ad ipsam"
+        }
+      ],
+      "rejectedStarts": [],
+      "pageNotes": "",
+      "textNotes": "Duplicate ridi. at page start.",
+      "layoutNotes": ""
+    },
+    "364": {
+      "page": "364",
+      "reviewed": true,
+      "acceptedStarts": [
+        {
+          "text": "Mirari desinet"
+        }
+      ],
+      "rejectedStarts": [],
+      "pageNotes": "",
+      "textNotes": "",
+      "layoutNotes": ""
+    }
+  }
+}
